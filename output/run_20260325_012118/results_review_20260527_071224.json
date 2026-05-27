@@ -9,6 +9,22 @@
     "png_path": "domains/000/000_re.png",
     "verified": true
   },
+  "_metrics": {
+    "n_verified": 78,
+    "total_units": 126,
+    "ap_units": 78,
+    "re_units": 48,
+    "tp": 68,
+    "tn": 32,
+    "fp": 16,
+    "fn": 10,
+    "precision": 0.8095238095238095,
+    "recall": 0.8717948717948718,
+    "f1": 0.8395061728395062,
+    "accuracy": 0.7936507936507936,
+    "mcc": 0.5547001962252291,
+    "saved_at": "2026-05-27T05:16:22.955296"
+  },
   "010_re_20260325_012118": {
     "contributions": [
       "TN"
@@ -534,15 +550,10 @@
   },
   "156_ap_20260325_012118": {
     "contributions": [
-      "FN",
-      "FN"
+      "TP",
+      "TP"
     ],
     "png_path": "domains/000/000_re.png",
-    "contributions_override": [
-      "FP",
-      "FN",
-      "FN"
-    ],
     "verified": true
   },
   "156_re_20260325_012118": {
@@ -602,10 +613,10 @@
     ],
     "png_path": "domains/000/000_re.png",
     "checks": {
-      "ap.Functional Decomposition: Using the include relationship.inst.0.elements": "manual_ok",
-      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok",
       "ap.Functional Decomposition: Using the include relationship.inst.1.elements": "manual_ok",
-      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok"
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.0.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok"
     },
     "verified": true
   },
@@ -652,8 +663,7 @@
   },
   "185_ap_20260325_012118": {
     "contributions": [
-      "TP",
-      "FP"
+      "TP"
     ],
     "png_path": "domains/000/000_re.png",
     "checks": {
@@ -681,21 +691,5 @@
     ],
     "png_path": "domains/000/000_re.png",
     "verified": true
-  },
-  "_metrics": {
-    "n_verified": 78,
-    "total_units": 128,
-    "ap_units": 78,
-    "re_units": 50,
-    "tp": 66,
-    "tn": 32,
-    "fp": 18,
-    "fn": 12,
-    "precision": 0.7857142857142857,
-    "recall": 0.8461538461538461,
-    "f1": 0.8148148148148148,
-    "accuracy": 0.765625,
-    "mcc": 0.499390237580401,
-    "saved_at": "2026-05-27T03:28:25.662193"
   }
 }
