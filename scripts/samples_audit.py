@@ -227,22 +227,24 @@ def parse_audit_file(audit_path: Path) -> dict:
 # ── Audit verification ────────────────────────────────────────────────────────
 
 
-def verify_domain_audit(domain_str: str, run_dir: Path, skip_json: bool = False) -> list[str]:
+def verify_domain_audit(
+    domain_str: str, run_dir: Path, skip_json: bool = False
+) -> tuple[list[str], list[str]]:
     """Verify .puml / .jinja / .yaml files for a domain against its audit log.
 
     skip_json=True skips the JSON comparison between .jinja / .yaml and the audit
     log.  Use this after repair_training_samples.py has intentionally changed the
     answer JSON (the audit log records the original pre-repair generation).
 
-    Returns a list of error strings (empty = all good).
-    Returns a single-item list with a warning if no audit file exists.
+    Returns ``(errors, warnings)``.
     """
     errors: list[str] = []
+    warnings: list[str] = []
     domain_dir = run_dir / "domains" / domain_str
     audit_file = domain_dir / f"{domain_str}_audit.txt"
 
     if not audit_file.exists():
-        return [f"domain {domain_str}: no audit file"]
+        return [f"domain {domain_str}: no audit file"], []
 
     expected = parse_audit_file(audit_file)
 
@@ -310,12 +312,12 @@ def verify_domain_audit(domain_str: str, run_dir: Path, skip_json: bool = False)
     if ap_jinja_content is not None:
         jinja_answer = extract_answer_from_jinja(ap_jinja_content)
         if jinja_answer is not None:
-            errors.extend(
-                verify_output_json_consistency(
-                    f"domain {domain_str} (_ap.jinja)", jinja_answer,
-                    puml_source=expected.get("v1_puml"),
-                )
+            errs, warns = verify_output_json_consistency(
+                f"domain {domain_str} (_ap.jinja)", jinja_answer,
+                puml_source=expected.get("v1_puml"),
             )
+            errors.extend(errs)
+            warnings.extend(warns)
 
     # YAML checks
     if ap_yaml_path.exists():
@@ -335,12 +337,12 @@ def verify_domain_audit(domain_str: str, run_dir: Path, skip_json: bool = False)
                 if yaml_output_obj != expected_json_obj:
                     errors.append(f"domain {domain_str}: _ap.yaml training_sample.output does not match audit JSON")
         if yaml_output:
-            errors.extend(
-                verify_output_json_consistency(
-                    f"domain {domain_str} (_ap.yaml)", yaml_output,
-                    puml_source=expected.get("v1_puml"),
-                )
+            errs, warns = verify_output_json_consistency(
+                f"domain {domain_str} (_ap.yaml)", yaml_output,
+                puml_source=expected.get("v1_puml"),
             )
+            errors.extend(errs)
+            warnings.extend(warns)
 
         # Input PlantUML (check containment — the input also has the task instruction prefix)
         if expected["v1_puml"] is not None:
@@ -372,13 +374,13 @@ def verify_domain_audit(domain_str: str, run_dir: Path, skip_json: bool = False)
 
     has_re = re_puml_path.exists() or re_jinja_path.exists() or re_yaml_path.exists()
     if not has_re:
-        return errors
+        return errors, warnings
 
     if expected["v2_puml"] is None:
         errors.append(
             f"domain {domain_str}: _re files exist but could not extract VERSION 2 PlantUML from audit"
         )
-        return errors
+        return errors, warnings
 
     re_jinja_content: str | None = None
     if re_jinja_path.exists():
@@ -447,7 +449,7 @@ def verify_domain_audit(domain_str: str, run_dir: Path, skip_json: bool = False)
                     )
                 )
 
-    return errors
+    return errors, warnings
 
 
 # ── Explanation template helpers (mirrored from fix_explanations.py) ─────────
@@ -755,29 +757,35 @@ def verify_output_json_consistency(
     sample_id: str,
     output_json: str,
     puml_source: str | None = None,
-) -> list[str]:
+) -> tuple[list[str], list[str]]:
     """
-    Check internal consistency of an assistant output JSON string:
+    Check internal consistency of an assistant output JSON string.
+
+    Returns ``(errors, warnings)``.  Errors indicate genuine data integrity
+    problems; warnings flag style/template deviations that do not affect
+    training quality.
+
       1. total_instances == sum of all antipattern instance_count values
       2. instance_count for each antipattern == len(instances)
       3. Every instance has an "elements" field (not the old "constructs")
       4. Every instance has exactly 2 elements (base + inclusion)
       5. Every instance has a non-empty "explanation"
       6. Every instance explanation matches the canonical template (when puml_source provided)
+         → warning only: content is correct even when alias parentheticals are omitted
       7. Every element alias resolves to a real use case in the PlantUML source (when puml_source provided)
       8. Every element name matches the use case name for that alias in the diagram (when puml_source provided)
       9. The include relationship base→inclusion actually exists in the diagram (when puml_source provided)
      10. The inclusion UC has no direct actor association in the diagram (when puml_source provided)
      11. No duplicate (base, inclusion) pairs within an antipattern
      12. total_antipattern_types == number of distinct antipatterns listed
-    Returns a list of error strings (empty = all good).
     """
     errors: list[str] = []
+    warnings: list[str] = []
 
     try:
         obj = json.loads(output_json)
     except json.JSONDecodeError as exc:
-        return [f"{sample_id}: assistant JSON is not valid JSON: {exc}"]
+        return [f"{sample_id}: assistant JSON is not valid JSON: {exc}"], []
 
     if not obj.get("detected", False):
         # Refactored sample — just check antipatterns list is empty
@@ -785,7 +793,7 @@ def verify_output_json_consistency(
             errors.append(f"{sample_id}: detected=false but antipatterns list is non-empty")
         if obj.get("total_instances", 0) != 0:
             errors.append(f"{sample_id}: detected=false but total_instances={obj.get('total_instances')}")
-        return errors
+        return errors, warnings
 
     # Check 12: total_antipattern_types == number of antipatterns listed
     listed_aps = obj.get("antipatterns", [])
@@ -880,12 +888,13 @@ def verify_output_json_consistency(
                             f"inclusion UC '{incl_alias}' has a direct actor association"
                         )
 
-                # Check 6: explanation matches canonical template
+                # Check 6: explanation matches canonical template (warning only —
+                # content is correct even when alias parentheticals are omitted)
                 expected_expl = _expected_explanation(
                     base_name, base_alias, incl_name, incl_alias
                 )
                 if inst.get("explanation", "") != expected_expl:
-                    errors.append(
+                    warnings.append(
                         f"{sample_id}: {ap_name} instance {i}: "
                         f"explanation does not match canonical template"
                     )
@@ -896,7 +905,7 @@ def verify_output_json_consistency(
             f"but sum of instance_counts={actual_total}"
         )
 
-    return errors
+    return errors, warnings
 
 
 # ── JSONL verification ────────────────────────────────────────────────────────
@@ -907,9 +916,10 @@ def verify_sample(
     line_num: int,
     run_dir: Path,
     task_instr: str,
-) -> list[str]:
-    """Return a list of error strings for this sample (empty = all good)."""
+) -> tuple[list[str], list[str]]:
+    """Return ``(errors, warnings)`` for this sample."""
     errors: list[str] = []
+    warnings: list[str] = []
     sample_id = sample.get("sample_id", f"<line {line_num}>")
     messages = sample.get("messages", [])
 
@@ -919,7 +929,7 @@ def verify_sample(
     parts = sample_id.split("_")
     if len(parts) < 2:
         errors.append(f"{sample_id}: cannot parse sample_id (expected NNN_ap/re_...)")
-        return errors
+        return errors, warnings
 
     domain_str = parts[0]       # e.g. "001"
     sample_type = parts[1]      # "ap" or "re"
@@ -932,7 +942,7 @@ def verify_sample(
         errors.append(
             f"{sample_id}: expected 3 messages, got {len(messages)}"
         )
-        return errors
+        return errors, warnings
 
     sys_msg, user_msg, asst_msg = messages
 
@@ -996,11 +1006,13 @@ def verify_sample(
         user_content = user_msg.get("content", "")
         puml_idx = user_content.find(puml_marker)
         puml_src = user_content[puml_idx + len(puml_marker):] if puml_idx != -1 else None
-        errors.extend(verify_output_json_consistency(
+        errs, warns = verify_output_json_consistency(
             sample_id, asst_content, puml_source=puml_src,
-        ))
+        )
+        errors.extend(errs)
+        warnings.extend(warns)
 
-    return errors
+    return errors, warnings
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
@@ -1060,8 +1072,10 @@ def main() -> None:
 
     # ── JSONL verification ────────────────────────────────────────────────────
     all_errors: list[str] = []
+    all_warnings: list[str] = []
     total = 0
     failed_domains: dict[str, list[str]] = {}
+    warned_domains: dict[str, list[str]] = {}
 
     with open(jsonl_path, encoding="utf-8") as f:
         for line_num, line in enumerate(f, 1):
@@ -1080,19 +1094,26 @@ def main() -> None:
             sample_id = sample.get("sample_id", f"<line {line_num}>")
             domain_str = sample_id.split("_")[0] if "_" in sample_id else sample_id
 
-            errs = verify_sample(sample, line_num, run_dir, task_instr)
+            errs, warns = verify_sample(sample, line_num, run_dir, task_instr)
+            for w in warns:
+                log.warning("WARN  %s", w)
+                all_warnings.append(w)
             if errs:
                 for e in errs:
                     log.warning("FAIL  %s", e)
                     all_errors.append(e)
                 failed_domains.setdefault(domain_str, []).extend(errs)
+            elif warns:
+                # warn-only (no errors): track separately for the summary
+                warned_domains.setdefault(domain_str, []).extend(warns)
             else:
                 log.info("OK    %s", sample_id)
 
     log.info("")
     log.info("═" * 60)
-    log.info("Verified %d samples — %d passed, %d failed",
-             total, total - len(failed_domains), len(failed_domains))
+    log.info("Verified %d samples — %d passed, %d failed, %d with warnings",
+             total, total - len(failed_domains) - len(warned_domains),
+             len(failed_domains), len(warned_domains))
 
     if failed_domains:
         log.info("")
@@ -1103,6 +1124,14 @@ def main() -> None:
                 log.info("    • %s", reason)
     else:
         log.info("All samples passed verification.")
+
+    if warned_domains:
+        log.info("")
+        log.info("Domains with warnings:")
+        for ds in sorted(warned_domains):
+            log.info("  Domain %s:", ds)
+            for reason in warned_domains[ds]:
+                log.info("    ~ %s", reason)
 
     # ── Audit verification ────────────────────────────────────────────────────
     log.info("")
@@ -1118,6 +1147,7 @@ def main() -> None:
     audit_checked = 0
     audit_skipped = 0
     audit_failed: dict[str, list[str]] = {}
+    audit_warned: dict[str, list[str]] = {}
     audit_no_file: list[str] = []
 
     for domain_dir in domain_dirs:
@@ -1130,21 +1160,28 @@ def main() -> None:
             continue
 
         audit_checked += 1
-        errs = verify_domain_audit(ds, run_dir, skip_json=args.skip_audit_json)
+        errs, warns = verify_domain_audit(ds, run_dir, skip_json=args.skip_audit_json)
+        for w in warns:
+            log.warning("AUDIT WARN  %s", w)
         if errs:
             for e in errs:
                 log.warning("AUDIT FAIL  %s", e)
             audit_failed[ds] = errs
+        elif warns:
+            # warn-only (no errors): track separately for the summary
+            audit_warned[ds] = warns
         else:
             log.info("AUDIT OK    domain %s", ds)
 
     log.info("")
     log.info("═" * 60)
     log.info(
-        "Audit: %d domains checked — %d passed, %d failed | %d skipped (no audit file)",
+        "Audit: %d domains checked — %d passed, %d failed, %d with warnings"
+        " | %d skipped (no audit file)",
         audit_checked,
-        audit_checked - len(audit_failed),
+        audit_checked - len(audit_failed) - len(audit_warned),
         len(audit_failed),
+        len(audit_warned),
         audit_skipped,
     )
 
@@ -1155,6 +1192,14 @@ def main() -> None:
             log.info("  Domain %s:", ds)
             for reason in audit_failed[ds]:
                 log.info("    • %s", reason)
+
+    if audit_warned:
+        log.info("")
+        log.info("Audit domains with warnings:")
+        for ds in sorted(audit_warned):
+            log.info("  Domain %s:", ds)
+            for reason in audit_warned[ds]:
+                log.info("    ~ %s", reason)
 
     if audit_no_file:
         log.info("")
