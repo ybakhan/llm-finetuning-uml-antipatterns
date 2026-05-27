@@ -1,0 +1,701 @@
+{
+  "010_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "010_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "016_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "016_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "017_ap_20260325_012118": {
+    "contributions": [
+      "FN",
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.1.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok"
+    },
+    "contributions_override": [
+      "FP",
+      "TP"
+    ],
+    "verified": true
+  },
+  "017_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "019_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "019_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "020_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "020_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "025_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "contributions_override": [
+      "TP",
+      "TP",
+      "FP",
+      "FN"
+    ],
+    "verified": true
+  },
+  "025_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "031_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "031_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "046_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "046_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "056_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "056_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "067_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "contributions_override": [
+      "TP",
+      "TP",
+      "FP",
+      "FN"
+    ],
+    "verified": true
+  },
+  "067_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "068_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "068_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "069_ap_20260325_012118": {
+    "contributions": [
+      "FN",
+      "TP",
+      "TP",
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.1.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.2.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.2.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.3.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.3.explanation": "manual_ok"
+    },
+    "contributions_override": [
+      "FP",
+      "TP",
+      "TP",
+      "TP"
+    ],
+    "verified": true
+  },
+  "069_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "070_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "070_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "contributions_override": [
+      "FP",
+      "FP"
+    ],
+    "verified": true
+  },
+  "074_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "074_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "076_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "076_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "083_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "083_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "094_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "094_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "097_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "097_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "102_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "102_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "112_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "112_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "113_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "113_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "114_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "114_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "116_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "116_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "118_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "FN",
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.2.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.2.explanation": "manual_ok"
+    },
+    "contributions_override": [
+      "TP",
+      "FP",
+      "TP"
+    ],
+    "verified": true
+  },
+  "118_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "119_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "119_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "120_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.elements": "manual_ok"
+    },
+    "verified": true
+  },
+  "120_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "124_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "124_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "128_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "128_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "139_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "139_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "145_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "145_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "154_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.2.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "154_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "156_ap_20260325_012118": {
+    "contributions": [
+      "FN",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "contributions_override": [
+      "FP",
+      "FN",
+      "FN"
+    ],
+    "verified": true
+  },
+  "156_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "159_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "FN",
+      "FN",
+      "FN",
+      "FN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "contributions_override": [
+      "TP",
+      "FP",
+      "FP",
+      "FN",
+      "FN",
+      "FN",
+      "FN"
+    ],
+    "verified": true
+  },
+  "159_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "165_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "165_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "169_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.elements": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "169_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "170_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok",
+      "ap.Functional Decomposition: Using the include relationship.inst.1.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "170_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "173_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "173_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "185_ap_20260325_012118": {
+    "contributions": [
+      "TP",
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "checks": {
+      "ap.Functional Decomposition: Using the include relationship.inst.0.explanation": "manual_ok"
+    },
+    "verified": true
+  },
+  "185_re_20260325_012118": {
+    "contributions": [
+      "TN"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "192_ap_20260325_012118": {
+    "contributions": [
+      "TP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "192_re_20260325_012118": {
+    "contributions": [
+      "FP"
+    ],
+    "png_path": "domains/000/000_re.png",
+    "verified": true
+  },
+  "_metrics": {
+    "n_verified": 78,
+    "total_units": 128,
+    "ap_units": 78,
+    "re_units": 50,
+    "tp": 66,
+    "tn": 32,
+    "fp": 18,
+    "fn": 12,
+    "precision": 0.7857142857142857,
+    "recall": 0.8461538461538461,
+    "f1": 0.8148148148148148,
+    "accuracy": 0.765625,
+    "mcc": 0.499390237580401,
+    "saved_at": "2026-05-27T03:28:25.662193"
+  }
+}
