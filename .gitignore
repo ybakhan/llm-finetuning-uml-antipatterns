@@ -16,8 +16,5 @@ output/run_*/samples_generate.log
 output/run_*/samples_review.json
 output/run_*/finetune_eval_*.jsonl
 
-# Docs
-docs/
-
 # Trained model weights (too large)
 trained_adapter/
