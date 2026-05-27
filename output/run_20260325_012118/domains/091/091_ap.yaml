@@ -1,0 +1,84 @@
+metadata:
+  domain_id: 91
+  domain: public_complaint_management_system
+  domain_display: Public Complaint Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Complaint (UC1)
+      - Validate Complaint Form (UC2)
+      explanation: '''Validate Complaint Form'' (UC2) is included by ''Submit Complaint''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Complaint'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Complaint'' via the include relationship.'
+    - elements:
+      - Submit Complaint (UC1)
+      - Generate Complaint ID (UC3)
+      explanation: '''Generate Complaint ID'' (UC3) is included by ''Submit Complaint''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Complaint'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Complaint'' via the include relationship.'
+    - elements:
+      - Investigate Complaint (UC5)
+      - Retrieve Case Files (UC6)
+      explanation: '''Retrieve Case Files'' (UC6) is included by ''Investigate Complaint''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Investigate Complaint''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Investigate Complaint'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:56:27.289411'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Citizen\" as Citizen\nactor \"Complaint Officer\"\
+    \ as Officer\nactor \"Administrator\" as Admin\n\nrectangle \"Public Complaint\
+    \ Management System\" {\n  usecase \"Submit Complaint\" as UC1\n  usecase \"Validate\
+    \ Complaint Form\" as UC2\n  usecase \"Generate Complaint ID\" as UC3\n  usecase\
+    \ \"Track Complaint Status\" as UC4\n  usecase \"Investigate Complaint\" as UC5\n\
+    \  usecase \"Retrieve Case Files\" as UC6\n  usecase \"Assign Complaint to Officer\"\
+    \ as UC7\n  usecase \"Resolve Complaint\" as UC8\n  usecase \"Provide Feedback\"\
+    \ as UC9\n  usecase \"Generate Reports\" as UC10\n  usecase \"Manage User Accounts\"\
+    \ as UC11\n  usecase \"Escalate Complaint\" as UC12\n  usecase \"View Complaint\
+    \ History\" as UC13\n}\n\nCitizen -- UC1\nCitizen -- UC4\nCitizen -- UC9\nOfficer\
+    \ -- UC5\nOfficer -- UC8\nOfficer -- UC12\nOfficer -- UC13\nAdmin -- UC7\nAdmin\
+    \ -- UC10\nAdmin -- UC11\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n\
+    UC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Complaint (UC1)\"\
+    ,\n            \"Validate Complaint Form (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Complaint Form' (UC2) is included by 'Submit Complaint' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Complaint' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Submit\
+    \ Complaint' via the include relationship.\"\n        },\n        {\n        \
+    \  \"elements\": [\n            \"Submit Complaint (UC1)\",\n            \"Generate\
+    \ Complaint ID (UC3)\"\n          ],\n          \"explanation\": \"'Generate Complaint\
+    \ ID' (UC3) is included by 'Submit Complaint' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Complaint' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Submit Complaint' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Investigate\
+    \ Complaint (UC5)\",\n            \"Retrieve Case Files (UC6)\"\n          ],\n\
+    \          \"explanation\": \"'Retrieve Case Files' (UC6) is included by 'Investigate\
+    \ Complaint' (UC5), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Investigate\
+    \ Complaint' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Investigate Complaint' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

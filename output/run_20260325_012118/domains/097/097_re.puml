@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Resident" as Resident
+actor "Coordinator" as Coordinator
+
+rectangle "Neighbourhood Watch App" {
+  usecase "Report Incident" as UC1
+  usecase "View Alert Feed" as UC3
+  usecase "Manage Members" as UC4
+  usecase "Send Community Alert" as UC5
+}
+
+Resident -- UC1
+Resident -- UC3
+Coordinator -- UC4
+Coordinator -- UC5
+@enduml

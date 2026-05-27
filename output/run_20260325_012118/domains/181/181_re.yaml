@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 181
+  domain: irrigation_control_system
+  domain_display: Irrigation Control System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:32:11.395462'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Farm Manager\" as FM\nactor \"Field Technician\"\
+    \ as FT\nactor \"Weather Service\" as WS\n\nrectangle \"Irrigation Control System\"\
+    \ {\n  usecase \"Configure Irrigation Schedule\" as UC1\n  usecase \"Monitor Soil\
+    \ Moisture\" as UC2\n  usecase \"Activate Zone Valves\" as UC3\n  usecase \"View\
+    \ Dashboard\" as UC4\n  usecase \"Receive Weather Forecast\" as UC5\n  usecase\
+    \ \"Generate Water Usage Report\" as UC6\n  usecase \"Set Alert Thresholds\" as\
+    \ UC7\n  usecase \"Perform Field Inspection\" as UC8\n  usecase \"Validate Sensor\
+    \ Readings\" as UC9\n  usecase \"Manage Sensor Calibration\" as UC12\n  usecase\
+    \ \"Override Automatic Irrigation\" as UC13\n}\n\nFM -- UC1\nFM -- UC2\nFM --\
+    \ UC4\nFM -- UC6\nFM -- UC7\nFM -- UC13\nFT -- UC8\nFT -- UC3\nFT -- UC12\nWS\
+    \ -- UC5\n\nUC8 ..> UC9 : <<include>>\nUC2 ..> UC9 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

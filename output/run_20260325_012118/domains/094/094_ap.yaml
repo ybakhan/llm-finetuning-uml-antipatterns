@@ -1,0 +1,72 @@
+metadata:
+  domain_id: 94
+  domain: municipal_waste_management
+  domain_display: Municipal Waste Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Waste Complaint (UC1)
+      - Validate Complaint Details (UC2)
+      explanation: '''Validate Complaint Details'' (UC2) is included by ''Submit Waste
+        Complaint'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Submit Waste
+        Complaint'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Submit Waste Complaint'' via the include
+        relationship.'
+    - elements:
+      - Schedule Waste Pickup (UC3)
+      - Determine Optimal Route (UC4)
+      explanation: '''Determine Optimal Route'' (UC4) is included by ''Schedule Waste
+        Pickup'' (UC3), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Schedule
+        Waste Pickup'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Schedule Waste Pickup'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:57:50.966910'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Resident\" as Resident\nactor \"Waste Collector\"\
+    \ as Collector\nactor \"Recycling Officer\" as RecyclingOfficer\nactor \"Fleet\
+    \ Manager\" as FleetManager\nactor \"City Administrator\" as CityAdmin\n\nrectangle\
+    \ \"Municipal Waste Management System\" {\n  usecase \"Submit Waste Complaint\"\
+    \ as UC1\n  usecase \"Validate Complaint Details\" as UC2\n  usecase \"Schedule\
+    \ Waste Pickup\" as UC3\n  usecase \"Determine Optimal Route\" as UC4\n  usecase\
+    \ \"Record Collection Completion\" as UC5\n  usecase \"Sort Recyclable Materials\"\
+    \ as UC6\n  usecase \"Generate Recycling Report\" as UC7\n  usecase \"Manage Collection\
+    \ Fleet\" as UC8\n  usecase \"Request Special Pickup\" as UC9\n  usecase \"View\
+    \ Collection Schedule\" as UC10\n  usecase \"Register Recycling Drop-off\" as\
+    \ UC11\n  usecase \"Monitor Landfill Capacity\" as UC12\n  usecase \"Assign Collection\
+    \ Zones\" as UC13\n}\n\nResident -- UC1\nResident -- UC9\nResident -- UC10\nCollector\
+    \ -- UC5\nCollector -- UC3\nRecyclingOfficer -- UC6\nRecyclingOfficer -- UC7\n\
+    RecyclingOfficer -- UC11\nFleetManager -- UC8\nCityAdmin -- UC12\nCityAdmin --\
+    \ UC13\n\nUC1 ..> UC2 : <<include>>\nUC3 ..> UC4 : <<include>>\n}\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Waste Complaint\
+    \ (UC1)\",\n            \"Validate Complaint Details (UC2)\"\n          ],\n \
+    \         \"explanation\": \"'Validate Complaint Details' (UC2) is included by\
+    \ 'Submit Waste Complaint' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Submit\
+    \ Waste Complaint' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Submit Waste Complaint' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Schedule Waste\
+    \ Pickup (UC3)\",\n            \"Determine Optimal Route (UC4)\"\n          ],\n\
+    \          \"explanation\": \"'Determine Optimal Route' (UC4) is included by 'Schedule\
+    \ Waste Pickup' (UC3), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Schedule Waste\
+    \ Pickup' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Schedule Waste Pickup' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

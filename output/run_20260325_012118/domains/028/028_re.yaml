@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 28
+  domain: customer_relationship_management
+  domain_display: Customer Relationship Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T04:47:00.277063'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Sales Rep\" as A1\nactor \"Marketing Manager\"\
+    \ as A2\nactor \"Support Agent\" as A3\nactor \"CRM Administrator\" as A4\n\n\
+    rectangle \"Customer Relationship Management System\" {\n  usecase \"Manage Contacts\"\
+    \ as UC1\n  usecase \"Log Interaction\" as UC3\n  usecase \"Create Sales Opportunity\"\
+    \ as UC4\n  usecase \"Generate Pipeline Report\" as UC5\n  usecase \"Launch Email\
+    \ Campaign\" as UC6\n  usecase \"Track Campaign Metrics\" as UC8\n  usecase \"\
+    Handle Support Ticket\" as UC9\n  usecase \"Configure User Roles\" as UC11\n \
+    \ usecase \"Import Customer Data\" as UC12\n}\n\nA1 -- UC1\nA1 -- UC3\nA1 -- UC4\n\
+    A1 -- UC5\nA2 -- UC6\nA2 -- UC8\nA3 -- UC9\nA4 -- UC11\nA4 -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

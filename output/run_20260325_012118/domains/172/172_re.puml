@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Track Order" as UC7
+  usecase "Manage Product Templates" as UC8
+  usecase "Generate Sales Report" as UC9
+  usecase "Handle Return Request" as UC10
+  usecase "Review Design Proof" as UC11
+  usecase "Set Pricing" as UC12
+  usecase "Ship Order" as UC13
+}
+
+Designer -- UC1
+Designer -- UC11
+Designer -- UC12
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Admin -- UC8
+Admin -- UC9
+Carrier -- UC13
+Carrier -- UC7
+@enduml

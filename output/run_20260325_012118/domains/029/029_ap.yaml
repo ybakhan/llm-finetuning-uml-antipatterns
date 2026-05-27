@@ -1,0 +1,103 @@
+metadata:
+  domain_id: 29
+  domain: inventory_management_system
+  domain_display: Inventory Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Receive Shipment (UC1)
+      - Validate Shipment Contents (UC2)
+      explanation: '''Validate Shipment Contents'' (UC2) is included by ''Receive
+        Shipment'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Receive
+        Shipment'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Receive Shipment'' via the include relationship.'
+    - elements:
+      - Receive Shipment (UC1)
+      - Update Stock Quantities (UC3)
+      explanation: '''Update Stock Quantities'' (UC3) is included by ''Receive Shipment''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Receive Shipment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Receive Shipment'' via the include relationship.'
+    - elements:
+      - Create Purchase Order (UC4)
+      - Check Reorder Levels (UC5)
+      explanation: '''Check Reorder Levels'' (UC5) is included by ''Create Purchase
+        Order'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Purchase
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Create Purchase Order'' via the include relationship.'
+    - elements:
+      - Create Purchase Order (UC4)
+      - Generate Supplier Order (UC6)
+      explanation: '''Generate Supplier Order'' (UC6) is included by ''Create Purchase
+        Order'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Purchase
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Create Purchase Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:49:02.200570'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Warehouse Manager\" as WM\nactor \"Purchasing\
+    \ Officer\" as PO\nactor \"Sales Staff\" as SS\nactor \"Inventory Auditor\" as\
+    \ IA\nactor \"System Administrator\" as SA\n\nrectangle \"Inventory Management\
+    \ System\" {\n  usecase \"Receive Shipment\" as UC1\n  usecase \"Validate Shipment\
+    \ Contents\" as UC2\n  usecase \"Update Stock Quantities\" as UC3\n  usecase \"\
+    Create Purchase Order\" as UC4\n  usecase \"Check Reorder Levels\" as UC5\n  usecase\
+    \ \"Generate Supplier Order\" as UC6\n  usecase \"Process Sales Order\" as UC7\n\
+    \  usecase \"View Stock Levels\" as UC8\n  usecase \"Conduct Stock Audit\" as\
+    \ UC9\n  usecase \"Adjust Inventory Discrepancies\" as UC10\n  usecase \"Manage\
+    \ Product Catalog\" as UC11\n  usecase \"Configure Warehouse Locations\" as UC12\n\
+    \  usecase \"Generate Inventory Report\" as UC13\n  usecase \"Transfer Stock Between\
+    \ Warehouses\" as UC14\n}\n\nWM -- UC1\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3\
+    \ : <<include>>\nPO -- UC4\nUC4 ..> UC5 : <<include>>\nUC4 ..> UC6 : <<include>>\n\
+    SS -- UC7\nSS -- UC8\nIA -- UC9\nIA -- UC10\nSA -- UC11\nSA -- UC12\nWM -- UC13\n\
+    WM -- UC14\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Receive Shipment (UC1)\"\
+    ,\n            \"Validate Shipment Contents (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Shipment Contents' (UC2) is included by 'Receive Shipment'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Receive Shipment' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Receive Shipment' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Receive Shipment (UC1)\",\n        \
+    \    \"Update Stock Quantities (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Update Stock Quantities' (UC3) is included by 'Receive Shipment' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Receive Shipment' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Receive\
+    \ Shipment' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Create Purchase Order (UC4)\",\n            \"\
+    Check Reorder Levels (UC5)\"\n          ],\n          \"explanation\": \"'Check\
+    \ Reorder Levels' (UC5) is included by 'Create Purchase Order' (UC4), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Create Purchase Order' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Create Purchase\
+    \ Order' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Create Purchase Order (UC4)\",\n            \"Generate\
+    \ Supplier Order (UC6)\"\n          ],\n          \"explanation\": \"'Generate\
+    \ Supplier Order' (UC6) is included by 'Create Purchase Order' (UC4), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Create Purchase Order' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Create Purchase\
+    \ Order' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

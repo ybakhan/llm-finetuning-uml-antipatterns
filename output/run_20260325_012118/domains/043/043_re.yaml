@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 43
+  domain: weather_forecasting_service
+  domain_display: Weather Forecasting Service
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:51:52.009960'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"General User\" as GU\nactor \"Meteorologist\"\
+    \ as MET\nactor \"Emergency Manager\" as EM\nactor \"System Administrator\" as\
+    \ SA\n\nrectangle \"Weather Forecasting Service\" {\n  usecase \"View Current\
+    \ Weather\" as UC1\n  usecase \"Search Location\" as UC2\n  usecase \"View Extended\
+    \ Forecast\" as UC3\n  usecase \"Issue Severe Weather Alert\" as UC4\n  usecase\
+    \ \"Subscribe to Notifications\" as UC6\n  usecase \"Manage Weather Stations\"\
+    \ as UC7\n  usecase \"Review Historical Data\" as UC8\n  usecase \"Generate Forecast\
+    \ Model\" as UC9\n  usecase \"Configure System Settings\" as UC11\n  usecase \"\
+    View Emergency Briefing\" as UC12\n  usecase \"Export Weather Report\" as UC13\n\
+    }\n\nGU -- UC1\nGU -- UC2\nGU -- UC3\nGU -- UC6\nMET -- UC4\nMET -- UC8\nMET --\
+    \ UC9\nMET -- UC13\nEM -- UC12\nEM -- UC3\nSA -- UC7\nSA -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

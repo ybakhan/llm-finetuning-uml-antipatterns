@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Streamer" as Streamer
+actor "Viewer" as Viewer
+
+rectangle "Livestreaming Platform" {
+  usecase "Start Live Stream" as UC1
+  usecase "Encode Video Feed" as UC2
+  usecase "Watch Live Stream" as UC3
+  usecase "Send Chat Message" as UC4
+  usecase "Subscribe to Channel" as UC5
+  usecase "Donate to Streamer" as UC6
+}
+
+Streamer -- UC1
+UC1 ..> UC2 : <<include>>
+Viewer -- UC3
+Viewer -- UC4
+Viewer -- UC5
+Viewer -- UC6
+@enduml

@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 51
+  domain: public_transport_system
+  domain_display: Public Transport System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:40:16.788845'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Passenger\" as Passenger\nactor \"Driver\"\
+    \ as Driver\n\nrectangle \"Public Transport System\" {\n  usecase \"Purchase Ticket\"\
+    \ as UC1\n  usecase \"Track Bus Location\" as UC3\n  usecase \"Report Delay\"\
+    \ as UC4\n  usecase \"Plan Route\" as UC5\n}\n\nPassenger -- UC1\nPassenger --\
+    \ UC3\nPassenger -- UC5\nDriver -- UC4\n\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,86 @@
+metadata:
+  domain_id: 92
+  domain: tax_authority_portal
+  domain_display: Tax Authority Portal
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - File Tax Return (UC1)
+      - Validate Taxpayer Identity (UC2)
+      explanation: '''Validate Taxpayer Identity'' (UC2) is included by ''File Tax
+        Return'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''File Tax
+        Return'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''File Tax Return'' via the include relationship.'
+    - elements:
+      - File Tax Return (UC1)
+      - Calculate Tax Liability (UC3)
+      explanation: '''Calculate Tax Liability'' (UC3) is included by ''File Tax Return''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''File Tax Return'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''File Tax Return'' via the include relationship.'
+    - elements:
+      - Process Refund (UC5)
+      - Marshal Refund Data (UC6)
+      explanation: '''Marshal Refund Data'' (UC6) is included by ''Process Refund''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Refund'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Refund'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:09:42.142609'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Taxpayer\" as Taxpayer\nactor \"Tax Officer\"\
+    \ as TaxOfficer\nactor \"Auditor\" as Auditor\n\nrectangle \"Tax Authority Portal\"\
+    \ {\n  usecase \"File Tax Return\" as UC1\n  usecase \"Validate Taxpayer Identity\"\
+    \ as UC2\n  usecase \"Calculate Tax Liability\" as UC3\n  usecase \"View Tax History\"\
+    \ as UC4\n  usecase \"Process Refund\" as UC5\n  usecase \"Marshal Refund Data\"\
+    \ as UC6\n  usecase \"Submit Supporting Documents\" as UC7\n  usecase \"Pay Outstanding\
+    \ Tax\" as UC8\n  usecase \"Generate Tax Assessment\" as UC9\n  usecase \"Conduct\
+    \ Audit\" as UC10\n  usecase \"Update Taxpayer Profile\" as UC11\n  usecase \"\
+    Register New Taxpayer\" as UC12\n  usecase \"Appeal Assessment\" as UC13\n  usecase\
+    \ \"Generate Compliance Report\" as UC14\n  usecase \"Send Tax Notification\"\
+    \ as UC15\n  usecase \"Manage Tax Exemptions\" as UC16\n}\n\nTaxpayer -- UC1\n\
+    Taxpayer -- UC4\nTaxpayer -- UC7\nTaxpayer -- UC8\nTaxpayer -- UC11\nTaxpayer\
+    \ -- UC12\nTaxpayer -- UC13\n\nTaxOfficer -- UC5\nTaxOfficer -- UC9\nTaxOfficer\
+    \ -- UC15\nTaxOfficer -- UC16\n\nAuditor -- UC10\nAuditor -- UC14\n\nUC1 ..> UC2\
+    \ : <<include>>\nUC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"File Tax Return (UC1)\"\
+    ,\n            \"Validate Taxpayer Identity (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Taxpayer Identity' (UC2) is included by 'File Tax Return'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'File Tax Return' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'File Tax Return' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"File Tax Return (UC1)\",\n         \
+    \   \"Calculate Tax Liability (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Tax Liability' (UC3) is included by 'File Tax Return' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'File Tax Return' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'File\
+    \ Tax Return' via the include relationship.\"\n        },\n        {\n       \
+    \   \"elements\": [\n            \"Process Refund (UC5)\",\n            \"Marshal\
+    \ Refund Data (UC6)\"\n          ],\n          \"explanation\": \"'Marshal Refund\
+    \ Data' (UC6) is included by 'Process Refund' (UC5), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Process Refund' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Process Refund' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

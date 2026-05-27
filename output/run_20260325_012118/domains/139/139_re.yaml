@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 139
+  domain: digital_photography_platform
+  domain_display: Digital Photography Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:15:35.066568'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Photographer as P\nactor Viewer as V\nactor Administrator\
+    \ as A\n\nrectangle \"Digital Photography Platform\" {\n  usecase \"Upload Photo\"\
+    \ as UC1\n  usecase \"Browse Gallery\" as UC4\n  usecase \"Search Photos\" as\
+    \ UC5\n  usecase \"Download Photo\" as UC7\n  usecase \"Rate Photo\" as UC8\n\
+    \  usecase \"Comment on Photo\" as UC9\n  usecase \"Create Album\" as UC10\n \
+    \ usecase \"Moderate Content\" as UC11\n  usecase \"Manage User Accounts\" as\
+    \ UC12\n  usecase \"View Photo Details\" as UC13\n}\n\nP -- UC1\nP -- UC10\nP\
+    \ -- UC4\nP -- UC13\nV -- UC4\nV -- UC5\nV -- UC7\nV -- UC8\nV -- UC9\nV -- UC13\n\
+    A -- UC11\nA -- UC12\n\nUC4 ..> UC13 : <<include>>\n}\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

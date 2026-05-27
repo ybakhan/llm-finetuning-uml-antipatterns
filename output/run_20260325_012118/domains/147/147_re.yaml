@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 147
+  domain: climbing_gym_management_system
+  domain_display: Climbing Gym Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:18:47.735231'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Staff\" as Staff\n\
+    \nrectangle \"Climbing Gym Management System\" {\n  usecase \"Check In\" as UC1\n\
+    \  usecase \"Book Climbing Session\" as UC3\n  usecase \"Manage Routes\" as UC4\n\
+    \  usecase \"Process Day Pass\" as UC5\n  usecase \"Rent Equipment\" as UC6\n\
+    }\n\nMember -- UC1\nMember -- UC3\nMember -- UC6\nStaff -- UC4\nStaff -- UC5\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

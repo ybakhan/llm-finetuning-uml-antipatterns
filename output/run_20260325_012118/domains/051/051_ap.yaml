@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 51
+  domain: public_transport_system
+  domain_display: Public Transport System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Ticket (UC1)
+      - Validate Payment (UC2)
+      explanation: '''Validate Payment'' (UC2) is included by ''Purchase Ticket''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Ticket'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Ticket'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:40:16.788845'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Passenger\" as Passenger\nactor \"Driver\"\
+    \ as Driver\n\nrectangle \"Public Transport System\" {\n  usecase \"Purchase Ticket\"\
+    \ as UC1\n  usecase \"Validate Payment\" as UC2\n  usecase \"Track Bus Location\"\
+    \ as UC3\n  usecase \"Report Delay\" as UC4\n  usecase \"Plan Route\" as UC5\n\
+    }\n\nPassenger -- UC1\nUC1 ..> UC2 : <<include>>\nPassenger -- UC3\nPassenger\
+    \ -- UC5\nDriver -- UC4\n\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Purchase Ticket (UC1)\"\
+    ,\n            \"Validate Payment (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Payment' (UC2) is included by 'Purchase Ticket' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Purchase Ticket' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Purchase Ticket' via\
+    \ the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

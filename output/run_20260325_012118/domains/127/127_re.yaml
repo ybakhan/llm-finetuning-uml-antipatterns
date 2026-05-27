@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 127
+  domain: company_registration_system
+  domain_display: Company Registration System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:54:51.750499'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Registrar\" as A2\n\
+    \nrectangle \"Company Registration System\" {\n  usecase \"Register Company\"\
+    \ as UC1\n  usecase \"Review Application\" as UC3\n  usecase \"Issue Certificate\"\
+    \ as UC4\n  usecase \"Search Company Records\" as UC5\n  usecase \"Pay Registration\
+    \ Fee\" as UC6\n}\n\nA1 -- UC1\nA1 -- UC5\nA1 -- UC6\nA2 -- UC3\nA2 -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

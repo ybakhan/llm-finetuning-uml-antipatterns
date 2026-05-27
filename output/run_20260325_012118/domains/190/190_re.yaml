@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 190
+  domain: hazardous_materials_tracking_system
+  domain_display: Hazardous Materials Tracking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:36:15.522441'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Safety Officer\" as SO\nactor \"Warehouse Manager\"\
+    \ as WM\nactor \"Transport Driver\" as TD\nactor \"Regulatory Inspector\" as RI\n\
+    actor \"Emergency Responder\" as ER\n\nrectangle \"Hazardous Materials Tracking\
+    \ System\" {\n  usecase \"Register Hazardous Material\" as UC1\n  usecase \"Update\
+    \ Material Inventory\" as UC2\n  usecase \"Assign Storage Location\" as UC3\n\
+    \  usecase \"Create Shipment Record\" as UC4\n  usecase \"Track Shipment in Transit\"\
+    \ as UC5\n  usecase \"Report Spill Incident\" as UC6\n  usecase \"Conduct Safety\
+    \ Audit\" as UC7\n  usecase \"Generate Compliance Report\" as UC8\n  usecase \"\
+    View Emergency Procedures\" as UC9\n  usecase \"Review Incident History\" as UC12\n\
+    }\n\nSO -- UC1\nSO -- UC7\nSO -- UC6\nWM -- UC2\nWM -- UC3\nWM -- UC1\nTD -- UC4\n\
+    TD -- UC5\nRI -- UC7\nRI -- UC8\nER -- UC6\nER -- UC9\nSO -- UC12\n\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

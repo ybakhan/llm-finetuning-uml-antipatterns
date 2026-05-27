@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Visa Officer" as A2
+
+rectangle "Visa Application System" {
+  usecase "Submit Visa Application" as UC1
+  usecase "Review Application" as UC4
+  usecase "Issue Visa Decision" as UC5
+  usecase "Schedule Interview" as UC6
+  usecase "Check Application Status" as UC7
+}
+
+A1 -- UC1
+A1 -- UC7
+A2 -- UC4
+A2 -- UC5
+A2 -- UC6
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Voter" as Voter
+actor "Election Administrator" as Admin
+actor "Auditor" as Auditor
+
+rectangle "E-Voting System" {
+  usecase "Register to Vote" as UC1
+  usecase "Cast Ballot" as UC3
+  usecase "View Election Results" as UC5
+  usecase "Configure Election" as UC6
+  usecase "Manage Candidate List" as UC7
+  usecase "Open Voting Period" as UC8
+  usecase "Close Voting Period" as UC9
+  usecase "Generate Audit Report" as UC10
+  usecase "Verify Vote Integrity" as UC11
+  usecase "Monitor Live Turnout" as UC12
+  usecase "Export Audit Trail" as UC13
+}
+
+Voter -- UC1
+Voter -- UC3
+Voter -- UC5
+
+Admin -- UC6
+Admin -- UC7
+Admin -- UC8
+Admin -- UC9
+Admin -- UC12
+
+Auditor -- UC10
+Auditor -- UC11
+Auditor -- UC13
+@enduml

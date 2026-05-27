@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 72
+  domain: home_services_booking
+  domain_display: Home Services Booking
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Book Service (UC2)
+      - Validate Address (UC3)
+      explanation: '''Validate Address'' is included by ''Book Service'', has no direct
+        actor association, does not include or extend any other use case, is not extended
+        by any use case, and is not part of any generalisation hierarchy. It represents
+        an internal sub-step of ''Book Service'' rather than a standalone service
+        observable to any actor, making it a functional decomposition of ''Book Service''
+        via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:48:36.136706'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Homeowner\" as Homeowner\n\nrectangle \"Home\
+    \ Services Booking\" {\n  usecase \"Browse Services\" as UC1\n  usecase \"Book\
+    \ Service\" as UC2\n  usecase \"Validate Address\" as UC3\n  usecase \"Cancel\
+    \ Booking\" as UC4\n  usecase \"View Booking History\" as UC5\n}\n\nHomeowner\
+    \ -- UC1\nHomeowner -- UC2\nHomeowner -- UC4\nHomeowner -- UC5\n\nUC2 ..> UC3\
+    \ : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Service (UC2)\"\
+    ,\n            \"Validate Address (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Address' is included by 'Book Service', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Book Service' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Book Service' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

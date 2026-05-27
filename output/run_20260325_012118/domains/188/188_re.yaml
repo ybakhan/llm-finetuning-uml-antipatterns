@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 188
+  domain: industrial_safety_reporting_system
+  domain_display: Industrial Safety Reporting System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:52:24.729891'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Worker\" as WK\nactor \"Safety Officer\" as\
+    \ SO\nactor \"Plant Manager\" as PM\nactor \"Regulatory Auditor\" as RA\n\nrectangle\
+    \ \"Industrial Safety Reporting System\" {\n  usecase \"Report Incident\" as UC1\n\
+    \  usecase \"Review Incident Reports\" as UC4\n  usecase \"Generate Compliance\
+    \ Report\" as UC5\n  usecase \"Conduct Safety Inspection\" as UC7\n  usecase \"\
+    Submit Near-Miss Report\" as UC8\n  usecase \"Track Corrective Actions\" as UC9\n\
+    \  usecase \"View Safety Dashboard\" as UC10\n  usecase \"Approve Investigation\
+    \ Findings\" as UC11\n  usecase \"Export Audit Trail\" as UC12\n  usecase \"Escalate\
+    \ Critical Incident\" as UC13\n}\n\nWK -- UC1\nWK -- UC8\nSO -- UC1\nSO -- UC4\n\
+    SO -- UC7\nSO -- UC9\nSO -- UC13\nPM -- UC10\nPM -- UC11\nRA -- UC5\nRA -- UC12\n\
+    \nUC13 ..> UC4 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

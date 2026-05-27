@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "IT Administrator" as Admin
+actor "Employee" as Emp
+
+rectangle "IT Asset Management System" {
+  usecase "Register New Asset" as UC1
+  usecase "Assign Asset to Employee" as UC2
+  usecase "Return Asset" as UC3
+  usecase "View Assigned Assets" as UC4
+  usecase "Generate Asset Report" as UC5
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC5
+Emp -- UC4
+@enduml

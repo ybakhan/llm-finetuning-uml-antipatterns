@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 189
+  domain: product_recall_management_system
+  domain_display: Product Recall Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Initiate Recall (UC1)
+      - Validate Batch Numbers (UC2)
+      explanation: '''Validate Batch Numbers'' (UC2) is included by ''Initiate Recall''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Initiate Recall'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Initiate Recall'' via the include relationship.'
+    - elements:
+      - Process Customer Returns (UC5)
+      - Calculate Refund Amount (UC6)
+      explanation: '''Calculate Refund Amount'' (UC6) is included by ''Process Customer
+        Returns'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Process
+        Customer Returns'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Process Customer Returns'' via the
+        include relationship.'
+    - elements:
+      - Verify Product Destruction (UC10)
+      - Verify Destruction Certificate (UC14)
+      explanation: '''Verify Destruction Certificate'' (UC14) is included by ''Verify
+        Product Destruction'' (UC10), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Verify Product Destruction'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Verify Product Destruction''
+        via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:26:35.828381'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Quality Inspector\" as QI\nactor \"Recall Coordinator\"\
+    \ as RC\nactor \"Regulatory Authority\" as RA\nactor \"Customer Service Rep\"\
+    \ as CSR\nactor \"Warehouse Manager\" as WM\n\nrectangle \"Product Recall Management\
+    \ System\" {\n  usecase \"Initiate Recall\" as UC1\n  usecase \"Validate Batch\
+    \ Numbers\" as UC2\n  usecase \"Notify Regulatory Authority\" as UC3\n  usecase\
+    \ \"Generate Recall Report\" as UC4\n  usecase \"Process Customer Returns\" as\
+    \ UC5\n  usecase \"Calculate Refund Amount\" as UC6\n  usecase \"Track Recalled\
+    \ Inventory\" as UC7\n  usecase \"Classify Recall Severity\" as UC8\n  usecase\
+    \ \"Communicate Recall to Public\" as UC9\n  usecase \"Verify Product Destruction\"\
+    \ as UC10\n  usecase \"Close Recall Case\" as UC11\n  usecase \"Review Recall\
+    \ History\" as UC12\n  usecase \"Manage Refund Requests\" as UC13\n  usecase \"\
+    Verify Destruction Certificate\" as UC14\n}\n\nQI -- UC1\nQI -- UC8\nRC -- UC1\n\
+    RC -- UC3\nRC -- UC9\nRC -- UC11\nRC -- UC12\nRA -- UC4\nCSR -- UC5\nCSR -- UC13\n\
+    WM -- UC7\nWM -- UC10\n\nUC1 ..> UC2 : <<include>>\nUC5 ..> UC6 : <<include>>\n\
+    UC10 ..> UC14 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Initiate Recall (UC1)\"\
+    ,\n            \"Validate Batch Numbers (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Batch Numbers' (UC2) is included by 'Initiate Recall' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Initiate Recall' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Initiate\
+    \ Recall' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Process Customer Returns (UC5)\",\n            \"\
+    Calculate Refund Amount (UC6)\"\n          ],\n          \"explanation\": \"'Calculate\
+    \ Refund Amount' (UC6) is included by 'Process Customer Returns' (UC5), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Process Customer Returns' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Process Customer Returns' via the include relationship.\"\n        },\n\
+    \        {\n          \"elements\": [\n            \"Verify Product Destruction\
+    \ (UC10)\",\n            \"Verify Destruction Certificate (UC14)\"\n         \
+    \ ],\n          \"explanation\": \"'Verify Destruction Certificate' (UC14) is\
+    \ included by 'Verify Product Destruction' (UC10), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Verify Product Destruction' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Verify Product Destruction'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

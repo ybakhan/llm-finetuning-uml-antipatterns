@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "EV Driver" as Driver
+actor "Network Operator" as Operator
+
+rectangle "Electric Vehicle Charging Network" {
+  usecase "Start Charging Session" as UC1
+  usecase "Validate Payment Method" as UC2
+  usecase "View Charging History" as UC3
+  usecase "Monitor Station Status" as UC4
+  usecase "Set Pricing Plan" as UC5
+  usecase "Report Station Fault" as UC6
+}
+
+Driver -- UC1
+UC1 ..> UC2 : <<include>>
+Driver -- UC3
+Driver -- UC6
+Operator -- UC4
+Operator -- UC5
+Operator -- UC6
+@enduml

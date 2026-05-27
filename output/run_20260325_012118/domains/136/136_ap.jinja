@@ -1,0 +1,102 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Club Leader" as Leader
+actor "Administrator" as Admin
+
+rectangle "Book Club Platform" {
+  usecase "Browse Book Catalog" as UC1
+  usecase "Join Book Club" as UC2
+  usecase "Leave Book Club" as UC3
+  usecase "Submit Book Review" as UC4
+  usecase "Rate Book" as UC5
+  usecase "Schedule Meeting" as UC6
+  usecase "Validate Meeting Time" as UC7
+  usecase "Send Meeting Notifications" as UC8
+  usecase "Create Book Club" as UC9
+  usecase "Select Book of the Month" as UC10
+  usecase "Manage Members" as UC11
+  usecase "Moderate Discussions" as UC12
+  usecase "Generate Reading Reports" as UC13
+  usecase "Validate Report Parameters" as UC14
+  usecase "Format Report Output" as UC15
+  usecase "Manage Platform Settings" as UC16
+  usecase "View Discussion Thread" as UC17
+  usecase "Post Discussion Comment" as UC18
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Member -- UC4
+Member -- UC5
+Member -- UC17
+Member -- UC18
+
+Leader -- UC6
+Leader -- UC9
+Leader -- UC10
+Leader -- UC11
+Leader -- UC12
+Leader -- UC13
+
+Admin -- UC16
+
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC8 : <<include>>
+UC13 ..> UC14 : <<include>>
+UC13 ..> UC15 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Schedule Meeting (UC6)",
+            "Validate Meeting Time (UC7)"
+          ],
+          "explanation": "'Validate Meeting Time' (UC7) is included by 'Schedule Meeting' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Schedule Meeting' rather than a standalone service observable to any actor, making it a functional decomposition of 'Schedule Meeting' via the include relationship."
+        },
+        {
+          "elements": [
+            "Schedule Meeting (UC6)",
+            "Send Meeting Notifications (UC8)"
+          ],
+          "explanation": "'Send Meeting Notifications' (UC8) is included by 'Schedule Meeting' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Schedule Meeting' rather than a standalone service observable to any actor, making it a functional decomposition of 'Schedule Meeting' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Reading Reports (UC13)",
+            "Validate Report Parameters (UC14)"
+          ],
+          "explanation": "'Validate Report Parameters' (UC14) is included by 'Generate Reading Reports' (UC13), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Reading Reports' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Reading Reports' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Reading Reports (UC13)",
+            "Format Report Output (UC15)"
+          ],
+          "explanation": "'Format Report Output' (UC15) is included by 'Generate Reading Reports' (UC13), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Reading Reports' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Reading Reports' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

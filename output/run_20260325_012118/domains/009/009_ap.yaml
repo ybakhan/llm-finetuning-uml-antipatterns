@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 9
+  domain: food_delivery_platform
+  domain_display: Food Delivery Platform
+  size: medium
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 3
+    instances:
+    - elements:
+      - Place Order (UC2)
+      - Validate Payment Details (UC3)
+      explanation: '''Validate Payment Details'' is included by ''Place Order'', has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Place Order'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Place
+        Order'' via the include relationship.'
+    - elements:
+      - Place Order (UC2)
+      - Calculate Delivery Fee (UC9)
+      explanation: '''Calculate Delivery Fee'' is included by ''Place Order'', has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Place Order'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Place
+        Order'' via the include relationship.'
+    - elements:
+      - Place Order (UC2)
+      - Generate Order Confirmation (UC13)
+      explanation: '''Generate Order Confirmation'' is included by ''Place Order'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:46:29.215478'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Restaurant\"\
+    \ as Restaurant\nactor \"Delivery Driver\" as Driver\nactor \"Admin\" as Admin\n\
+    \nrectangle \"Food Delivery Platform\" {\n  usecase \"Browse Restaurants\" as\
+    \ UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Validate Payment Details\"\
+    \ as UC3\n  usecase \"Track Delivery\" as UC4\n  usecase \"Rate Order\" as UC5\n\
+    \  usecase \"Manage Menu\" as UC6\n  usecase \"Accept Order\" as UC7\n  usecase\
+    \ \"Update Delivery Status\" as UC8\n  usecase \"Calculate Delivery Fee\" as UC9\n\
+    \  usecase \"Manage Promotions\" as UC10\n  usecase \"View Order History\" as\
+    \ UC11\n  usecase \"Register Account\" as UC12\n  usecase \"Generate Order Confirmation\"\
+    \ as UC13\n  usecase \"Handle Customer Complaints\" as UC14\n  usecase \"View\
+    \ Earnings\" as UC15\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC4\n\
+    Customer -- UC5\nCustomer -- UC11\nCustomer -- UC12\nRestaurant -- UC6\nRestaurant\
+    \ -- UC7\nDriver -- UC8\nDriver -- UC15\nAdmin -- UC10\nAdmin -- UC14\n\nUC2 ..>\
+    \ UC3 : <<include>>\nUC2 ..> UC9 : <<include>>\nUC2 ..> UC13 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Order (UC2)\",\n\
+    \            \"Validate Payment Details (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Payment Details' is included by 'Place Order', has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Place Order' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Place Order' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Place Order (UC2)\",\n            \"Calculate Delivery Fee (UC9)\"\
+    \n          ],\n          \"explanation\": \"'Calculate Delivery Fee' is included\
+    \ by 'Place Order', has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Place Order'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Place Order' via the include relationship.\"\n        },\n\
+    \        {\n          \"elements\": [\n            \"Place Order (UC2)\",\n  \
+    \          \"Generate Order Confirmation (UC13)\"\n          ],\n          \"\
+    explanation\": \"'Generate Order Confirmation' is included by 'Place Order', has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Place Order' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Place\
+    \ Order' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

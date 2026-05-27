@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Hotel Guest" as Guest
+actor "Room Service Staff" as Staff
+actor "Kitchen Staff" as Kitchen
+actor "Manager" as Manager
+
+rectangle "Room Service Management System" {
+  usecase "Browse Menu" as UC1
+  usecase "Place Order" as UC2
+  usecase "Track Order Status" as UC4
+  usecase "Deliver Order" as UC5
+  usecase "Confirm Delivery" as UC6
+  usecase "Prepare Order" as UC7
+  usecase "Update Menu Items" as UC8
+  usecase "Handle Complaint" as UC9
+  usecase "Generate Daily Report" as UC10
+  usecase "Rate Service" as UC11
+  usecase "Cancel Order" as UC12
+}
+
+Guest -- UC1
+Guest -- UC2
+Guest -- UC4
+Guest -- UC9
+Guest -- UC11
+Guest -- UC12
+
+Staff -- UC5
+Staff -- UC6
+Staff -- UC4
+
+Kitchen -- UC7
+
+Manager -- UC8
+Manager -- UC10
+Manager -- UC9
+@enduml

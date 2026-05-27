@@ -1,0 +1,85 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Retail Trader" as RT
+actor "Institutional Trader" as IT
+actor "Compliance Officer" as CO
+actor "Market Data Provider" as MDP
+
+rectangle "Stock Trading Platform" {
+  usecase "Place Market Order" as UC1
+  usecase "Validate Order Parameters" as UC2
+  usecase "Check Account Balance" as UC3
+  usecase "Place Limit Order" as UC4
+  usecase "Verify Price Threshold" as UC5
+  usecase "View Portfolio" as UC6
+  usecase "Execute Block Trade" as UC7
+  usecase "Monitor Compliance" as UC9
+  usecase "Generate Audit Report" as UC10
+  usecase "Receive Market Feed" as UC11
+  usecase "Set Price Alert" as UC12
+  usecase "Cancel Order" as UC13
+  usecase "View Trade History" as UC14
+}
+
+RT -- UC1
+RT -- UC4
+RT -- UC6
+RT -- UC12
+RT -- UC13
+RT -- UC14
+IT -- UC7
+IT -- UC6
+CO -- UC9
+CO -- UC10
+MDP -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Place Market Order (UC1)",
+            "Validate Order Parameters (UC2)"
+          ],
+          "explanation": "'Validate Order Parameters' (UC2) is included by 'Place Market Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Market Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Market Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Place Market Order (UC1)",
+            "Check Account Balance (UC3)"
+          ],
+          "explanation": "'Check Account Balance' (UC3) is included by 'Place Market Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Market Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Market Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Place Limit Order (UC4)",
+            "Verify Price Threshold (UC5)"
+          ],
+          "explanation": "'Verify Price Threshold' (UC5) is included by 'Place Limit Order' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Limit Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Limit Order' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

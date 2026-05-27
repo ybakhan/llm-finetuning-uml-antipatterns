@@ -1,0 +1,79 @@
+metadata:
+  domain_id: 161
+  domain: photography_studio_booking_system
+  domain_display: Photography Studio Booking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Studio Session (UC2)
+      - Select Time Slot (UC3)
+      explanation: '''Select Time Slot'' (UC3) is included by ''Book Studio Session''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Studio Session'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Studio Session'' via the include relationship.'
+    - elements:
+      - Book Studio Session (UC2)
+      - Make Payment (UC4)
+      explanation: '''Make Payment'' (UC4) is included by ''Book Studio Session''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Studio Session'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Studio Session'' via the include relationship.'
+    - elements:
+      - Make Payment (UC4)
+      - Validate Payment Details (UC7)
+      explanation: '''Validate Payment Details'' (UC7) is included by ''Make Payment''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Make Payment'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Make Payment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:21:25.131175'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Photographer\"\
+    \ as Photographer\n\nrectangle \"Photography Studio Booking System\" {\n  usecase\
+    \ \"Browse Available Studios\" as UC1\n  usecase \"Book Studio Session\" as UC2\n\
+    \  usecase \"Select Time Slot\" as UC3\n  usecase \"Make Payment\" as UC4\n  usecase\
+    \ \"View Booking Schedule\" as UC5\n  usecase \"Cancel Booking\" as UC6\n  usecase\
+    \ \"Validate Payment Details\" as UC7\n}\n\nCustomer -- UC1\nCustomer -- UC2\n\
+    UC2 ..> UC3 : <<include>>\nUC2 ..> UC4 : <<include>>\nUC4 ..> UC7 : <<include>>\n\
+    Photographer -- UC5\nPhotographer -- UC6\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Studio Session (UC2)\"\
+    ,\n            \"Select Time Slot (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Select Time Slot' (UC3) is included by 'Book Studio Session' (UC2), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Book Studio Session' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Book\
+    \ Studio Session' via the include relationship.\"\n        },\n        {\n   \
+    \       \"elements\": [\n            \"Book Studio Session (UC2)\",\n        \
+    \    \"Make Payment (UC4)\"\n          ],\n          \"explanation\": \"'Make\
+    \ Payment' (UC4) is included by 'Book Studio Session' (UC2), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Book Studio Session' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Book Studio\
+    \ Session' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Make Payment (UC4)\",\n            \"Validate Payment\
+    \ Details (UC7)\"\n          ],\n          \"explanation\": \"'Validate Payment\
+    \ Details' (UC7) is included by 'Make Payment' (UC4), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Make Payment' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Make Payment' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

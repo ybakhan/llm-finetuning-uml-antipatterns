@@ -1,0 +1,86 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Budget Owner" as BO
+actor "Financial Advisor" as FA
+actor "Administrator" as Admin
+
+rectangle "Budgeting Application" {
+  usecase "Create Budget" as UC1
+  usecase "Validate Budget Name" as UC2
+  usecase "Save Budget to Database" as UC3
+  usecase "View Budget Summary" as UC4
+  usecase "Track Expenses" as UC5
+  usecase "Categorize Transaction" as UC6
+  usecase "Set Spending Limits" as UC7
+  usecase "Generate Financial Report" as UC8
+  usecase "Manage Budget Categories" as UC9
+  usecase "Review Client Budgets" as UC10
+  usecase "Manage User Accounts" as UC11
+  usecase "Configure System Settings" as UC12
+  usecase "Send Budget Alert" as UC13
+}
+
+BO -- UC1
+BO -- UC4
+BO -- UC5
+BO -- UC7
+BO -- UC8
+BO -- UC9
+BO -- UC13
+
+FA -- UC10
+FA -- UC8
+
+Admin -- UC11
+Admin -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Create Budget (UC1)",
+            "Validate Budget Name (UC2)"
+          ],
+          "explanation": "'Validate Budget Name' (UC2) is included by 'Create Budget' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Budget' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Budget' via the include relationship."
+        },
+        {
+          "elements": [
+            "Create Budget (UC1)",
+            "Save Budget to Database (UC3)"
+          ],
+          "explanation": "'Save Budget to Database' (UC3) is included by 'Create Budget' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Budget' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Budget' via the include relationship."
+        },
+        {
+          "elements": [
+            "Track Expenses (UC5)",
+            "Categorize Transaction (UC6)"
+          ],
+          "explanation": "'Categorize Transaction' (UC6) is included by 'Track Expenses' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Track Expenses' rather than a standalone service observable to any actor, making it a functional decomposition of 'Track Expenses' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

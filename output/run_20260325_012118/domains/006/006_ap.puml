@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+
+rectangle "Messaging Application" {
+  usecase "Send Message" as UC1
+  usecase "Validate Message Content" as UC2
+  usecase "View Conversations" as UC3
+  usecase "Delete Message" as UC4
+  usecase "Manage Users" as UC5
+  usecase "Search Messages" as UC6
+}
+
+User -- UC1
+User -- UC3
+User -- UC4
+User -- UC6
+Admin -- UC5
+
+UC1 ..> UC2 : <<include>>
+@enduml

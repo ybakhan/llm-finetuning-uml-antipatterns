@@ -1,0 +1,35 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Job Seeker" as JS
+actor "Employer" as EM
+
+rectangle "Job Portal" {
+  usecase "Search Jobs" as UC1
+  usecase "Apply for Job" as UC2
+  usecase "Post Job Listing" as UC4
+  usecase "Review Applications" as UC5
+}
+
+JS -- UC1
+JS -- UC2
+EM -- UC4
+EM -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

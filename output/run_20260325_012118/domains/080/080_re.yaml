@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 80
+  domain: freight_tracking_system
+  domain_display: Freight Tracking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:07:02.295337'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Shipper\" as Shipper\nactor \"Carrier\" as\
+    \ Carrier\nactor \"Warehouse Manager\" as WM\nactor \"Customer\" as Customer\n\
+    actor \"System Administrator\" as Admin\n\nrectangle \"Freight Tracking System\"\
+    \ {\n  usecase \"Create Shipment\" as UC1\n  usecase \"Update Shipment Status\"\
+    \ as UC2\n  usecase \"Track Shipment\" as UC3\n  usecase \"Assign Carrier\" as\
+    \ UC4\n  usecase \"Register Freight Arrival\" as UC5\n  usecase \"Manage Routes\"\
+    \ as UC6\n  usecase \"Generate Shipment Report\" as UC7\n  usecase \"Request Delivery\
+    \ Estimate\" as UC8\n  usecase \"File Damage Claim\" as UC9\n  usecase \"Cancel\
+    \ Shipment\" as UC10\n  usecase \"Manage User Accounts\" as UC11\n  usecase \"\
+    Schedule Pickup\" as UC13\n  usecase \"View Shipment History\" as UC14\n}\n\n\
+    Shipper -- UC1\nShipper -- UC4\nShipper -- UC10\nShipper -- UC13\nCarrier -- UC2\n\
+    Carrier -- UC5\nWM -- UC5\nWM -- UC7\nCustomer -- UC3\nCustomer -- UC8\nCustomer\
+    \ -- UC9\nCustomer -- UC14\nAdmin -- UC6\nAdmin -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

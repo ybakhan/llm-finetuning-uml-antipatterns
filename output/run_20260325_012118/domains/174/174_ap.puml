@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Buyer" as Buyer
+actor "Seller" as Seller
+
+rectangle "Second-Hand Clothing Marketplace" {
+  usecase "Browse Listings" as UC1
+  usecase "Purchase Item" as UC2
+  usecase "Process Payment" as UC3
+  usecase "Create Listing" as UC4
+  usecase "Manage Account" as UC5
+}
+
+Buyer -- UC1
+Buyer -- UC2
+UC2 ..> UC3 : <<include>>
+Seller -- UC4
+Seller -- UC5
+@enduml

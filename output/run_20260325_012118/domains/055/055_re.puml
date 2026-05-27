@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Pet Owner" as PO
+actor "Veterinarian" as VET
+actor "Receptionist" as REC
+
+rectangle "Veterinary Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Examine Pet" as UC2
+  usecase "Prescribe Medication" as UC3
+  usecase "Process Payment" as UC4
+}
+
+PO -- UC1
+PO -- UC4
+VET -- UC2
+VET -- UC3
+REC -- UC1
+REC -- UC4
+@enduml

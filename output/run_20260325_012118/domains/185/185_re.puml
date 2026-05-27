@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Inspector" as Inspector
+actor "Production Manager" as PM
+
+rectangle "Quality Control System" {
+  usecase "Perform Inspection" as UC1
+  usecase "Generate Quality Report" as UC3
+  usecase "Review Defect Trends" as UC4
+  usecase "Log Defect" as UC5
+}
+
+Inspector -- UC1
+Inspector -- UC5
+PM -- UC3
+PM -- UC4
+@enduml

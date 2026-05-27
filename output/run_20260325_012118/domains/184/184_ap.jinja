@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Floor Supervisor" as FS
+actor "Maintenance Technician" as MT
+
+rectangle "Factory Floor Management System" {
+  usecase "Monitor Production Line" as UC1
+  usecase "Report Equipment Fault" as UC2
+  usecase "Schedule Maintenance" as UC3
+  usecase "Perform Maintenance" as UC4
+  usecase "Log Maintenance Details" as UC5
+  usecase "Generate Shift Report" as UC6
+}
+
+FS -- UC1
+FS -- UC2
+FS -- UC6
+MT -- UC3
+MT -- UC4
+
+UC4 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Perform Maintenance (UC4)",
+            "Log Maintenance Details (UC5)"
+          ],
+          "explanation": "'Log Maintenance Details' (UC5) is included by 'Perform Maintenance' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Perform Maintenance' rather than a standalone service observable to any actor, making it a functional decomposition of 'Perform Maintenance' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

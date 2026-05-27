@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Accountant" as Accountant
+actor "Manager" as Manager
+
+rectangle "Accounting System" {
+  usecase "Record Journal Entry" as UC1
+  usecase "Validate Account Codes" as UC2
+  usecase "Generate Financial Report" as UC3
+  usecase "Approve Expenses" as UC4
+  usecase "View Ledger" as UC5
+  usecase "Reconcile Bank Statement" as UC6
+}
+
+Accountant -- UC1
+Accountant -- UC5
+Accountant -- UC6
+Manager -- UC3
+Manager -- UC4
+
+UC1 ..> UC2 : <<include>>
+@enduml

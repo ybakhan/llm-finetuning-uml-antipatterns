@@ -1,0 +1,296 @@
+AUDIT LOG — Prompt #159
+Timestamp : 2026-03-25T02:23:54.203516
+Model     : claude-opus-4-6
+Tokens    : input=1596  output=1628
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #159: Generate a MEDIUM use case model with exactly 28 constructs (valid range for medium: 24–30 constructs). Domain: Parking Lot Management System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: parking_lot_management_system
+DOMAIN_DISPLAY: Parking Lot Management System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 28
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Driver" as Driver
+actor "Parking Attendant" as Attendant
+actor "System Administrator" as Admin
+actor "Payment Gateway" as PGateway
+
+rectangle "Parking Lot Management System" {
+  usecase "Enter Parking Lot" as UC1
+  usecase "Scan Entry Ticket" as UC1a
+  usecase "Open Entry Gate" as UC1b
+  usecase "Exit Parking Lot" as UC2
+  usecase "Calculate Parking Fee" as UC2a
+  usecase "Raise Exit Barrier" as UC2b
+  usecase "Process Payment" as UC3
+  usecase "Validate Payment Details" as UC3a
+  usecase "Reserve Parking Spot" as UC4
+  usecase "View Occupancy Status" as UC5
+  usecase "Manage Parking Zones" as UC6
+  usecase "Generate Revenue Report" as UC7
+  usecase "Register Monthly Pass" as UC8
+  usecase "Monitor Security Cameras" as UC9
+}
+
+Driver -- UC1
+Driver -- UC2
+Driver -- UC3
+Driver -- UC4
+Attendant -- UC5
+Attendant -- UC9
+Admin -- UC6
+Admin -- UC7
+Admin -- UC8
+PGateway -- UC3
+
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+UC2 ..> UC2a : <<include>>
+UC2 ..> UC2b : <<include>>
+UC3 ..> UC3a : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Enter Parking Lot (use case, UC1)",
+            "Scan Entry Ticket (use case, UC1a)",
+            "Open Entry Gate (use case, UC1b)",
+            "UC1 --include--> UC1a (include relationship)",
+            "UC1 --include--> UC1b (include relationship)"
+          ],
+          "explanation": "'Scan Entry Ticket' and 'Open Entry Gate' are inclusion use cases that are each included by only one use case ('Enter Parking Lot'), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are not involved in any generalization. They represent sub-steps of entering the parking lot rather than complete services observable to any actor, making this a functional decomposition of 'Enter Parking Lot' into procedural steps."
+        },
+        {
+          "constructs": [
+            "Exit Parking Lot (use case, UC2)",
+            "Calculate Parking Fee (use case, UC2a)",
+            "Raise Exit Barrier (use case, UC2b)",
+            "UC2 --include--> UC2a (include relationship)",
+            "UC2 --include--> UC2b (include relationship)"
+          ],
+          "explanation": "'Calculate Parking Fee' and 'Raise Exit Barrier' are inclusion use cases each included by only one use case ('Exit Parking Lot'), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are not involved in any generalization. They decompose the exit process into internal procedural steps rather than representing complete, independently valuable services to an actor."
+        },
+        {
+          "constructs": [
+            "Process Payment (use case, UC3)",
+            "Validate Payment Details (use case, UC3a)",
+            "UC3 --include--> UC3a (include relationship)"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case included by only one use case ('Process Payment'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within payment processing rather than a complete service observable to any actor."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three instances of functional decomposition must be resolved by merging inclusion use cases back into their respective base use cases:
+
+1. **UC1a "Scan Entry Ticket" and UC1b "Open Entry Gate"** are merged into **UC1 "Enter Parking Lot"**. Both sub-steps are internal procedural details of entering the lot. The two inclusion use cases and their two include relationships are removed. The base use case "Enter Parking Lot" now encapsulates scanning the ticket and opening the gate as internal steps.
+
+2. **UC2a "Calculate Parking Fee" and UC2b "Raise Exit Barrier"** are merged into **UC2 "Exit Parking Lot"**. Both represent sub-steps of exiting. The two inclusion use cases and their two include relationships are removed. "Exit Parking Lot" now internally handles fee calculation and barrier operation.
+
+3. **UC3a "Validate Payment Details"** is merged into **UC3 "Process Payment"**. Validation is an internal step of payment processing. The inclusion use case and its include relationship are removed. "Process Payment" now internally encompasses payment validation.
+
+This removes 5 inclusion use cases and 5 include relationships, resulting in a cleaner model with 18 constructs.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Driver" as Driver
+actor "Parking Attendant" as Attendant
+actor "System Administrator" as Admin
+actor "Payment Gateway" as PGateway
+
+rectangle "Parking Lot Management System" {
+  usecase "Enter Parking Lot" as UC1
+  usecase "Exit Parking Lot" as UC2
+  usecase "Process Payment" as UC3
+  usecase "Reserve Parking Spot" as UC4
+  usecase "View Occupancy Status" as UC5
+  usecase "Manage Parking Zones" as UC6
+  usecase "Generate Revenue Report" as UC7
+  usecase "Register Monthly Pass" as UC8
+  usecase "Monitor Security Cameras" as UC9
+}
+
+Driver -- UC1
+Driver -- UC2
+Driver -- UC3
+Driver -- UC4
+Attendant -- UC5
+Attendant -- UC9
+Admin -- UC6
+Admin -- UC7
+Admin -- UC8
+PGateway -- UC3
+@enduml
+```

@@ -1,0 +1,96 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Passenger" as Passenger
+actor "Driver" as Driver
+actor "Admin" as Admin
+
+rectangle "Ride Sharing Service" {
+  usecase "Request Ride" as UC1
+  usecase "Validate Pickup Location" as UC2
+  usecase "Calculate Fare Estimate" as UC3
+  usecase "Accept Ride" as UC4
+  usecase "Complete Ride" as UC5
+  usecase "Process Payment" as UC6
+  usecase "Generate Receipt" as UC7
+  usecase "Rate Driver" as UC8
+  usecase "Rate Passenger" as UC9
+  usecase "View Ride History" as UC10
+  usecase "Manage Driver Accounts" as UC11
+  usecase "Register as Driver" as UC12
+  usecase "Track Ride in Progress" as UC13
+  usecase "Cancel Ride" as UC14
+  usecase "View Earnings" as UC15
+}
+
+Passenger -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Passenger -- UC8
+Passenger -- UC10
+Passenger -- UC13
+Passenger -- UC14
+
+Driver -- UC4
+Driver -- UC5
+UC5 ..> UC6 : <<include>>
+UC6 ..> UC7 : <<include>>
+Driver -- UC9
+Driver -- UC12
+Driver -- UC15
+
+Admin -- UC11
+Admin -- UC10
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Request Ride (UC1)",
+            "Validate Pickup Location (UC2)"
+          ],
+          "explanation": "'Validate Pickup Location' (UC2) is included by 'Request Ride' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Request Ride' rather than a standalone service observable to any actor, making it a functional decomposition of 'Request Ride' via the include relationship."
+        },
+        {
+          "elements": [
+            "Request Ride (UC1)",
+            "Calculate Fare Estimate (UC3)"
+          ],
+          "explanation": "'Calculate Fare Estimate' (UC3) is included by 'Request Ride' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Request Ride' rather than a standalone service observable to any actor, making it a functional decomposition of 'Request Ride' via the include relationship."
+        },
+        {
+          "elements": [
+            "Complete Ride (UC5)",
+            "Process Payment (UC6)"
+          ],
+          "explanation": "'Process Payment' (UC6) is included by 'Complete Ride' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Complete Ride' rather than a standalone service observable to any actor, making it a functional decomposition of 'Complete Ride' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Payment (UC6)",
+            "Generate Receipt (UC7)"
+          ],
+          "explanation": "'Generate Receipt' (UC7) is included by 'Process Payment' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Payment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Payment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

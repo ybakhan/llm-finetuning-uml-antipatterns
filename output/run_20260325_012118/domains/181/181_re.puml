@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Weather Service" as WS
+
+rectangle "Irrigation Control System" {
+  usecase "Configure Irrigation Schedule" as UC1
+  usecase "Monitor Soil Moisture" as UC2
+  usecase "Activate Zone Valves" as UC3
+  usecase "View Dashboard" as UC4
+  usecase "Receive Weather Forecast" as UC5
+  usecase "Generate Water Usage Report" as UC6
+  usecase "Set Alert Thresholds" as UC7
+  usecase "Perform Field Inspection" as UC8
+  usecase "Validate Sensor Readings" as UC9
+  usecase "Manage Sensor Calibration" as UC12
+  usecase "Override Automatic Irrigation" as UC13
+}
+
+FM -- UC1
+FM -- UC2
+FM -- UC4
+FM -- UC6
+FM -- UC7
+FM -- UC13
+FT -- UC8
+FT -- UC3
+FT -- UC12
+WS -- UC5
+
+UC8 ..> UC9 : <<include>>
+UC2 ..> UC9 : <<include>>
+@enduml

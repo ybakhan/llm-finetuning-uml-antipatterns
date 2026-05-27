@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reviewer" as Reviewer
+
+rectangle "Document Management System" {
+  usecase "Upload Document" as UC1
+  usecase "Search Documents" as UC2
+  usecase "Review Document" as UC3
+  usecase "Download Document" as UC4
+  usecase "Archive Document" as UC5
+}
+
+Author -- UC1
+Author -- UC2
+Author -- UC4
+Reviewer -- UC3
+Reviewer -- UC5
+@enduml

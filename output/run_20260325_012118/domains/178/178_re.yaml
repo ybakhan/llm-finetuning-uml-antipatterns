@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 178
+  domain: solar_energy_management_system
+  domain_display: Solar Energy Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:24:34.161792'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"System Administrator\" as Admin\nactor \"Energy\
+    \ Analyst\" as Analyst\nactor \"Maintenance Technician\" as Technician\nactor\
+    \ \"Homeowner\" as Homeowner\nactor \"Grid Operator\" as GridOp\n\nrectangle \"\
+    Solar Energy Management System\" {\n  usecase \"Configure Solar Panels\" as UC1\n\
+    \  usecase \"Monitor Energy Production\" as UC2\n  usecase \"Analyze Energy Trends\"\
+    \ as UC3\n  usecase \"Schedule Panel Maintenance\" as UC4\n  usecase \"View Energy\
+    \ Dashboard\" as UC5\n  usecase \"Manage Battery Storage\" as UC6\n  usecase \"\
+    Report System Faults\" as UC7\n  usecase \"Export Energy to Grid\" as UC8\n  usecase\
+    \ \"Track Energy Consumption\" as UC9\n  usecase \"Set Energy Usage Alerts\" as\
+    \ UC10\n  usecase \"Generate Monthly Report\" as UC11\n  usecase \"Manage User\
+    \ Accounts\" as UC12\n}\n\nAdmin -- UC1\nAdmin -- UC12\nAdmin -- UC6\nAnalyst\
+    \ -- UC3\nAnalyst -- UC11\nAnalyst -- UC2\nTechnician -- UC4\nTechnician -- UC7\n\
+    Homeowner -- UC5\nHomeowner -- UC9\nHomeowner -- UC10\nGridOp -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

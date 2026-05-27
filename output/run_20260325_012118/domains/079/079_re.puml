@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Player" as Player
+actor "Tournament Admin" as Admin
+
+rectangle "Tournament Registration System" {
+  usecase "Register for Tournament" as UC1
+  usecase "View Tournament Schedule" as UC3
+  usecase "Create Tournament" as UC4
+  usecase "Cancel Registration" as UC5
+  usecase "Manage Seedings" as UC6
+}
+
+Player -- UC1
+Player -- UC3
+Player -- UC5
+Admin -- UC4
+Admin -- UC6
+
+@enduml

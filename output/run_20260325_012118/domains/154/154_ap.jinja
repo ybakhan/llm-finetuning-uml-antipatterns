@@ -1,0 +1,89 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "IT Administrator" as Admin
+actor "Security Officer" as SO
+
+rectangle "Remote Desktop Service" {
+  usecase "Initiate Remote Session" as UC1
+  usecase "Authenticate User" as UC2
+  usecase "Verify Credentials" as UC3
+  usecase "Manage Virtual Machines" as UC4
+  usecase "Allocate VM Resources" as UC5
+  usecase "Transfer Files" as UC6
+  usecase "Encrypt File Data" as UC7
+  usecase "Monitor Active Sessions" as UC8
+  usecase "Terminate Session" as UC9
+  usecase "Configure Access Policies" as UC10
+  usecase "View Session Logs" as UC11
+  usecase "Adjust Display Settings" as UC12
+}
+
+EU -- UC1
+EU -- UC6
+EU -- UC12
+EU -- UC9
+Admin -- UC4
+Admin -- UC8
+Admin -- UC9
+SO -- UC10
+SO -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC6 ..> UC7 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Initiate Remote Session (UC1)",
+            "Authenticate User (UC2)"
+          ],
+          "explanation": "'Authenticate User' (UC2) is included by 'Initiate Remote Session' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Initiate Remote Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Initiate Remote Session' via the include relationship."
+        },
+        {
+          "elements": [
+            "Authenticate User (UC2)",
+            "Verify Credentials (UC3)"
+          ],
+          "explanation": "'Verify Credentials' (UC3) is included by 'Authenticate User' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Authenticate User' rather than a standalone service observable to any actor, making it a functional decomposition of 'Authenticate User' via the include relationship."
+        },
+        {
+          "elements": [
+            "Manage Virtual Machines (UC4)",
+            "Allocate VM Resources (UC5)"
+          ],
+          "explanation": "'Allocate VM Resources' (UC5) is included by 'Manage Virtual Machines', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Manage Virtual Machines' rather than a standalone service observable to any actor, making it a functional decomposition of 'Manage Virtual Machines' via the include relationship."
+        },
+        {
+          "elements": [
+            "Transfer Files (UC6)",
+            "Encrypt File Data (UC7)"
+          ],
+          "explanation": "'Encrypt File Data' (UC7) is included by 'Transfer Files', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Transfer Files' rather than a standalone service observable to any actor, making it a functional decomposition of 'Transfer Files' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

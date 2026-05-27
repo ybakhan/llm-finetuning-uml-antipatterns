@@ -1,0 +1,104 @@
+metadata:
+  domain_id: 61
+  domain: driver_license_renewal_system
+  domain_display: Driver License Renewal System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Renew License Online (UC1)
+      - Validate Identity Documents (UC10)
+      explanation: '''Validate Identity Documents'' (UC10) is included by ''Renew
+        License Online'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Renew License Online'' rather than a standalone service observable to any
+        actor, making it a functional decomposition of ''Renew License Online'' via
+        the include relationship.'
+    - elements:
+      - Renew License Online (UC1)
+      - Check Eligibility (UC11)
+      explanation: '''Check Eligibility'' (UC11) is included by ''Renew License Online''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Renew License Online''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Renew License Online'' via the include relationship.'
+    - elements:
+      - Renew License Online (UC1)
+      - Upload Photo (UC12)
+      explanation: '''Upload Photo'' (UC12) is included by ''Renew License Online''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Renew License Online''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Renew License Online'' via the include relationship.'
+    - elements:
+      - Pay Renewal Fee (UC6)
+      - Process Payment (UC13)
+      explanation: '''Process Payment'' (UC13) is included by ''Pay Renewal Fee''
+        (UC6), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Pay Renewal Fee'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Pay Renewal Fee'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:54:12.430455'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"License Holder\" as LH\nactor \"DMV Clerk\"\
+    \ as Clerk\nactor \"Optometrist\" as Opt\n\nrectangle \"Driver License Renewal\
+    \ System\" {\n  usecase \"Renew License Online\" as UC1\n  usecase \"Renew License\
+    \ In-Person\" as UC2\n  usecase \"Schedule Appointment\" as UC3\n  usecase \"\
+    Conduct Vision Test\" as UC4\n  usecase \"Update Personal Information\" as UC5\n\
+    \  usecase \"Pay Renewal Fee\" as UC6\n  usecase \"View License Status\" as UC7\n\
+    \  usecase \"Report Lost License\" as UC8\n  usecase \"Request Duplicate License\"\
+    \ as UC9\n  usecase \"Validate Identity Documents\" as UC10\n  usecase \"Check\
+    \ Eligibility\" as UC11\n  usecase \"Upload Photo\" as UC12\n  usecase \"Process\
+    \ Payment\" as UC13\n  usecase \"Submit Vision Test Results\" as UC14\n  usecase\
+    \ \"Manage License Records\" as UC15\n}\n\nLH -- UC1\nLH -- UC2\nLH -- UC3\nLH\
+    \ -- UC5\nLH -- UC6\nLH -- UC7\nLH -- UC8\nLH -- UC9\nClerk -- UC2\nClerk -- UC15\n\
+    Opt -- UC4\nOpt -- UC14\n\nUC1 ..> UC10 : <<include>>\nUC1 ..> UC11 : <<include>>\n\
+    UC1 ..> UC12 : <<include>>\nUC6 ..> UC13 : <<include>>\nUC2 ..> UC4 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Renew License Online\
+    \ (UC1)\",\n            \"Validate Identity Documents (UC10)\"\n          ],\n\
+    \          \"explanation\": \"'Validate Identity Documents' (UC10) is included\
+    \ by 'Renew License Online' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Renew\
+    \ License Online' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Renew License Online' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Renew License\
+    \ Online (UC1)\",\n            \"Check Eligibility (UC11)\"\n          ],\n  \
+    \        \"explanation\": \"'Check Eligibility' (UC11) is included by 'Renew License\
+    \ Online' (UC1), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Renew License Online' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Renew License Online' via the include relationship.\"\n        },\n    \
+    \    {\n          \"elements\": [\n            \"Renew License Online (UC1)\"\
+    ,\n            \"Upload Photo (UC12)\"\n          ],\n          \"explanation\"\
+    : \"'Upload Photo' (UC12) is included by 'Renew License Online' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Renew License Online' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Renew\
+    \ License Online' via the include relationship.\"\n        },\n        {\n   \
+    \       \"elements\": [\n            \"Pay Renewal Fee (UC6)\",\n            \"\
+    Process Payment (UC13)\"\n          ],\n          \"explanation\": \"'Process\
+    \ Payment' (UC13) is included by 'Pay Renewal Fee' (UC6), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Pay Renewal Fee' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Pay Renewal Fee' via\
+    \ the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

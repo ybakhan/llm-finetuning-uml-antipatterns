@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Donor" as Donor
+actor "Administrator" as Admin
+
+rectangle "Donation Management System" {
+  usecase "Make Donation" as UC1
+  usecase "Validate Payment Details" as UC2
+  usecase "View Donation History" as UC3
+  usecase "Generate Reports" as UC4
+  usecase "Manage Campaigns" as UC5
+  usecase "Send Thank You Receipt" as UC6
+}
+
+Donor -- UC1
+Donor -- UC3
+Admin -- UC4
+Admin -- UC5
+Admin -- UC6
+
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Make Donation (UC1)",
+            "Validate Payment Details (UC2)"
+          ],
+          "explanation": "'Validate Payment Details' (UC2) is included by 'Make Donation' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Make Donation' rather than a standalone service observable to any actor, making it a functional decomposition of 'Make Donation' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

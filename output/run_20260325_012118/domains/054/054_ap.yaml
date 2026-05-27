@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 54
+  domain: blood_bank_management
+  domain_display: Blood Bank Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Donor (UC1)
+      - Validate Donor Identity (UC2)
+      explanation: '''Validate Donor Identity'' (UC2) is included by ''Register Donor''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Donor'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Donor'' via the include relationship.'
+    - elements:
+      - Register Donor (UC1)
+      - Record Donor Details (UC3)
+      explanation: '''Record Donor Details'' (UC3) is included by ''Register Donor''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Donor'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Donor'' via the include relationship.'
+    - elements:
+      - Screen Blood Sample (UC5)
+      - Categorize Blood Group (UC8)
+      explanation: '''Categorize Blood Group'' (UC8) is included by ''Screen Blood
+        Sample'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Screen Blood
+        Sample'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Screen Blood Sample'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:41:27.389878'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Donor\" as Donor\nactor \"Lab Technician\"\
+    \ as LabTech\nactor \"Blood Bank Officer\" as Officer\nactor \"Doctor\" as Doctor\n\
+    \nrectangle \"Blood Bank Management System\" {\n  usecase \"Register Donor\" as\
+    \ UC1\n  usecase \"Validate Donor Identity\" as UC2\n  usecase \"Record Donor\
+    \ Details\" as UC3\n  usecase \"Conduct Blood Donation\" as UC4\n  usecase \"\
+    Screen Blood Sample\" as UC5\n  usecase \"Perform Compatibility Test\" as UC6\n\
+    \  usecase \"Store Blood Unit\" as UC7\n  usecase \"Categorize Blood Group\" as\
+    \ UC8\n  usecase \"Process Blood Request\" as UC9\n  usecase \"Request Blood Unit\"\
+    \ as UC10\n  usecase \"Manage Blood Inventory\" as UC11\n  usecase \"Generate\
+    \ Donation Report\" as UC12\n  usecase \"Discard Expired Blood\" as UC13\n}\n\n\
+    Donor -- UC1\nDonor -- UC4\nLabTech -- UC5\nLabTech -- UC6\nOfficer -- UC7\nOfficer\
+    \ -- UC9\nOfficer -- UC11\nOfficer -- UC13\nDoctor -- UC10\nOfficer -- UC12\n\n\
+    UC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nUC5 ..> UC8 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Donor (UC1)\"\
+    ,\n            \"Validate Donor Identity (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Donor Identity' (UC2) is included by 'Register Donor' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Register Donor' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Register\
+    \ Donor' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Register Donor (UC1)\",\n            \"Record Donor\
+    \ Details (UC3)\"\n          ],\n          \"explanation\": \"'Record Donor Details'\
+    \ (UC3) is included by 'Register Donor' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Register Donor' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Register Donor' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Screen Blood\
+    \ Sample (UC5)\",\n            \"Categorize Blood Group (UC8)\"\n          ],\n\
+    \          \"explanation\": \"'Categorize Blood Group' (UC8) is included by 'Screen\
+    \ Blood Sample' (UC5), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Screen Blood\
+    \ Sample' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Screen Blood Sample' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

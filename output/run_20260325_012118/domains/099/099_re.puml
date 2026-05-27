@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Optometrist" as Optometrist
+actor "Receptionist" as Receptionist
+actor "Lab Technician" as LabTech
+
+rectangle "Optometry Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Check In Patient" as UC2
+  usecase "Conduct Eye Exam" as UC3
+  usecase "Prescribe Corrective Lenses" as UC6
+  usecase "Order Lenses from Lab" as UC7
+  usecase "Verify Insurance Coverage" as UC8
+  usecase "Process Payment" as UC9
+  usecase "Manage Patient Records" as UC11
+  usecase "Dispense Eyewear" as UC12
+  usecase "Schedule Follow-Up" as UC13
+}
+
+Patient -- UC1
+Patient -- UC9
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC8
+Optometrist -- UC3
+Optometrist -- UC6
+Optometrist -- UC13
+LabTech -- UC7
+LabTech -- UC12
+Receptionist -- UC11
+@enduml

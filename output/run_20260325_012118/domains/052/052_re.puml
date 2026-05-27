@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+
+actor "Investor" as INV
+actor "Financial Advisor" as FA
+actor "System Administrator" as SA
+
+rectangle "Investment Portfolio System" {
+  usecase "View Portfolio" as UC1
+  usecase "Buy Securities" as UC2
+  usecase "Sell Securities" as UC3
+  usecase "Rebalance Portfolio" as UC5
+  usecase "Generate Performance Report" as UC6
+  usecase "Manage Client Accounts" as UC8
+  usecase "Set Risk Profile" as UC9
+  usecase "Configure System Settings" as UC10
+  usecase "Monitor Market Data" as UC11
+}
+
+INV -- UC1
+INV -- UC2
+INV -- UC3
+INV -- UC6
+INV -- UC9
+FA -- UC5
+FA -- UC8
+FA -- UC11
+SA -- UC10
+@enduml

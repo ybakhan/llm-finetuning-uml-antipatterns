@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor Radiologist
+actor Patient
+
+rectangle "Medical Imaging System" {
+  usecase "Upload Scan" as UC1
+  usecase "View Diagnostic Report" as UC2
+  usecase "Perform Diagnosis" as UC3
+  usecase "Validate Image Format" as UC4
+  usecase "Schedule Imaging Appointment" as UC5
+}
+
+Patient -- UC5
+Radiologist -- UC1
+Radiologist -- UC2
+Radiologist -- UC3
+
+UC1 ..> UC4 : <<include>>
+@enduml

@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 25
+  domain: insurance_management_system
+  domain_display: Insurance Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:48:38.397751'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Insurance Agent\"\
+    \ as Agent\nactor \"Claims Adjuster\" as Adjuster\nactor \"Underwriter\" as Underwriter\n\
+    \nrectangle \"Insurance Management System\" {\n  usecase \"Submit Claim\" as UC1\n\
+    \  usecase \"Review Claim\" as UC3\n  usecase \"Approve/Deny Claim\" as UC4\n\
+    \  usecase \"Purchase Policy\" as UC5\n  usecase \"Request Quote\" as UC7\n  usecase\
+    \ \"Assess Risk\" as UC8\n  usecase \"Renew Policy\" as UC10\n  usecase \"Cancel\
+    \ Policy\" as UC11\n  usecase \"View Policy Details\" as UC12\n  usecase \"File\
+    \ Appeal\" as UC13\n  usecase \"Update Customer Profile\" as UC14\n  usecase \"\
+    Process Payout\" as UC15\n}\n\nCustomer -- UC1\nCustomer -- UC5\nCustomer -- UC7\n\
+    Customer -- UC10\nCustomer -- UC11\nCustomer -- UC12\nCustomer -- UC13\nCustomer\
+    \ -- UC14\n\nAgent -- UC5\nAgent -- UC7\nAgent -- UC12\n\nAdjuster -- UC3\nAdjuster\
+    \ -- UC4\nAdjuster -- UC15\n\nUnderwriter -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,52 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Moderator" as Moderator
+
+rectangle "Forum and Discussion System" {
+  usecase "Create Thread" as UC1
+  usecase "Reply to Thread" as UC2
+  usecase "Moderate Content" as UC3
+  usecase "Search Forums" as UC4
+  usecase "Validate Post Content" as UC5
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC4
+Moderator -- UC3
+
+UC1 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Create Thread (UC1)",
+            "Validate Post Content (UC5)"
+          ],
+          "explanation": "'Validate Post Content' (UC5) is included by 'Create Thread' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Thread' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Thread' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+
+rectangle "Cloud Storage Service" {
+  usecase "Upload File" as UC1
+  usecase "Download File" as UC2
+  usecase "Manage Storage Quota" as UC3
+  usecase "Share File" as UC4
+  usecase "Delete File" as UC5
+  usecase "Validate File Format" as UC6
+  usecase "Generate Upload Token" as UC7
+}
+
+User -- UC1
+User -- UC2
+User -- UC4
+User -- UC5
+Admin -- UC3
+
+UC1 ..> UC6 : <<include>>
+UC1 ..> UC7 : <<include>>
+@enduml

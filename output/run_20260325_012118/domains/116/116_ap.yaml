@@ -1,0 +1,62 @@
+metadata:
+  domain_id: 116
+  domain: visa_application_system
+  domain_display: Visa Application System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Visa Application (UC1)
+      - Upload Documents (UC2)
+      explanation: '''Upload Documents'' (UC2) is included by ''Submit Visa Application''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Visa Application''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Visa Application'' via the include relationship.'
+    - elements:
+      - Submit Visa Application (UC1)
+      - Fill Personal Details (UC3)
+      explanation: '''Fill Personal Details'' (UC3) is included by ''Submit Visa Application''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Visa Application''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Visa Application'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:56.541033'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Visa Officer\" as\
+    \ A2\n\nrectangle \"Visa Application System\" {\n  usecase \"Submit Visa Application\"\
+    \ as UC1\n  usecase \"Upload Documents\" as UC2\n  usecase \"Fill Personal Details\"\
+    \ as UC3\n  usecase \"Review Application\" as UC4\n  usecase \"Issue Visa Decision\"\
+    \ as UC5\n  usecase \"Schedule Interview\" as UC6\n  usecase \"Check Application\
+    \ Status\" as UC7\n}\n\nA1 -- UC1\nA1 -- UC7\nA2 -- UC4\nA2 -- UC5\nA2 -- UC6\n\
+    \nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Visa Application\
+    \ (UC1)\",\n            \"Upload Documents (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Upload Documents' (UC2) is included by 'Submit Visa Application'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Submit Visa Application' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Visa Application' via the include relationship.\"\n        },\n \
+    \       {\n          \"elements\": [\n            \"Submit Visa Application (UC1)\"\
+    ,\n            \"Fill Personal Details (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Fill Personal Details' (UC3) is included by 'Submit Visa Application' (UC1),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Visa Application' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Visa Application' via the include relationship.\"\n        }\n  \
+    \    ]\n    }\n  ]\n}"

@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 96
+  domain: pet_adoption_system
+  domain_display: Pet Adoption System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:10:27.911317'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Adopter\" as Adopter\nactor \"Shelter Staff\"\
+    \ as Staff\nactor \"Veterinarian\" as Vet\nactor \"Administrator\" as Admin\n\n\
+    rectangle \"Pet Adoption System\" {\n  usecase \"Browse Available Pets\" as UC1\n\
+    \  usecase \"Submit Adoption Application\" as UC2\n  usecase \"Track Application\
+    \ Status\" as UC3\n  usecase \"Register New Pet\" as UC4\n  usecase \"Review Adoption\
+    \ Application\" as UC5\n  usecase \"Perform Health Checkup\" as UC6\n  usecase\
+    \ \"Manage User Accounts\" as UC7\n  usecase \"Generate Adoption Reports\" as\
+    \ UC8\n  usecase \"Process Adoption Fee\" as UC9\n  usecase \"Finalize Adoption\"\
+    \ as UC11\n  usecase \"Schedule Meet and Greet\" as UC12\n  usecase \"Issue Health\
+    \ Certificate\" as UC13\n\n  UC12 ..> UC5 : <<extend>>\n  UC13 ..> UC6 : <<extend>>\n\
+    }\n\nAdopter -- UC1\nAdopter -- UC2\nAdopter -- UC3\nAdopter -- UC9\nStaff --\
+    \ UC4\nStaff -- UC5\nStaff -- UC11\nVet -- UC6\nAdmin -- UC7\nAdmin -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

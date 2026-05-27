@@ -1,0 +1,21 @@
+metadata:
+  domain_id: 169
+  domain: baby_equipment_rental_service
+  domain_display: Baby Equipment Rental Service
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:22:20.631534'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Parent\" as Parent\n\nrectangle \"Baby Equipment\
+    \ Rental Service\" {\n  usecase \"Browse Equipment\" as UC1\n  usecase \"Rent\
+    \ Equipment\" as UC2\n  usecase \"Return Equipment\" as UC4\n}\n\nParent -- UC1\n\
+    Parent -- UC2\nParent -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

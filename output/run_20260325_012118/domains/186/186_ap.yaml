@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 186
+  domain: equipment_maintenance_system
+  domain_display: Equipment Maintenance System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Log Maintenance Request (UC1)
+      - Validate Equipment ID (UC3)
+      explanation: '''Validate Equipment ID'' (UC3) is included by ''Log Maintenance
+        Request'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Log Maintenance
+        Request'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Log Maintenance Request'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:34:26.974006'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Maintenance Technician\" as Tech\nactor \"\
+    Supervisor\" as Super\n\nrectangle \"Equipment Maintenance System\" {\n  usecase\
+    \ \"Log Maintenance Request\" as UC1\n  usecase \"Perform Repair\" as UC2\n  usecase\
+    \ \"Validate Equipment ID\" as UC3\n  usecase \"Approve Work Order\" as UC4\n\
+    \  usecase \"View Maintenance History\" as UC5\n  usecase \"Generate Report\"\
+    \ as UC6\n}\n\nTech -- UC1\nTech -- UC2\nTech -- UC5\nSuper -- UC4\nSuper -- UC6\n\
+    \nUC1 ..> UC3 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Log Maintenance Request\
+    \ (UC1)\",\n            \"Validate Equipment ID (UC3)\"\n          ],\n      \
+    \    \"explanation\": \"'Validate Equipment ID' (UC3) is included by 'Log Maintenance\
+    \ Request' (UC1), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Log Maintenance\
+    \ Request' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Log Maintenance Request' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

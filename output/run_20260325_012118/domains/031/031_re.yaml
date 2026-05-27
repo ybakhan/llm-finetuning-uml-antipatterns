@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 31
+  domain: credit_card_management_system
+  domain_display: Credit Card Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:33:06.576668'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Cardholder\" as CH\nactor \"Customer Service\
+    \ Agent\" as CSA\nactor \"Fraud Analyst\" as FA\nactor \"System Administrator\"\
+    \ as SA\n\nrectangle \"Credit Card Management System\" {\n  usecase \"Apply for\
+    \ Credit Card\" as UC1\n  usecase \"View Account Statement\" as UC4\n  usecase\
+    \ \"Make Payment\" as UC5\n  usecase \"Report Lost Card\" as UC7\n  usecase \"\
+    Block Card\" as UC8\n  usecase \"Investigate Fraud\" as UC9\n  usecase \"Manage\
+    \ Card Limits\" as UC11\n  usecase \"Dispute Transaction\" as UC12\n  usecase\
+    \ \"Request Credit Limit Increase\" as UC13\n  usecase \"Redeem Rewards\" as UC14\n\
+    \  usecase \"Manage User Accounts\" as UC15\n}\n\nCH -- UC1\nCH -- UC4\nCH --\
+    \ UC5\nCH -- UC7\nCH -- UC12\nCH -- UC13\nCH -- UC14\n\nCSA -- UC7\nCSA -- UC8\n\
+    CSA -- UC11\n\nFA -- UC9\n\nSA -- UC15\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

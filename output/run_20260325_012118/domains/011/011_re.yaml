@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 11
+  domain: music_streaming_platform
+  domain_display: Music Streaming Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:25:21.886921'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Listener\" as Listener\nactor \"Artist\" as\
+    \ Artist\nactor \"Admin\" as Admin\n\nrectangle \"Music Streaming Platform\" {\n\
+    \  usecase \"Search Music\" as UC1\n  usecase \"Play Track\" as UC2\n  usecase\
+    \ \"Manage Playlist\" as UC3\n  usecase \"Subscribe to Premium\" as UC4\n  usecase\
+    \ \"Upload Album\" as UC5\n  usecase \"View Analytics\" as UC6\n  usecase \"Moderate\
+    \ Content\" as UC7\n  usecase \"Rate Track\" as UC8\n  usecase \"Download for\
+    \ Offline\" as UC9\n  usecase \"Share Playlist\" as UC13\n  usecase \"Browse Charts\"\
+    \ as UC14\n}\n\nListener -- UC1\nListener -- UC2\nListener -- UC3\nListener --\
+    \ UC4\nListener -- UC8\nListener -- UC9\nListener -- UC13\nListener -- UC14\n\n\
+    Artist -- UC5\nArtist -- UC6\n\nAdmin -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

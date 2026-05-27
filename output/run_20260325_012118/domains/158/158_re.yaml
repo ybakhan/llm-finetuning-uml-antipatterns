@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 158
+  domain: coworking_space_booking
+  domain_display: Coworking Space Booking System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:23:28.063030'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Admin\" as Admin\n\
+    \nrectangle \"Coworking Space Booking System\" {\n  usecase \"Browse Available\
+    \ Spaces\" as UC1\n  usecase \"Book Workspace\" as UC2\n  usecase \"Cancel Booking\"\
+    \ as UC4\n  usecase \"Manage Spaces\" as UC5\n  usecase \"View Booking Reports\"\
+    \ as UC6\n}\n\nMember -- UC1\nMember -- UC2\nMember -- UC4\nAdmin -- UC5\nAdmin\
+    \ -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

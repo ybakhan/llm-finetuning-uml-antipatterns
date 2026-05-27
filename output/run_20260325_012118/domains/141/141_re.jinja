@@ -1,0 +1,47 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Event Coordinator" as EC
+actor "Security Officer" as SO
+actor "Maintenance Staff" as MS
+actor "Ticket Office Manager" as TOM
+
+rectangle "Stadium Management System" {
+  usecase "Schedule Event" as UC1
+  usecase "Monitor Crowd Control" as UC4
+  usecase "Manage Access Gates" as UC5
+  usecase "Log Security Incident" as UC6
+  usecase "Submit Maintenance Request" as UC8
+  usecase "Inspect Stadium Facilities" as UC9
+  usecase "Configure Ticket Pricing" as UC10
+  usecase "Generate Sales Report" as UC11
+  usecase "Manage Parking Allocation" as UC13
+  usecase "Coordinate Emergency Evacuation" as UC14
+}
+
+EC -- UC1
+SO -- UC4
+SO -- UC5
+SO -- UC6
+MS -- UC8
+MS -- UC9
+TOM -- UC10
+TOM -- UC11
+TOM -- UC13
+SO -- UC14
+@enduml
+
+
+Answer:
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}

@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "Passenger" as Passenger
+actor "Driver" as Driver
+
+rectangle "Public Transport System" {
+  usecase "Purchase Ticket" as UC1
+  usecase "Track Bus Location" as UC3
+  usecase "Report Delay" as UC4
+  usecase "Plan Route" as UC5
+}
+
+Passenger -- UC1
+Passenger -- UC3
+Passenger -- UC5
+Driver -- UC4
+
+@enduml

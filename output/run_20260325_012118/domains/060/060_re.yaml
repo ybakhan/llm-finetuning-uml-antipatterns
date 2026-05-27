@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 60
+  domain: passport_application_system
+  domain_display: Passport Application System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:43:59.763579'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Passport Officer\"\
+    \ as A2\nactor \"Supervisor\" as A3\nactor \"Payment Gateway\" as A4\n\nrectangle\
+    \ \"Passport Application System\" {\n  usecase \"Submit Application\" as UC1\n\
+    \  usecase \"Schedule Appointment\" as UC4\n  usecase \"Verify Documents\" as\
+    \ UC5\n  usecase \"Conduct Interview\" as UC7\n  usecase \"Process Payment\" as\
+    \ UC8\n  usecase \"Approve Application\" as UC10\n  usecase \"Reject Application\"\
+    \ as UC11\n  usecase \"Issue Passport\" as UC12\n  usecase \"Track Application\
+    \ Status\" as UC13\n  usecase \"Renew Passport\" as UC14\n}\n\nA1 -- UC1\nA1 --\
+    \ UC4\nA1 -- UC8\nA1 -- UC13\nA1 -- UC14\nA2 -- UC5\nA2 -- UC7\nA3 -- UC10\nA3\
+    \ -- UC11\nA3 -- UC12\nA4 -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

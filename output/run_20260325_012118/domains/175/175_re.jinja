@@ -1,0 +1,55 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Delivery Driver" as Driver
+actor "Inventory Manager" as InvMgr
+actor "Payment Gateway" as PayGW
+
+rectangle "Furniture Rental Service" {
+  usecase "Browse Furniture Catalog" as UC1
+  usecase "Place Rental Order" as UC2
+  usecase "Process Payment" as UC4
+  usecase "Extend Rental Period" as UC5
+  usecase "Return Furniture" as UC6
+  usecase "Schedule Delivery" as UC7
+  usecase "Confirm Delivery" as UC8
+  usecase "Manage Inventory" as UC9
+  usecase "Report Damage" as UC10
+  usecase "Track Order Status" as UC11
+  usecase "Cancel Rental Order" as UC12
+  usecase "Request Furniture Swap" as UC13
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC5
+Customer -- UC6
+Customer -- UC10
+Customer -- UC11
+Customer -- UC12
+Customer -- UC13
+Driver -- UC7
+Driver -- UC8
+InvMgr -- UC9
+PayGW -- UC4
+
+UC2 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

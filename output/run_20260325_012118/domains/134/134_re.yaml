@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 134
+  domain: alumni_network_system
+  domain_display: Alumni Network System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:13:29.154647'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Alumni\" as A1\nactor \"University Admin\"\
+    \ as A2\nactor \"Event Coordinator\" as A3\nactor \"Career Services\" as A4\n\n\
+    rectangle \"Alumni Network System\" {\n  usecase \"Register Profile\" as UC1\n\
+    \  usecase \"Update Profile\" as UC2\n  usecase \"Search Alumni Directory\" as\
+    \ UC3\n  usecase \"Send Message\" as UC4\n  usecase \"Create Event\" as UC5\n\
+    \  usecase \"RSVP to Event\" as UC6\n  usecase \"Post Job Opportunity\" as UC7\n\
+    \  usecase \"Apply for Job\" as UC8\n  usecase \"Manage Memberships\" as UC9\n\
+    \  usecase \"Generate Alumni Report\" as UC10\n  usecase \"Donate to University\"\
+    \ as UC11\n  usecase \"Join Interest Group\" as UC12\n  usecase \"Moderate Content\"\
+    \ as UC13\n  usecase \"Manage Mentorship Program\" as UC15\n  usecase \"View Event\
+    \ Calendar\" as UC16\n}\n\nA1 -- UC1\nA1 -- UC2\nA1 -- UC3\nA1 -- UC4\nA1 -- UC6\n\
+    A1 -- UC8\nA1 -- UC11\nA1 -- UC12\nA2 -- UC9\nA2 -- UC10\nA2 -- UC13\nA3 -- UC5\n\
+    A3 -- UC16\nA4 -- UC7\nA4 -- UC15\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

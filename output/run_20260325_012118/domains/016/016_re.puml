@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Delivery Driver" as Driver
+
+rectangle "Grocery Delivery Service" {
+  usecase "Browse Products" as UC1
+  usecase "Place Order" as UC2
+  usecase "Track Delivery" as UC4
+  usecase "Complete Delivery" as UC5
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Driver -- UC5
+@enduml

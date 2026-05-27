@@ -1,0 +1,87 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Agronomist" as AG
+actor "Weather Service" as WS
+
+rectangle "Crop Monitoring System" {
+  usecase "Monitor Crop Health" as UC1
+  usecase "Validate Sensor Data" as UC2
+  usecase "Record Field Observation" as UC3
+  usecase "Parse GPS Coordinates" as UC4
+  usecase "Generate Yield Forecast" as UC5
+  usecase "Normalize Historical Data" as UC6
+  usecase "Configure Alert Thresholds" as UC7
+  usecase "View Dashboard" as UC8
+  usecase "Manage Irrigation Schedule" as UC9
+  usecase "Detect Pest Outbreak" as UC10
+  usecase "Recommend Treatment Plan" as UC11
+  usecase "Receive Weather Data" as UC12
+  usecase "Generate Seasonal Report" as UC13
+  usecase "Register Field Parcel" as UC14
+}
+
+FM -- UC1
+FM -- UC8
+FM -- UC7
+FM -- UC9
+FM -- UC13
+FT -- UC3
+FT -- UC14
+AG -- UC5
+AG -- UC10
+AG -- UC11
+WS -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC10 .> UC11 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Monitor Crop Health (UC1)",
+            "Validate Sensor Data (UC2)"
+          ],
+          "explanation": "'Validate Sensor Data' (UC2) is included by 'Monitor Crop Health' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Crop Health' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Crop Health' via the include relationship."
+        },
+        {
+          "elements": [
+            "Record Field Observation (UC3)",
+            "Parse GPS Coordinates (UC4)"
+          ],
+          "explanation": "'Parse GPS Coordinates' (UC4) is included by 'Record Field Observation' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Record Field Observation' rather than a standalone service observable to any actor, making it a functional decomposition of 'Record Field Observation' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Yield Forecast (UC5)",
+            "Normalize Historical Data (UC6)"
+          ],
+          "explanation": "'Normalize Historical Data' (UC6) is included by 'Generate Yield Forecast' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Yield Forecast' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Yield Forecast' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

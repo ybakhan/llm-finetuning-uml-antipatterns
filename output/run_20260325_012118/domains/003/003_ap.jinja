@@ -1,0 +1,91 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Store Admin" as Admin
+actor "Payment Gateway" as PayGW
+
+rectangle "Online Store" {
+  usecase "Browse Products" as UC1
+  usecase "Search Products" as UC2
+  usecase "Add to Cart" as UC3
+  usecase "Place Order" as UC4
+  usecase "Validate Cart Items" as UC5
+  usecase "Calculate Shipping Cost" as UC6
+  usecase "Process Payment" as UC7
+  usecase "Track Order" as UC8
+  usecase "Submit Product Review" as UC9
+  usecase "Manage Inventory" as UC10
+  usecase "Generate Sales Report" as UC11
+  usecase "Manage Promotions" as UC12
+  usecase "Register Account" as UC13
+  usecase "Apply Discount Code" as UC14
+  usecase "Verify Discount Eligibility" as UC15
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Customer -- UC4
+Customer -- UC7
+Customer -- UC8
+Customer -- UC9
+Customer -- UC13
+Customer -- UC14
+
+Admin -- UC10
+Admin -- UC11
+Admin -- UC12
+
+PayGW -- UC7
+
+UC4 ..> UC5 : <<include>>
+UC4 ..> UC6 : <<include>>
+UC14 ..> UC15 : <<include>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Place Order (UC4)",
+            "Validate Cart Items (UC5)"
+          ],
+          "explanation": "'Validate Cart Items' (UC5) is included by 'Place Order' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Place Order (UC4)",
+            "Calculate Shipping Cost (UC6)"
+          ],
+          "explanation": "'Calculate Shipping Cost' (UC6) is included by 'Place Order' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Apply Discount Code (UC14)",
+            "Verify Discount Eligibility (UC15)"
+          ],
+          "explanation": "'Verify Discount Eligibility' (UC15) is included by 'Apply Discount Code' (UC14), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Apply Discount Code' rather than a standalone service observable to any actor, making it a functional decomposition of 'Apply Discount Code' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

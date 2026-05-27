@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 98
+  domain: dental_clinic_system
+  domain_display: Dental Clinic System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:59:43.170431'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Dentist\" as\
+    \ Dentist\nactor \"Receptionist\" as Receptionist\nactor \"Insurance Provider\"\
+    \ as InsProvider\n\nrectangle \"Dental Clinic System\" {\n  usecase \"Book Appointment\"\
+    \ as UC1\n  usecase \"Perform Treatment\" as UC4\n  usecase \"Process Payment\"\
+    \ as UC7\n  usecase \"View Treatment History\" as UC9\n  usecase \"Cancel Appointment\"\
+    \ as UC10\n  usecase \"Submit Insurance Claim\" as UC11\n  usecase \"Manage Patient\
+    \ Records\" as UC12\n  usecase \"Generate Prescription\" as UC13\n  usecase \"\
+    Send Appointment Reminder\" as UC14\n  usecase \"View Schedule\" as UC15\n}\n\n\
+    Patient -- UC1\nPatient -- UC7\nPatient -- UC9\nPatient -- UC10\n\nDentist --\
+    \ UC4\nDentist -- UC13\nDentist -- UC15\nDentist -- UC9\n\nReceptionist -- UC1\n\
+    Receptionist -- UC12\nReceptionist -- UC14\nReceptionist -- UC7\n\nInsProvider\
+    \ -- UC11\n\nUC11 ..> UC9 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

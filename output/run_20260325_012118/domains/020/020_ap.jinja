@@ -1,0 +1,51 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Student" as Student
+actor "Registrar" as Registrar
+
+rectangle "University Enrollment System" {
+  usecase "Browse Course Catalog" as UC1
+  usecase "Enroll in Course" as UC2
+  usecase "Validate Prerequisites" as UC3
+  usecase "Drop Course" as UC4
+  usecase "Manage Course Offerings" as UC5
+}
+
+Student -- UC1
+Student -- UC2
+UC2 ..> UC3 : <<include>>
+Student -- UC4
+Registrar -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Enroll in Course (UC2)",
+            "Validate Prerequisites (UC3)"
+          ],
+          "explanation": "'Validate Prerequisites' is included by 'Enroll in Course', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Enroll in Course' rather than a standalone service observable to any actor, making it a functional decomposition of 'Enroll in Course' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,94 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Insurance Agent" as Agent
+actor "Claims Adjuster" as Adjuster
+actor "Underwriter" as Underwriter
+
+rectangle "Insurance Management System" {
+  usecase "Submit Claim" as UC1
+  usecase "Validate Claim Documents" as UC2
+  usecase "Review Claim" as UC3
+  usecase "Approve/Deny Claim" as UC4
+  usecase "Purchase Policy" as UC5
+  usecase "Calculate Premium" as UC6
+  usecase "Request Quote" as UC7
+  usecase "Assess Risk" as UC8
+  usecase "Generate Risk Score" as UC9
+  usecase "Renew Policy" as UC10
+  usecase "Cancel Policy" as UC11
+  usecase "View Policy Details" as UC12
+  usecase "File Appeal" as UC13
+  usecase "Update Customer Profile" as UC14
+  usecase "Process Payout" as UC15
+}
+
+Customer -- UC1
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Customer -- UC11
+Customer -- UC12
+Customer -- UC13
+Customer -- UC14
+
+Agent -- UC5
+Agent -- UC7
+Agent -- UC12
+
+Adjuster -- UC3
+Adjuster -- UC4
+Adjuster -- UC15
+
+Underwriter -- UC8
+
+UC1 ..> UC2 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC8 ..> UC9 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Submit Claim (UC1)",
+            "Validate Claim Documents (UC2)"
+          ],
+          "explanation": "'Validate Claim Documents' (UC2) is included by 'Submit Claim' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Claim' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Claim' via the include relationship."
+        },
+        {
+          "elements": [
+            "Purchase Policy (UC5)",
+            "Calculate Premium (UC6)"
+          ],
+          "explanation": "'Calculate Premium' (UC6) is included by 'Purchase Policy' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Policy' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Policy' via the include relationship."
+        },
+        {
+          "elements": [
+            "Assess Risk (UC8)",
+            "Generate Risk Score (UC9)"
+          ],
+          "explanation": "'Generate Risk Score' (UC9) is included by 'Assess Risk' (UC8), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Assess Risk' rather than a standalone service observable to any actor, making it a functional decomposition of 'Assess Risk' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

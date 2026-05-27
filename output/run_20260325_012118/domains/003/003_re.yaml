@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 3
+  domain: online_store
+  domain_display: Online Store
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:22:19.920868'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Store Admin\"\
+    \ as Admin\nactor \"Payment Gateway\" as PayGW\n\nrectangle \"Online Store\" {\n\
+    \  usecase \"Browse Products\" as UC1\n  usecase \"Search Products\" as UC2\n\
+    \  usecase \"Add to Cart\" as UC3\n  usecase \"Place Order\" as UC4\n  usecase\
+    \ \"Process Payment\" as UC7\n  usecase \"Track Order\" as UC8\n  usecase \"Submit\
+    \ Product Review\" as UC9\n  usecase \"Manage Inventory\" as UC10\n  usecase \"\
+    Generate Sales Report\" as UC11\n  usecase \"Manage Promotions\" as UC12\n  usecase\
+    \ \"Register Account\" as UC13\n  usecase \"Apply Discount Code\" as UC14\n}\n\
+    \nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC3\nCustomer -- UC4\nCustomer\
+    \ -- UC7\nCustomer -- UC8\nCustomer -- UC9\nCustomer -- UC13\nCustomer -- UC14\n\
+    \nAdmin -- UC10\nAdmin -- UC11\nAdmin -- UC12\n\nPayGW -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

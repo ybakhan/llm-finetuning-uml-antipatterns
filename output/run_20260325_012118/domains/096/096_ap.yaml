@@ -1,0 +1,51 @@
+metadata:
+  domain_id: 96
+  domain: pet_adoption_system
+  domain_display: Pet Adoption System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Process Adoption Fee (UC9)
+      - Validate Payment Details (UC10)
+      explanation: '''Validate Payment Details'' (UC10) is included by ''Process Adoption
+        Fee'' (UC9), has no direct actor association, does not include or extend any
+        other use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Adoption Fee''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Adoption Fee'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:10:27.911317'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Adopter\" as Adopter\nactor \"Shelter Staff\"\
+    \ as Staff\nactor \"Veterinarian\" as Vet\nactor \"Administrator\" as Admin\n\n\
+    rectangle \"Pet Adoption System\" {\n  usecase \"Browse Available Pets\" as UC1\n\
+    \  usecase \"Submit Adoption Application\" as UC2\n  usecase \"Track Application\
+    \ Status\" as UC3\n  usecase \"Register New Pet\" as UC4\n  usecase \"Review Adoption\
+    \ Application\" as UC5\n  usecase \"Perform Health Checkup\" as UC6\n  usecase\
+    \ \"Manage User Accounts\" as UC7\n  usecase \"Generate Adoption Reports\" as\
+    \ UC8\n  usecase \"Process Adoption Fee\" as UC9\n  usecase \"Validate Payment\
+    \ Details\" as UC10\n  usecase \"Finalize Adoption\" as UC11\n  usecase \"Schedule\
+    \ Meet and Greet\" as UC12\n  usecase \"Issue Health Certificate\" as UC13\n\n\
+    \  UC9 ..> UC10 : <<include>>\n  UC12 ..> UC5 : <<extend>>\n  UC13 ..> UC6 : <<extend>>\n\
+    }\n\nAdopter -- UC1\nAdopter -- UC2\nAdopter -- UC3\nAdopter -- UC9\nStaff --\
+    \ UC4\nStaff -- UC5\nStaff -- UC11\nVet -- UC6\nAdmin -- UC7\nAdmin -- UC8\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Process Adoption Fee\
+    \ (UC9)\",\n            \"Validate Payment Details (UC10)\"\n          ],\n  \
+    \        \"explanation\": \"'Validate Payment Details' (UC10) is included by 'Process\
+    \ Adoption Fee' (UC9), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Process Adoption\
+    \ Fee' rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Process Adoption Fee' via the include relationship.\"\n  \
+    \      }\n      ]\n    }\n  ]\n}"

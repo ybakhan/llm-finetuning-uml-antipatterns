@@ -1,0 +1,49 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Donor" as Donor
+actor "Lab Technician" as LabTech
+actor "Blood Bank Officer" as Officer
+actor "Doctor" as Doctor
+
+rectangle "Blood Bank Management System" {
+  usecase "Register Donor" as UC1
+  usecase "Conduct Blood Donation" as UC4
+  usecase "Screen Blood Sample" as UC5
+  usecase "Perform Compatibility Test" as UC6
+  usecase "Store Blood Unit" as UC7
+  usecase "Process Blood Request" as UC9
+  usecase "Request Blood Unit" as UC10
+  usecase "Manage Blood Inventory" as UC11
+  usecase "Generate Donation Report" as UC12
+  usecase "Discard Expired Blood" as UC13
+}
+
+Donor -- UC1
+Donor -- UC4
+LabTech -- UC5
+LabTech -- UC6
+Officer -- UC7
+Officer -- UC9
+Officer -- UC11
+Officer -- UC13
+Doctor -- UC10
+Officer -- UC12
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

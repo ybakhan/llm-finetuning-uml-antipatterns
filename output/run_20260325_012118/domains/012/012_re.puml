@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Viewer" as Viewer
+actor "Content Creator" as Creator
+
+rectangle "Video Streaming Platform" {
+  usecase "Watch Video" as UC1
+  usecase "Search Content" as UC2
+  usecase "Upload Video" as UC3
+  usecase "Manage Subscription" as UC4
+}
+
+Viewer -- UC1
+Viewer -- UC2
+Viewer -- UC4
+Creator -- UC3
+@enduml

@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 17
+  domain: medical_clinic_system
+  domain_display: Medical Clinic System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Prescribe Medication (UC4)
+      - Validate Prescription (UC5)
+      explanation: '''Validate Prescription'' (UC5) is included by ''Prescribe Medication'' (UC4), has
+        no direct actor association, does not include or extend any other use case, is not extended by
+        any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step
+        of ''Prescribe Medication'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Prescribe Medication'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T04:32:16.113492'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains any antipatterns. Base\
+    \ your analysis solely on the model provided. Do not use any outside knowledge. Respond with a JSON\
+    \ object.\n\nPlantUML Model:\n@startuml\nleft to right direction\n\nactor \"Patient\" as Patient\n\
+    actor \"Doctor\" as Doctor\nactor \"Receptionist\" as Receptionist\nactor \"Nurse\" as Nurse\n\nrectangle\
+    \ \"Medical Clinic System\" {\n  usecase \"Schedule Appointment\" as UC1\n  usecase \"Check Available\
+    \ Slots\" as UC2\n  usecase \"Conduct Consultation\" as UC3\n  usecase \"Prescribe Medication\" as\
+    \ UC4\n  usecase \"Validate Prescription\" as UC5\n  usecase \"Register Patient\" as UC6\n  usecase\
+    \ \"Record Vitals\" as UC7\n  usecase \"View Medical History\" as UC8\n  usecase \"Cancel Appointment\"\
+    \ as UC9\n  usecase \"Generate Invoice\" as UC10\n  usecase \"Request Lab Test\" as UC11\n}\n\nPatient\
+    \ -- UC1\nPatient -- UC9\nPatient -- UC8\nReceptionist -- UC1\nReceptionist -- UC2\nReceptionist --\
+    \ UC6\nReceptionist -- UC9\nReceptionist -- UC10\nDoctor -- UC3\nDoctor -- UC4\nDoctor -- UC8\nDoctor\
+    \ -- UC11\nNurse -- UC7\n\nUC1 ..> UC2 : <<include>>\nUC4 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\": 1,\n  \"\
+    antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition: Using the include\
+    \ relationship\",\n      \"instance_count\": 1,\n      \"instances\": [\n        {\n          \"elements\"\
+    : [\n            \"Prescribe Medication (UC4)\",\n            \"Validate Prescription (UC5)\"\n  \
+    \        ],\n          \"explanation\": \"'Validate Prescription' (UC5) is included by 'Prescribe\
+    \ Medication' (UC4), has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Prescribe Medication' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Prescribe Medication' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

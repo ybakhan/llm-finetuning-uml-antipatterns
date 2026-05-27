@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Judge" as Judge
+actor "Clerk" as Clerk
+actor "Attorney" as Attorney
+actor "Bailiff" as Bailiff
+
+rectangle "Court Case Management System" {
+  usecase "File New Case" as UC1
+  usecase "Schedule Hearing" as UC3
+  usecase "Review Case Details" as UC4
+  usecase "Issue Court Order" as UC5
+  usecase "Record Verdict" as UC6
+  usecase "Manage Evidence" as UC7
+  usecase "Submit Motion" as UC8
+  usecase "Request Adjournment" as UC9
+  usecase "Manage Jury Selection" as UC10
+  usecase "Update Case Status" as UC11
+  usecase "Archive Closed Case" as UC12
+  usecase "Escort Defendant" as UC13
+  usecase "Search Case Records" as UC14
+  usecase "Assign Public Defender" as UC15
+}
+
+Clerk -- UC1
+Clerk -- UC3
+Judge -- UC4
+Judge -- UC5
+Judge -- UC6
+Clerk -- UC7
+Attorney -- UC8
+Attorney -- UC9
+Judge -- UC10
+Clerk -- UC11
+Clerk -- UC12
+Bailiff -- UC13
+Attorney -- UC14
+Clerk -- UC14
+Judge -- UC15
+@enduml

@@ -1,0 +1,35 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Clinical Researcher" as Researcher
+actor "Site Coordinator" as Coordinator
+
+rectangle "Clinical Trial Management System" {
+  usecase "Register Patient" as UC1
+  usecase "Record Adverse Event" as UC3
+  usecase "Monitor Trial Progress" as UC4
+  usecase "Submit Regulatory Report" as UC5
+}
+
+Researcher -- UC1
+Researcher -- UC3
+Coordinator -- UC4
+Coordinator -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

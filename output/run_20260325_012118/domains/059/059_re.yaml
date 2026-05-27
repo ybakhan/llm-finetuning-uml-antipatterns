@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 59
+  domain: scholarship_application_system
+  domain_display: Scholarship Application System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T05:17:34.171764'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Reviewer\" as A2\n\
+    actor \"Administrator\" as A3\nactor \"Financial Aid Officer\" as A4\n\nrectangle\
+    \ \"Scholarship Application System\" {\n  usecase \"Submit Application\" as UC1\n\
+    \  usecase \"Upload Documents\" as UC2\n  usecase \"Review Application\" as UC5\n\
+    \  usecase \"Score Application\" as UC7\n  usecase \"Manage Scholarships\" as\
+    \ UC8\n  usecase \"Generate Award Letter\" as UC9\n  usecase \"Approve Award\"\
+    \ as UC10\n  usecase \"Track Application Status\" as UC11\n  usecase \"View Reports\"\
+    \ as UC12\n  usecase \"Notify Applicant\" as UC13\n  usecase \"Manage Deadlines\"\
+    \ as UC14\n}\n\nA1 -- UC1\nA1 -- UC2\nA1 -- UC11\nA2 -- UC5\nA2 -- UC7\nA3 --\
+    \ UC8\nA3 -- UC14\nA3 -- UC12\nA4 -- UC10\nUC10 ..> UC9 : <<include>>\nUC10 ..>\
+    \ UC13 : <<include>>\nUC5 ..> UC13 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Property Owner" as PO
+actor "Registrar" as REG
+
+rectangle "Land Registry System" {
+  usecase "Register Property" as UC1
+  usecase "Search Land Records" as UC2
+  usecase "Transfer Ownership" as UC3
+  usecase "Issue Title Deed" as UC5
+  usecase "Resolve Boundary Dispute" as UC6
+}
+
+PO -- UC1
+PO -- UC2
+REG -- UC3
+REG -- UC5
+REG -- UC6
+@enduml

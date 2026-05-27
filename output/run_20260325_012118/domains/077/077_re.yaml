@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 77
+  domain: room_service_management
+  domain_display: Room Service Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:50:35.639314'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Hotel Guest\" as Guest\nactor \"Room Service\
+    \ Staff\" as Staff\nactor \"Kitchen Staff\" as Kitchen\nactor \"Manager\" as Manager\n\
+    \nrectangle \"Room Service Management System\" {\n  usecase \"Browse Menu\" as\
+    \ UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Track Order Status\" as UC4\n\
+    \  usecase \"Deliver Order\" as UC5\n  usecase \"Confirm Delivery\" as UC6\n \
+    \ usecase \"Prepare Order\" as UC7\n  usecase \"Update Menu Items\" as UC8\n \
+    \ usecase \"Handle Complaint\" as UC9\n  usecase \"Generate Daily Report\" as\
+    \ UC10\n  usecase \"Rate Service\" as UC11\n  usecase \"Cancel Order\" as UC12\n\
+    }\n\nGuest -- UC1\nGuest -- UC2\nGuest -- UC4\nGuest -- UC9\nGuest -- UC11\nGuest\
+    \ -- UC12\n\nStaff -- UC5\nStaff -- UC6\nStaff -- UC4\n\nKitchen -- UC7\n\nManager\
+    \ -- UC8\nManager -- UC10\nManager -- UC9\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

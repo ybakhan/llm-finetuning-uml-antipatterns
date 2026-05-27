@@ -1,0 +1,97 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Rider" as Rider
+actor "Station Technician" as Tech
+actor "System Administrator" as Admin
+
+rectangle "Bike Sharing System" {
+  usecase "Register Account" as UC1
+  usecase "Validate Email Format" as UC1a
+  usecase "Save User to Database" as UC1b
+  usecase "Rent Bike" as UC2
+  usecase "Return Bike" as UC3
+  usecase "Report Bike Issue" as UC4
+  usecase "View Ride History" as UC5
+  usecase "Process Payment" as UC6
+  usecase "Validate Payment Details" as UC6a
+  usecase "Charge Payment Method" as UC6b
+  usecase "Perform Bike Maintenance" as UC7
+  usecase "Inspect Station" as UC8
+  usecase "Manage Stations" as UC9
+  usecase "View System Analytics" as UC10
+  usecase "Manage Pricing Plans" as UC11
+}
+
+Rider -- UC1
+Rider -- UC2
+Rider -- UC3
+Rider -- UC4
+Rider -- UC5
+Rider -- UC6
+
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+
+UC6 ..> UC6a : <<include>>
+UC6 ..> UC6b : <<include>>
+
+Tech -- UC7
+Tech -- UC8
+
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Register Account (UC1)",
+            "Validate Email Format (UC1a)"
+          ],
+          "explanation": "'Validate Email Format' (UC1a) is included by 'Register Account' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register Account' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register Account' via the include relationship."
+        },
+        {
+          "elements": [
+            "Register Account (UC1)",
+            "Save User to Database (UC1b)"
+          ],
+          "explanation": "'Save User to Database' (UC1b) is included by 'Register Account' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register Account' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register Account' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Payment (UC6)",
+            "Validate Payment Details (UC6a)"
+          ],
+          "explanation": "'Validate Payment Details' (UC6a) is included by 'Process Payment' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Payment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Payment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Payment (UC6)",
+            "Charge Payment Method (UC6b)"
+          ],
+          "explanation": "'Charge Payment Method' (UC6b) is included by 'Process Payment' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Payment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Payment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

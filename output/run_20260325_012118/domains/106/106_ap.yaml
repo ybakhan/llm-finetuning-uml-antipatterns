@@ -1,0 +1,62 @@
+metadata:
+  domain_id: 106
+  domain: language_learning_app
+  domain_display: Language Learning App
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Take Vocabulary Quiz (UC1)
+      - Load Quiz Questions (UC2)
+      explanation: '''Load Quiz Questions'' is included by ''Take Vocabulary Quiz'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Take Vocabulary Quiz''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Take Vocabulary Quiz'' via the include relationship.'
+    - elements:
+      - Take Vocabulary Quiz (UC1)
+      - Calculate Quiz Score (UC3)
+      explanation: '''Calculate Quiz Score'' is included by ''Take Vocabulary Quiz'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Take Vocabulary Quiz''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Take Vocabulary Quiz'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:02:34.084950'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Learner\" as Learner\nactor \"Instructor\"\
+    \ as Instructor\n\nrectangle \"Language Learning App\" {\n  usecase \"Take Vocabulary\
+    \ Quiz\" as UC1\n  usecase \"Load Quiz Questions\" as UC2\n  usecase \"Calculate\
+    \ Quiz Score\" as UC3\n  usecase \"Practice Pronunciation\" as UC4\n  usecase\
+    \ \"View Progress Report\" as UC5\n  usecase \"Create Lesson Plan\" as UC6\n}\n\
+    \nLearner -- UC1\nLearner -- UC4\nLearner -- UC5\nInstructor -- UC6\n\nUC1 ..>\
+    \ UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Take Vocabulary Quiz\
+    \ (UC1)\",\n            \"Load Quiz Questions (UC2)\"\n          ],\n        \
+    \  \"explanation\": \"'Load Quiz Questions' is included by 'Take Vocabulary Quiz',\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Take Vocabulary Quiz' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Take\
+    \ Vocabulary Quiz' via the include relationship.\"\n        },\n        {\n  \
+    \        \"elements\": [\n            \"Take Vocabulary Quiz (UC1)\",\n      \
+    \      \"Calculate Quiz Score (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Quiz Score' is included by 'Take Vocabulary Quiz', has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Take Vocabulary Quiz' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Take Vocabulary\
+    \ Quiz' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

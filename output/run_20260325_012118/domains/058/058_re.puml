@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+actor "Student" as Student
+actor "Professor" as Professor
+actor "Registrar" as Registrar
+actor "Academic Advisor" as Advisor
+
+rectangle "Course Registration System" {
+  usecase "Register for Course" as UC1
+  usecase "Drop Course" as UC2
+  usecase "View Course Catalog" as UC3
+  usecase "View Schedule" as UC4
+  usecase "Approve Registration" as UC5
+  usecase "Manage Course Offerings" as UC6
+  usecase "View Class Roster" as UC7
+  usecase "Set Enrollment Limits" as UC8
+  usecase "Generate Transcript" as UC9
+  usecase "Request Prerequisite Override" as UC10
+  usecase "Review Override Request" as UC11
+  usecase "Waitlist for Course" as UC12
+  usecase "View Advisee Registrations" as UC14
+}
+
+Student -- UC1
+Student -- UC2
+Student -- UC3
+Student -- UC4
+Student -- UC9
+Student -- UC10
+Student -- UC12
+
+Professor -- UC7
+Professor -- UC8
+Professor -- UC11
+
+Registrar -- UC5
+Registrar -- UC6
+
+Advisor -- UC14
+
+UC12 ..> UC1 : <<extend>>
+@enduml

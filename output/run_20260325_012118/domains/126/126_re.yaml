@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 126
+  domain: court_case_management_system
+  domain_display: Court Case Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:15:44.435271'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Judge\" as Judge\nactor \"Clerk\" as Clerk\n\
+    actor \"Attorney\" as Attorney\nactor \"Bailiff\" as Bailiff\n\nrectangle \"Court\
+    \ Case Management System\" {\n  usecase \"File New Case\" as UC1\n  usecase \"\
+    Schedule Hearing\" as UC3\n  usecase \"Review Case Details\" as UC4\n  usecase\
+    \ \"Issue Court Order\" as UC5\n  usecase \"Record Verdict\" as UC6\n  usecase\
+    \ \"Manage Evidence\" as UC7\n  usecase \"Submit Motion\" as UC8\n  usecase \"\
+    Request Adjournment\" as UC9\n  usecase \"Manage Jury Selection\" as UC10\n  usecase\
+    \ \"Update Case Status\" as UC11\n  usecase \"Archive Closed Case\" as UC12\n\
+    \  usecase \"Escort Defendant\" as UC13\n  usecase \"Search Case Records\" as\
+    \ UC14\n  usecase \"Assign Public Defender\" as UC15\n}\n\nClerk -- UC1\nClerk\
+    \ -- UC3\nJudge -- UC4\nJudge -- UC5\nJudge -- UC6\nClerk -- UC7\nAttorney --\
+    \ UC8\nAttorney -- UC9\nJudge -- UC10\nClerk -- UC11\nClerk -- UC12\nBailiff --\
+    \ UC13\nAttorney -- UC14\nClerk -- UC14\nJudge -- UC15\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

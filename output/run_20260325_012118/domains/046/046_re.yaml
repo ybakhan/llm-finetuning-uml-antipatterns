@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 46
+  domain: expense_tracking_system
+  domain_display: Expense Tracking System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:38:27.703909'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Employee\" as Employee\nactor \"Manager\" as\
+    \ Manager\n\nrectangle \"Expense Tracking System\" {\n  usecase \"Submit Expense\
+    \ Report\" as UC1\n  usecase \"Review Expense Report\" as UC3\n  usecase \"Generate\
+    \ Spending Summary\" as UC4\n  usecase \"Approve Expense Report\" as UC5\n}\n\n\
+    Employee -- UC1\nEmployee -- UC4\nManager -- UC3\nManager -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

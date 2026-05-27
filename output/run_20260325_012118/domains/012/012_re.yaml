@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 12
+  domain: video_streaming_platform
+  domain_display: Video Streaming Platform
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:25:40.835738'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Viewer\" as Viewer\nactor \"Content Creator\"\
+    \ as Creator\n\nrectangle \"Video Streaming Platform\" {\n  usecase \"Watch Video\"\
+    \ as UC1\n  usecase \"Search Content\" as UC2\n  usecase \"Upload Video\" as UC3\n\
+    \  usecase \"Manage Subscription\" as UC4\n}\n\nViewer -- UC1\nViewer -- UC2\n\
+    Viewer -- UC4\nCreator -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

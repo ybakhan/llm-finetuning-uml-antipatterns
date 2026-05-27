@@ -1,0 +1,56 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Therapist" as Therapist
+actor "Receptionist" as Receptionist
+actor "Manager" as Manager
+
+rectangle "Spa and Wellness Booking System" {
+  usecase "Browse Treatments" as UC1
+  usecase "Book Appointment" as UC2
+  usecase "Process Payment" as UC4
+  usecase "Cancel Appointment" as UC5
+  usecase "View Schedule" as UC6
+  usecase "Manage Treatment Catalog" as UC7
+  usecase "Record Client Preferences" as UC8
+  usecase "Check In Client" as UC9
+  usecase "Generate Revenue Report" as UC10
+  usecase "Leave Review" as UC11
+  usecase "Apply Discount Code" as UC12
+  usecase "Manage Staff Availability" as UC13
+  usecase "Request Membership" as UC14
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Customer -- UC5
+Customer -- UC11
+Customer -- UC14
+UC12 ..> UC2 : <<extend>>
+Therapist -- UC6
+Therapist -- UC8
+Receptionist -- UC9
+Receptionist -- UC4
+Manager -- UC7
+Manager -- UC10
+Manager -- UC13
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

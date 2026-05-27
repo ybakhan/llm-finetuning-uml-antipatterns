@@ -1,0 +1,21 @@
+metadata:
+  domain_id: 168
+  domain: notary_service_booking
+  domain_display: Notary Service Booking System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:26:57.331543'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Client\" as Client\nactor \"Notary\" as Notary\n\
+    \nrectangle \"Notary Service Booking System\" {\n  usecase \"Book Appointment\"\
+    \ as UC1\n  usecase \"Manage Schedule\" as UC3\n  usecase \"Cancel Appointment\"\
+    \ as UC4\n}\n\nClient -- UC1\nClient -- UC4\nNotary -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

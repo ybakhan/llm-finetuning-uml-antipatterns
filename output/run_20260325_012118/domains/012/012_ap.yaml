@@ -1,0 +1,61 @@
+metadata:
+  domain_id: 12
+  domain: video_streaming_platform
+  domain_display: Video Streaming Platform
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Watch Video (UC1)
+      - Load Video Player (UC5)
+      explanation: '''Load Video Player'' is included by ''Watch Video'', has no direct
+        actor association, does not include or extend any other use case, is not extended
+        by any use case, and is not part of any generalisation hierarchy. It represents
+        an internal sub-step of ''Watch Video'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Watch Video'' via
+        the include relationship.'
+    - elements:
+      - Watch Video (UC1)
+      - Buffer Stream Data (UC6)
+      explanation: '''Buffer Stream Data'' is included by ''Watch Video'', has no
+        direct actor association, does not include or extend any other use case, is
+        not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Watch Video'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Watch
+        Video'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:25:40.835738'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Viewer\" as Viewer\nactor \"Content Creator\"\
+    \ as Creator\n\nrectangle \"Video Streaming Platform\" {\n  usecase \"Watch Video\"\
+    \ as UC1\n  usecase \"Search Content\" as UC2\n  usecase \"Upload Video\" as UC3\n\
+    \  usecase \"Manage Subscription\" as UC4\n  usecase \"Load Video Player\" as\
+    \ UC5\n  usecase \"Buffer Stream Data\" as UC6\n}\n\nViewer -- UC1\nViewer --\
+    \ UC2\nViewer -- UC4\nCreator -- UC3\n\nUC1 ..> UC5 : <<include>>\nUC1 ..> UC6\
+    \ : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Watch Video (UC1)\",\n\
+    \            \"Load Video Player (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'Load Video Player' is included by 'Watch Video', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Watch Video' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Watch Video' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Watch Video\
+    \ (UC1)\",\n            \"Buffer Stream Data (UC6)\"\n          ],\n         \
+    \ \"explanation\": \"'Buffer Stream Data' is included by 'Watch Video', has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Watch Video' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Watch\
+    \ Video' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

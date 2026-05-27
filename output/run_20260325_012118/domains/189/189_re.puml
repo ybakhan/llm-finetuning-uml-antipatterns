@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Track Recalled Inventory" as UC7
+  usecase "Classify Recall Severity" as UC8
+  usecase "Communicate Recall to Public" as UC9
+  usecase "Verify Product Destruction" as UC10
+  usecase "Close Recall Case" as UC11
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+}
+
+QI -- UC1
+QI -- UC8
+RC -- UC1
+RC -- UC3
+RC -- UC9
+RC -- UC11
+RC -- UC12
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC7
+WM -- UC10
+@enduml

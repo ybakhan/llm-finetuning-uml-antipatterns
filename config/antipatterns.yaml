@@ -1,0 +1,48 @@
+# antipatterns.yaml
+#
+# Configure the antipatterns to embed and their refactoring strategies.
+# Pass this file to generate_samples.py via --config.
+
+antipatterns:
+
+  - name: "Functional Decomposition: Using the include relationship"
+    code: "a4"
+    description: |
+      This antipattern represents improper usage of the include relationship. The service
+      offered by a use case is divided into several inclusion use cases. Moreover, these
+      inclusion use cases are not directly associated with any actor. They do not represent a
+      complete service that is offered the system; hence, provide no observable result to a user.
+      Functional decomposition is acceptable if an inclusion use case provides complete
+      behavior to another actor and/or is included by another use case.
+    refactorings:
+      - name: "Drop Functional Decomposition"
+        description: |
+          This refactoring merges the inclusion use cases into the base use case, which
+          individually provides a complete service to the actor. A use case is involved in this
+          antipattern if it:
+          - is an inclusion use case which is included by one use case only
+          - is not associated with any actor
+          - is neither including nor extending any use case
+          - is not extended by any use case
+          - is neither a generalization nor a specialization of any use case
+
+  # - name: "Functional Decomposition: Using the extend relationship"
+  #   code: "a3"
+  #   description: |
+  #     This antipattern represents improper usage of the extend relationship, in which a
+  #     single use case extends multiple base use cases. To elaborate, the extension use case is
+  #     providing optional behavior which is useful to multiple base use cases. This strongly
+  #     indicates that the extension use case has degraded into a function, and cannot properly
+  #     provide optional behavior to its base use cases.
+  #   refactorings:
+  #     - name: "Split Extension UC"
+  #       description: |
+  #         This refactoring splits the extension use case into multiple use cases, each of which
+  #         provide optional behavior specific to a single base use case. This will ensure that
+  #         exceptional situations are properly handled by the extension use cases. A use case is
+  #         involved in this antipattern if it is:
+  #         - not associated with any actor
+  #         - neither a generalization nor a specialization of any use case
+  #         - neither an inclusion use case nor including any use case
+  #         - not extended by any use case
+  #         - extends more than one use case

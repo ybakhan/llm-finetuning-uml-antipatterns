@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Principal Investigator" as PI
+actor "Grant Officer" as GO
+actor "Review Panel Member" as RPM
+actor "Finance Officer" as FO
+
+rectangle "Research Grant Management System" {
+  usecase "Submit Grant Proposal" as UC1
+  usecase "Validate Budget Details" as UC2
+  usecase "Review Grant Application" as UC3
+  usecase "Approve Grant Funding" as UC4
+  usecase "Process Fund Disbursement" as UC5
+  usecase "Monitor Grant Expenditure" as UC6
+  usecase "Submit Progress Report" as UC7
+  usecase "Track Grant Milestones" as UC8
+  usecase "Close Grant Account" as UC9
+  usecase "Request Budget Amendment" as UC10
+  usecase "Manage Reviewer Assignments" as UC11
+}
+
+PI -- UC1
+PI -- UC7
+PI -- UC10
+RPM -- UC3
+GO -- UC4
+GO -- UC8
+GO -- UC11
+FO -- UC5
+FO -- UC6
+FO -- UC9
+
+UC1 ..> UC2 : <<include>>
+@enduml

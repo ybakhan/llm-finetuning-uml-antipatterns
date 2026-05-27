@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Attendee" as A1
+actor "Organizer" as A2
+actor "Reviewer" as A3
+actor "Payment Gateway" as A4
+
+rectangle "Conference Registration System" {
+  usecase "Register for Conference" as UC1
+  usecase "Submit Paper" as UC2
+  usecase "Review Paper" as UC3
+  usecase "Manage Conference Schedule" as UC4
+  usecase "Process Payment" as UC5
+  usecase "View Conference Program" as UC6
+  usecase "Cancel Registration" as UC7
+  usecase "Assign Reviewers" as UC8
+  usecase "Generate Attendance Certificate" as UC9
+  usecase "Validate Registration Data" as UC10
+  usecase "Send Confirmation Email" as UC11
+  usecase "Check Session Availability" as UC12
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC6
+A1 -- UC7
+A1 -- UC9
+A2 -- UC4
+A2 -- UC8
+A3 -- UC3
+A4 -- UC5
+
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC10 : <<include>>
+UC1 ..> UC11 : <<include>>
+UC1 ..> UC12 : <<include>>
+}
+@enduml

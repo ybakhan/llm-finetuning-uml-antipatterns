@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 21
+  domain: movie_ticket_booking
+  domain_display: Movie Ticket Booking
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:29:21.501970'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Admin\" as\
+    \ Admin\nactor \"Payment Gateway\" as PG\n\nrectangle \"Movie Ticket Booking System\"\
+    \ {\n  usecase \"Browse Movies\" as UC1\n  usecase \"Search Movies\" as UC2\n\
+    \  usecase \"View Movie Details\" as UC3\n  usecase \"Select Showtime\" as UC4\n\
+    \  usecase \"Book Ticket\" as UC6\n  usecase \"Process Payment\" as UC8\n  usecase\
+    \ \"Cancel Booking\" as UC9\n  usecase \"View Booking History\" as UC10\n  usecase\
+    \ \"Manage Movies\" as UC11\n  usecase \"Manage Showtimes\" as UC12\n  usecase\
+    \ \"Generate Reports\" as UC13\n  usecase \"Apply Promo Code\" as UC14\n  usecase\
+    \ \"Rate Movie\" as UC15\n  usecase \"Register Account\" as UC16\n}\n\nCustomer\
+    \ -- UC1\nCustomer -- UC2\nCustomer -- UC3\nCustomer -- UC4\nCustomer -- UC6\n\
+    Customer -- UC9\nCustomer -- UC10\nCustomer -- UC14\nCustomer -- UC15\nCustomer\
+    \ -- UC16\n\nAdmin -- UC11\nAdmin -- UC12\nAdmin -- UC13\n\nPG -- UC8\n\nUC6 ..>\
+    \ UC8 : <<include>>\nUC9 ..> UC8 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

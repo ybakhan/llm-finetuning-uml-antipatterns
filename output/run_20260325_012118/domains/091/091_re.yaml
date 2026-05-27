@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 91
+  domain: public_complaint_management_system
+  domain_display: Public Complaint Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:56:27.289411'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Citizen\" as Citizen\nactor \"Complaint Officer\"\
+    \ as Officer\nactor \"Administrator\" as Admin\n\nrectangle \"Public Complaint\
+    \ Management System\" {\n  usecase \"Submit Complaint\" as UC1\n  usecase \"Track\
+    \ Complaint Status\" as UC4\n  usecase \"Investigate Complaint\" as UC5\n  usecase\
+    \ \"Assign Complaint to Officer\" as UC7\n  usecase \"Resolve Complaint\" as UC8\n\
+    \  usecase \"Provide Feedback\" as UC9\n  usecase \"Generate Reports\" as UC10\n\
+    \  usecase \"Manage User Accounts\" as UC11\n  usecase \"Escalate Complaint\"\
+    \ as UC12\n  usecase \"View Complaint History\" as UC13\n}\n\nCitizen -- UC1\n\
+    Citizen -- UC4\nCitizen -- UC9\nOfficer -- UC5\nOfficer -- UC8\nOfficer -- UC12\n\
+    Officer -- UC13\nAdmin -- UC7\nAdmin -- UC10\nAdmin -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

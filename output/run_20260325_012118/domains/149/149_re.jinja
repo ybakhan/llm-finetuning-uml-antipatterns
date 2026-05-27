@@ -1,0 +1,35 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+  usecase "Escalate Incident" as UC5
+}
+
+SA -- UC1
+SA -- UC3
+SA -- UC5
+CISO -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

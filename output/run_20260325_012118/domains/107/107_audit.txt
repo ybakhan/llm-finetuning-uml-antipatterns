@@ -1,0 +1,223 @@
+AUDIT LOG — Prompt #107
+Timestamp : 2026-03-25T02:02:53.344068
+Model     : claude-opus-4-6
+Tokens    : input=1481  output=837
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #107: Generate a SMALL use case model with exactly 13 constructs (valid range for small: 9–13 constructs). Domain: Certification Examination System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: certification_examination_system
+DOMAIN_DISPLAY: Certification Examination System
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 13
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Candidate" as Candidate
+actor "Examiner" as Examiner
+
+rectangle "Certification Examination System" {
+  usecase "Register for Exam" as UC1
+  usecase "Take Exam" as UC2
+  usecase "Review Results" as UC3
+  usecase "Grade Exam" as UC4
+  usecase "Issue Certificate" as UC5
+  usecase "Validate Answers" as UC6
+}
+
+Candidate -- UC1
+Candidate -- UC2
+Candidate -- UC3
+Examiner -- UC4
+Examiner -- UC5
+UC4 ..> UC6 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Grade Exam (use case, UC4)",
+            "Validate Answers (use case, UC6)",
+            "<<include>> relationship from UC4 to UC6"
+          ],
+          "explanation": "The use case 'Validate Answers' (UC6) is an inclusion use case that is included by only one use case ('Grade Exam', UC4). It is not associated with any actor directly, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. 'Validate Answers' does not represent a complete, independently meaningful service to any actor — it is merely a decomposed sub-step of grading an exam. This is functional decomposition via the include relationship, where the base use case's behavior has been improperly broken into a subordinate fragment that has no standalone value."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The use case "Validate Answers" (UC6) is included only by "Grade Exam" (UC4), has no actor association, and has no other relationships (no includes, extends, or generalizations). It represents a decomposed sub-step of grading rather than a complete service. Following the "Drop Functional Decomposition" refactoring, UC6 must be merged into UC4. The validation of answers becomes an internal step within "Grade Exam." This removes UC6 and the <<include>> relationship between UC4 and UC6, reducing the total construct count by 3 (one use case and one include relationship removed, yielding 11 constructs).
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Candidate" as Candidate
+actor "Examiner" as Examiner
+
+rectangle "Certification Examination System" {
+  usecase "Register for Exam" as UC1
+  usecase "Take Exam" as UC2
+  usecase "Review Results" as UC3
+  usecase "Grade Exam" as UC4
+  usecase "Issue Certificate" as UC5
+}
+
+Candidate -- UC1
+Candidate -- UC2
+Candidate -- UC3
+Examiner -- UC4
+Examiner -- UC5
+@enduml
+```

@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 87
+  domain: subscription_box_service
+  domain_display: Subscription Box Service
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:08:38.711780'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Subscriber\" as Sub\nactor \"Admin\" as Admin\n\
+    \nrectangle \"Subscription Box Service\" {\n  usecase \"Subscribe to Plan\" as\
+    \ UC1\n  usecase \"Manage Box Contents\" as UC3\n  usecase \"Cancel Subscription\"\
+    \ as UC4\n  usecase \"View Delivery Status\" as UC5\n}\n\nSub -- UC1\nSub -- UC4\n\
+    Sub -- UC5\nAdmin -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

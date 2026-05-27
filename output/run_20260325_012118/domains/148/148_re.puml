@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+actor "Network Administrator" as Admin
+actor "Security Analyst" as SecAnalyst
+actor "NOC Operator" as NOC
+
+rectangle "Network Monitoring System" {
+  usecase "View Dashboard" as UC1
+  usecase "Configure Alert Rules" as UC2
+  usecase "Monitor Traffic" as UC3
+  usecase "Investigate Security Incident" as UC4
+  usecase "Generate Performance Report" as UC5
+  usecase "Manage Device Inventory" as UC6
+  usecase "Acknowledge Alarm" as UC7
+  usecase "Run Diagnostic Test" as UC8
+  usecase "Analyze Packet Capture" as UC9
+  usecase "Schedule Maintenance Window" as UC10
+  usecase "View Historical Logs" as UC11
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC6
+Admin -- UC8
+Admin -- UC10
+
+SecAnalyst -- UC4
+SecAnalyst -- UC9
+SecAnalyst -- UC11
+
+NOC -- UC1
+NOC -- UC5
+NOC -- UC7
+
+UC4 ..> UC11 : <<include>>
+@enduml

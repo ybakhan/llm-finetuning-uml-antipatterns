@@ -1,0 +1,51 @@
+metadata:
+  domain_id: 160
+  domain: escape_room_booking_system
+  domain_display: Escape Room Booking System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Escape Room (UC2)
+      - Validate Time Slot (UC3)
+      explanation: '''Validate Time Slot'' (UC3) is included by ''Book Escape Room''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Escape Room'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Escape Room'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:21:07.721834'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Staff\" as\
+    \ Staff\nactor \"Admin\" as Admin\n\nrectangle \"Escape Room Booking System\"\
+    \ {\n  usecase \"Browse Available Rooms\" as UC1\n  usecase \"Book Escape Room\"\
+    \ as UC2\n  usecase \"Validate Time Slot\" as UC3\n  usecase \"Cancel Booking\"\
+    \ as UC4\n  usecase \"Request Refund\" as UC5\n  usecase \"Check In Group\" as\
+    \ UC6\n  usecase \"Leave Review\" as UC7\n  usecase \"Apply Promo Code\" as UC8\n\
+    \  usecase \"Manage Room Inventory\" as UC9\n  usecase \"View Booking Reports\"\
+    \ as UC10\n  usecase \"Manage Staff Schedule\" as UC11\n  usecase \"View Customer\
+    \ Feedback\" as UC12\n  usecase \"Reschedule Booking\" as UC13\n}\n\nCustomer\
+    \ -- UC1\nCustomer -- UC2\nCustomer -- UC4\nCustomer -- UC5\nCustomer -- UC7\n\
+    Customer -- UC13\n\nStaff -- UC6\nStaff -- UC5\n\nAdmin -- UC9\nAdmin -- UC10\n\
+    Admin -- UC11\nAdmin -- UC12\n\nUC2 ..> UC3 : <<include>>\nUC8 ..> UC2 : <<extend>>\n\
+    UC5 ..> UC4 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Escape Room (UC2)\"\
+    ,\n            \"Validate Time Slot (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Time Slot' (UC3) is included by 'Book Escape Room' (UC2), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Book Escape Room' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Book\
+    \ Escape Room' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n\
+    }"

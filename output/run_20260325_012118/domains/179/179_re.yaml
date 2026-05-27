@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 179
+  domain: air_quality_monitoring_system
+  domain_display: Air Quality Monitoring System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:24:51.396342'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Environmental Officer\" as EO\nactor \"Technician\"\
+    \ as Tech\n\nrectangle \"Air Quality Monitoring System\" {\n  usecase \"View Air\
+    \ Quality Report\" as UC1\n  usecase \"Configure Sensor\" as UC2\n  usecase \"\
+    Set Alert Thresholds\" as UC3\n  usecase \"Receive Pollution Alert\" as UC4\n\
+    \  usecase \"Generate Report\" as UC5\n}\n\nEO -- UC1\nEO -- UC3\nEO -- UC4\n\
+    Tech -- UC2\nEO -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

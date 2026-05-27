@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 38
+  domain: telemedicine_system
+  domain_display: Telemedicine System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:51:08.313558'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Doctor\" as Doctor\n\
+    \nrectangle \"Telemedicine System\" {\n  usecase \"Schedule Appointment\" as UC1\n\
+    \  usecase \"Conduct Video Consultation\" as UC2\n  usecase \"View Medical Records\"\
+    \ as UC3\n  usecase \"Write Prescription\" as UC4\n  usecase \"Request Prescription\
+    \ Refill\" as UC6\n}\n\nPatient -- UC1\nPatient -- UC2\nPatient -- UC3\nPatient\
+    \ -- UC6\nDoctor -- UC2\nDoctor -- UC3\nDoctor -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

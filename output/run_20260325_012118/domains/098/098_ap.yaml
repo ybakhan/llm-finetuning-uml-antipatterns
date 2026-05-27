@@ -1,0 +1,122 @@
+metadata:
+  domain_id: 98
+  domain: dental_clinic_system
+  domain_display: Dental Clinic System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Appointment (UC1)
+      - Check Available Slots (UC2)
+      explanation: '''Check Available Slots'' (UC2) is included by ''Book Appointment''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Appointment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Appointment'' via the include relationship.'
+    - elements:
+      - Book Appointment (UC1)
+      - Record Patient Details (UC3)
+      explanation: '''Record Patient Details'' (UC3) is included by ''Book Appointment''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Appointment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Appointment'' via the include relationship.'
+    - elements:
+      - Perform Treatment (UC4)
+      - Select Dental Instruments (UC5)
+      explanation: '''Select Dental Instruments'' (UC5) is included by ''Perform Treatment''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Perform Treatment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Perform Treatment'' via the include relationship.'
+    - elements:
+      - Perform Treatment (UC4)
+      - Update Treatment Notes (UC6)
+      explanation: '''Update Treatment Notes'' (UC6) is included by ''Perform Treatment''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Perform Treatment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Perform Treatment'' via the include relationship.'
+    - elements:
+      - Process Payment (UC7)
+      - Calculate Total Charges (UC8)
+      explanation: '''Calculate Total Charges'' (UC8) is included by ''Process Payment''
+        (UC7), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Payment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Payment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:59:43.170431'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Dentist\" as\
+    \ Dentist\nactor \"Receptionist\" as Receptionist\nactor \"Insurance Provider\"\
+    \ as InsProvider\n\nrectangle \"Dental Clinic System\" {\n  usecase \"Book Appointment\"\
+    \ as UC1\n  usecase \"Check Available Slots\" as UC2\n  usecase \"Record Patient\
+    \ Details\" as UC3\n\n  usecase \"Perform Treatment\" as UC4\n  usecase \"Select\
+    \ Dental Instruments\" as UC5\n  usecase \"Update Treatment Notes\" as UC6\n\n\
+    \  usecase \"Process Payment\" as UC7\n  usecase \"Calculate Total Charges\" as\
+    \ UC8\n\n  usecase \"View Treatment History\" as UC9\n  usecase \"Cancel Appointment\"\
+    \ as UC10\n  usecase \"Submit Insurance Claim\" as UC11\n  usecase \"Manage Patient\
+    \ Records\" as UC12\n  usecase \"Generate Prescription\" as UC13\n  usecase \"\
+    Send Appointment Reminder\" as UC14\n  usecase \"View Schedule\" as UC15\n}\n\n\
+    Patient -- UC1\nPatient -- UC7\nPatient -- UC9\nPatient -- UC10\n\nDentist --\
+    \ UC4\nDentist -- UC13\nDentist -- UC15\nDentist -- UC9\n\nReceptionist -- UC1\n\
+    Receptionist -- UC12\nReceptionist -- UC14\nReceptionist -- UC7\n\nInsProvider\
+    \ -- UC11\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nUC4 ..> UC5\
+    \ : <<include>>\nUC4 ..> UC6 : <<include>>\nUC7 ..> UC8 : <<include>>\nUC11 ..>\
+    \ UC9 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 5,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 5,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Appointment (UC1)\"\
+    ,\n            \"Check Available Slots (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Check Available Slots' (UC2) is included by 'Book Appointment' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Book Appointment' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Book\
+    \ Appointment' via the include relationship.\"\n        },\n        {\n      \
+    \    \"elements\": [\n            \"Book Appointment (UC1)\",\n            \"\
+    Record Patient Details (UC3)\"\n          ],\n          \"explanation\": \"'Record\
+    \ Patient Details' (UC3) is included by 'Book Appointment' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Book Appointment' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Book Appointment'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Perform Treatment (UC4)\",\n            \"Select Dental Instruments\
+    \ (UC5)\"\n          ],\n          \"explanation\": \"'Select Dental Instruments'\
+    \ (UC5) is included by 'Perform Treatment' (UC4), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Perform Treatment' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Perform Treatment' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Perform Treatment (UC4)\",\n            \"Update Treatment Notes (UC6)\"\
+    \n          ],\n          \"explanation\": \"'Update Treatment Notes' (UC6) is\
+    \ included by 'Perform Treatment' (UC4), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Perform Treatment' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Perform Treatment' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Process Payment (UC7)\",\n            \"Calculate Total Charges (UC8)\"\
+    \n          ],\n          \"explanation\": \"'Calculate Total Charges' (UC8) is\
+    \ included by 'Process Payment' (UC7), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Process Payment' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Process Payment' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

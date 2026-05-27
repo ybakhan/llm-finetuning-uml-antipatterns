@@ -1,0 +1,60 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Couple" as Couple
+actor "Vendor" as Vendor
+actor "Wedding Planner" as Planner
+actor "Admin" as Admin
+
+rectangle "Wedding Planning Platform" {
+  usecase "Browse Vendors" as UC1
+  usecase "Book Vendor" as UC2
+  usecase "Create Guest List" as UC4
+  usecase "Send Invitations" as UC5
+  usecase "Track Budget" as UC7
+  usecase "Create Seating Chart" as UC8
+  usecase "Register Couple Account" as UC9
+  usecase "View RSVP Responses" as UC10
+  usecase "Review Vendor" as UC11
+  usecase "Manage Venue Listings" as UC12
+  usecase "Submit Quote" as UC13
+  usecase "Manage Wedding Timeline" as UC14
+  usecase "Generate Reports" as UC15
+  usecase "Manage Platform Settings" as UC16
+}
+
+Couple -- UC1
+Couple -- UC2
+Couple -- UC4
+Couple -- UC5
+Couple -- UC7
+Couple -- UC8
+Couple -- UC9
+Couple -- UC10
+Couple -- UC11
+
+Vendor -- UC12
+Vendor -- UC13
+
+Planner -- UC14
+
+Admin -- UC15
+Admin -- UC16
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

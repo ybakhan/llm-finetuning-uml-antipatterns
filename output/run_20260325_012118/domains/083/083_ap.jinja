@@ -1,0 +1,84 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Harbor Master" as HM
+actor "Ship Captain" as SC
+actor "Crane Operator" as CO
+actor "Customs Officer" as CUS
+actor "Billing Clerk" as BC
+
+rectangle "Port Management System" {
+  usecase "Request Berth Assignment" as UC1
+  usecase "Check Berth Availability" as UC2
+  usecase "Record Vessel Details" as UC3
+  usecase "Approve Vessel Entry" as UC4
+  usecase "Manage Cargo Loading" as UC5
+  usecase "Verify Cargo Weight" as UC6
+  usecase "Operate Crane" as UC7
+  usecase "Perform Customs Inspection" as UC8
+  usecase "Submit Cargo Declaration" as UC9
+  usecase "Generate Port Charges Invoice" as UC10
+  usecase "Track Vessel Departure" as UC11
+  usecase "Monitor Port Traffic" as UC12
+  usecase "Manage Dangerous Goods" as UC13
+}
+
+SC -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+HM -- UC4
+HM -- UC12
+HM -- UC11
+CO -- UC5
+UC5 ..> UC6 : <<include>>
+CO -- UC7
+CUS -- UC8
+SC -- UC9
+BC -- UC10
+HM -- UC13
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Request Berth Assignment (UC1)",
+            "Check Berth Availability (UC2)"
+          ],
+          "explanation": "'Check Berth Availability' (UC2) is included by 'Request Berth Assignment' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Request Berth Assignment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Request Berth Assignment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Request Berth Assignment (UC1)",
+            "Record Vessel Details (UC3)"
+          ],
+          "explanation": "'Record Vessel Details' (UC3) is included by 'Request Berth Assignment' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Request Berth Assignment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Request Berth Assignment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Manage Cargo Loading (UC5)",
+            "Verify Cargo Weight (UC6)"
+          ],
+          "explanation": "'Verify Cargo Weight' (UC6) is included by 'Manage Cargo Loading' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Manage Cargo Loading' rather than a standalone service observable to any actor, making it a functional decomposition of 'Manage Cargo Loading' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

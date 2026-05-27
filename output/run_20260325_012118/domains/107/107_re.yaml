@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 107
+  domain: certification_examination_system
+  domain_display: Certification Examination System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:02:53.345165'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Candidate\" as Candidate\nactor \"Examiner\"\
+    \ as Examiner\n\nrectangle \"Certification Examination System\" {\n  usecase \"\
+    Register for Exam\" as UC1\n  usecase \"Take Exam\" as UC2\n  usecase \"Review\
+    \ Results\" as UC3\n  usecase \"Grade Exam\" as UC4\n  usecase \"Issue Certificate\"\
+    \ as UC5\n}\n\nCandidate -- UC1\nCandidate -- UC2\nCandidate -- UC3\nExaminer\
+    \ -- UC4\nExaminer -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

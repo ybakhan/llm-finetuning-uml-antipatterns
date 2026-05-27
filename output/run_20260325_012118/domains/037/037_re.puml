@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Wallet User" as WU
+actor "Merchant" as M
+actor "Admin" as A
+actor "Payment Gateway" as PG
+
+rectangle "Digital Wallet System" {
+  usecase "Add Funds" as UC1
+  usecase "Send Money" as UC2
+  usecase "Request Money" as UC3
+  usecase "Pay Merchant" as UC4
+  usecase "View Transaction History" as UC5
+  usecase "Manage Profile" as UC6
+  usecase "Issue Refund" as UC7
+  usecase "Generate Sales Report" as UC8
+  usecase "Freeze Account" as UC9
+  usecase "Link Bank Account" as UC10
+  usecase "Set Spending Limit" as UC12
+}
+
+WU -- UC1
+WU -- UC2
+WU -- UC3
+WU -- UC4
+WU -- UC5
+WU -- UC6
+WU -- UC10
+WU -- UC12
+M -- UC4
+M -- UC7
+M -- UC8
+A -- UC9
+PG -- UC1
+@enduml

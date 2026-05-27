@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Loan Applicant" as Applicant
+actor "Loan Officer" as Officer
+actor "Underwriter" as Underwriter
+actor "Credit Bureau" as CreditBureau
+
+rectangle "Mortgage Application System" {
+  usecase "Submit Mortgage Application" as UC1
+  usecase "Review Application" as UC4
+  usecase "Pull Credit Report" as UC6
+  usecase "Perform Underwriting" as UC7
+  usecase "Approve Mortgage" as UC9
+  usecase "Deny Mortgage" as UC10
+  usecase "Generate Pre-Approval Letter" as UC11
+  usecase "Schedule Closing" as UC12
+  usecase "Track Application Status" as UC13
+  usecase "Upload Income Verification" as UC14
+}
+
+Applicant -- UC1
+Applicant -- UC13
+Applicant -- UC14
+Officer -- UC4
+Officer -- UC6
+Officer -- UC9
+Officer -- UC10
+Officer -- UC11
+Officer -- UC12
+Underwriter -- UC7
+CreditBureau -- UC6
+
+Underwriter -- UC9
+Underwriter -- UC10
+@enduml

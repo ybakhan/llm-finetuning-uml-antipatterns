@@ -1,0 +1,72 @@
+metadata:
+  domain_id: 28
+  domain: customer_relationship_management
+  domain_display: Customer Relationship Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Manage Contacts (UC1)
+      - Validate Contact Fields (UC2)
+      explanation: '''Validate Contact Fields'' (UC2) is included by ''Manage Contacts'' (UC1), has no
+        direct actor association, does not include or extend any other use case, is not extended by any
+        use case, and is not part of any generalisation hierarchy. It represents an internal sub-step
+        of ''Manage Contacts'' rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Manage Contacts'' via the include relationship.'
+    - elements:
+      - Launch Email Campaign (UC6)
+      - Compose Email Template (UC7)
+      explanation: '''Compose Email Template'' (UC7) is included by ''Launch Email Campaign'' (UC6), has
+        no direct actor association, does not include or extend any other use case, is not extended by
+        any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step
+        of ''Launch Email Campaign'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Launch Email Campaign'' via the include relationship.'
+    - elements:
+      - Handle Support Ticket (UC9)
+      - Categorize Ticket Priority (UC10)
+      explanation: '''Categorize Ticket Priority'' (UC10) is included by ''Handle Support Ticket'' (UC9),
+        has no direct actor association, does not include or extend any other use case, is not extended
+        by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step
+        of ''Handle Support Ticket'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Handle Support Ticket'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T04:47:00.277063'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains any antipatterns. Base\
+    \ your analysis solely on the model provided. Do not use any outside knowledge. Respond with a JSON\
+    \ object.\n\nPlantUML Model:\n@startuml\nleft to right direction\n\nactor \"Sales Rep\" as A1\nactor\
+    \ \"Marketing Manager\" as A2\nactor \"Support Agent\" as A3\nactor \"CRM Administrator\" as A4\n\n\
+    rectangle \"Customer Relationship Management System\" {\n  usecase \"Manage Contacts\" as UC1\n  usecase\
+    \ \"Validate Contact Fields\" as UC2\n  usecase \"Log Interaction\" as UC3\n  usecase \"Create Sales\
+    \ Opportunity\" as UC4\n  usecase \"Generate Pipeline Report\" as UC5\n  usecase \"Launch Email Campaign\"\
+    \ as UC6\n  usecase \"Compose Email Template\" as UC7\n  usecase \"Track Campaign Metrics\" as UC8\n\
+    \  usecase \"Handle Support Ticket\" as UC9\n  usecase \"Categorize Ticket Priority\" as UC10\n  usecase\
+    \ \"Configure User Roles\" as UC11\n  usecase \"Import Customer Data\" as UC12\n}\n\nA1 -- UC1\nUC1\
+    \ ..> UC2 : <<include>>\nA1 -- UC3\nA1 -- UC4\nA1 -- UC5\nA2 -- UC6\nUC6 ..> UC7 : <<include>>\nA2\
+    \ -- UC8\nA3 -- UC9\nUC9 ..> UC10 : <<include>>\nA4 -- UC11\nA4 -- UC12\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\": 3,\n  \"\
+    antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition: Using the include\
+    \ relationship\",\n      \"instance_count\": 3,\n      \"instances\": [\n        {\n          \"elements\"\
+    : [\n            \"Manage Contacts (UC1)\",\n            \"Validate Contact Fields (UC2)\"\n     \
+    \     ],\n          \"explanation\": \"'Validate Contact Fields' (UC2) is included by 'Manage Contacts'\
+    \ (UC1), has no direct actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Manage Contacts' rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Manage Contacts' via the include relationship.\"\n        },\n        {\n    \
+    \      \"elements\": [\n            \"Launch Email Campaign (UC6)\",\n            \"Compose Email\
+    \ Template (UC7)\"\n          ],\n          \"explanation\": \"'Compose Email Template' (UC7) is included\
+    \ by 'Launch Email Campaign' (UC6), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Launch Email Campaign' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Launch Email Campaign' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Handle Support Ticket (UC9)\",\n\
+    \            \"Categorize Ticket Priority (UC10)\"\n          ],\n          \"explanation\": \"'Categorize\
+    \ Ticket Priority' (UC10) is included by 'Handle Support Ticket' (UC9), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Handle Support Ticket' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition of 'Handle\
+    \ Support Ticket' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

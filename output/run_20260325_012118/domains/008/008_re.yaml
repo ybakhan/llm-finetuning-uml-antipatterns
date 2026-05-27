@@ -1,0 +1,25 @@
+metadata:
+  domain_id: 8
+  domain: flight_booking_system
+  domain_display: Flight Booking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:46:04.387296'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Traveler\" as Traveler\nactor \"Travel Agent\"\
+    \ as Agent\nactor \"Admin\" as Admin\n\nrectangle \"Flight Booking System\" {\n\
+    \  usecase \"Search Flights\" as UC1\n  usecase \"Book Flight\" as UC2\n  usecase\
+    \ \"Cancel Booking\" as UC5\n  usecase \"View Booking History\" as UC6\n  usecase\
+    \ \"Manage Flight Schedules\" as UC7\n  usecase \"Book Flight on Behalf of Customer\"\
+    \ as UC9\n  usecase \"Manage Promotions\" as UC11\n}\n\nTraveler -- UC1\nTraveler\
+    \ -- UC2\nTraveler -- UC5\nTraveler -- UC6\nAgent -- UC9\nAgent -- UC6\nAdmin\
+    \ -- UC7\nAdmin -- UC11\n\nUC9 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

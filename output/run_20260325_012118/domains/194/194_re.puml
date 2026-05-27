@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reader" as Reader
+
+rectangle "Fan Fiction Community" {
+  usecase "Publish Story" as UC1
+  usecase "Read Story" as UC3
+  usecase "Leave Review" as UC4
+}
+
+Author -- UC1
+Reader -- UC3
+Reader -- UC4
+@enduml

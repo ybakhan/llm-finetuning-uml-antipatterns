@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 95
+  domain: water_utility_management
+  domain_display: Water Utility Management
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Meter Reading (UC5)
+      - Validate Meter Data (UC6)
+      explanation: '''Validate Meter Data'' (UC6) is included by ''Submit Meter Reading''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Meter Reading''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Meter Reading'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:58:12.546466'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Technician\"\
+    \ as Technician\n\nrectangle \"Water Utility Management System\" {\n  usecase\
+    \ \"Pay Water Bill\" as UC1\n  usecase \"Report Leak\" as UC2\n  usecase \"Perform\
+    \ Maintenance\" as UC3\n  usecase \"View Usage History\" as UC4\n  usecase \"\
+    Submit Meter Reading\" as UC5\n  usecase \"Validate Meter Data\" as UC6\n}\n\n\
+    Customer -- UC1\nCustomer -- UC2\nCustomer -- UC4\nTechnician -- UC3\nTechnician\
+    \ -- UC5\nUC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Meter Reading\
+    \ (UC5)\",\n            \"Validate Meter Data (UC6)\"\n          ],\n        \
+    \  \"explanation\": \"'Validate Meter Data' (UC6) is included by 'Submit Meter\
+    \ Reading' (UC5), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Submit Meter\
+    \ Reading' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Submit Meter Reading' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

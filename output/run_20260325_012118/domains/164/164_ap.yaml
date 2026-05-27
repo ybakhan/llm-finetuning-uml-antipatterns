@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 164
+  domain: self_storage_facility_system
+  domain_display: Self-Storage Facility System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Reserve Unit (UC1)
+      - Check Unit Availability (UC2)
+      explanation: '''Check Unit Availability'' (UC2) is included by ''Reserve Unit''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Reserve Unit'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Reserve Unit'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:21:41.397754'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Facility Manager\"\
+    \ as Manager\n\nrectangle \"Self-Storage Facility System\" {\n  usecase \"Reserve\
+    \ Unit\" as UC1\n  usecase \"Check Unit Availability\" as UC2\n  usecase \"Make\
+    \ Payment\" as UC3\n  usecase \"Manage Units\" as UC4\n  usecase \"View Rental\
+    \ Agreement\" as UC5\n}\n\nCustomer -- UC1\nCustomer -- UC3\nCustomer -- UC5\n\
+    UC1 ..> UC2 : <<include>>\nManager -- UC4\n\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Reserve Unit (UC1)\"\
+    ,\n            \"Check Unit Availability (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Check Unit Availability' (UC2) is included by 'Reserve Unit' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Reserve Unit' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Reserve\
+    \ Unit' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

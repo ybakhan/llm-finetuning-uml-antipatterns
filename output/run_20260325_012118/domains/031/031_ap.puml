@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+
+actor "Cardholder" as CH
+actor "Customer Service Agent" as CSA
+actor "Fraud Analyst" as FA
+actor "System Administrator" as SA
+
+rectangle "Credit Card Management System" {
+  usecase "Apply for Credit Card" as UC1
+  usecase "Validate Identity" as UC2
+  usecase "Check Credit Score" as UC3
+  usecase "View Account Statement" as UC4
+  usecase "Make Payment" as UC5
+  usecase "Calculate Interest" as UC6
+  usecase "Report Lost Card" as UC7
+  usecase "Block Card" as UC8
+  usecase "Investigate Fraud" as UC9
+  usecase "Gather Transaction Logs" as UC10
+  usecase "Manage Card Limits" as UC11
+  usecase "Dispute Transaction" as UC12
+  usecase "Request Credit Limit Increase" as UC13
+  usecase "Redeem Rewards" as UC14
+  usecase "Manage User Accounts" as UC15
+}
+
+CH -- UC1
+CH -- UC4
+CH -- UC5
+CH -- UC7
+CH -- UC12
+CH -- UC13
+CH -- UC14
+
+CSA -- UC7
+CSA -- UC8
+CSA -- UC11
+
+FA -- UC9
+
+SA -- UC15
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC9 ..> UC10 : <<include>>
+@enduml

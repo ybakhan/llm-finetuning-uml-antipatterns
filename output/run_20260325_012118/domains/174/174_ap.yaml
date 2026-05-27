@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 174
+  domain: second_hand_clothing_marketplace
+  domain_display: Second-Hand Clothing Marketplace
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Item (UC2)
+      - Process Payment (UC3)
+      explanation: '''Process Payment'' (UC3) is included by ''Purchase Item'' (UC2),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Item'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Item'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 11
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:29:20.077751'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Buyer\" as Buyer\nactor \"Seller\" as Seller\n\
+    \nrectangle \"Second-Hand Clothing Marketplace\" {\n  usecase \"Browse Listings\"\
+    \ as UC1\n  usecase \"Purchase Item\" as UC2\n  usecase \"Process Payment\" as\
+    \ UC3\n  usecase \"Create Listing\" as UC4\n  usecase \"Manage Account\" as UC5\n\
+    }\n\nBuyer -- UC1\nBuyer -- UC2\nUC2 ..> UC3 : <<include>>\nSeller -- UC4\nSeller\
+    \ -- UC5\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Purchase Item (UC2)\"\
+    ,\n            \"Process Payment (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Process Payment' (UC3) is included by 'Purchase Item' (UC2), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Purchase Item' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Purchase Item' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

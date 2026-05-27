@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 63
+  domain: donation_management_system
+  domain_display: Donation Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:45:05.152536'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Donor\" as Donor\nactor \"Administrator\" as\
+    \ Admin\n\nrectangle \"Donation Management System\" {\n  usecase \"Make Donation\"\
+    \ as UC1\n  usecase \"View Donation History\" as UC3\n  usecase \"Generate Reports\"\
+    \ as UC4\n  usecase \"Manage Campaigns\" as UC5\n  usecase \"Send Thank You Receipt\"\
+    \ as UC6\n}\n\nDonor -- UC1\nDonor -- UC3\nAdmin -- UC4\nAdmin -- UC5\nAdmin --\
+    \ UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

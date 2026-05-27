@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 109
+  domain: academic_conference_management_system
+  domain_display: Academic Conference Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:03:45.164777'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Author\" as Author\nactor \"Reviewer\" as Reviewer\n\
+    actor \"Program Chair\" as Chair\nactor \"Attendee\" as Attendee\n\nrectangle\
+    \ \"Academic Conference Management System\" {\n  usecase \"Submit Paper\" as UC1\n\
+    \  usecase \"Review Paper\" as UC4\n  usecase \"Assign Reviewers\" as UC6\n  usecase\
+    \ \"Make Acceptance Decision\" as UC7\n  usecase \"Manage Conference Schedule\"\
+    \ as UC8\n  usecase \"Register for Conference\" as UC9\n  usecase \"Browse Accepted\
+    \ Papers\" as UC10\n  usecase \"Submit Camera-Ready Version\" as UC11\n  usecase\
+    \ \"Send Notifications\" as UC12\n  usecase \"Track Submission Status\" as UC13\n\
+    }\n\nAuthor -- UC1\nAuthor -- UC11\nAuthor -- UC13\nReviewer -- UC4\nChair --\
+    \ UC6\nChair -- UC7\nChair -- UC8\nChair -- UC12\nAttendee -- UC9\nAttendee --\
+    \ UC10\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

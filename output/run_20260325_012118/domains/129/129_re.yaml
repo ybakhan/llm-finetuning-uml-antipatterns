@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 129
+  domain: legal_aid_management_system
+  domain_display: Legal Aid Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:16:32.909635'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Case Worker\" as\
+    \ A2\n\nrectangle \"Legal Aid Management System\" {\n  usecase \"Submit Application\"\
+    \ as UC1\n  usecase \"Review Application\" as UC2\n  usecase \"Assign Attorney\"\
+    \ as UC3\n  usecase \"Track Case Progress\" as UC4\n}\n\nA1 -- UC1\nA1 -- UC4\n\
+    A2 -- UC2\nA2 -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

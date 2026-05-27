@@ -1,0 +1,85 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Optometrist" as Optometrist
+actor "Receptionist" as Receptionist
+actor "Lab Technician" as LabTech
+
+rectangle "Optometry Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Check In Patient" as UC2
+  usecase "Conduct Eye Exam" as UC3
+  usecase "Record Visual Acuity" as UC4
+  usecase "Perform Refraction Test" as UC5
+  usecase "Prescribe Corrective Lenses" as UC6
+  usecase "Order Lenses from Lab" as UC7
+  usecase "Verify Insurance Coverage" as UC8
+  usecase "Process Payment" as UC9
+  usecase "Validate Payment Details" as UC10
+  usecase "Manage Patient Records" as UC11
+  usecase "Dispense Eyewear" as UC12
+  usecase "Schedule Follow-Up" as UC13
+}
+
+Patient -- UC1
+Patient -- UC9
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC8
+Optometrist -- UC3
+Optometrist -- UC6
+Optometrist -- UC13
+LabTech -- UC7
+LabTech -- UC12
+Receptionist -- UC11
+
+UC3 ..> UC4 : <<include>>
+UC3 ..> UC5 : <<include>>
+UC9 ..> UC10 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Conduct Eye Exam (UC3)",
+            "Record Visual Acuity (UC4)"
+          ],
+          "explanation": "'Record Visual Acuity' (UC4) is included by 'Conduct Eye Exam' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Conduct Eye Exam' rather than a standalone service observable to any actor, making it a functional decomposition of 'Conduct Eye Exam' via the include relationship."
+        },
+        {
+          "elements": [
+            "Conduct Eye Exam (UC3)",
+            "Perform Refraction Test (UC5)"
+          ],
+          "explanation": "'Perform Refraction Test' (UC5) is included by 'Conduct Eye Exam' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Conduct Eye Exam' rather than a standalone service observable to any actor, making it a functional decomposition of 'Conduct Eye Exam' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Payment (UC9)",
+            "Validate Payment Details (UC10)"
+          ],
+          "explanation": "'Validate Payment Details' (UC10) is included by 'Process Payment' (UC9), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Payment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Payment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

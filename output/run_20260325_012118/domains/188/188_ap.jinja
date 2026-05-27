@@ -1,0 +1,86 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Worker" as WK
+actor "Safety Officer" as SO
+actor "Plant Manager" as PM
+actor "Regulatory Auditor" as RA
+
+rectangle "Industrial Safety Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Validate Incident Data" as UC2
+  usecase "Assign Incident Category" as UC3
+  usecase "Review Incident Reports" as UC4
+  usecase "Generate Compliance Report" as UC5
+  usecase "Retrieve Regulation Standards" as UC6
+  usecase "Conduct Safety Inspection" as UC7
+  usecase "Submit Near-Miss Report" as UC8
+  usecase "Track Corrective Actions" as UC9
+  usecase "View Safety Dashboard" as UC10
+  usecase "Approve Investigation Findings" as UC11
+  usecase "Export Audit Trail" as UC12
+  usecase "Escalate Critical Incident" as UC13
+}
+
+WK -- UC1
+WK -- UC8
+SO -- UC1
+SO -- UC4
+SO -- UC7
+SO -- UC9
+SO -- UC13
+PM -- UC10
+PM -- UC11
+RA -- UC5
+RA -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC13 ..> UC4 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Report Incident (UC1)",
+            "Validate Incident Data (UC2)"
+          ],
+          "explanation": "'Validate Incident Data' (UC2) is included by 'Report Incident' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Report Incident' rather than a standalone service observable to any actor, making it a functional decomposition of 'Report Incident' via the include relationship."
+        },
+        {
+          "elements": [
+            "Report Incident (UC1)",
+            "Assign Incident Category (UC3)"
+          ],
+          "explanation": "'Assign Incident Category' (UC3) is included by 'Report Incident' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Report Incident' rather than a standalone service observable to any actor, making it a functional decomposition of 'Report Incident' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Compliance Report (UC5)",
+            "Retrieve Regulation Standards (UC6)"
+          ],
+          "explanation": "'Retrieve Regulation Standards' (UC6) is included by 'Generate Compliance Report' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Compliance Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Compliance Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

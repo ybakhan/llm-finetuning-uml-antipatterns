@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Teacher" as Teacher
+actor "Student" as Student
+actor "Administrator" as Admin
+
+rectangle "Student Attendance System" {
+  usecase "Mark Attendance" as UC1
+  usecase "Validate Student ID" as UC2
+  usecase "Save Attendance Record" as UC3
+  usecase "View Attendance Report" as UC4
+  usecase "Generate Report Data" as UC5
+  usecase "Register Student" as UC6
+  usecase "Verify Registration Details" as UC7
+  usecase "View Own Attendance" as UC8
+  usecase "Configure Attendance Policy" as UC9
+  usecase "Manage Class Schedule" as UC10
+  usecase "Send Absence Notification" as UC11
+  usecase "Export Attendance Data" as UC12
+}
+
+Teacher -- UC1
+Teacher -- UC4
+Teacher -- UC11
+Student -- UC8
+Admin -- UC6
+Admin -- UC9
+Admin -- UC10
+Admin -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC6 ..> UC7 : <<include>>
+UC11 ..> UC8 : <<extend>>
+@enduml

@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 92
+  domain: tax_authority_portal
+  domain_display: Tax Authority Portal
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:09:42.142609'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Taxpayer\" as Taxpayer\nactor \"Tax Officer\"\
+    \ as TaxOfficer\nactor \"Auditor\" as Auditor\n\nrectangle \"Tax Authority Portal\"\
+    \ {\n  usecase \"File Tax Return\" as UC1\n  usecase \"View Tax History\" as UC4\n\
+    \  usecase \"Process Refund\" as UC5\n  usecase \"Submit Supporting Documents\"\
+    \ as UC7\n  usecase \"Pay Outstanding Tax\" as UC8\n  usecase \"Generate Tax Assessment\"\
+    \ as UC9\n  usecase \"Conduct Audit\" as UC10\n  usecase \"Update Taxpayer Profile\"\
+    \ as UC11\n  usecase \"Register New Taxpayer\" as UC12\n  usecase \"Appeal Assessment\"\
+    \ as UC13\n  usecase \"Generate Compliance Report\" as UC14\n  usecase \"Send\
+    \ Tax Notification\" as UC15\n  usecase \"Manage Tax Exemptions\" as UC16\n}\n\
+    \nTaxpayer -- UC1\nTaxpayer -- UC4\nTaxpayer -- UC7\nTaxpayer -- UC8\nTaxpayer\
+    \ -- UC11\nTaxpayer -- UC12\nTaxpayer -- UC13\n\nTaxOfficer -- UC5\nTaxOfficer\
+    \ -- UC9\nTaxOfficer -- UC15\nTaxOfficer -- UC16\n\nAuditor -- UC10\nAuditor --\
+    \ UC14\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

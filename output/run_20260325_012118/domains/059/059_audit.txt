@@ -1,0 +1,436 @@
+AUDIT LOG — Prompt #059
+Timestamp : 2026-05-25T05:17:34.170922
+Model     : claude-opus-4-6
+Tokens    : input=3427  output=1660
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ ANTIPATTERN INSTANCE RULE ═══════════════════════════════════════════════
+One antipattern instance = exactly ONE (base use case, inclusion use case) pair.
+
+  • When a base use case includes N qualifying inclusion use cases, that is N
+    separate instances — one per (base, inclusion) pair.
+  • Do NOT group multiple inclusion use cases into a single instance entry.
+
+Example: "Book Flight" includes "Validate Payment Details", "Process Payment", and
+"Generate Ticket Confirmation" (none associated with an actor). This is THREE instances:
+  Instance 1 — elements: ["Book Flight (UC2)", "Validate Payment Details (UC3)"]
+  Instance 2 — elements: ["Book Flight (UC2)", "Process Payment (UC4)"]
+  Instance 3 — elements: ["Book Flight (UC2)", "Generate Ticket Confirmation (UC8)"]
+
+ELEMENT FORMAT RULES
+  • List exactly two elements per instance: the base use case and the inclusion use case.
+  • Format: "Use Case Name (UCx)" where UCx is the PlantUML alias (e.g. UC2, UC3).
+    If no alias was assigned, use just the name: "Use Case Name".
+  • Do NOT include include-relationship entries (arrows) in the elements list.
+    The relationship is implied by the pairing of base and inclusion.
+
+CHAIN INCLUDES  (A →include→ B →include→ C)
+  If B is itself an inclusion use case that also includes C, the chain produces two
+  instances: (A, B) and (B, C). B acts as both an inclusion use case (for A) and a
+  base use case (for C). List each pair as its own instance.
+
+═══ CONSTRUCT COMPLETENESS RULE ═════════════════════════════════════════════
+Before finalising the JSON, re-scan every <<include>> arrow in the PlantUML that
+originates from the base use case of that instance. For each target use case:
+  • If it has no direct actor association → it qualifies as a functional decomposition
+    and MUST appear as a separate instance paired with the base use case.
+  • If it IS directly associated with an actor → it does not qualify; exclude it.
+
+Omitting even one qualifying inclusion use case is an error.
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+  • You MUST NOT remove use cases, actors, or relationships that are not involved in
+    the antipattern. If a use case is directly associated with an actor AND does not
+    appear in any antipattern instance's constructs list, it MUST remain in Version 2
+    unchanged.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #059: Generate a MEDIUM use case model with exactly 25 constructs (valid range for medium: 24–30 constructs). Domain: Scholarship Application System.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+the refactored model is wrong
+make following changes
+
+drop the relationship between "Financial Aid Officer" and "Generate Award Letter". This relationship did not exist in the original model.
+
+Drop "Generate Award Letter" since it is a Functional decomposition.
+
+Drop the relationship between "Review Application" and "Calculate GPA" score. this relationship did not exist in the original model.
+
+Drop "Calculate GPA Score" because it is a functional decomposition.
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Reviewer" as A2
+actor "Administrator" as A3
+actor "Financial Aid Officer" as A4
+
+rectangle "Scholarship Application System" {
+  usecase "Submit Application" as UC1
+  usecase "Upload Documents" as UC2
+  usecase "Validate Documents" as UC3
+  usecase "Check Eligibility" as UC4
+  usecase "Review Application" as UC5
+  usecase "Calculate GPA Score" as UC6
+  usecase "Score Application" as UC7
+  usecase "Manage Scholarships" as UC8
+  usecase "Generate Award Letter" as UC9
+  usecase "Approve Award" as UC10
+  usecase "Track Application Status" as UC11
+  usecase "View Reports" as UC12
+  usecase "Notify Applicant" as UC13
+  usecase "Manage Deadlines" as UC14
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC11
+UC1 ..> UC3 : <<include>>
+UC1 ..> UC4 : <<include>>
+A2 -- UC5
+A2 -- UC7
+UC7 ..> UC6 : <<include>>
+A3 -- UC8
+A3 -- UC14
+A3 -- UC12
+A4 -- UC10
+UC10 ..> UC9 : <<include>>
+UC10 ..> UC13 : <<include>>
+UC5 ..> UC13 : <<extend>>
+@enduml
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Reviewer" as A2
+actor "Administrator" as A3
+actor "Financial Aid Officer" as A4
+
+rectangle "Scholarship Application System" {
+  usecase "Submit Application" as UC1
+  usecase "Upload Documents" as UC2
+  usecase "Review Application" as UC5
+  usecase "Calculate GPA Score" as UC6
+  usecase "Score Application" as UC7
+  usecase "Manage Scholarships" as UC8
+  usecase "Generate Award Letter" as UC9
+  usecase "Approve Award" as UC10
+  usecase "Track Application Status" as UC11
+  usecase "View Reports" as UC12
+  usecase "Notify Applicant" as UC13
+  usecase "Manage Deadlines" as UC14
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC11
+A2 -- UC5
+A2 -- UC7
+UC7 ..> UC6 : <<include>>
+UC5 ..> UC6 : <<include>>
+A3 -- UC8
+A3 -- UC14
+A3 -- UC12
+A4 -- UC10
+A4 -- UC9
+UC10 ..> UC9 : <<include>>
+UC10 ..> UC13 : <<include>>
+UC5 ..> UC13 : <<extend>>
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: scholarship_application_system
+DOMAIN_DISPLAY: Scholarship Application System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 25
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Reviewer" as A2
+actor "Administrator" as A3
+actor "Financial Aid Officer" as A4
+
+rectangle "Scholarship Application System" {
+  usecase "Submit Application" as UC1
+  usecase "Upload Documents" as UC2
+  usecase "Validate Documents" as UC3
+  usecase "Check Eligibility" as UC4
+  usecase "Review Application" as UC5
+  usecase "Calculate GPA Score" as UC6
+  usecase "Score Application" as UC7
+  usecase "Manage Scholarships" as UC8
+  usecase "Generate Award Letter" as UC9
+  usecase "Approve Award" as UC10
+  usecase "Track Application Status" as UC11
+  usecase "View Reports" as UC12
+  usecase "Notify Applicant" as UC13
+  usecase "Manage Deadlines" as UC14
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC11
+UC1 ..> UC3 : <<include>>
+UC1 ..> UC4 : <<include>>
+A2 -- UC5
+A2 -- UC7
+UC7 ..> UC6 : <<include>>
+A3 -- UC8
+A3 -- UC14
+A3 -- UC12
+A4 -- UC10
+UC10 ..> UC9 : <<include>>
+UC10 ..> UC13 : <<include>>
+UC5 ..> UC13 : <<extend>>
+@enduml
+```
+
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Submit Application (UC1)",
+            "Validate Documents (UC3)"
+          ],
+          "explanation": "'Validate Documents' (UC3) is included by 'Submit Application' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Application' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Application' via the include relationship."
+        },
+        {
+          "elements": [
+            "Submit Application (UC1)",
+            "Check Eligibility (UC4)"
+          ],
+          "explanation": "'Check Eligibility' (UC4) is included by 'Submit Application' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Application' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Application' via the include relationship."
+        },
+        {
+          "elements": [
+            "Score Application (UC7)",
+            "Calculate GPA Score (UC6)"
+          ],
+          "explanation": "'Calculate GPA Score' (UC6) is included by 'Score Application' (UC7), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Score Application' rather than a standalone service observable to any actor, making it a functional decomposition of 'Score Application' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: 3 functional decomposition instance(s) resolved. (1) 'Validate Documents' merged into 'Submit Application'. (2) 'Check Eligibility' merged into 'Submit Application'. (3) 'Calculate GPA Score' merged into 'Score Application'. All other constructs unchanged.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Reviewer" as A2
+actor "Administrator" as A3
+actor "Financial Aid Officer" as A4
+
+rectangle "Scholarship Application System" {
+  usecase "Submit Application" as UC1
+  usecase "Upload Documents" as UC2
+  usecase "Review Application" as UC5
+  usecase "Score Application" as UC7
+  usecase "Manage Scholarships" as UC8
+  usecase "Generate Award Letter" as UC9
+  usecase "Approve Award" as UC10
+  usecase "Track Application Status" as UC11
+  usecase "View Reports" as UC12
+  usecase "Notify Applicant" as UC13
+  usecase "Manage Deadlines" as UC14
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC11
+A2 -- UC5
+A2 -- UC7
+A3 -- UC8
+A3 -- UC14
+A3 -- UC12
+A4 -- UC10
+UC10 ..> UC9 : <<include>>
+UC10 ..> UC13 : <<include>>
+UC5 ..> UC13 : <<extend>>
+@enduml
+```

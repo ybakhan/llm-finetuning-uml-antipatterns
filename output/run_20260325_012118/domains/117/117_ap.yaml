@@ -1,0 +1,67 @@
+metadata:
+  domain_id: 117
+  domain: travel_insurance_system
+  domain_display: Travel Insurance System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Policy (UC2)
+      - Validate Personal Details (UC3)
+      explanation: '''Validate Personal Details'' (UC3) is included by ''Purchase
+        Policy'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Purchase
+        Policy'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Purchase Policy'' via the include relationship.'
+    - elements:
+      - Submit Claim (UC4)
+      - Upload Supporting Documents (UC5)
+      explanation: '''Upload Supporting Documents'' (UC5) is included by ''Submit
+        Claim'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Submit Claim''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Claim'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:13:15.238791'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Traveler\" as Traveler\nactor \"Insurance Agent\"\
+    \ as Agent\nactor \"Claims Adjuster\" as Adjuster\n\nrectangle \"Travel Insurance\
+    \ System\" {\n  usecase \"Browse Insurance Plans\" as UC1\n  usecase \"Purchase\
+    \ Policy\" as UC2\n  usecase \"Validate Personal Details\" as UC3\n  usecase \"\
+    Submit Claim\" as UC4\n  usecase \"Upload Supporting Documents\" as UC5\n  usecase\
+    \ \"Review Claim\" as UC6\n  usecase \"Approve or Deny Claim\" as UC7\n  usecase\
+    \ \"Generate Policy Document\" as UC8\n  usecase \"Cancel Policy\" as UC9\n  usecase\
+    \ \"View Policy Details\" as UC10\n  usecase \"Manage Customer Profiles\" as UC11\n\
+    \  usecase \"Generate Claims Report\" as UC12\n  usecase \"Renew Policy\" as UC13\n\
+    }\n\nTraveler -- UC1\nTraveler -- UC2\nTraveler -- UC4\nTraveler -- UC9\nTraveler\
+    \ -- UC10\nTraveler -- UC13\n\nAgent -- UC8\nAgent -- UC11\n\nAdjuster -- UC6\n\
+    Adjuster -- UC7\nAdjuster -- UC12\n\nUC2 ..> UC3 : <<include>>\nUC4 ..> UC5 :\
+    \ <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Purchase Policy (UC2)\"\
+    ,\n            \"Validate Personal Details (UC3)\"\n          ],\n          \"\
+    explanation\": \"'Validate Personal Details' (UC3) is included by 'Purchase Policy'\
+    \ (UC2), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Purchase Policy' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Purchase Policy' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Submit Claim (UC4)\",\n            \"\
+    Upload Supporting Documents (UC5)\"\n          ],\n          \"explanation\":\
+    \ \"'Upload Supporting Documents' (UC5) is included by 'Submit Claim' (UC4), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Claim' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Submit\
+    \ Claim' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

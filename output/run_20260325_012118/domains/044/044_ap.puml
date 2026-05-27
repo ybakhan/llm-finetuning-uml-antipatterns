@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor "Listener" as Listener
+actor "Podcaster" as Podcaster
+actor "Admin" as Admin
+
+rectangle "Podcast Platform" {
+  usecase "Browse Podcasts" as UC1
+  usecase "Play Episode" as UC2
+  usecase "Subscribe to Podcast" as UC3
+  usecase "Rate and Review" as UC4
+  usecase "Manage Playlist" as UC5
+  usecase "Upload Episode" as UC6
+  usecase "Validate Audio Format" as UC7
+  usecase "Save to Storage" as UC8
+  usecase "Manage Podcast Metadata" as UC9
+  usecase "View Analytics" as UC10
+  usecase "Parse Analytics Data" as UC11
+  usecase "Moderate Content" as UC12
+  usecase "Manage Users" as UC13
+  usecase "Download Episode" as UC14
+  usecase "Search Podcasts" as UC15
+}
+
+Listener -- UC1
+Listener -- UC2
+Listener -- UC3
+Listener -- UC4
+Listener -- UC5
+Listener -- UC14
+Listener -- UC15
+
+Podcaster -- UC6
+Podcaster -- UC9
+Podcaster -- UC10
+
+Admin -- UC12
+Admin -- UC13
+
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC8 : <<include>>
+UC10 ..> UC11 : <<include>>
+@enduml

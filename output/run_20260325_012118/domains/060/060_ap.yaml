@@ -1,0 +1,101 @@
+metadata:
+  domain_id: 60
+  domain: passport_application_system
+  domain_display: Passport Application System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Application (UC1)
+      - Fill Personal Details (UC2)
+      explanation: '''Fill Personal Details'' (UC2) is included by ''Submit Application''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Application'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Application'' via the include relationship.'
+    - elements:
+      - Submit Application (UC1)
+      - Upload Documents (UC3)
+      explanation: '''Upload Documents'' (UC3) is included by ''Submit Application''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Application'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Application'' via the include relationship.'
+    - elements:
+      - Verify Documents (UC5)
+      - Check Document Authenticity (UC6)
+      explanation: '''Check Document Authenticity'' (UC6) is included by ''Verify
+        Documents'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Verify Documents''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Verify Documents'' via the include relationship.'
+    - elements:
+      - Process Payment (UC8)
+      - Generate Receipt (UC9)
+      explanation: '''Generate Receipt'' (UC9) is included by ''Process Payment''
+        (UC8), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Payment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Payment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:43:59.763579'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Passport Officer\"\
+    \ as A2\nactor \"Supervisor\" as A3\nactor \"Payment Gateway\" as A4\n\nrectangle\
+    \ \"Passport Application System\" {\n  usecase \"Submit Application\" as UC1\n\
+    \  usecase \"Fill Personal Details\" as UC2\n  usecase \"Upload Documents\" as\
+    \ UC3\n  usecase \"Schedule Appointment\" as UC4\n  usecase \"Verify Documents\"\
+    \ as UC5\n  usecase \"Check Document Authenticity\" as UC6\n  usecase \"Conduct\
+    \ Interview\" as UC7\n  usecase \"Process Payment\" as UC8\n  usecase \"Generate\
+    \ Receipt\" as UC9\n  usecase \"Approve Application\" as UC10\n  usecase \"Reject\
+    \ Application\" as UC11\n  usecase \"Issue Passport\" as UC12\n  usecase \"Track\
+    \ Application Status\" as UC13\n  usecase \"Renew Passport\" as UC14\n}\n\nA1\
+    \ -- UC1\nA1 -- UC4\nA1 -- UC8\nA1 -- UC13\nA1 -- UC14\nA2 -- UC5\nA2 -- UC7\n\
+    A3 -- UC10\nA3 -- UC11\nA3 -- UC12\nA4 -- UC8\n\nUC1 ..> UC2 : <<include>>\nUC1\
+    \ ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\nUC8 ..> UC9 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Application (UC1)\"\
+    ,\n            \"Fill Personal Details (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Fill Personal Details' (UC2) is included by 'Submit Application' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Application' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Submit\
+    \ Application' via the include relationship.\"\n        },\n        {\n      \
+    \    \"elements\": [\n            \"Submit Application (UC1)\",\n            \"\
+    Upload Documents (UC3)\"\n          ],\n          \"explanation\": \"'Upload Documents'\
+    \ (UC3) is included by 'Submit Application' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Application' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Submit Application' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Verify Documents (UC5)\",\n            \"Check Document Authenticity (UC6)\"\
+    \n          ],\n          \"explanation\": \"'Check Document Authenticity' (UC6)\
+    \ is included by 'Verify Documents' (UC5), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Verify Documents' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Verify Documents' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Process Payment\
+    \ (UC8)\",\n            \"Generate Receipt (UC9)\"\n          ],\n          \"\
+    explanation\": \"'Generate Receipt' (UC9) is included by 'Process Payment' (UC8),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Process Payment' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Process\
+    \ Payment' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

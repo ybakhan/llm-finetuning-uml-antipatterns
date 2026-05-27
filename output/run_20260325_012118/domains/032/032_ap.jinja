@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Loan Applicant" as Applicant
+actor "Loan Officer" as Officer
+
+rectangle "Loan Approval System" {
+  usecase "Submit Loan Application" as UC1
+  usecase "Review Loan Application" as UC2
+  usecase "Approve or Reject Loan" as UC3
+  usecase "Check Credit Score" as UC4
+  usecase "View Loan Status" as UC5
+  usecase "Generate Loan Agreement" as UC6
+}
+
+Applicant -- UC1
+Applicant -- UC5
+Officer -- UC2
+Officer -- UC3
+Officer -- UC6
+
+UC2 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Review Loan Application (UC2)",
+            "Check Credit Score (UC4)"
+          ],
+          "explanation": "'Check Credit Score' (UC4) is included by 'Review Loan Application' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Review Loan Application' rather than a standalone service observable to any actor, making it a functional decomposition of 'Review Loan Application' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

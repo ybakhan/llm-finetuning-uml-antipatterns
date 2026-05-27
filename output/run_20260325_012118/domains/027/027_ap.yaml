@@ -1,0 +1,53 @@
+metadata:
+  domain_id: 27
+  domain: human_resources_system
+  domain_display: Human Resources System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Process Monthly Payroll (UC7)
+      - Validate Tax Deductions (UC8)
+      explanation: '''Validate Tax Deductions'' (UC8) is included by ''Process Monthly
+        Payroll'' (UC7), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Process
+        Monthly Payroll'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Process Monthly Payroll'' via the
+        include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:31:33.494250'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"HR Manager\" as HRM\nactor \"Employee\" as\
+    \ EMP\nactor \"Recruiter\" as REC\nactor \"Payroll Officer\" as PAY\nactor \"\
+    Department Head\" as DH\n\nrectangle \"Human Resources System\" {\n  usecase \"\
+    Post Job Opening\" as UC1\n  usecase \"Screen Applications\" as UC2\n  usecase\
+    \ \"Schedule Interview\" as UC3\n  usecase \"Submit Leave Request\" as UC4\n \
+    \ usecase \"Approve Leave Request\" as UC5\n  usecase \"View Pay Slip\" as UC6\n\
+    \  usecase \"Process Monthly Payroll\" as UC7\n  usecase \"Validate Tax Deductions\"\
+    \ as UC8\n  usecase \"Conduct Performance Review\" as UC9\n  usecase \"Update\
+    \ Employee Profile\" as UC10\n  usecase \"Generate HR Report\" as UC11\n  usecase\
+    \ \"Manage Benefits Enrollment\" as UC12\n  usecase \"Onboard New Employee\" as\
+    \ UC13\n  usecase \"Terminate Employee\" as UC14\n}\n\nREC -- UC1\nREC -- UC2\n\
+    REC -- UC3\nEMP -- UC4\nEMP -- UC6\nEMP -- UC10\nHRM -- UC5\nHRM -- UC9\nHRM --\
+    \ UC11\nHRM -- UC13\nHRM -- UC14\nPAY -- UC7\nDH -- UC9\nDH -- UC12\n\nUC7 ..>\
+    \ UC8 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Process Monthly Payroll\
+    \ (UC7)\",\n            \"Validate Tax Deductions (UC8)\"\n          ],\n    \
+    \      \"explanation\": \"'Validate Tax Deductions' (UC8) is included by 'Process\
+    \ Monthly Payroll' (UC7), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Process\
+    \ Monthly Payroll' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Process Monthly Payroll' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,217 @@
+AUDIT LOG — Prompt #167
+Timestamp : 2026-03-25T02:26:40.197737
+Model     : claude-opus-4-6
+Tokens    : input=1481  output=841
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #167: Generate a SMALL use case model with exactly 9 constructs (valid range for small: 9–13 constructs). Domain: Funeral Service Management System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: funeral_service_management_system
+DOMAIN_DISPLAY: Funeral Service Management System
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 9
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Funeral Director" as FD
+
+rectangle "Funeral Service Management System" {
+  usecase "Arrange Funeral Service" as UC1
+  usecase "Select Casket" as UC2
+  usecase "Schedule Venue" as UC3
+  usecase "Register Deceased" as UC4
+  usecase "Generate Invoice" as UC5
+}
+
+FD -- UC1
+FD -- UC4
+FD -- UC5
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Arrange Funeral Service (use case, base)",
+            "Select Casket (use case, inclusion)",
+            "Schedule Venue (use case, inclusion)",
+            "Arrange Funeral Service --include--> Select Casket (include relationship)",
+            "Arrange Funeral Service --include--> Schedule Venue (include relationship)"
+          ],
+          "explanation": "The 'Arrange Funeral Service' use case has been functionally decomposed into two inclusion use cases — 'Select Casket' and 'Schedule Venue'. Each of these inclusion use cases: (1) is included by only one use case ('Arrange Funeral Service'), (2) is not directly associated with any actor, (3) does not include or extend any other use case, (4) is not extended by any other use case, and (5) is not involved in any generalization. They do not independently provide a complete, observable service to any actor; instead they represent sub-steps of the funeral arrangement process that have been improperly extracted as separate use cases. This is a classic functional decomposition antipattern via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The inclusion use cases "Select Casket" and "Schedule Venue" are each included by only one use case ("Arrange Funeral Service"), are not associated with any actor, and do not participate in any other relationships. They represent sub-steps rather than standalone services. Following the "Drop Functional Decomposition" refactoring, both "Select Casket" and "Schedule Venue" must be merged back into "Arrange Funeral Service", and the two include relationships must be removed. The resulting "Arrange Funeral Service" use case encompasses casket selection and venue scheduling as part of its complete service. This eliminates 2 use cases and 2 include relationships, reducing the model from 9 to 5 constructs.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Funeral Director" as FD
+
+rectangle "Funeral Service Management System" {
+  usecase "Arrange Funeral Service" as UC1
+  usecase "Register Deceased" as UC4
+  usecase "Generate Invoice" as UC5
+}
+
+FD -- UC1
+FD -- UC4
+FD -- UC5
+@enduml
+```

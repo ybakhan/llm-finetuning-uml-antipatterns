@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Election Officer" as EO
+actor "Citizen" as CZ
+
+rectangle "Electoral Roll Management System" {
+  usecase "Register Voter" as UC1
+  usecase "Validate Identity Documents" as UC2
+  usecase "Search Electoral Roll" as UC3
+  usecase "Update Voter Details" as UC4
+  usecase "View Registration Status" as UC5
+}
+
+EO -- UC1
+EO -- UC3
+EO -- UC4
+CZ -- UC5
+
+UC1 ..> UC2 : <<include>>
+@enduml

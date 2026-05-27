@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Worker" as WK
+actor "Safety Officer" as SO
+actor "Plant Manager" as PM
+actor "Regulatory Auditor" as RA
+
+rectangle "Industrial Safety Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Review Incident Reports" as UC4
+  usecase "Generate Compliance Report" as UC5
+  usecase "Conduct Safety Inspection" as UC7
+  usecase "Submit Near-Miss Report" as UC8
+  usecase "Track Corrective Actions" as UC9
+  usecase "View Safety Dashboard" as UC10
+  usecase "Approve Investigation Findings" as UC11
+  usecase "Export Audit Trail" as UC12
+  usecase "Escalate Critical Incident" as UC13
+}
+
+WK -- UC1
+WK -- UC8
+SO -- UC1
+SO -- UC4
+SO -- UC7
+SO -- UC9
+SO -- UC13
+PM -- UC10
+PM -- UC11
+RA -- UC5
+RA -- UC12
+
+UC13 ..> UC4 : <<extend>>
+@enduml

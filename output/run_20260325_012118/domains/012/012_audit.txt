@@ -1,0 +1,224 @@
+AUDIT LOG — Prompt #012
+Timestamp : 2026-03-25T01:25:40.834721
+Model     : claude-opus-4-6
+Tokens    : input=1480  output=855
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #012: Generate a SMALL use case model with exactly 10 constructs (valid range for small: 9–13 constructs). Domain: Video Streaming Platform.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: video_streaming_platform
+DOMAIN_DISPLAY: Video Streaming Platform
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 10
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Viewer" as Viewer
+actor "Content Creator" as Creator
+
+rectangle "Video Streaming Platform" {
+  usecase "Watch Video" as UC1
+  usecase "Search Content" as UC2
+  usecase "Upload Video" as UC3
+  usecase "Manage Subscription" as UC4
+  usecase "Load Video Player" as UC5
+  usecase "Buffer Stream Data" as UC6
+}
+
+Viewer -- UC1
+Viewer -- UC2
+Viewer -- UC4
+Creator -- UC3
+
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Watch Video (use case, base)",
+            "Load Video Player (use case, inclusion)",
+            "Buffer Stream Data (use case, inclusion)",
+            "Watch Video --include--> Load Video Player (include relationship)",
+            "Watch Video --include--> Buffer Stream Data (include relationship)"
+          ],
+          "explanation": "The 'Watch Video' use case has been functionally decomposed into two inclusion use cases: 'Load Video Player' and 'Buffer Stream Data'. Both 'Load Video Player' and 'Buffer Stream Data' meet all criteria for this antipattern: (1) each is included by only one use case ('Watch Video'), (2) neither is associated with any actor, (3) neither includes nor extends any other use case, (4) neither is extended by any other use case, and (5) neither participates in any generalization. These inclusion use cases represent internal implementation steps of watching a video (loading the player, buffering data) rather than complete, independently meaningful services observable to any actor. They fragment the coherent 'Watch Video' service into sub-functions."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The inclusion use cases "Load Video Player" and "Buffer Stream Data" are each included by only one use case ("Watch Video"), are not associated with any actor, and do not participate in any other relationships. They represent internal sub-steps of watching a video rather than standalone services. Following the "Drop Functional Decomposition" refactoring, both "Load Video Player" and "Buffer Stream Data" must be merged back into "Watch Video", eliminating the two use cases and their two include relationships. The "Watch Video" use case now encapsulates the full behavior of loading the player, buffering the stream, and playing the video as a single complete service for the Viewer.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Viewer" as Viewer
+actor "Content Creator" as Creator
+
+rectangle "Video Streaming Platform" {
+  usecase "Watch Video" as UC1
+  usecase "Search Content" as UC2
+  usecase "Upload Video" as UC3
+  usecase "Manage Subscription" as UC4
+}
+
+Viewer -- UC1
+Viewer -- UC2
+Viewer -- UC4
+Creator -- UC3
+@enduml
+```

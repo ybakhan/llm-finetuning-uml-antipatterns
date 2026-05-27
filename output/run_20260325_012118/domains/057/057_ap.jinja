@@ -1,0 +1,89 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Teacher" as Teacher
+actor "Student" as Student
+actor "Administrator" as Admin
+
+rectangle "Student Attendance System" {
+  usecase "Mark Attendance" as UC1
+  usecase "Validate Student ID" as UC2
+  usecase "Save Attendance Record" as UC3
+  usecase "View Attendance Report" as UC4
+  usecase "Generate Report Data" as UC5
+  usecase "Register Student" as UC6
+  usecase "Verify Registration Details" as UC7
+  usecase "View Own Attendance" as UC8
+  usecase "Configure Attendance Policy" as UC9
+  usecase "Manage Class Schedule" as UC10
+  usecase "Send Absence Notification" as UC11
+  usecase "Export Attendance Data" as UC12
+}
+
+Teacher -- UC1
+Teacher -- UC4
+Teacher -- UC11
+Student -- UC8
+Admin -- UC6
+Admin -- UC9
+Admin -- UC10
+Admin -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC6 ..> UC7 : <<include>>
+UC11 ..> UC8 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Mark Attendance (UC1)",
+            "Validate Student ID (UC2)"
+          ],
+          "explanation": "'Validate Student ID' (UC2) is included by 'Mark Attendance' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Mark Attendance' rather than a standalone service observable to any actor, making it a functional decomposition of 'Mark Attendance' via the include relationship."
+        },
+        {
+          "elements": [
+            "Mark Attendance (UC1)",
+            "Save Attendance Record (UC3)"
+          ],
+          "explanation": "'Save Attendance Record' (UC3) is included by 'Mark Attendance' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Mark Attendance' rather than a standalone service observable to any actor, making it a functional decomposition of 'Mark Attendance' via the include relationship."
+        },
+        {
+          "elements": [
+            "View Attendance Report (UC4)",
+            "Generate Report Data (UC5)"
+          ],
+          "explanation": "'Generate Report Data' (UC5) is included by 'View Attendance Report' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'View Attendance Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'View Attendance Report' via the include relationship."
+        },
+        {
+          "elements": [
+            "Register Student (UC6)",
+            "Verify Registration Details (UC7)"
+          ],
+          "explanation": "'Verify Registration Details' (UC7) is included by 'Register Student' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register Student' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register Student' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

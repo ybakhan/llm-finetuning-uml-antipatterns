@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Warehouse Manager" as WM
+actor "Supplier" as SUP
+
+rectangle "Supply Chain Management System" {
+  usecase "Track Inventory" as UC1
+  usecase "Place Purchase Order" as UC2
+  usecase "Confirm Shipment" as UC3
+  usecase "Validate Order Details" as UC4
+  usecase "Receive Goods" as UC5
+}
+
+WM -- UC1
+WM -- UC2
+WM -- UC5
+SUP -- UC3
+
+UC2 ..> UC4 : <<include>>
+@enduml

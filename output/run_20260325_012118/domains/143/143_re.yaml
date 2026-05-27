@@ -1,0 +1,31 @@
+metadata:
+  domain_id: 143
+  domain: esports_tournament_platform
+  domain_display: Esports Tournament Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:17:25.390617'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Tournament Organizer\" as Organizer\nactor\
+    \ \"Player\" as Player\nactor \"Spectator\" as Spectator\nactor \"Caster\" as\
+    \ Caster\nactor \"Admin\" as Admin\n\nrectangle \"Esports Tournament Platform\"\
+    \ {\n  usecase \"Create Tournament\" as UC1\n  usecase \"Register for Tournament\"\
+    \ as UC3\n  usecase \"Submit Match Result\" as UC5\n  usecase \"View Live Bracket\"\
+    \ as UC6\n  usecase \"Stream Match\" as UC7\n  usecase \"Provide Commentary\"\
+    \ as UC8\n  usecase \"Manage Player Profiles\" as UC9\n  usecase \"Ban Player\"\
+    \ as UC10\n  usecase \"View Tournament Schedule\" as UC11\n  usecase \"Distribute\
+    \ Prizes\" as UC12\n  usecase \"Appeal Match Result\" as UC13\n  usecase \"Generate\
+    \ Tournament Statistics\" as UC14\n}\n\nOrganizer -- UC1\nOrganizer -- UC5\nOrganizer\
+    \ -- UC12\nOrganizer -- UC11\n\nPlayer -- UC3\nPlayer -- UC5\nPlayer -- UC13\n\
+    Player -- UC9\n\nSpectator -- UC6\nSpectator -- UC7\nSpectator -- UC11\n\nCaster\
+    \ -- UC8\nCaster -- UC7\n\nAdmin -- UC10\nAdmin -- UC14\n\nUC13 ..> UC5 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

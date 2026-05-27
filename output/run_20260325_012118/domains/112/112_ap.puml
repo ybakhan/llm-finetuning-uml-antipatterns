@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Traveler" as Traveler
+actor "Travel Agent" as Agent
+
+rectangle "Tour Package Booking System" {
+  usecase "Browse Tour Packages" as UC1
+  usecase "Book Tour Package" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Manage Tour Packages" as UC4
+  usecase "Cancel Booking" as UC5
+}
+
+Traveler -- UC1
+Traveler -- UC2
+UC2 ..> UC3 : <<include>>
+Agent -- UC4
+Traveler -- UC5
+@enduml

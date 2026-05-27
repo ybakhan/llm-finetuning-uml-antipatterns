@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 193
+  domain: graphic_novel_platform
+  domain_display: Graphic Novel Platform
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Publish Novel (UC3)
+      - Upload Pages (UC4)
+      explanation: '''Upload Pages'' is included by ''Publish Novel'', has no direct
+        actor association, does not include or extend any other use case, is not extended
+        by any use case, and is not part of any generalisation hierarchy. It represents
+        an internal sub-step of ''Publish Novel'' rather than a standalone service
+        observable to any actor, making it a functional decomposition of ''Publish
+        Novel'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:37:29.145080'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Reader\" as Reader\nactor \"Author\" as Author\n\
+    \nrectangle \"Graphic Novel Platform\" {\n  usecase \"Browse Catalog\" as UC1\n\
+    \  usecase \"Read Novel\" as UC2\n  usecase \"Publish Novel\" as UC3\n  usecase\
+    \ \"Upload Pages\" as UC4\n  usecase \"Rate Novel\" as UC5\n}\n\nReader -- UC1\n\
+    Reader -- UC2\nReader -- UC5\nAuthor -- UC3\nUC3 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Publish Novel (UC3)\"\
+    ,\n            \"Upload Pages (UC4)\"\n          ],\n          \"explanation\"\
+    : \"'Upload Pages' is included by 'Publish Novel', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Publish Novel' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Publish Novel' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

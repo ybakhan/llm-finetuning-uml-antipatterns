@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 171
+  domain: gift_registry_system
+  domain_display: Gift Registry System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Gift (UC2)
+      - Validate Payment (UC3)
+      explanation: '''Validate Payment'' (UC3) is included by ''Purchase Gift'' (UC2),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Gift'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Gift'' via the include relationship.'
+    - elements:
+      - Purchase Gift (UC2)
+      - Update Inventory (UC4)
+      explanation: '''Update Inventory'' (UC4) is included by ''Purchase Gift'' (UC2),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Gift'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Gift'' via the include relationship.'
+    - elements:
+      - Purchase Gift (UC2)
+      - Generate Confirmation Email (UC14)
+      explanation: '''Generate Confirmation Email'' (UC14) is included by ''Purchase
+        Gift'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Purchase
+        Gift'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Purchase Gift'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:23:02.615839'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Gift Giver\" as Giver\nactor \"Registrant\"\
+    \ as Registrant\nactor \"Store Admin\" as Admin\n\nrectangle \"Gift Registry System\"\
+    \ {\n  usecase \"Browse Registries\" as UC1\n  usecase \"Purchase Gift\" as UC2\n\
+    \  usecase \"Validate Payment\" as UC3\n  usecase \"Update Inventory\" as UC4\n\
+    \  usecase \"Create Registry\" as UC5\n  usecase \"Add Items to Registry\" as\
+    \ UC6\n  usecase \"Share Registry\" as UC7\n  usecase \"Track Purchased Gifts\"\
+    \ as UC8\n  usecase \"Manage Store Catalog\" as UC9\n  usecase \"Generate Sales\
+    \ Report\" as UC10\n  usecase \"Send Thank You Note\" as UC11\n  usecase \"Mark\
+    \ Gift as Received\" as UC12\n  usecase \"Search Gift by Category\" as UC13\n\
+    \  usecase \"Generate Confirmation Email\" as UC14\n}\n\nGiver -- UC1\nGiver --\
+    \ UC2\nUC2 ..> UC3 : <<include>>\nUC2 ..> UC4 : <<include>>\nUC2 ..> UC14 : <<include>>\n\
+    Giver -- UC13\n\nRegistrant -- UC5\nRegistrant -- UC6\nRegistrant -- UC7\nRegistrant\
+    \ -- UC8\nRegistrant -- UC11\nRegistrant -- UC12\n\nAdmin -- UC9\nAdmin -- UC10\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Purchase Gift (UC2)\"\
+    ,\n            \"Validate Payment (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Payment' (UC3) is included by 'Purchase Gift' (UC2), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Purchase Gift' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Purchase Gift' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Purchase Gift (UC2)\",\n            \"Update Inventory (UC4)\"\n\
+    \          ],\n          \"explanation\": \"'Update Inventory' (UC4) is included\
+    \ by 'Purchase Gift' (UC2), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Purchase\
+    \ Gift' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Purchase Gift' via the include relationship.\"\n\
+    \        },\n        {\n          \"elements\": [\n            \"Purchase Gift\
+    \ (UC2)\",\n            \"Generate Confirmation Email (UC14)\"\n          ],\n\
+    \          \"explanation\": \"'Generate Confirmation Email' (UC14) is included\
+    \ by 'Purchase Gift' (UC2), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Purchase\
+    \ Gift' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Purchase Gift' via the include relationship.\"\n\
+    \        }\n      ]\n    }\n  ]\n}"

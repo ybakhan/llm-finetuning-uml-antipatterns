@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Program Director" as PD
+actor "Broadcast Engineer" as BE
+
+rectangle "Broadcasting Management System" {
+  usecase "Schedule Program" as UC1
+  usecase "Validate Time Slot" as UC2
+  usecase "Monitor Live Broadcast" as UC3
+  usecase "Manage Channel Lineup" as UC4
+  usecase "Generate Broadcast Log" as UC5
+}
+
+PD -- UC1
+PD -- UC4
+BE -- UC3
+BE -- UC5
+UC1 ..> UC2 : <<include>>
+@enduml

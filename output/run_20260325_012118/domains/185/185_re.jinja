@@ -1,0 +1,35 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Inspector" as Inspector
+actor "Production Manager" as PM
+
+rectangle "Quality Control System" {
+  usecase "Perform Inspection" as UC1
+  usecase "Generate Quality Report" as UC3
+  usecase "Review Defect Trends" as UC4
+  usecase "Log Defect" as UC5
+}
+
+Inspector -- UC1
+Inspector -- UC5
+PM -- UC3
+PM -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

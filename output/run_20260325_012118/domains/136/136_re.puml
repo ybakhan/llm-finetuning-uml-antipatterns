@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Club Leader" as Leader
+actor "Administrator" as Admin
+
+rectangle "Book Club Platform" {
+  usecase "Browse Book Catalog" as UC1
+  usecase "Join Book Club" as UC2
+  usecase "Leave Book Club" as UC3
+  usecase "Submit Book Review" as UC4
+  usecase "Rate Book" as UC5
+  usecase "Schedule Meeting" as UC6
+  usecase "Create Book Club" as UC9
+  usecase "Select Book of the Month" as UC10
+  usecase "Manage Members" as UC11
+  usecase "Moderate Discussions" as UC12
+  usecase "Generate Reading Reports" as UC13
+  usecase "Manage Platform Settings" as UC16
+  usecase "View Discussion Thread" as UC17
+  usecase "Post Discussion Comment" as UC18
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Member -- UC4
+Member -- UC5
+Member -- UC17
+Member -- UC18
+
+Leader -- UC6
+Leader -- UC9
+Leader -- UC10
+Leader -- UC11
+Leader -- UC12
+Leader -- UC13
+
+Admin -- UC16
+@enduml

@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 54
+  domain: blood_bank_management
+  domain_display: Blood Bank Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:41:27.389878'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Donor\" as Donor\nactor \"Lab Technician\"\
+    \ as LabTech\nactor \"Blood Bank Officer\" as Officer\nactor \"Doctor\" as Doctor\n\
+    \nrectangle \"Blood Bank Management System\" {\n  usecase \"Register Donor\" as\
+    \ UC1\n  usecase \"Conduct Blood Donation\" as UC4\n  usecase \"Screen Blood Sample\"\
+    \ as UC5\n  usecase \"Perform Compatibility Test\" as UC6\n  usecase \"Store Blood\
+    \ Unit\" as UC7\n  usecase \"Process Blood Request\" as UC9\n  usecase \"Request\
+    \ Blood Unit\" as UC10\n  usecase \"Manage Blood Inventory\" as UC11\n  usecase\
+    \ \"Generate Donation Report\" as UC12\n  usecase \"Discard Expired Blood\" as\
+    \ UC13\n}\n\nDonor -- UC1\nDonor -- UC4\nLabTech -- UC5\nLabTech -- UC6\nOfficer\
+    \ -- UC7\nOfficer -- UC9\nOfficer -- UC11\nOfficer -- UC13\nDoctor -- UC10\nOfficer\
+    \ -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

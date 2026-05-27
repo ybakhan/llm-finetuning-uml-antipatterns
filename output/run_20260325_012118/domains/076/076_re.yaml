@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 76
+  domain: catering_service_system
+  domain_display: Catering Service System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:06:22.248487'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Chef\" as Chef\n\
+    actor \"Delivery Driver\" as Driver\nactor \"Event Coordinator\" as Coordinator\n\
+    \nrectangle \"Catering Service System\" {\n  usecase \"Place Catering Order\"\
+    \ as UC1\n  usecase \"Browse Menu\" as UC2\n  usecase \"Customize Menu Selection\"\
+    \ as UC3\n  usecase \"Cancel Order\" as UC4\n  usecase \"Track Order Status\"\
+    \ as UC5\n  usecase \"Manage Menu\" as UC6\n  usecase \"Prepare Order\" as UC7\n\
+    \  usecase \"Confirm Delivery\" as UC8\n  usecase \"Schedule Event Catering\"\
+    \ as UC9\n  usecase \"Manage Client Accounts\" as UC10\n  usecase \"Request Special\
+    \ Dietary Options\" as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer --\
+    \ UC3\nCustomer -- UC4\nCustomer -- UC5\nCustomer -- UC13\nChef -- UC6\nChef --\
+    \ UC7\nDriver -- UC8\nDriver -- UC5\nCoordinator -- UC9\nCoordinator -- UC10\n\
+    \nUC13 ..> UC3 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,52 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor Radiologist
+actor Patient
+
+rectangle "Medical Imaging System" {
+  usecase "Upload Scan" as UC1
+  usecase "View Diagnostic Report" as UC2
+  usecase "Perform Diagnosis" as UC3
+  usecase "Validate Image Format" as UC4
+  usecase "Schedule Imaging Appointment" as UC5
+}
+
+Patient -- UC5
+Radiologist -- UC1
+Radiologist -- UC2
+Radiologist -- UC3
+
+UC1 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Upload Scan (UC1)",
+            "Validate Image Format (UC4)"
+          ],
+          "explanation": "'Validate Image Format' (UC4) is included by 'Upload Scan' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Scan' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Scan' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

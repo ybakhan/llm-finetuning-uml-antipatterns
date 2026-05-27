@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 112
+  domain: tour_package_booking_system
+  domain_display: Tour Package Booking System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:05.318649'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Traveler\" as Traveler\nactor \"Travel Agent\"\
+    \ as Agent\n\nrectangle \"Tour Package Booking System\" {\n  usecase \"Browse\
+    \ Tour Packages\" as UC1\n  usecase \"Book Tour Package\" as UC2\n  usecase \"\
+    Manage Tour Packages\" as UC4\n  usecase \"Cancel Booking\" as UC5\n}\n\nTraveler\
+    \ -- UC1\nTraveler -- UC2\nAgent -- UC4\nTraveler -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

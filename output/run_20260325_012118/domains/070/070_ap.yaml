@@ -1,0 +1,51 @@
+metadata:
+  domain_id: 70
+  domain: museum_ticketing_system
+  domain_display: Museum Ticketing System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Ticket (UC1)
+      - Validate Payment Details (UC2)
+      explanation: '''Validate Payment Details'' (UC2) is included by ''Purchase Ticket''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Ticket'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Ticket'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-27T19:36:51.549670'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Visitor\" as V\nactor \"Museum Staff\" as MS\n\
+    actor \"Group Coordinator\" as GC\nactor \"System Administrator\" as SA\n\nrectangle\
+    \ \"Museum Ticketing System\" {\n  usecase \"Purchase Ticket\" as UC1\n  usecase\
+    \ \"Validate Payment Details\" as UC2\n  usecase \"Browse Exhibitions\" as UC3\n\
+    \  usecase \"Book Group Visit\" as UC4\n  usecase \"Cancel Reservation\" as UC5\n\
+    \  usecase \"Validate Ticket\" as UC6\n  usecase \"Issue Refund\" as UC7\n  usecase\
+    \ \"Manage Exhibition Schedule\" as UC8\n  usecase \"Generate Sales Report\" as\
+    \ UC9\n  usecase \"Purchase Membership\" as UC10\n  usecase \"Reserve Audio Guide\"\
+    \ as UC11\n  usecase \"Manage Pricing\" as UC12\n  usecase \"Apply Discount\"\
+    \ as UC13\n}\n\nV -- UC1\nV -- UC3\nV -- UC5\nV -- UC10\nV -- UC11\nGC -- UC4\n\
+    GC -- UC5\nMS -- UC6\nMS -- UC7\nSA -- UC8\nSA -- UC9\nSA -- UC12\n\nUC1 ..> UC2\
+    \ : <<include>>\nUC13 ..> UC1 : <<extend>>\nUC13 ..> UC4 : <<extend>>\nGC -- UC13\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Purchase Ticket (UC1)\"\
+    ,\n            \"Validate Payment Details (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' (UC2) is included by 'Purchase Ticket'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Purchase Ticket' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Purchase Ticket' via the include relationship.\"\n        }\n      ]\n \
+    \   }\n  ]\n}"

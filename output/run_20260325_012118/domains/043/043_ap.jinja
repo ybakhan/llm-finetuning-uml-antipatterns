@@ -1,0 +1,78 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "General User" as GU
+actor "Meteorologist" as MET
+actor "Emergency Manager" as EM
+actor "System Administrator" as SA
+
+rectangle "Weather Forecasting Service" {
+  usecase "View Current Weather" as UC1
+  usecase "Search Location" as UC2
+  usecase "View Extended Forecast" as UC3
+  usecase "Issue Severe Weather Alert" as UC4
+  usecase "Validate Alert Criteria" as UC5
+  usecase "Subscribe to Notifications" as UC6
+  usecase "Manage Weather Stations" as UC7
+  usecase "Review Historical Data" as UC8
+  usecase "Generate Forecast Model" as UC9
+  usecase "Calibrate Model Parameters" as UC10
+  usecase "Configure System Settings" as UC11
+  usecase "View Emergency Briefing" as UC12
+  usecase "Export Weather Report" as UC13
+}
+
+GU -- UC1
+GU -- UC2
+GU -- UC3
+GU -- UC6
+MET -- UC4
+MET -- UC8
+MET -- UC9
+MET -- UC13
+EM -- UC12
+EM -- UC3
+SA -- UC7
+SA -- UC11
+
+UC4 ..> UC5 : <<include>>
+UC9 ..> UC10 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Issue Severe Weather Alert (UC4)",
+            "Validate Alert Criteria (UC5)"
+          ],
+          "explanation": "'Validate Alert Criteria' (UC5) is included by 'Issue Severe Weather Alert' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Issue Severe Weather Alert' rather than a standalone service observable to any actor, making it a functional decomposition of 'Issue Severe Weather Alert' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Forecast Model (UC9)",
+            "Calibrate Model Parameters (UC10)"
+          ],
+          "explanation": "'Calibrate Model Parameters' (UC10) is included by 'Generate Forecast Model' (UC9), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Forecast Model' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Forecast Model' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

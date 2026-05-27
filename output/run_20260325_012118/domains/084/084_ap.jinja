@@ -1,0 +1,75 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Bidder" as Bidder
+actor "Seller" as Seller
+actor "Admin" as Admin
+
+rectangle "Online Auction Platform" {
+  usecase "Browse Auctions" as UC1
+  usecase "Place Bid" as UC2
+  usecase "Create Auction Listing" as UC3
+  usecase "Manage Account" as UC4
+  usecase "View Bid History" as UC5
+  usecase "Close Auction" as UC6
+  usecase "Resolve Dispute" as UC7
+  usecase "Leave Feedback" as UC8
+  usecase "Monitor Platform Activity" as UC9
+  usecase "Pay for Won Item" as UC10
+  usecase "Validate Payment Details" as UC11
+  usecase "Search Auctions" as UC12
+  usecase "Set Reserve Price" as UC13
+  usecase "Suspend User Account" as UC14
+}
+
+Bidder -- UC1
+Bidder -- UC2
+Bidder -- UC5
+Bidder -- UC8
+Bidder -- UC10
+Bidder -- UC12
+
+Seller -- UC3
+Seller -- UC6
+Seller -- UC8
+Seller -- UC4
+
+Admin -- UC7
+Admin -- UC9
+Admin -- UC14
+
+UC10 ..> UC11 : <<include>>
+
+UC13 ..> UC3 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Pay for Won Item (UC10)",
+            "Validate Payment Details (UC11)"
+          ],
+          "explanation": "'Validate Payment Details' (UC11) is included by 'Pay for Won Item' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Pay for Won Item' rather than a standalone service observable to any actor, making it a functional decomposition of 'Pay for Won Item' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

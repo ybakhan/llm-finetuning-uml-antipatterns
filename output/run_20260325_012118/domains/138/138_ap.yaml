@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 138
+  domain: livestreaming_platform
+  domain_display: Livestreaming Platform
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Start Live Stream (UC1)
+      - Encode Video Feed (UC2)
+      explanation: '''Encode Video Feed'' (UC2) is included by ''Start Live Stream''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Start Live Stream'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Start Live Stream'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:15:09.504712'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Streamer\" as Streamer\nactor \"Viewer\" as\
+    \ Viewer\n\nrectangle \"Livestreaming Platform\" {\n  usecase \"Start Live Stream\"\
+    \ as UC1\n  usecase \"Encode Video Feed\" as UC2\n  usecase \"Watch Live Stream\"\
+    \ as UC3\n  usecase \"Send Chat Message\" as UC4\n  usecase \"Subscribe to Channel\"\
+    \ as UC5\n  usecase \"Donate to Streamer\" as UC6\n}\n\nStreamer -- UC1\nUC1 ..>\
+    \ UC2 : <<include>>\nViewer -- UC3\nViewer -- UC4\nViewer -- UC5\nViewer -- UC6\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Start Live Stream (UC1)\"\
+    ,\n            \"Encode Video Feed (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Encode Video Feed' (UC2) is included by 'Start Live Stream' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Start Live Stream' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Start\
+    \ Live Stream' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n\
+    }"

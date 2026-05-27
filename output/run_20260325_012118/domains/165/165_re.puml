@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "Professional Translator" as PT
+actor "Admin" as AD
+
+rectangle "Language Translation Service" {
+  usecase "Submit Text for Translation" as UC1
+  usecase "Review Machine Translation" as UC4
+  usecase "Approve Translation" as UC5
+  usecase "Manage Glossaries" as UC6
+  usecase "View Translation History" as UC7
+  usecase "Manage User Accounts" as UC8
+  usecase "Generate Quality Report" as UC9
+  usecase "Request Document Translation" as UC10
+  usecase "Rate Translation Quality" as UC12
+  usecase "Configure Language Pairs" as UC13
+}
+
+EU -- UC1
+EU -- UC7
+EU -- UC10
+EU -- UC12
+PT -- UC4
+PT -- UC5
+PT -- UC6
+AD -- UC8
+AD -- UC9
+AD -- UC13
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Driver" as Driver
+
+rectangle "Laundry Pickup Service" {
+  usecase "Schedule Pickup" as UC1
+  usecase "Track Order" as UC3
+  usecase "Complete Delivery" as UC4
+  usecase "Rate Service" as UC5
+}
+
+Customer -- UC1
+Customer -- UC3
+Customer -- UC5
+Driver -- UC4
+@enduml

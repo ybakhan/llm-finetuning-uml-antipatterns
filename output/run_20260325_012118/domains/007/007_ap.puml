@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Guest" as Guest
+actor "Receptionist" as Receptionist
+
+rectangle "Hotel Booking System" {
+  usecase "Search Available Rooms" as UC1
+  usecase "Make Reservation" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Cancel Reservation" as UC4
+  usecase "Check-In Guest" as UC5
+  usecase "View Booking History" as UC6
+}
+
+Guest -- UC1
+Guest -- UC2
+Guest -- UC4
+Guest -- UC6
+Receptionist -- UC5
+
+UC2 ..> UC3 : <<include>>
+@enduml

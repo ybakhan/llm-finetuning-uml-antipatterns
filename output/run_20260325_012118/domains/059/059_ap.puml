@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Reviewer" as A2
+actor "Administrator" as A3
+actor "Financial Aid Officer" as A4
+
+rectangle "Scholarship Application System" {
+  usecase "Submit Application" as UC1
+  usecase "Upload Documents" as UC2
+  usecase "Validate Documents" as UC3
+  usecase "Check Eligibility" as UC4
+  usecase "Review Application" as UC5
+  usecase "Calculate GPA Score" as UC6
+  usecase "Score Application" as UC7
+  usecase "Manage Scholarships" as UC8
+  usecase "Generate Award Letter" as UC9
+  usecase "Approve Award" as UC10
+  usecase "Track Application Status" as UC11
+  usecase "View Reports" as UC12
+  usecase "Notify Applicant" as UC13
+  usecase "Manage Deadlines" as UC14
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC11
+UC1 ..> UC3 : <<include>>
+UC1 ..> UC4 : <<include>>
+A2 -- UC5
+A2 -- UC7
+UC7 ..> UC6 : <<include>>
+A3 -- UC8
+A3 -- UC14
+A3 -- UC12
+A4 -- UC10
+UC10 ..> UC9 : <<include>>
+UC10 ..> UC13 : <<include>>
+UC5 ..> UC13 : <<extend>>
+@enduml

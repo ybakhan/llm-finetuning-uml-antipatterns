@@ -1,0 +1,85 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Couple" as Couple
+actor "Vendor" as Vendor
+actor "Wedding Planner" as Planner
+actor "Admin" as Admin
+
+rectangle "Wedding Planning Platform" {
+  usecase "Browse Vendors" as UC1
+  usecase "Book Vendor" as UC2
+  usecase "Validate Vendor Availability" as UC3
+  usecase "Create Guest List" as UC4
+  usecase "Send Invitations" as UC5
+  usecase "Format Invitation Email" as UC6
+  usecase "Track Budget" as UC7
+  usecase "Create Seating Chart" as UC8
+  usecase "Register Couple Account" as UC9
+  usecase "View RSVP Responses" as UC10
+  usecase "Review Vendor" as UC11
+  usecase "Manage Venue Listings" as UC12
+  usecase "Submit Quote" as UC13
+  usecase "Manage Wedding Timeline" as UC14
+  usecase "Generate Reports" as UC15
+  usecase "Manage Platform Settings" as UC16
+}
+
+Couple -- UC1
+Couple -- UC2
+UC2 ..> UC3 : <<include>>
+Couple -- UC4
+Couple -- UC5
+UC5 ..> UC6 : <<include>>
+Couple -- UC7
+Couple -- UC8
+Couple -- UC9
+Couple -- UC10
+Couple -- UC11
+
+Vendor -- UC12
+Vendor -- UC13
+
+Planner -- UC14
+
+Admin -- UC15
+Admin -- UC16
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Book Vendor (UC2)",
+            "Validate Vendor Availability (UC3)"
+          ],
+          "explanation": "'Validate Vendor Availability' (UC3) is included by 'Book Vendor' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Vendor' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Vendor' via the include relationship."
+        },
+        {
+          "elements": [
+            "Send Invitations (UC5)",
+            "Format Invitation Email (UC6)"
+          ],
+          "explanation": "'Format Invitation Email' (UC6) is included by 'Send Invitations' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Send Invitations' rather than a standalone service observable to any actor, making it a functional decomposition of 'Send Invitations' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+actor "Project Manager" as PM
+actor "Site Engineer" as SE
+actor "Contractor" as CO
+actor "Safety Officer" as SO
+actor "Client" as CL
+
+rectangle "Construction Project Management System" {
+  usecase "Create Project Schedule" as UC1
+  usecase "Define Task Dependencies" as UC1a
+  usecase "Assign Resources to Tasks" as UC1b
+  usecase "Track Daily Progress" as UC2
+  usecase "Log Work Completion" as UC2a
+  usecase "Submit Change Order" as UC3
+  usecase "Approve Change Order" as UC4
+  usecase "Conduct Safety Inspection" as UC5
+  usecase "Generate Safety Report" as UC6
+  usecase "Manage Subcontractor Bids" as UC7
+  usecase "Review Project Milestones" as UC8
+  usecase "Upload Site Documents" as UC9
+  usecase "Request Material Delivery" as UC10
+  usecase "View Project Dashboard" as UC11
+}
+
+PM -- UC1
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+PM -- UC2
+UC2 ..> UC2a : <<include>>
+PM -- UC3
+PM -- UC4
+PM -- UC8
+PM -- UC11
+SE -- UC2
+SE -- UC9
+SE -- UC10
+CO -- UC3
+CO -- UC7
+SO -- UC5
+SO -- UC6
+CL -- UC8
+CL -- UC11
+}
+@enduml

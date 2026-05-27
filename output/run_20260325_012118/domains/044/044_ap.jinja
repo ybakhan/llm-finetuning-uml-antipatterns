@@ -1,0 +1,89 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Listener" as Listener
+actor "Podcaster" as Podcaster
+actor "Admin" as Admin
+
+rectangle "Podcast Platform" {
+  usecase "Browse Podcasts" as UC1
+  usecase "Play Episode" as UC2
+  usecase "Subscribe to Podcast" as UC3
+  usecase "Rate and Review" as UC4
+  usecase "Manage Playlist" as UC5
+  usecase "Upload Episode" as UC6
+  usecase "Validate Audio Format" as UC7
+  usecase "Save to Storage" as UC8
+  usecase "Manage Podcast Metadata" as UC9
+  usecase "View Analytics" as UC10
+  usecase "Parse Analytics Data" as UC11
+  usecase "Moderate Content" as UC12
+  usecase "Manage Users" as UC13
+  usecase "Download Episode" as UC14
+  usecase "Search Podcasts" as UC15
+}
+
+Listener -- UC1
+Listener -- UC2
+Listener -- UC3
+Listener -- UC4
+Listener -- UC5
+Listener -- UC14
+Listener -- UC15
+
+Podcaster -- UC6
+Podcaster -- UC9
+Podcaster -- UC10
+
+Admin -- UC12
+Admin -- UC13
+
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC8 : <<include>>
+UC10 ..> UC11 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Upload Episode (UC6)",
+            "Validate Audio Format (UC7)"
+          ],
+          "explanation": "'Validate Audio Format' (UC7) is included by 'Upload Episode' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Episode' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Episode' via the include relationship."
+        },
+        {
+          "elements": [
+            "Upload Episode (UC6)",
+            "Save to Storage (UC8)"
+          ],
+          "explanation": "'Save to Storage' (UC8) is included by 'Upload Episode' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Episode' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Episode' via the include relationship."
+        },
+        {
+          "elements": [
+            "View Analytics (UC10)",
+            "Parse Analytics Data (UC11)"
+          ],
+          "explanation": "'Parse Analytics Data' (UC11) is included by 'View Analytics' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'View Analytics' rather than a standalone service observable to any actor, making it a functional decomposition of 'View Analytics' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

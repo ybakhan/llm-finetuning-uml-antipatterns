@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 148
+  domain: network_monitoring_system
+  domain_display: Network Monitoring System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Configure Alert Rules (UC2)
+      - Validate Rule Syntax (UC12)
+      explanation: '''Validate Rule Syntax'' (UC12) is included by ''Configure Alert
+        Rules'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Configure
+        Alert Rules'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Configure Alert Rules'' via the include
+        relationship.'
+    - elements:
+      - Monitor Traffic (UC3)
+      - Fetch Device Metrics (UC13)
+      explanation: '''Fetch Device Metrics'' (UC13) is included by ''Monitor Traffic''
+        (UC3), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Monitor Traffic'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Monitor Traffic'' via the include relationship.'
+    - elements:
+      - Generate Performance Report (UC5)
+      - Export Report to PDF (UC14)
+      explanation: '''Export Report to PDF'' (UC14) is included by ''Generate Performance
+        Report'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Performance Report'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Generate Performance Report'' via
+        the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:19:11.161328'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Network Administrator\" as Admin\nactor \"\
+    Security Analyst\" as SecAnalyst\nactor \"NOC Operator\" as NOC\n\nrectangle \"\
+    Network Monitoring System\" {\n  usecase \"View Dashboard\" as UC1\n  usecase\
+    \ \"Configure Alert Rules\" as UC2\n  usecase \"Monitor Traffic\" as UC3\n  usecase\
+    \ \"Investigate Security Incident\" as UC4\n  usecase \"Generate Performance Report\"\
+    \ as UC5\n  usecase \"Manage Device Inventory\" as UC6\n  usecase \"Acknowledge\
+    \ Alarm\" as UC7\n  usecase \"Run Diagnostic Test\" as UC8\n  usecase \"Analyze\
+    \ Packet Capture\" as UC9\n  usecase \"Schedule Maintenance Window\" as UC10\n\
+    \  usecase \"View Historical Logs\" as UC11\n  usecase \"Validate Rule Syntax\"\
+    \ as UC12\n  usecase \"Fetch Device Metrics\" as UC13\n  usecase \"Export Report\
+    \ to PDF\" as UC14\n}\n\nAdmin -- UC1\nAdmin -- UC2\nAdmin -- UC3\nAdmin -- UC6\n\
+    Admin -- UC8\nAdmin -- UC10\n\nSecAnalyst -- UC4\nSecAnalyst -- UC9\nSecAnalyst\
+    \ -- UC11\n\nNOC -- UC1\nNOC -- UC5\nNOC -- UC7\n\nUC2 ..> UC12 : <<include>>\n\
+    UC3 ..> UC13 : <<include>>\nUC5 ..> UC14 : <<include>>\nUC4 ..> UC11 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Configure Alert Rules\
+    \ (UC2)\",\n            \"Validate Rule Syntax (UC12)\"\n          ],\n      \
+    \    \"explanation\": \"'Validate Rule Syntax' (UC12) is included by 'Configure\
+    \ Alert Rules' (UC2), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Configure Alert\
+    \ Rules' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Configure Alert Rules' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Monitor Traffic\
+    \ (UC3)\",\n            \"Fetch Device Metrics (UC13)\"\n          ],\n      \
+    \    \"explanation\": \"'Fetch Device Metrics' (UC13) is included by 'Monitor\
+    \ Traffic' (UC3), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Monitor Traffic'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Monitor Traffic' via the include relationship.\"\n       \
+    \ },\n        {\n          \"elements\": [\n            \"Generate Performance\
+    \ Report (UC5)\",\n            \"Export Report to PDF (UC14)\"\n          ],\n\
+    \          \"explanation\": \"'Export Report to PDF' (UC14) is included by 'Generate\
+    \ Performance Report' (UC5), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Generate\
+    \ Performance Report' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Generate Performance Report' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

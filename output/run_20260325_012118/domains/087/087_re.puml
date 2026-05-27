@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Subscriber" as Sub
+actor "Admin" as Admin
+
+rectangle "Subscription Box Service" {
+  usecase "Subscribe to Plan" as UC1
+  usecase "Manage Box Contents" as UC3
+  usecase "Cancel Subscription" as UC4
+  usecase "View Delivery Status" as UC5
+}
+
+Sub -- UC1
+Sub -- UC4
+Sub -- UC5
+Admin -- UC3
+@enduml

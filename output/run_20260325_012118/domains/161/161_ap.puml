@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Photographer" as Photographer
+
+rectangle "Photography Studio Booking System" {
+  usecase "Browse Available Studios" as UC1
+  usecase "Book Studio Session" as UC2
+  usecase "Select Time Slot" as UC3
+  usecase "Make Payment" as UC4
+  usecase "View Booking Schedule" as UC5
+  usecase "Cancel Booking" as UC6
+  usecase "Validate Payment Details" as UC7
+}
+
+Customer -- UC1
+Customer -- UC2
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC4 ..> UC7 : <<include>>
+Photographer -- UC5
+Photographer -- UC6
+@enduml

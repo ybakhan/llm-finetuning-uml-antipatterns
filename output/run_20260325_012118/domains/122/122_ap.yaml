@@ -1,0 +1,84 @@
+metadata:
+  domain_id: 122
+  domain: stock_trading_platform
+  domain_display: Stock Trading Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Market Order (UC1)
+      - Validate Order Parameters (UC2)
+      explanation: '''Validate Order Parameters'' (UC2) is included by ''Place Market
+        Order'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Market
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Market Order'' via the include relationship.'
+    - elements:
+      - Place Market Order (UC1)
+      - Check Account Balance (UC3)
+      explanation: '''Check Account Balance'' (UC3) is included by ''Place Market
+        Order'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Market
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Market Order'' via the include relationship.'
+    - elements:
+      - Place Limit Order (UC4)
+      - Verify Price Threshold (UC5)
+      explanation: '''Verify Price Threshold'' (UC5) is included by ''Place Limit
+        Order'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Limit
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Limit Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:14:20.795201'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Retail Trader\" as RT\nactor \"Institutional\
+    \ Trader\" as IT\nactor \"Compliance Officer\" as CO\nactor \"Market Data Provider\"\
+    \ as MDP\n\nrectangle \"Stock Trading Platform\" {\n  usecase \"Place Market Order\"\
+    \ as UC1\n  usecase \"Validate Order Parameters\" as UC2\n  usecase \"Check Account\
+    \ Balance\" as UC3\n  usecase \"Place Limit Order\" as UC4\n  usecase \"Verify\
+    \ Price Threshold\" as UC5\n  usecase \"View Portfolio\" as UC6\n  usecase \"\
+    Execute Block Trade\" as UC7\n  usecase \"Monitor Compliance\" as UC9\n  usecase\
+    \ \"Generate Audit Report\" as UC10\n  usecase \"Receive Market Feed\" as UC11\n\
+    \  usecase \"Set Price Alert\" as UC12\n  usecase \"Cancel Order\" as UC13\n \
+    \ usecase \"View Trade History\" as UC14\n}\n\nRT -- UC1\nRT -- UC4\nRT -- UC6\n\
+    RT -- UC12\nRT -- UC13\nRT -- UC14\nIT -- UC7\nIT -- UC6\nCO -- UC9\nCO -- UC10\n\
+    MDP -- UC11\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nUC4 ..> UC5\
+    \ : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Market Order (UC1)\"\
+    ,\n            \"Validate Order Parameters (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Order Parameters' (UC2) is included by 'Place Market\
+    \ Order' (UC1), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Place Market Order' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Place Market Order' via the include relationship.\"\n        },\n      \
+    \  {\n          \"elements\": [\n            \"Place Market Order (UC1)\",\n \
+    \           \"Check Account Balance (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Check Account Balance' (UC3) is included by 'Place Market Order' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Place Market Order' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Place\
+    \ Market Order' via the include relationship.\"\n        },\n        {\n     \
+    \     \"elements\": [\n            \"Place Limit Order (UC4)\",\n            \"\
+    Verify Price Threshold (UC5)\"\n          ],\n          \"explanation\": \"'Verify\
+    \ Price Threshold' (UC5) is included by 'Place Limit Order' (UC4), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Place Limit Order' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Place Limit\
+    \ Order' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,21 @@
+metadata:
+  domain_id: 120
+  domain: crowdfunding_platform
+  domain_display: Crowdfunding Platform
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:08:10.382442'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Backer\" as Backer\nactor \"Project Creator\"\
+    \ as Creator\n\nrectangle \"Crowdfunding Platform\" {\n  usecase \"Back Project\"\
+    \ as UC2\n  usecase \"Browse Projects\" as UC1\n  usecase \"Create Campaign\"\
+    \ as UC4\n}\n\nBacker -- UC1\nBacker -- UC2\nCreator -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

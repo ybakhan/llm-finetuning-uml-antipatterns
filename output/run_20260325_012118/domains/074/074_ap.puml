@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Host" as Host
+
+rectangle "Restaurant Reservation System" {
+  usecase "Make Reservation" as UC1
+  usecase "Cancel Reservation" as UC2
+  usecase "View Available Tables" as UC3
+  usecase "Manage Waitlist" as UC4
+  usecase "Select Time Slot" as UC5
+  usecase "Confirm Table Assignment" as UC6
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Host -- UC4
+Host -- UC6
+
+UC1 ..> UC5 : <<include>>
+@enduml

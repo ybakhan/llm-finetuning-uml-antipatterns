@@ -1,0 +1,56 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Doctor" as Doctor
+
+rectangle "Telemedicine System" {
+  usecase "Schedule Appointment" as UC1
+  usecase "Conduct Video Consultation" as UC2
+  usecase "View Medical Records" as UC3
+  usecase "Write Prescription" as UC4
+  usecase "Validate Patient Identity" as UC5
+  usecase "Request Prescription Refill" as UC6
+}
+
+Patient -- UC1
+Patient -- UC2
+Patient -- UC3
+Patient -- UC6
+Doctor -- UC2
+Doctor -- UC3
+Doctor -- UC4
+
+UC2 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Conduct Video Consultation (UC2)",
+            "Validate Patient Identity (UC5)"
+          ],
+          "explanation": "'Validate Patient Identity' is included by 'Conduct Video Consultation', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Conduct Video Consultation' rather than a standalone service observable to any actor, making it a functional decomposition of 'Conduct Video Consultation' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

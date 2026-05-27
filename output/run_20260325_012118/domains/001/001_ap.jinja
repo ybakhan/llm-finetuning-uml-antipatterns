@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Bank Teller" as Teller
+
+rectangle "Banking System" {
+  usecase "View Account Balance" as UC1
+  usecase "Transfer Funds" as UC2
+  usecase "Withdraw Cash" as UC3
+  usecase "Validate Account" as UC4
+  usecase "Deposit Funds" as UC5
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Customer -- UC5
+Teller -- UC5
+
+UC3 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Withdraw Cash (UC3)",
+            "Validate Account (UC4)"
+          ],
+          "explanation": "'Validate Account' (UC4) is included by 'Withdraw Cash' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Withdraw Cash' rather than a standalone service observable to any actor, making it a functional decomposition of 'Withdraw Cash' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

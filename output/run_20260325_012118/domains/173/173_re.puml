@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Technician" as Technician
+
+rectangle "Vending Machine Management System" {
+  usecase "Purchase Product" as UC1
+  usecase "Restock Machine" as UC4
+  usecase "View Inventory" as UC5
+}
+
+Customer -- UC1
+Technician -- UC4
+Technician -- UC5
+@enduml

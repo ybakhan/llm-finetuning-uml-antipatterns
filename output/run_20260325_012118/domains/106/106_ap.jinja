@@ -1,0 +1,61 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+
+rectangle "Language Learning App" {
+  usecase "Take Vocabulary Quiz" as UC1
+  usecase "Load Quiz Questions" as UC2
+  usecase "Calculate Quiz Score" as UC3
+  usecase "Practice Pronunciation" as UC4
+  usecase "View Progress Report" as UC5
+  usecase "Create Lesson Plan" as UC6
+}
+
+Learner -- UC1
+Learner -- UC4
+Learner -- UC5
+Instructor -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Take Vocabulary Quiz (UC1)",
+            "Load Quiz Questions (UC2)"
+          ],
+          "explanation": "'Load Quiz Questions' is included by 'Take Vocabulary Quiz', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Take Vocabulary Quiz' rather than a standalone service observable to any actor, making it a functional decomposition of 'Take Vocabulary Quiz' via the include relationship."
+        },
+        {
+          "elements": [
+            "Take Vocabulary Quiz (UC1)",
+            "Calculate Quiz Score (UC3)"
+          ],
+          "explanation": "'Calculate Quiz Score' is included by 'Take Vocabulary Quiz', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Take Vocabulary Quiz' rather than a standalone service observable to any actor, making it a functional decomposition of 'Take Vocabulary Quiz' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

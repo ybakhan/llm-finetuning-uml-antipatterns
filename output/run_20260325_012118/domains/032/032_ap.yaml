@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 32
+  domain: loan_approval_system
+  domain_display: Loan Approval System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Review Loan Application (UC2)
+      - Check Credit Score (UC4)
+      explanation: '''Check Credit Score'' (UC4) is included by ''Review Loan Application''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Review Loan Application''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Review Loan Application'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:49:20.804810'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Applicant\" as Applicant\nactor \"Loan\
+    \ Officer\" as Officer\n\nrectangle \"Loan Approval System\" {\n  usecase \"Submit\
+    \ Loan Application\" as UC1\n  usecase \"Review Loan Application\" as UC2\n  usecase\
+    \ \"Approve or Reject Loan\" as UC3\n  usecase \"Check Credit Score\" as UC4\n\
+    \  usecase \"View Loan Status\" as UC5\n  usecase \"Generate Loan Agreement\"\
+    \ as UC6\n}\n\nApplicant -- UC1\nApplicant -- UC5\nOfficer -- UC2\nOfficer --\
+    \ UC3\nOfficer -- UC6\n\nUC2 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Review Loan Application\
+    \ (UC2)\",\n            \"Check Credit Score (UC4)\"\n          ],\n         \
+    \ \"explanation\": \"'Check Credit Score' (UC4) is included by 'Review Loan Application'\
+    \ (UC2), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Review Loan Application' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Review Loan Application' via the include relationship.\"\n        }\n  \
+    \    ]\n    }\n  ]\n}"

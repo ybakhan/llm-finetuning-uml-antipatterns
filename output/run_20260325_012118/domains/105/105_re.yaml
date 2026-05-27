@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 105
+  domain: tutoring_marketplace
+  domain_display: Tutoring Marketplace
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:02:10.725521'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Student\" as Student\nactor \"Tutor\" as Tutor\n\
+    \nrectangle \"Tutoring Marketplace\" {\n  usecase \"Search for Tutor\" as UC1\n\
+    \  usecase \"Book Session\" as UC2\n  usecase \"Conduct Session\" as UC4\n  usecase\
+    \ \"Leave Review\" as UC5\n}\n\nStudent -- UC1\nStudent -- UC2\nTutor -- UC4\n\
+    Student -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

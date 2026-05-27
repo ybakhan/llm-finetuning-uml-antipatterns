@@ -1,0 +1,109 @@
+metadata:
+  domain_id: 133
+  domain: mentorship_platform
+  domain_display: Mentorship Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Create Mentor Profile (UC1)
+      - Validate Profile Fields (UC2)
+      explanation: '''Validate Profile Fields'' (UC2) is included by ''Create Mentor
+        Profile'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Mentor
+        Profile'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Create Mentor Profile'' via the include
+        relationship.'
+    - elements:
+      - Create Mentor Profile (UC1)
+      - Save Profile to Database (UC3)
+      explanation: '''Save Profile to Database'' (UC3) is included by ''Create Mentor
+        Profile'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Mentor
+        Profile'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Create Mentor Profile'' via the include
+        relationship.'
+    - elements:
+      - Search for Mentor (UC4)
+      - Filter Search Results (UC5)
+      explanation: '''Filter Search Results'' (UC5) is included by ''Search for Mentor''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Search for Mentor'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Search for Mentor'' via the include relationship.'
+    - elements:
+      - Request Mentorship Session (UC6)
+      - Send Session Notification (UC7)
+      explanation: '''Send Session Notification'' (UC7) is included by ''Request Mentorship
+        Session'' (UC6), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Request
+        Mentorship Session'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Request Mentorship Session'' via
+        the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:17:35.255434'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Mentor\" as Mentor\nactor \"Mentee\" as Mentee\n\
+    actor \"Platform Admin\" as Admin\n\nrectangle \"Mentorship Platform\" {\n  usecase\
+    \ \"Create Mentor Profile\" as UC1\n  usecase \"Validate Profile Fields\" as UC2\n\
+    \  usecase \"Save Profile to Database\" as UC3\n  usecase \"Search for Mentor\"\
+    \ as UC4\n  usecase \"Filter Search Results\" as UC5\n  usecase \"Request Mentorship\
+    \ Session\" as UC6\n  usecase \"Send Session Notification\" as UC7\n  usecase\
+    \ \"Conduct Video Session\" as UC8\n  usecase \"Submit Session Feedback\" as UC9\n\
+    \  usecase \"Browse Learning Resources\" as UC10\n  usecase \"Track Mentee Progress\"\
+    \ as UC11\n  usecase \"Manage Platform Users\" as UC12\n  usecase \"Generate Analytics\
+    \ Report\" as UC13\n  usecase \"Set Availability Schedule\" as UC14\n  usecase\
+    \ \"View Mentor Recommendations\" as UC15\n  usecase \"Cancel Mentorship Session\"\
+    \ as UC16\n}\n\nMentor -- UC1\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n\
+    Mentor -- UC8\nMentor -- UC9\nMentor -- UC14\nMentor -- UC11\n\nMentee -- UC4\n\
+    UC4 ..> UC5 : <<include>>\nMentee -- UC6\nUC6 ..> UC7 : <<include>>\nMentee --\
+    \ UC8\nMentee -- UC9\nMentee -- UC10\nMentee -- UC15\nMentee -- UC16\n\nAdmin\
+    \ -- UC12\nAdmin -- UC13\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Create Mentor Profile\
+    \ (UC1)\",\n            \"Validate Profile Fields (UC2)\"\n          ],\n    \
+    \      \"explanation\": \"'Validate Profile Fields' (UC2) is included by 'Create\
+    \ Mentor Profile' (UC1), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Create\
+    \ Mentor Profile' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Create Mentor Profile' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Create Mentor\
+    \ Profile (UC1)\",\n            \"Save Profile to Database (UC3)\"\n         \
+    \ ],\n          \"explanation\": \"'Save Profile to Database' (UC3) is included\
+    \ by 'Create Mentor Profile' (UC1), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Create Mentor Profile' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Create Mentor Profile' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Search for Mentor (UC4)\",\n            \"Filter Search Results\
+    \ (UC5)\"\n          ],\n          \"explanation\": \"'Filter Search Results'\
+    \ (UC5) is included by 'Search for Mentor' (UC4), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Search for Mentor' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Search for Mentor' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Request Mentorship Session (UC6)\",\n            \"Send Session Notification\
+    \ (UC7)\"\n          ],\n          \"explanation\": \"'Send Session Notification'\
+    \ (UC7) is included by 'Request Mentorship Session' (UC6), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Request Mentorship Session' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Request\
+    \ Mentorship Session' via the include relationship.\"\n        }\n      ]\n  \
+    \  }\n  ]\n}"

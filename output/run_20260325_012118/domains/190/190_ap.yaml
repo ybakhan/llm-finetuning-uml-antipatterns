@@ -1,0 +1,71 @@
+metadata:
+  domain_id: 190
+  domain: hazardous_materials_tracking_system
+  domain_display: Hazardous Materials Tracking System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Hazardous Material (UC1)
+      - Validate SDS Document (UC10)
+      explanation: '''Validate SDS Document'' (UC10) is included by ''Register Hazardous
+        Material'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        Hazardous Material'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Register Hazardous Material'' via
+        the include relationship.'
+    - elements:
+      - Register Hazardous Material (UC1)
+      - Log Material Classification (UC11)
+      explanation: '''Log Material Classification'' (UC11) is included by ''Register
+        Hazardous Material'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Register Hazardous Material'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Register Hazardous
+        Material'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:36:15.522441'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Safety Officer\" as SO\nactor \"Warehouse Manager\"\
+    \ as WM\nactor \"Transport Driver\" as TD\nactor \"Regulatory Inspector\" as RI\n\
+    actor \"Emergency Responder\" as ER\n\nrectangle \"Hazardous Materials Tracking\
+    \ System\" {\n  usecase \"Register Hazardous Material\" as UC1\n  usecase \"Update\
+    \ Material Inventory\" as UC2\n  usecase \"Assign Storage Location\" as UC3\n\
+    \  usecase \"Create Shipment Record\" as UC4\n  usecase \"Track Shipment in Transit\"\
+    \ as UC5\n  usecase \"Report Spill Incident\" as UC6\n  usecase \"Conduct Safety\
+    \ Audit\" as UC7\n  usecase \"Generate Compliance Report\" as UC8\n  usecase \"\
+    View Emergency Procedures\" as UC9\n  usecase \"Validate SDS Document\" as UC10\n\
+    \  usecase \"Log Material Classification\" as UC11\n  usecase \"Review Incident\
+    \ History\" as UC12\n}\n\nSO -- UC1\nSO -- UC7\nSO -- UC6\nWM -- UC2\nWM -- UC3\n\
+    WM -- UC1\nTD -- UC4\nTD -- UC5\nRI -- UC7\nRI -- UC8\nER -- UC6\nER -- UC9\n\
+    SO -- UC12\n\nUC1 ..> UC10 : <<include>>\nUC1 ..> UC11 : <<include>>\n\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Hazardous Material\
+    \ (UC1)\",\n            \"Validate SDS Document (UC10)\"\n          ],\n     \
+    \     \"explanation\": \"'Validate SDS Document' (UC10) is included by 'Register\
+    \ Hazardous Material' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Register\
+    \ Hazardous Material' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Register Hazardous Material' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Register Hazardous Material (UC1)\",\n            \"Log Material\
+    \ Classification (UC11)\"\n          ],\n          \"explanation\": \"'Log Material\
+    \ Classification' (UC11) is included by 'Register Hazardous Material' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Register Hazardous Material' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Register Hazardous Material' via the include relationship.\"\n        }\n\
+    \      ]\n    }\n  ]\n}"

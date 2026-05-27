@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 15
+  domain: job_portal
+  domain_display: Job Portal
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Apply for Job (UC2)
+      - Validate Application Data (UC3)
+      explanation: '''Validate Application Data'' is included by ''Apply for Job'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Apply for Job'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Apply for Job'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:27:12.681447'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Job Seeker\" as JS\nactor \"Employer\" as EM\n\
+    \nrectangle \"Job Portal\" {\n  usecase \"Search Jobs\" as UC1\n  usecase \"Apply\
+    \ for Job\" as UC2\n  usecase \"Validate Application Data\" as UC3\n  usecase\
+    \ \"Post Job Listing\" as UC4\n  usecase \"Review Applications\" as UC5\n}\n\n\
+    JS -- UC1\nJS -- UC2\nUC2 ..> UC3 : <<include>>\nEM -- UC4\nEM -- UC5\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Apply for Job (UC2)\"\
+    ,\n            \"Validate Application Data (UC3)\"\n          ],\n          \"\
+    explanation\": \"'Validate Application Data' is included by 'Apply for Job', has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Apply for Job' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Apply\
+    \ for Job' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

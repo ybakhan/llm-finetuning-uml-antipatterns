@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 144
+  domain: athlete_training_system
+  domain_display: Athlete Training System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:18:16.682852'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Athlete\" as Athlete\nactor \"Coach\" as Coach\n\
+    actor \"Nutritionist\" as Nutritionist\nactor \"Team Doctor\" as TeamDoctor\n\n\
+    rectangle \"Athlete Training System\" {\n  usecase \"View Training Schedule\"\
+    \ as UC1\n  usecase \"Log Workout\" as UC2\n  usecase \"Track Performance Metrics\"\
+    \ as UC4\n  usecase \"Create Training Plan\" as UC5\n  usecase \"Assign Drills\
+    \ to Athlete\" as UC7\n  usecase \"Review Athlete Progress\" as UC8\n  usecase\
+    \ \"Create Nutrition Plan\" as UC9\n  usecase \"Log Dietary Intake\" as UC10\n\
+    \  usecase \"Record Injury\" as UC11\n  usecase \"Manage Recovery Program\" as\
+    \ UC12\n  usecase \"Generate Performance Report\" as UC13\n  usecase \"Set Training\
+    \ Goals\" as UC14\n}\n\nAthlete -- UC1\nAthlete -- UC2\nAthlete -- UC4\nCoach\
+    \ -- UC5\nCoach -- UC7\nCoach -- UC8\nCoach -- UC13\nNutritionist -- UC9\nAthlete\
+    \ -- UC10\nTeamDoctor -- UC11\nTeamDoctor -- UC12\nAthlete -- UC14\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

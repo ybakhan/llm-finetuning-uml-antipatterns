@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+actor "Event Coordinator" as EC
+actor "Security Officer" as SO
+actor "Maintenance Staff" as MS
+actor "Ticket Office Manager" as TOM
+
+rectangle "Stadium Management System" {
+  usecase "Schedule Event" as UC1
+  usecase "Validate Venue Availability" as UC2
+  usecase "Assign Seating Layout" as UC3
+  usecase "Monitor Crowd Control" as UC4
+  usecase "Manage Access Gates" as UC5
+  usecase "Log Security Incident" as UC6
+  usecase "Dispatch Security Team" as UC7
+  usecase "Submit Maintenance Request" as UC8
+  usecase "Inspect Stadium Facilities" as UC9
+  usecase "Configure Ticket Pricing" as UC10
+  usecase "Generate Sales Report" as UC11
+  usecase "Retrieve Transaction Data" as UC12
+  usecase "Manage Parking Allocation" as UC13
+  usecase "Coordinate Emergency Evacuation" as UC14
+}
+
+EC -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+SO -- UC4
+SO -- UC5
+SO -- UC6
+UC6 ..> UC7 : <<include>>
+MS -- UC8
+MS -- UC9
+TOM -- UC10
+TOM -- UC11
+UC11 ..> UC12 : <<include>>
+TOM -- UC13
+SO -- UC14
+@enduml

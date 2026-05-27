@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "Funeral Director" as FD
+
+rectangle "Funeral Service Management System" {
+  usecase "Arrange Funeral Service" as UC1
+  usecase "Select Casket" as UC2
+  usecase "Schedule Venue" as UC3
+  usecase "Register Deceased" as UC4
+  usecase "Generate Invoice" as UC5
+}
+
+FD -- UC1
+FD -- UC4
+FD -- UC5
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml

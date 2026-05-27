@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 106
+  domain: language_learning_app
+  domain_display: Language Learning App
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:02:34.084950'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Learner\" as Learner\nactor \"Instructor\"\
+    \ as Instructor\n\nrectangle \"Language Learning App\" {\n  usecase \"Take Vocabulary\
+    \ Quiz\" as UC1\n  usecase \"Practice Pronunciation\" as UC4\n  usecase \"View\
+    \ Progress Report\" as UC5\n  usecase \"Create Lesson Plan\" as UC6\n}\n\nLearner\
+    \ -- UC1\nLearner -- UC4\nLearner -- UC5\nInstructor -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

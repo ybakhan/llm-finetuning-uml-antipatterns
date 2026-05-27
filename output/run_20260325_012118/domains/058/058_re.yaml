@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 58
+  domain: course_registration_system
+  domain_display: Course Registration System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:53:17.424943'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Student\" as Student\nactor \"Professor\" as\
+    \ Professor\nactor \"Registrar\" as Registrar\nactor \"Academic Advisor\" as Advisor\n\
+    \nrectangle \"Course Registration System\" {\n  usecase \"Register for Course\"\
+    \ as UC1\n  usecase \"Drop Course\" as UC2\n  usecase \"View Course Catalog\"\
+    \ as UC3\n  usecase \"View Schedule\" as UC4\n  usecase \"Approve Registration\"\
+    \ as UC5\n  usecase \"Manage Course Offerings\" as UC6\n  usecase \"View Class\
+    \ Roster\" as UC7\n  usecase \"Set Enrollment Limits\" as UC8\n  usecase \"Generate\
+    \ Transcript\" as UC9\n  usecase \"Request Prerequisite Override\" as UC10\n \
+    \ usecase \"Review Override Request\" as UC11\n  usecase \"Waitlist for Course\"\
+    \ as UC12\n  usecase \"View Advisee Registrations\" as UC14\n}\n\nStudent -- UC1\n\
+    Student -- UC2\nStudent -- UC3\nStudent -- UC4\nStudent -- UC9\nStudent -- UC10\n\
+    Student -- UC12\n\nProfessor -- UC7\nProfessor -- UC8\nProfessor -- UC11\n\nRegistrar\
+    \ -- UC5\nRegistrar -- UC6\n\nAdvisor -- UC14\n\nUC12 ..> UC1 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

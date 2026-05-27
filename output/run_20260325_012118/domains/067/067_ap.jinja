@@ -1,0 +1,90 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Developer" as Dev
+actor "Tester" as Tester
+actor "Project Manager" as PM
+
+rectangle "Software Bug Tracking System" {
+  usecase "Report Bug" as UC1
+  usecase "Validate Bug Fields" as UC2
+  usecase "Assign Bug to Developer" as UC3
+  usecase "Check Developer Availability" as UC4
+  usecase "Update Bug Status" as UC5
+  usecase "View Bug Dashboard" as UC6
+  usecase "Search Bugs" as UC7
+  usecase "Add Comment to Bug" as UC8
+  usecase "Resolve Bug" as UC9
+  usecase "Reopen Bug" as UC10
+  usecase "Close Bug" as UC11
+  usecase "Generate Bug Report" as UC12
+  usecase "Export Report to PDF" as UC13
+  usecase "Set Bug Priority" as UC14
+  usecase "View Bug History" as UC15
+}
+
+Tester -- UC1
+UC1 ..> UC2 : <<include>>
+PM -- UC3
+UC3 ..> UC4 : <<include>>
+Dev -- UC5
+PM -- UC6
+Tester -- UC7
+Dev -- UC8
+Tester -- UC8
+Dev -- UC9
+Tester -- UC10
+PM -- UC11
+PM -- UC12
+UC12 ..> UC13 : <<include>>
+PM -- UC14
+Dev -- UC15
+Tester -- UC15
+UC10 ..> UC1 : <<extend>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Report Bug (UC1)",
+            "Validate Bug Fields (UC2)"
+          ],
+          "explanation": "'Validate Bug Fields' (UC2) is included by 'Report Bug' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Report Bug' rather than a standalone service observable to any actor, making it a functional decomposition of 'Report Bug' via the include relationship."
+        },
+        {
+          "elements": [
+            "Assign Bug to Developer (UC3)",
+            "Check Developer Availability (UC4)"
+          ],
+          "explanation": "'Check Developer Availability' (UC4) is included by 'Assign Bug to Developer' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Assign Bug to Developer' rather than a standalone service observable to any actor, making it a functional decomposition of 'Assign Bug to Developer' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Bug Report (UC12)",
+            "Export Report to PDF (UC13)"
+          ],
+          "explanation": "'Export Report to PDF' (UC13) is included by 'Generate Bug Report' (UC12), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Bug Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Bug Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

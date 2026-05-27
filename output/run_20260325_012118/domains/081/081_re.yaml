@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 81
+  domain: bike_sharing_system
+  domain_display: Bike Sharing System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:52:11.995951'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Rider\" as Rider\nactor \"Station Technician\"\
+    \ as Tech\nactor \"System Administrator\" as Admin\n\nrectangle \"Bike Sharing\
+    \ System\" {\n  usecase \"Register Account\" as UC1\n  usecase \"Rent Bike\" as\
+    \ UC2\n  usecase \"Return Bike\" as UC3\n  usecase \"Report Bike Issue\" as UC4\n\
+    \  usecase \"View Ride History\" as UC5\n  usecase \"Process Payment\" as UC6\n\
+    \  usecase \"Perform Bike Maintenance\" as UC7\n  usecase \"Inspect Station\"\
+    \ as UC8\n  usecase \"Manage Stations\" as UC9\n  usecase \"View System Analytics\"\
+    \ as UC10\n  usecase \"Manage Pricing Plans\" as UC11\n}\n\nRider -- UC1\nRider\
+    \ -- UC2\nRider -- UC3\nRider -- UC4\nRider -- UC5\nRider -- UC6\n\nTech -- UC7\n\
+    Tech -- UC8\n\nAdmin -- UC9\nAdmin -- UC10\nAdmin -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

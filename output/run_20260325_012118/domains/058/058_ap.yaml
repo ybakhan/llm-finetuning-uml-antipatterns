@@ -1,0 +1,53 @@
+metadata:
+  domain_id: 58
+  domain: course_registration_system
+  domain_display: Course Registration System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register for Course (UC1)
+      - Check Prerequisite Eligibility (UC13)
+      explanation: '''Check Prerequisite Eligibility'' (UC13) is included by ''Register
+        for Course'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        for Course'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Register for Course'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:53:17.424943'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Student\" as Student\nactor \"Professor\" as\
+    \ Professor\nactor \"Registrar\" as Registrar\nactor \"Academic Advisor\" as Advisor\n\
+    \nrectangle \"Course Registration System\" {\n  usecase \"Register for Course\"\
+    \ as UC1\n  usecase \"Drop Course\" as UC2\n  usecase \"View Course Catalog\"\
+    \ as UC3\n  usecase \"View Schedule\" as UC4\n  usecase \"Approve Registration\"\
+    \ as UC5\n  usecase \"Manage Course Offerings\" as UC6\n  usecase \"View Class\
+    \ Roster\" as UC7\n  usecase \"Set Enrollment Limits\" as UC8\n  usecase \"Generate\
+    \ Transcript\" as UC9\n  usecase \"Request Prerequisite Override\" as UC10\n \
+    \ usecase \"Review Override Request\" as UC11\n  usecase \"Waitlist for Course\"\
+    \ as UC12\n  usecase \"Check Prerequisite Eligibility\" as UC13\n  usecase \"\
+    View Advisee Registrations\" as UC14\n}\n\nStudent -- UC1\nStudent -- UC2\nStudent\
+    \ -- UC3\nStudent -- UC4\nStudent -- UC9\nStudent -- UC10\nStudent -- UC12\n\n\
+    Professor -- UC7\nProfessor -- UC8\nProfessor -- UC11\n\nRegistrar -- UC5\nRegistrar\
+    \ -- UC6\n\nAdvisor -- UC14\n\nUC1 ..> UC13 : <<include>>\n\nUC12 ..> UC1 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register for Course (UC1)\"\
+    ,\n            \"Check Prerequisite Eligibility (UC13)\"\n          ],\n     \
+    \     \"explanation\": \"'Check Prerequisite Eligibility' (UC13) is included by\
+    \ 'Register for Course' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Register\
+    \ for Course' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Register for Course' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

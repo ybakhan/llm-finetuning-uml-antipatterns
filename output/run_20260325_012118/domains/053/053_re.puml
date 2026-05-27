@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+
+actor "Doctor" as Doctor
+actor "Receptionist" as Receptionist
+
+rectangle "Patient Records System" {
+  usecase "View Patient Record" as UC1
+  usecase "Register Patient" as UC2
+  usecase "Update Patient Record" as UC3
+}
+
+Doctor -- UC1
+Doctor -- UC3
+Receptionist -- UC2
+@enduml

@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 95
+  domain: water_utility_management
+  domain_display: Water Utility Management
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:58:12.546466'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Technician\"\
+    \ as Technician\n\nrectangle \"Water Utility Management System\" {\n  usecase\
+    \ \"Pay Water Bill\" as UC1\n  usecase \"Report Leak\" as UC2\n  usecase \"Perform\
+    \ Maintenance\" as UC3\n  usecase \"View Usage History\" as UC4\n  usecase \"\
+    Submit Meter Reading\" as UC5\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer\
+    \ -- UC4\nTechnician -- UC3\nTechnician -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

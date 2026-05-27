@@ -1,0 +1,73 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Hotel Guest" as Guest
+actor "Room Service Staff" as Staff
+actor "Kitchen Staff" as Kitchen
+actor "Manager" as Manager
+
+rectangle "Room Service Management System" {
+  usecase "Browse Menu" as UC1
+  usecase "Place Order" as UC2
+  usecase "Validate Payment Info" as UC3
+  usecase "Track Order Status" as UC4
+  usecase "Deliver Order" as UC5
+  usecase "Confirm Delivery" as UC6
+  usecase "Prepare Order" as UC7
+  usecase "Update Menu Items" as UC8
+  usecase "Handle Complaint" as UC9
+  usecase "Generate Daily Report" as UC10
+  usecase "Rate Service" as UC11
+  usecase "Cancel Order" as UC12
+}
+
+Guest -- UC1
+Guest -- UC2
+Guest -- UC4
+Guest -- UC9
+Guest -- UC11
+Guest -- UC12
+
+Staff -- UC5
+Staff -- UC6
+Staff -- UC4
+
+Kitchen -- UC7
+
+Manager -- UC8
+Manager -- UC10
+Manager -- UC9
+
+UC2 ..> UC3 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Place Order (UC2)",
+            "Validate Payment Info (UC3)"
+          ],
+          "explanation": "'Validate Payment Info' (UC3) is included by 'Place Order' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Order' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "Taxpayer" as Taxpayer
+actor "Tax Accountant" as Accountant
+
+rectangle "Tax Filing System" {
+  usecase "File Tax Return" as UC1
+  usecase "Validate Input Fields" as UC2
+  usecase "Review Filing Status" as UC3
+  usecase "Generate Tax Summary" as UC4
+}
+
+Taxpayer -- UC1
+Taxpayer -- UC3
+Accountant -- UC3
+Accountant -- UC4
+UC1 ..> UC2 : <<include>>
+@enduml

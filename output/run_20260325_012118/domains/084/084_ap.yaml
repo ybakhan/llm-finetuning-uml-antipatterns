@@ -1,0 +1,51 @@
+metadata:
+  domain_id: 84
+  domain: online_auction_platform
+  domain_display: Online Auction Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Pay for Won Item (UC10)
+      - Validate Payment Details (UC11)
+      explanation: '''Validate Payment Details'' (UC11) is included by ''Pay for Won
+        Item'' (UC10), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Pay for
+        Won Item'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Pay for Won Item'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:07:39.986364'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Bidder\" as Bidder\nactor \"Seller\" as Seller\n\
+    actor \"Admin\" as Admin\n\nrectangle \"Online Auction Platform\" {\n  usecase\
+    \ \"Browse Auctions\" as UC1\n  usecase \"Place Bid\" as UC2\n  usecase \"Create\
+    \ Auction Listing\" as UC3\n  usecase \"Manage Account\" as UC4\n  usecase \"\
+    View Bid History\" as UC5\n  usecase \"Close Auction\" as UC6\n  usecase \"Resolve\
+    \ Dispute\" as UC7\n  usecase \"Leave Feedback\" as UC8\n  usecase \"Monitor Platform\
+    \ Activity\" as UC9\n  usecase \"Pay for Won Item\" as UC10\n  usecase \"Validate\
+    \ Payment Details\" as UC11\n  usecase \"Search Auctions\" as UC12\n  usecase\
+    \ \"Set Reserve Price\" as UC13\n  usecase \"Suspend User Account\" as UC14\n\
+    }\n\nBidder -- UC1\nBidder -- UC2\nBidder -- UC5\nBidder -- UC8\nBidder -- UC10\n\
+    Bidder -- UC12\n\nSeller -- UC3\nSeller -- UC6\nSeller -- UC8\nSeller -- UC4\n\
+    \nAdmin -- UC7\nAdmin -- UC9\nAdmin -- UC14\n\nUC10 ..> UC11 : <<include>>\n\n\
+    UC13 ..> UC3 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Pay for Won Item (UC10)\"\
+    ,\n            \"Validate Payment Details (UC11)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' (UC11) is included by 'Pay for Won\
+    \ Item' (UC10), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Pay for Won Item' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Pay for Won Item' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

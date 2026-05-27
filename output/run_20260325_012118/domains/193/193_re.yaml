@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 193
+  domain: graphic_novel_platform
+  domain_display: Graphic Novel Platform
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:37:29.145080'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Reader\" as Reader\nactor \"Author\" as Author\n\
+    \nrectangle \"Graphic Novel Platform\" {\n  usecase \"Browse Catalog\" as UC1\n\
+    \  usecase \"Read Novel\" as UC2\n  usecase \"Publish Novel\" as UC3\n  usecase\
+    \ \"Rate Novel\" as UC5\n}\n\nReader -- UC1\nReader -- UC2\nReader -- UC5\nAuthor\
+    \ -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

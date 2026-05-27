@@ -1,0 +1,21 @@
+metadata:
+  domain_id: 15
+  domain: job_portal
+  domain_display: Job Portal
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:27:12.681447'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Job Seeker\" as JS\nactor \"Employer\" as EM\n\
+    \nrectangle \"Job Portal\" {\n  usecase \"Search Jobs\" as UC1\n  usecase \"Apply\
+    \ for Job\" as UC2\n  usecase \"Post Job Listing\" as UC4\n  usecase \"Review\
+    \ Applications\" as UC5\n}\n\nJS -- UC1\nJS -- UC2\nEM -- UC4\nEM -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

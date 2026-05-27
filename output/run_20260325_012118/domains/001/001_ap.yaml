@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 1
+  domain: banking_system
+  domain_display: Banking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Withdraw Cash (UC3)
+      - Validate Account (UC4)
+      explanation: '''Validate Account'' (UC4) is included by ''Withdraw Cash'' (UC3),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Withdraw Cash'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Withdraw Cash'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 11
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:34:24.151278'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Bank Teller\"\
+    \ as Teller\n\nrectangle \"Banking System\" {\n  usecase \"View Account Balance\"\
+    \ as UC1\n  usecase \"Transfer Funds\" as UC2\n  usecase \"Withdraw Cash\" as\
+    \ UC3\n  usecase \"Validate Account\" as UC4\n  usecase \"Deposit Funds\" as UC5\n\
+    }\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC3\nCustomer -- UC5\nTeller\
+    \ -- UC5\n\nUC3 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Withdraw Cash (UC3)\"\
+    ,\n            \"Validate Account (UC4)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Account' (UC4) is included by 'Withdraw Cash' (UC3), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Withdraw Cash' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Withdraw Cash' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

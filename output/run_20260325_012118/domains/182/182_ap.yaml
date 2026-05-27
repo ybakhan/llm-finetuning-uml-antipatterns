@@ -1,0 +1,109 @@
+metadata:
+  domain_id: 182
+  domain: wildlife_conservation_system
+  domain_display: Wildlife Conservation System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Record Animal Sighting (UC1)
+      - Validate GPS Coordinates (UC2)
+      explanation: '''Validate GPS Coordinates'' (UC2) is included by ''Record Animal
+        Sighting'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Record Animal
+        Sighting'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Record Animal Sighting'' via the include
+        relationship.'
+    - elements:
+      - Record Animal Sighting (UC1)
+      - Save Sighting to Database (UC3)
+      explanation: '''Save Sighting to Database'' (UC3) is included by ''Record Animal
+        Sighting'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Record Animal
+        Sighting'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Record Animal Sighting'' via the include
+        relationship.'
+    - elements:
+      - Generate Population Report (UC5)
+      - Compile Statistics (UC6)
+      explanation: '''Compile Statistics'' (UC6) is included by ''Generate Population
+        Report'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Population Report'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Generate Population Report'' via
+        the include relationship.'
+    - elements:
+      - Generate Population Report (UC5)
+      - Format Report Output (UC14)
+      explanation: '''Format Report Output'' (UC14) is included by ''Generate Population
+        Report'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Population Report'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Generate Population Report'' via
+        the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:25:15.158324'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Park Ranger\" as Ranger\nactor \"Conservation\
+    \ Scientist\" as Scientist\nactor \"System Administrator\" as Admin\n\nrectangle\
+    \ \"Wildlife Conservation System\" {\n  usecase \"Record Animal Sighting\" as\
+    \ UC1\n  usecase \"Validate GPS Coordinates\" as UC2\n  usecase \"Save Sighting\
+    \ to Database\" as UC3\n  usecase \"Monitor Endangered Species\" as UC4\n  usecase\
+    \ \"Generate Population Report\" as UC5\n  usecase \"Compile Statistics\" as UC6\n\
+    \  usecase \"Manage Protected Zones\" as UC7\n  usecase \"Track Animal Migration\"\
+    \ as UC8\n  usecase \"Respond to Poaching Alert\" as UC9\n  usecase \"Log Habitat\
+    \ Conditions\" as UC10\n  usecase \"Manage User Accounts\" as UC11\n  usecase\
+    \ \"Assign Patrol Routes\" as UC12\n  usecase \"Review Conservation Plans\" as\
+    \ UC13\n  usecase \"Format Report Output\" as UC14\n}\n\nRanger -- UC1\nRanger\
+    \ -- UC9\nRanger -- UC10\nRanger -- UC8\nScientist -- UC4\nScientist -- UC5\n\
+    Scientist -- UC13\nAdmin -- UC7\nAdmin -- UC11\nAdmin -- UC12\n\nUC1 ..> UC2 :\
+    \ <<include>>\nUC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\nUC5 ..> UC14\
+    \ : <<include>>\nUC4 ..> UC8 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Record Animal Sighting\
+    \ (UC1)\",\n            \"Validate GPS Coordinates (UC2)\"\n          ],\n   \
+    \       \"explanation\": \"'Validate GPS Coordinates' (UC2) is included by 'Record\
+    \ Animal Sighting' (UC1), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Record\
+    \ Animal Sighting' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Record Animal Sighting' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Record Animal\
+    \ Sighting (UC1)\",\n            \"Save Sighting to Database (UC3)\"\n       \
+    \   ],\n          \"explanation\": \"'Save Sighting to Database' (UC3) is included\
+    \ by 'Record Animal Sighting' (UC1), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Record Animal Sighting' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Record Animal Sighting' via\
+    \ the include relationship.\"\n        },\n        {\n          \"elements\":\
+    \ [\n            \"Generate Population Report (UC5)\",\n            \"Compile\
+    \ Statistics (UC6)\"\n          ],\n          \"explanation\": \"'Compile Statistics'\
+    \ (UC6) is included by 'Generate Population Report' (UC5), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Generate Population Report' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Generate\
+    \ Population Report' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Generate Population Report (UC5)\",\n\
+    \            \"Format Report Output (UC14)\"\n          ],\n          \"explanation\"\
+    : \"'Format Report Output' (UC14) is included by 'Generate Population Report'\
+    \ (UC5), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Generate Population Report'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Generate Population Report' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

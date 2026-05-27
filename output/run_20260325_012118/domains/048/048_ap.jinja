@@ -1,0 +1,63 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reviewer" as Reviewer
+
+rectangle "Document Management System" {
+  usecase "Upload Document" as UC1
+  usecase "Search Documents" as UC2
+  usecase "Review Document" as UC3
+  usecase "Download Document" as UC4
+  usecase "Archive Document" as UC5
+  usecase "Validate File Format" as UC6
+  usecase "Generate Upload Confirmation" as UC7
+}
+
+Author -- UC1
+Author -- UC2
+Author -- UC4
+Reviewer -- UC3
+Reviewer -- UC5
+
+UC1 ..> UC6 : <<include>>
+UC1 ..> UC7 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Upload Document (UC1)",
+            "Validate File Format (UC6)"
+          ],
+          "explanation": "'Validate File Format' is included by 'Upload Document', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Document' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Document' via the include relationship."
+        },
+        {
+          "elements": [
+            "Upload Document (UC1)",
+            "Generate Upload Confirmation (UC7)"
+          ],
+          "explanation": "'Generate Upload Confirmation' is included by 'Upload Document', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Document' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Document' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

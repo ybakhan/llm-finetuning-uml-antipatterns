@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 61
+  domain: driver_license_renewal_system
+  domain_display: Driver License Renewal System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:54:12.430455'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"License Holder\" as LH\nactor \"DMV Clerk\"\
+    \ as Clerk\nactor \"Optometrist\" as Opt\n\nrectangle \"Driver License Renewal\
+    \ System\" {\n  usecase \"Renew License Online\" as UC1\n  usecase \"Renew License\
+    \ In-Person\" as UC2\n  usecase \"Schedule Appointment\" as UC3\n  usecase \"\
+    Conduct Vision Test\" as UC4\n  usecase \"Update Personal Information\" as UC5\n\
+    \  usecase \"Pay Renewal Fee\" as UC6\n  usecase \"View License Status\" as UC7\n\
+    \  usecase \"Report Lost License\" as UC8\n  usecase \"Request Duplicate License\"\
+    \ as UC9\n  usecase \"Submit Vision Test Results\" as UC14\n  usecase \"Manage\
+    \ License Records\" as UC15\n}\n\nLH -- UC1\nLH -- UC2\nLH -- UC3\nLH -- UC5\n\
+    LH -- UC6\nLH -- UC7\nLH -- UC8\nLH -- UC9\nClerk -- UC2\nClerk -- UC15\nOpt --\
+    \ UC4\nOpt -- UC14\n\nUC2 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

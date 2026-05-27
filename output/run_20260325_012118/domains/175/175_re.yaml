@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 175
+  domain: furniture_rental_service
+  domain_display: Furniture Rental Service
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:23:58.543137'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Delivery Driver\"\
+    \ as Driver\nactor \"Inventory Manager\" as InvMgr\nactor \"Payment Gateway\"\
+    \ as PayGW\n\nrectangle \"Furniture Rental Service\" {\n  usecase \"Browse Furniture\
+    \ Catalog\" as UC1\n  usecase \"Place Rental Order\" as UC2\n  usecase \"Process\
+    \ Payment\" as UC4\n  usecase \"Extend Rental Period\" as UC5\n  usecase \"Return\
+    \ Furniture\" as UC6\n  usecase \"Schedule Delivery\" as UC7\n  usecase \"Confirm\
+    \ Delivery\" as UC8\n  usecase \"Manage Inventory\" as UC9\n  usecase \"Report\
+    \ Damage\" as UC10\n  usecase \"Track Order Status\" as UC11\n  usecase \"Cancel\
+    \ Rental Order\" as UC12\n  usecase \"Request Furniture Swap\" as UC13\n}\n\n\
+    Customer -- UC1\nCustomer -- UC2\nCustomer -- UC5\nCustomer -- UC6\nCustomer --\
+    \ UC10\nCustomer -- UC11\nCustomer -- UC12\nCustomer -- UC13\nDriver -- UC7\n\
+    Driver -- UC8\nInvMgr -- UC9\nPayGW -- UC4\n\nUC2 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

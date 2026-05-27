@@ -1,0 +1,408 @@
+AUDIT LOG — Prompt #028
+Timestamp : 2026-05-25T04:47:00.276227
+Model     : claude-opus-4-6
+Tokens    : input=3275  output=1342
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "elements": [
+            "<base use case (UCx)>",
+            "<inclusion use case (UCy)>"
+          ],
+          "explanation": "<why these two use cases form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ ANTIPATTERN INSTANCE RULE ═══════════════════════════════════════════════
+One antipattern instance = exactly ONE (base use case, inclusion use case) pair.
+
+  • When a base use case includes N qualifying inclusion use cases, that is N
+    separate instances — one per (base, inclusion) pair.
+  • Do NOT group multiple inclusion use cases into a single instance entry.
+
+Example: "Book Flight" includes "Validate Payment Details", "Process Payment", and
+"Generate Ticket Confirmation" (none associated with an actor). This is THREE instances:
+  Instance 1 — elements: ["Book Flight (UC2)", "Validate Payment Details (UC3)"]
+  Instance 2 — elements: ["Book Flight (UC2)", "Process Payment (UC4)"]
+  Instance 3 — elements: ["Book Flight (UC2)", "Generate Ticket Confirmation (UC8)"]
+
+ELEMENT FORMAT RULES
+  • List exactly two elements per instance: the base use case and the inclusion use case.
+  • Format: "Use Case Name (UCx)" where UCx is the PlantUML alias (e.g. UC2, UC3).
+    If no alias was assigned, use just the name: "Use Case Name".
+  • Do NOT include include-relationship entries (arrows) in the elements list.
+    The relationship is implied by the pairing of base and inclusion.
+
+CHAIN INCLUDES  (A →include→ B →include→ C)
+  If B is itself an inclusion use case that also includes C, the chain produces two
+  instances: (A, B) and (B, C). B acts as both an inclusion use case (for A) and a
+  base use case (for C). List each pair as its own instance.
+
+═══ CONSTRUCT COMPLETENESS RULE ═════════════════════════════════════════════
+Before finalising the JSON, re-scan every <<include>> arrow in the PlantUML that
+originates from the base use case of that instance. For each target use case:
+  • If it has no direct actor association → it qualifies as a functional decomposition
+    and MUST appear as a separate instance paired with the base use case.
+  • If it IS directly associated with an actor → it does not qualify; exclude it.
+
+Omitting even one qualifying inclusion use case is an error.
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+  • You MUST NOT remove use cases, actors, or relationships that are not involved in
+    the antipattern. If a use case is directly associated with an actor AND does not
+    appear in any antipattern instance's constructs list, it MUST remain in Version 2
+    unchanged.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #028: Generate a MEDIUM use case model with exactly 26 constructs (valid range for medium: 24–30 constructs). Domain: Customer Relationship Management.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+In the original model, "Escalate Ticket" is not associated with an Actor.
+But in the refactor model, it goes assocaited with actor Support Agent. 
+Please this is not allowed. regenerate the refactored model. Support Agent should not be associated with use case "Escalate Ticket"
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Sales Rep" as A1
+actor "Marketing Manager" as A2
+actor "Support Agent" as A3
+actor "CRM Administrator" as A4
+
+rectangle "Customer Relationship Management System" {
+  usecase "Manage Contacts" as UC1
+  usecase "Validate Contact Fields" as UC2
+  usecase "Log Interaction" as UC3
+  usecase "Create Sales Opportunity" as UC4
+  usecase "Generate Pipeline Report" as UC5
+  usecase "Launch Email Campaign" as UC6
+  usecase "Compose Email Template" as UC7
+  usecase "Track Campaign Metrics" as UC8
+  usecase "Handle Support Ticket" as UC9
+  usecase "Escalate Ticket" as UC10
+  usecase "Configure User Roles" as UC11
+  usecase "Import Customer Data" as UC12
+}
+
+A1 -- UC1
+UC1 ..> UC2 : <<include>>
+A1 -- UC3
+A1 -- UC4
+A1 -- UC5
+A2 -- UC6
+UC6 ..> UC7 : <<include>>
+A2 -- UC8
+A3 -- UC9
+UC10 ..> UC9 : <<extend>>
+A4 -- UC11
+A4 -- UC12
+@enduml
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Sales Rep" as A1
+actor "Marketing Manager" as A2
+actor "Support Agent" as A3
+actor "CRM Administrator" as A4
+
+rectangle "Customer Relationship Management System" {
+  usecase "Manage Contacts" as UC1
+  usecase "Log Interaction" as UC3
+  usecase "Create Sales Opportunity" as UC4
+  usecase "Generate Pipeline Report" as UC5
+  usecase "Launch Email Campaign" as UC6
+  usecase "Track Campaign Metrics" as UC8
+  usecase "Handle Support Ticket" as UC9
+  usecase "Escalate Ticket" as UC10
+  usecase "Configure User Roles" as UC11
+  usecase "Import Customer Data" as UC12
+}
+
+A1 -- UC1
+A1 -- UC3
+A1 -- UC4
+A1 -- UC5
+A2 -- UC6
+A2 -- UC8
+A3 -- UC9
+UC10 ..> UC9 : <<extend>>
+A3 -- UC10
+A4 -- UC11
+A4 -- UC12
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: customer_relationship_management
+DOMAIN_DISPLAY: Customer Relationship Management
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 26
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Sales Rep" as A1
+actor "Marketing Manager" as A2
+actor "Support Agent" as A3
+actor "CRM Administrator" as A4
+
+rectangle "Customer Relationship Management System" {
+  usecase "Manage Contacts" as UC1
+  usecase "Validate Contact Fields" as UC2
+  usecase "Log Interaction" as UC3
+  usecase "Create Sales Opportunity" as UC4
+  usecase "Generate Pipeline Report" as UC5
+  usecase "Launch Email Campaign" as UC6
+  usecase "Compose Email Template" as UC7
+  usecase "Track Campaign Metrics" as UC8
+  usecase "Handle Support Ticket" as UC9
+  usecase "Categorize Ticket Priority" as UC10
+  usecase "Configure User Roles" as UC11
+  usecase "Import Customer Data" as UC12
+}
+
+A1 -- UC1
+UC1 ..> UC2 : <<include>>
+A1 -- UC3
+A1 -- UC4
+A1 -- UC5
+A2 -- UC6
+UC6 ..> UC7 : <<include>>
+A2 -- UC8
+A3 -- UC9
+UC9 ..> UC10 : <<include>>
+A4 -- UC11
+A4 -- UC12
+@enduml
+```
+
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Manage Contacts (UC1)",
+            "Validate Contact Fields (UC2)"
+          ],
+          "explanation": "'Validate Contact Fields' (UC2) is included by 'Manage Contacts' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Manage Contacts' rather than a standalone service observable to any actor, making it a functional decomposition of 'Manage Contacts' via the include relationship."
+        },
+        {
+          "elements": [
+            "Launch Email Campaign (UC6)",
+            "Compose Email Template (UC7)"
+          ],
+          "explanation": "'Compose Email Template' (UC7) is included by 'Launch Email Campaign' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Launch Email Campaign' rather than a standalone service observable to any actor, making it a functional decomposition of 'Launch Email Campaign' via the include relationship."
+        },
+        {
+          "elements": [
+            "Handle Support Ticket (UC9)",
+            "Categorize Ticket Priority (UC10)"
+          ],
+          "explanation": "'Categorize Ticket Priority' (UC10) is included by 'Handle Support Ticket' (UC9), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Handle Support Ticket' rather than a standalone service observable to any actor, making it a functional decomposition of 'Handle Support Ticket' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three functional decomposition instances are resolved by merging each isolated inclusion use case into its base use case. (1) 'Validate Contact Fields' is merged into 'Manage Contacts'. (2) 'Compose Email Template' is merged into 'Launch Email Campaign'. (3) 'Categorize Ticket Priority' is merged into 'Handle Support Ticket'. All other use cases, actors, and relationships remain unchanged.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Sales Rep" as A1
+actor "Marketing Manager" as A2
+actor "Support Agent" as A3
+actor "CRM Administrator" as A4
+
+rectangle "Customer Relationship Management System" {
+  usecase "Manage Contacts" as UC1
+  usecase "Log Interaction" as UC3
+  usecase "Create Sales Opportunity" as UC4
+  usecase "Generate Pipeline Report" as UC5
+  usecase "Launch Email Campaign" as UC6
+  usecase "Track Campaign Metrics" as UC8
+  usecase "Handle Support Ticket" as UC9
+  usecase "Configure User Roles" as UC11
+  usecase "Import Customer Data" as UC12
+}
+
+A1 -- UC1
+A1 -- UC3
+A1 -- UC4
+A1 -- UC5
+A2 -- UC6
+A2 -- UC8
+A3 -- UC9
+A4 -- UC11
+A4 -- UC12
+@enduml
+```

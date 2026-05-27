@@ -1,0 +1,72 @@
+metadata:
+  domain_id: 178
+  domain: solar_energy_management_system
+  domain_display: Solar Energy Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Configure Solar Panels (UC1)
+      - Validate Panel Coordinates (UC13)
+      explanation: '''Validate Panel Coordinates'' (UC13) is included by ''Configure
+        Solar Panels'' (UC1), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Configure
+        Solar Panels'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Configure Solar Panels'' via the include
+        relationship.'
+    - elements:
+      - Analyze Energy Trends (UC3)
+      - Calculate Energy Output (UC14)
+      explanation: '''Calculate Energy Output'' (UC14) is included by ''Analyze Energy
+        Trends'' (UC3), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Analyze
+        Energy Trends'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Analyze Energy Trends'' via the
+        include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:24:34.161792'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"System Administrator\" as Admin\nactor \"Energy\
+    \ Analyst\" as Analyst\nactor \"Maintenance Technician\" as Technician\nactor\
+    \ \"Homeowner\" as Homeowner\nactor \"Grid Operator\" as GridOp\n\nrectangle \"\
+    Solar Energy Management System\" {\n  usecase \"Configure Solar Panels\" as UC1\n\
+    \  usecase \"Monitor Energy Production\" as UC2\n  usecase \"Analyze Energy Trends\"\
+    \ as UC3\n  usecase \"Schedule Panel Maintenance\" as UC4\n  usecase \"View Energy\
+    \ Dashboard\" as UC5\n  usecase \"Manage Battery Storage\" as UC6\n  usecase \"\
+    Report System Faults\" as UC7\n  usecase \"Export Energy to Grid\" as UC8\n  usecase\
+    \ \"Track Energy Consumption\" as UC9\n  usecase \"Set Energy Usage Alerts\" as\
+    \ UC10\n  usecase \"Generate Monthly Report\" as UC11\n  usecase \"Manage User\
+    \ Accounts\" as UC12\n  usecase \"Validate Panel Coordinates\" as UC13\n  usecase\
+    \ \"Calculate Energy Output\" as UC14\n}\n\nAdmin -- UC1\nAdmin -- UC12\nAdmin\
+    \ -- UC6\nAnalyst -- UC3\nAnalyst -- UC11\nAnalyst -- UC2\nTechnician -- UC4\n\
+    Technician -- UC7\nHomeowner -- UC5\nHomeowner -- UC9\nHomeowner -- UC10\nGridOp\
+    \ -- UC8\n\nUC1 ..> UC13 : <<include>>\nUC3 ..> UC14 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Configure Solar Panels\
+    \ (UC1)\",\n            \"Validate Panel Coordinates (UC13)\"\n          ],\n\
+    \          \"explanation\": \"'Validate Panel Coordinates' (UC13) is included\
+    \ by 'Configure Solar Panels' (UC1), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Configure Solar Panels' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Configure Solar Panels' via\
+    \ the include relationship.\"\n        },\n        {\n          \"elements\":\
+    \ [\n            \"Analyze Energy Trends (UC3)\",\n            \"Calculate Energy\
+    \ Output (UC14)\"\n          ],\n          \"explanation\": \"'Calculate Energy\
+    \ Output' (UC14) is included by 'Analyze Energy Trends' (UC3), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Analyze Energy Trends' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Analyze Energy\
+    \ Trends' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

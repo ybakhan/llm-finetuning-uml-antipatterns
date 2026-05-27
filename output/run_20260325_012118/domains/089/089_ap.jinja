@@ -1,0 +1,91 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Sales Representative" as SalesRep
+actor "Warehouse Manager" as WarehouseMgr
+actor "Purchasing Agent" as PurchAgent
+actor "Accounting Clerk" as AcctClerk
+
+rectangle "Wholesale Distribution System" {
+  usecase "Place Bulk Order" as UC1
+  usecase "Validate Customer Credit" as UC2
+  usecase "Calculate Line Item Totals" as UC3
+  usecase "Process Payment" as UC5
+  usecase "Manage Inventory" as UC6
+  usecase "Fulfill Shipment" as UC7
+  usecase "Arrange Freight Delivery" as UC8
+  usecase "Create Purchase Order" as UC9
+  usecase "Receive Goods" as UC10
+  usecase "Track Shipment" as UC11
+  usecase "Manage Customer Accounts" as UC12
+  usecase "Generate Sales Report" as UC13
+  usecase "Apply Volume Discount" as UC14
+  usecase "Process Return" as UC15
+}
+
+SalesRep -- UC1
+SalesRep -- UC12
+SalesRep -- UC13
+SalesRep -- UC15
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+
+WarehouseMgr -- UC6
+WarehouseMgr -- UC7
+WarehouseMgr -- UC10
+
+UC7 ..> UC8 : <<include>>
+
+PurchAgent -- UC9
+PurchAgent -- UC11
+
+AcctClerk -- UC5
+
+UC14 ..> UC1 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Place Bulk Order (UC1)",
+            "Validate Customer Credit (UC2)"
+          ],
+          "explanation": "'Validate Customer Credit' (UC2) is included by 'Place Bulk Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Bulk Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Bulk Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Place Bulk Order (UC1)",
+            "Calculate Line Item Totals (UC3)"
+          ],
+          "explanation": "'Calculate Line Item Totals' (UC3) is included by 'Place Bulk Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Bulk Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Bulk Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Fulfill Shipment (UC7)",
+            "Arrange Freight Delivery (UC8)"
+          ],
+          "explanation": "'Arrange Freight Delivery' (UC8) is included by 'Fulfill Shipment' (UC7), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Fulfill Shipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Fulfill Shipment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

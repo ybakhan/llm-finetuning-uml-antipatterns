@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 36
+  domain: dating_application
+  domain_display: Dating Application
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:50:30.489920'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"User\" as U\nactor \"Premium User\" as PU\n\
+    actor \"Admin\" as A\n\nrectangle \"Dating Application\" {\n  usecase \"Create\
+    \ Profile\" as UC1\n  usecase \"Browse Profiles\" as UC2\n  usecase \"Send Message\"\
+    \ as UC3\n  usecase \"Swipe / Match\" as UC4\n  usecase \"Report User\" as UC5\n\
+    \  usecase \"Manage Subscriptions\" as UC6\n  usecase \"Moderate Content\" as\
+    \ UC7\n  usecase \"View Analytics Dashboard\" as UC8\n  usecase \"Schedule Date\"\
+    \ as UC9\n  usecase \"Block User\" as UC12\n  usecase \"Video Call\" as UC13\n\
+    }\n\nU -- UC1\nU -- UC2\nU -- UC3\nU -- UC4\nU -- UC5\nU -- UC12\n\nPU -- UC6\n\
+    PU -- UC9\nPU -- UC13\n\nA -- UC7\nA -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

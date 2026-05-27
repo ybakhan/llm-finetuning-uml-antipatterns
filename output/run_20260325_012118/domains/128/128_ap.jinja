@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Property Owner" as PO
+actor "Registrar" as REG
+
+rectangle "Land Registry System" {
+  usecase "Register Property" as UC1
+  usecase "Search Land Records" as UC2
+  usecase "Transfer Ownership" as UC3
+  usecase "Validate Ownership Proof" as UC4
+  usecase "Issue Title Deed" as UC5
+  usecase "Resolve Boundary Dispute" as UC6
+}
+
+PO -- UC1
+PO -- UC2
+REG -- UC3
+REG -- UC5
+REG -- UC6
+
+UC3 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Transfer Ownership (UC3)",
+            "Validate Ownership Proof (UC4)"
+          ],
+          "explanation": "'Validate Ownership Proof' (UC4) is included by 'Transfer Ownership' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Transfer Ownership' rather than a standalone service observable to any actor, making it a functional decomposition of 'Transfer Ownership' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

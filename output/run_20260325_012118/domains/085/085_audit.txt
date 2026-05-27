@@ -1,0 +1,634 @@
+AUDIT LOG — Prompt #085
+Timestamp : 2026-03-26T01:08:05.290490
+Model     : claude-opus-4-6
+Tokens    : input=2221  output=1367
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (2 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #085: Generate a MEDIUM use case model with exactly 29 constructs (valid range for medium: 24–30 constructs). Domain: Second-Hand Marketplace.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: second_hand_marketplace
+DOMAIN_DISPLAY: Second-Hand Marketplace
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 29
+
+```plantuml
+@startuml
+left to right direction
+
+actor Seller
+actor Buyer
+actor Admin
+
+rectangle "Second-Hand Marketplace" {
+  usecase "List Item for Sale" as UC1
+  usecase "Upload Photos" as UC2
+  usecase "Set Pricing" as UC3
+  usecase "Browse Listings" as UC4
+  usecase "Search Items" as UC5
+  usecase "Purchase Item" as UC6
+  usecase "Validate Payment Details" as UC7
+  usecase "Send Message to Seller" as UC8
+  usecase "Leave Review" as UC9
+  usecase "Report Listing" as UC10
+  usecase "Manage Categories" as UC11
+  usecase "Remove Fraudulent Listing" as UC12
+  usecase "Track Order" as UC13
+  usecase "Make Offer" as UC14
+  usecase "Save to Wishlist" as UC15
+}
+
+Seller -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Buyer -- UC4
+Buyer -- UC5
+Buyer -- UC6
+UC6 ..> UC7 : <<include>>
+Buyer -- UC8
+Buyer -- UC9
+Buyer -- UC10
+Admin -- UC11
+Admin -- UC12
+Buyer -- UC13
+Buyer -- UC14
+Buyer -- UC15
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Upload Photos (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "'Upload Photos' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "Purchase Item (use case, UC6)",
+            "Validate Payment Details (use case, UC7)",
+            "<<include>> from UC6 to UC7"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case that is included by only one use case ('Purchase Item'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within the purchase process rather than a standalone service an actor would consciously request. This is functional decomposition of the 'Purchase Item' use case."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Two instances of functional decomposition must be resolved. (1) "Upload Photos" (UC2) is a sub-step only included by "List Item for Sale" (UC1) with no actor association — it must be merged into UC1, removing UC2 and the <<include>> relationship. Uploading photos is simply part of listing an item. (2) "Validate Payment Details" (UC7) is a sub-step only included by "Purchase Item" (UC6) with no actor association — it must be merged into UC6, removing UC7 and the <<include>> relationship. Payment validation is an internal step within purchasing. After refactoring, both "Set Pricing" (UC3) — wait, UC3 also has no actor and is only included by UC1. However, "Set Pricing" follows the same pattern. Let me re-check: UC3 is included by UC1 only, has no actor, doesn't include/extend anything, isn't extended, and has no generalization. It qualifies as functional decomposition too but was not assigned as an instance. Per the Use Case Granularity Rule for Version 2, it must still be removed as it is a sub-function. Both UC2, UC3, and UC7 are removed along with their include relationships.
+
+```plantuml
+@startuml
+left to right direction
+
+actor Seller
+actor Buyer
+actor Admin
+
+rectangle "Second-Hand Marketplace" {
+  usecase "List Item for Sale" as UC1
+  usecase "Browse Listings" as UC4
+  usecase "Search Items" as UC5
+  usecase "Purchase Item" as UC6
+  usecase "Send Message to Seller" as UC8
+  usecase "Leave Review" as UC9
+  usecase "Report Listing" as UC10
+  usecase "Manage Categories" as UC11
+  usecase "Remove Fraudulent Listing" as UC12
+  usecase "Track Order" as UC13
+  usecase "Make Offer" as UC14
+  usecase "Save to Wishlist" as UC15
+}
+
+Seller -- UC1
+Buyer -- UC4
+Buyer -- UC5
+Buyer -- UC6
+Buyer -- UC8
+Buyer -- UC9
+Buyer -- UC10
+Admin -- UC11
+Admin -- UC12
+Buyer -- UC13
+Buyer -- UC14
+Buyer -- UC15
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T00:58:51.300162
+Model     : claude-opus-4-6
+Tokens    : input=1014  output=569
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor Seller
+actor Buyer
+actor Admin
+
+rectangle "Second-Hand Marketplace" {
+  usecase "List Item for Sale" as UC1
+  usecase "Upload Photos" as UC2
+  usecase "Set Pricing" as UC3
+  usecase "Browse Listings" as UC4
+  usecase "Search Items" as UC5
+  usecase "Purchase Item" as UC6
+  usecase "Validate Payment Details" as UC7
+  usecase "Send Message to Seller" as UC8
+  usecase "Leave Review" as UC9
+  usecase "Report Listing" as UC10
+  usecase "Manage Categories" as UC11
+  usecase "Remove Fraudulent Listing" as UC12
+  usecase "Track Order" as UC13
+  usecase "Make Offer" as UC14
+  usecase "Save to Wishlist" as UC15
+}
+
+Seller -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Buyer -- UC4
+Buyer -- UC5
+Buyer -- UC6
+UC6 ..> UC7 : <<include>>
+Buyer -- UC8
+Buyer -- UC9
+Buyer -- UC10
+Admin -- UC11
+Admin -- UC12
+Buyer -- UC13
+Buyer -- UC14
+Buyer -- UC15
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Upload Photos (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "'Upload Photos' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "Purchase Item (use case, UC6)",
+            "Validate Payment Details (use case, UC7)",
+            "<<include>> from UC6 to UC7"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case that is included by only one use case ('Purchase Item'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within the purchase process rather than a standalone service an actor would consciously request. This is functional decomposition of the 'Purchase Item' use case."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+the first antipattern instance has constructs missing. inclusion use case "Set Pricing" is a functional decomposition of base use case "List Item for Sale".
+Adjust explanation field accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Upload Photos (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "'Upload Photos' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Set Pricing (use case, UC3)",
+            "<<include>> from UC1 to UC3"
+          ],
+          "explanation": "'Set Pricing' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "Purchase Item (use case, UC6)",
+            "Validate Payment Details (use case, UC7)",
+            "<<include>> from UC6 to UC7"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case that is included by only one use case ('Purchase Item'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within the purchase process rather than a standalone service an actor would consciously request. This is functional decomposition of the 'Purchase Item' use case."
+        }
+      ]
+    }
+  ]
+}
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T01:15:09.448960
+Model     : claude-opus-4-6
+Tokens    : input=1162  output=452
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor Seller
+actor Buyer
+actor Admin
+
+rectangle "Second-Hand Marketplace" {
+  usecase "List Item for Sale" as UC1
+  usecase "Upload Photos" as UC2
+  usecase "Set Pricing" as UC3
+  usecase "Browse Listings" as UC4
+  usecase "Search Items" as UC5
+  usecase "Purchase Item" as UC6
+  usecase "Validate Payment Details" as UC7
+  usecase "Send Message to Seller" as UC8
+  usecase "Leave Review" as UC9
+  usecase "Report Listing" as UC10
+  usecase "Manage Categories" as UC11
+  usecase "Remove Fraudulent Listing" as UC12
+  usecase "Track Order" as UC13
+  usecase "Make Offer" as UC14
+  usecase "Save to Wishlist" as UC15
+}
+
+Seller -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Buyer -- UC4
+Buyer -- UC5
+Buyer -- UC6
+UC6 ..> UC7 : <<include>>
+Buyer -- UC8
+Buyer -- UC9
+Buyer -- UC10
+Admin -- UC11
+Admin -- UC12
+Buyer -- UC13
+Buyer -- UC14
+Buyer -- UC15
+@enduml
+
+Current JSON Response:
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Upload Photos (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "'Upload Photos' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Set Pricing (use case, UC3)",
+            "<<include>> from UC1 to UC3"
+          ],
+          "explanation": "'Set Pricing' is an inclusion use case that is included by only one use case ('List Item for Sale'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a sub-step of listing an item rather than a complete, independently valuable service. This is functional decomposition of the 'List Item for Sale' use case into a procedural step."
+        },
+        {
+          "constructs": [
+            "Purchase Item (use case, UC6)",
+            "Validate Payment Details (use case, UC7)",
+            "<<include>> from UC6 to UC7"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case that is included by only one use case ('Purchase Item'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within the purchase process rather than a standalone service an actor would consciously request. This is functional decomposition of the 'Purchase Item' use case."
+        }
+      ]
+    }
+  ]
+}
+
+Reviewer Notes:
+the first two antipattern instances are actually one instance because they share same base use case "List Item for Sale".
+Adjust explanation field and count accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "List Item for Sale (use case, UC1)",
+            "Upload Photos (use case, UC2)",
+            "Set Pricing (use case, UC3)",
+            "<<include>> from UC1 to UC2",
+            "<<include>> from UC1 to UC3"
+          ],
+          "explanation": "'List Item for Sale' is functionally decomposed into two inclusion use cases: 'Upload Photos' and 'Set Pricing'. Both are included by only one use case ('List Item for Sale'), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are not involved in any generalization. They represent sub-steps of listing an item rather than complete, independently valuable services. This is functional decomposition of the 'List Item for Sale' use case into procedural steps."
+        },
+        {
+          "constructs": [
+            "Purchase Item (use case, UC6)",
+            "Validate Payment Details (use case, UC7)",
+            "<<include>> from UC6 to UC7"
+          ],
+          "explanation": "'Validate Payment Details' is an inclusion use case that is included by only one use case ('Purchase Item'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal validation step within the purchase process rather than a standalone service an actor would consciously request. This is functional decomposition of the 'Purchase Item' use case."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Host" as Host
+
+rectangle "Restaurant Reservation System" {
+  usecase "Make Reservation" as UC1
+  usecase "Cancel Reservation" as UC2
+  usecase "View Available Tables" as UC3
+  usecase "Manage Waitlist" as UC4
+  usecase "Select Time Slot" as UC5
+  usecase "Confirm Table Assignment" as UC6
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Host -- UC4
+Host -- UC6
+
+UC1 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Make Reservation (UC1)",
+            "Select Time Slot (UC5)"
+          ],
+          "explanation": "'Select Time Slot' (UC5) is included by 'Make Reservation' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Make Reservation' rather than a standalone service observable to any actor, making it a functional decomposition of 'Make Reservation' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,60 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Staff" as Staff
+
+rectangle "Sports Equipment Rental System" {
+  usecase "Browse Equipment" as UC1
+  usecase "Rent Equipment" as UC2
+  usecase "Verify Availability" as UC3
+  usecase "Return Equipment" as UC4
+  usecase "Process Payment" as UC5
+  usecase "Manage Inventory" as UC6
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Staff -- UC6
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Rent Equipment (UC2)",
+            "Verify Availability (UC3)"
+          ],
+          "explanation": "'Verify Availability' is included by 'Rent Equipment', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Rent Equipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Rent Equipment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Rent Equipment (UC2)",
+            "Process Payment (UC5)"
+          ],
+          "explanation": "'Process Payment' is included by 'Rent Equipment', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Rent Equipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Rent Equipment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

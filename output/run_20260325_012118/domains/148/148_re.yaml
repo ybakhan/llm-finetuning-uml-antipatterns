@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 148
+  domain: network_monitoring_system
+  domain_display: Network Monitoring System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:19:11.161328'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Network Administrator\" as Admin\nactor \"\
+    Security Analyst\" as SecAnalyst\nactor \"NOC Operator\" as NOC\n\nrectangle \"\
+    Network Monitoring System\" {\n  usecase \"View Dashboard\" as UC1\n  usecase\
+    \ \"Configure Alert Rules\" as UC2\n  usecase \"Monitor Traffic\" as UC3\n  usecase\
+    \ \"Investigate Security Incident\" as UC4\n  usecase \"Generate Performance Report\"\
+    \ as UC5\n  usecase \"Manage Device Inventory\" as UC6\n  usecase \"Acknowledge\
+    \ Alarm\" as UC7\n  usecase \"Run Diagnostic Test\" as UC8\n  usecase \"Analyze\
+    \ Packet Capture\" as UC9\n  usecase \"Schedule Maintenance Window\" as UC10\n\
+    \  usecase \"View Historical Logs\" as UC11\n}\n\nAdmin -- UC1\nAdmin -- UC2\n\
+    Admin -- UC3\nAdmin -- UC6\nAdmin -- UC8\nAdmin -- UC10\n\nSecAnalyst -- UC4\n\
+    SecAnalyst -- UC9\nSecAnalyst -- UC11\n\nNOC -- UC1\nNOC -- UC5\nNOC -- UC7\n\n\
+    UC4 ..> UC11 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

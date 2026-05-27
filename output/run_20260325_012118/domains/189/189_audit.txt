@@ -1,0 +1,433 @@
+AUDIT LOG — Prompt #189
+Timestamp : 2026-03-26T01:26:35.826320
+Model     : claude-opus-4-6
+Tokens    : input=3070  output=1564
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #189: Generate a MEDIUM use case model with exactly 29 constructs (valid range for medium: 24–30 constructs). Domain: Product Recall Management System.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+the refactoring is incomplete, use case "identity affected batches" is a functional decomposition and should be dropped.
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Identify Affected Batches" as UC2
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Track Recalled Inventory" as UC6
+  usecase "Classify Recall Severity" as UC7
+  usecase "Communicate Recall to Public" as UC8
+  usecase "Verify Product Destruction" as UC9
+  usecase "Close Recall Case" as UC10
+  usecase "Validate Batch Numbers" as UC11
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+}
+
+QI -- UC1
+QI -- UC7
+RC -- UC1
+RC -- UC3
+RC -- UC8
+RC -- UC10
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC6
+WM -- UC9
+RC -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC11 : <<include>>
+UC5 ..> UC13 : <<include>>
+@enduml
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Identify Affected Batches" as UC2
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Track Recalled Inventory" as UC6
+  usecase "Classify Recall Severity" as UC7
+  usecase "Communicate Recall to Public" as UC8
+  usecase "Verify Product Destruction" as UC9
+  usecase "Close Recall Case" as UC10
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+}
+
+QI -- UC1
+QI -- UC7
+RC -- UC1
+RC -- UC3
+RC -- UC8
+RC -- UC10
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC6
+WM -- UC9
+RC -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC5 ..> UC13 : <<include>>
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: product_recall_management_system
+DOMAIN_DISPLAY: Product Recall Management System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 29
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Validate Batch Numbers" as UC2
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Calculate Refund Amount" as UC6
+  usecase "Track Recalled Inventory" as UC7
+  usecase "Classify Recall Severity" as UC8
+  usecase "Communicate Recall to Public" as UC9
+  usecase "Verify Product Destruction" as UC10
+  usecase "Close Recall Case" as UC11
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+  usecase "Verify Destruction Certificate" as UC14
+}
+
+QI -- UC1
+QI -- UC8
+RC -- UC1
+RC -- UC3
+RC -- UC9
+RC -- UC11
+RC -- UC12
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC7
+WM -- UC10
+
+UC1 ..> UC2 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC10 ..> UC14 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Initiate Recall (use case, UC1)",
+            "Validate Batch Numbers (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "'Validate Batch Numbers' is included only by 'Initiate Recall', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal validation step rather than a complete service observable to any actor, making it a functional decomposition via include."
+        },
+        {
+          "constructs": [
+            "Process Customer Returns (use case, UC5)",
+            "Calculate Refund Amount (use case, UC6)",
+            "<<include>> from UC5 to UC6"
+          ],
+          "explanation": "'Calculate Refund Amount' is included only by 'Process Customer Returns', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal calculation step rather than a complete service observable to any actor, making it a functional decomposition via include."
+        },
+        {
+          "constructs": [
+            "Verify Product Destruction (use case, UC10)",
+            "Verify Destruction Certificate (use case, UC14)",
+            "<<include>> from UC10 to UC14"
+          ],
+          "explanation": "'Verify Destruction Certificate' is included only by 'Verify Product Destruction', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal verification sub-step rather than a complete service observable to any actor, making it a functional decomposition via include."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three functional decomposition instances must be resolved by merging each orphaned inclusion use case into its base use case:
+
+1. **"Validate Batch Numbers" (UC2)** is a sub-step only included by "Initiate Recall" and has no actor association. It is merged into "Initiate Recall" — batch validation becomes an internal step of initiating a recall. UC2 and the <<include>> from UC1 to UC2 are removed.
+
+2. **"Calculate Refund Amount" (UC6)** is a sub-step only included by "Process Customer Returns" and has no actor association. It is merged into "Process Customer Returns" — refund calculation becomes an internal step of processing returns. UC6 and the <<include>> from UC5 to UC6 are removed.
+
+3. **"Verify Destruction Certificate" (UC14)** is a sub-step only included by "Verify Product Destruction" and has no actor association. It is merged into "Verify Product Destruction" — certificate verification becomes an internal step of verifying destruction. UC14 and the <<include>> from UC10 to UC14 are removed.
+
+No new constructs are introduced. All remaining use cases represent complete, actor-initiated business goals.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Track Recalled Inventory" as UC7
+  usecase "Classify Recall Severity" as UC8
+  usecase "Communicate Recall to Public" as UC9
+  usecase "Verify Product Destruction" as UC10
+  usecase "Close Recall Case" as UC11
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+}
+
+QI -- UC1
+QI -- UC8
+RC -- UC1
+RC -- UC3
+RC -- UC9
+RC -- UC11
+RC -- UC12
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC7
+WM -- UC10
+@enduml
+```

@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 6
+  domain: messaging_application
+  domain_display: Messaging Application
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:23:25.556947'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"User\" as User\nactor \"Administrator\" as\
+    \ Admin\n\nrectangle \"Messaging Application\" {\n  usecase \"Send Message\" as\
+    \ UC1\n  usecase \"View Conversations\" as UC3\n  usecase \"Delete Message\" as\
+    \ UC4\n  usecase \"Manage Users\" as UC5\n  usecase \"Search Messages\" as UC6\n\
+    }\n\nUser -- UC1\nUser -- UC3\nUser -- UC4\nUser -- UC6\nAdmin -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

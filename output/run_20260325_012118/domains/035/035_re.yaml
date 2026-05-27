@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 35
+  domain: event_ticketing_system
+  domain_display: Event Ticketing System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T05:10:07.501577'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Event Organizer\"\
+    \ as Organizer\nactor \"System Administrator\" as Admin\n\nrectangle \"Event Ticketing\
+    \ System\" {\n  usecase \"Browse Events\" as UC1\n  usecase \"Purchase Ticket\"\
+    \ as UC2\n  usecase \"View Order History\" as UC6\n  usecase \"Cancel Ticket\"\
+    \ as UC7\n  usecase \"Process Payment\" as UC8\n  usecase \"Create Event\" as\
+    \ UC9\n  usecase \"Manage Event Pricing\" as UC10\n  usecase \"View Sales Reports\"\
+    \ as UC11\n  usecase \"Manage Venues\" as UC12\n  usecase \"Manage User Accounts\"\
+    \ as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC6\nCustomer --\
+    \ UC7\n\nOrganizer -- UC9\nOrganizer -- UC10\nOrganizer -- UC11\n\nAdmin -- UC12\n\
+    Admin -- UC13\n\nUC8 ..> UC2 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

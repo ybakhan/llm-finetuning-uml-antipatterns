@@ -1,0 +1,52 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Passenger" as Passenger
+actor "Driver" as Driver
+
+rectangle "Public Transport System" {
+  usecase "Purchase Ticket" as UC1
+  usecase "Validate Payment" as UC2
+  usecase "Track Bus Location" as UC3
+  usecase "Report Delay" as UC4
+  usecase "Plan Route" as UC5
+}
+
+Passenger -- UC1
+UC1 ..> UC2 : <<include>>
+Passenger -- UC3
+Passenger -- UC5
+Driver -- UC4
+
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Purchase Ticket (UC1)",
+            "Validate Payment (UC2)"
+          ],
+          "explanation": "'Validate Payment' (UC2) is included by 'Purchase Ticket' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Ticket' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Ticket' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 85
+  domain: second_hand_marketplace
+  domain_display: Second-Hand Marketplace
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:08:05.291539'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Seller\nactor Buyer\nactor Admin\n\nrectangle\
+    \ \"Second-Hand Marketplace\" {\n  usecase \"List Item for Sale\" as UC1\n  usecase\
+    \ \"Browse Listings\" as UC4\n  usecase \"Search Items\" as UC5\n  usecase \"\
+    Purchase Item\" as UC6\n  usecase \"Send Message to Seller\" as UC8\n  usecase\
+    \ \"Leave Review\" as UC9\n  usecase \"Report Listing\" as UC10\n  usecase \"\
+    Manage Categories\" as UC11\n  usecase \"Remove Fraudulent Listing\" as UC12\n\
+    \  usecase \"Track Order\" as UC13\n  usecase \"Make Offer\" as UC14\n  usecase\
+    \ \"Save to Wishlist\" as UC15\n}\n\nSeller -- UC1\nBuyer -- UC4\nBuyer -- UC5\n\
+    Buyer -- UC6\nBuyer -- UC8\nBuyer -- UC9\nBuyer -- UC10\nAdmin -- UC11\nAdmin\
+    \ -- UC12\nBuyer -- UC13\nBuyer -- UC14\nBuyer -- UC15\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

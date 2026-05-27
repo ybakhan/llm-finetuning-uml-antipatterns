@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+actor Student
+actor Instructor
+actor Administrator
+
+rectangle "E-Learning Platform" {
+  usecase "Browse Course Catalog" as UC1
+  usecase "Enroll in Course" as UC2
+  usecase "Watch Lecture" as UC3
+  usecase "Take Quiz" as UC4
+  usecase "Validate Quiz Answers" as UC5
+  usecase "Calculate Quiz Score" as UC6
+  usecase "Submit Assignment" as UC7
+  usecase "View Grades" as UC8
+  usecase "Create Course" as UC9
+  usecase "Upload Lecture Content" as UC10
+  usecase "Grade Assignment" as UC11
+  usecase "Manage User Accounts" as UC12
+  usecase "Generate Platform Report" as UC13
+  usecase "Post Discussion Message" as UC14
+  usecase "Track Learning Progress" as UC15
+}
+
+Student -- UC1
+Student -- UC2
+Student -- UC3
+Student -- UC4
+Student -- UC7
+Student -- UC8
+Student -- UC14
+Student -- UC15
+
+Instructor -- UC9
+Instructor -- UC10
+Instructor -- UC11
+Instructor -- UC14
+
+Administrator -- UC12
+Administrator -- UC13
+
+UC4 ..> UC5 : <<include>>
+UC4 ..> UC6 : <<include>>
+@enduml

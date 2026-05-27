@@ -1,0 +1,86 @@
+metadata:
+  domain_id: 78
+  domain: sports_league_management
+  domain_display: Sports League Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Team (UC1)
+      - Validate Team Roster (UC1a)
+      explanation: '''Validate Team Roster'' (UC1a) is included by ''Register Team''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Team'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Team'' via the include relationship.'
+    - elements:
+      - Register Team (UC1)
+      - Check Registration Fees (UC1b)
+      explanation: '''Check Registration Fees'' (UC1b) is included by ''Register Team''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Team'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Team'' via the include relationship.'
+    - elements:
+      - Schedule Match (UC2)
+      - Check Venue Availability (UC2a)
+      explanation: '''Check Venue Availability'' (UC2a) is included by ''Schedule
+        Match'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Schedule
+        Match'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Schedule Match'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:51:01.452439'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"League Administrator\" as Admin\nactor \"Team\
+    \ Manager\" as Manager\nactor \"Referee\" as Referee\nactor \"Fan\" as Fan\n\n\
+    rectangle \"Sports League Management System\" {\n  usecase \"Register Team\" as\
+    \ UC1\n  usecase \"Validate Team Roster\" as UC1a\n  usecase \"Check Registration\
+    \ Fees\" as UC1b\n\n  usecase \"Schedule Match\" as UC2\n  usecase \"Check Venue\
+    \ Availability\" as UC2a\n\n  usecase \"Record Match Result\" as UC3\n  usecase\
+    \ \"Update League Standings\" as UC4\n  usecase \"Assign Referee to Match\" as\
+    \ UC5\n  usecase \"Submit Lineup\" as UC6\n  usecase \"View League Standings\"\
+    \ as UC7\n  usecase \"View Match Schedule\" as UC8\n  usecase \"Manage Player\
+    \ Transfers\" as UC9\n  usecase \"Report Disciplinary Action\" as UC10\n  usecase\
+    \ \"Generate Season Report\" as UC11\n  usecase \"Purchase Season Tickets\" as\
+    \ UC12\n}\n\nAdmin -- UC1\nUC1 ..> UC1a : <<include>>\nUC1 ..> UC1b : <<include>>\n\
+    \nAdmin -- UC2\nUC2 ..> UC2a : <<include>>\n\nAdmin -- UC4\nAdmin -- UC5\nAdmin\
+    \ -- UC11\n\nReferee -- UC3\nReferee -- UC10\n\nManager -- UC6\nManager -- UC9\n\
+    \nFan -- UC7\nFan -- UC8\nFan -- UC12\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Team (UC1)\"\
+    ,\n            \"Validate Team Roster (UC1a)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Team Roster' (UC1a) is included by 'Register Team' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Register Team' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Register\
+    \ Team' via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Register Team (UC1)\",\n            \"Check Registration Fees\
+    \ (UC1b)\"\n          ],\n          \"explanation\": \"'Check Registration Fees'\
+    \ (UC1b) is included by 'Register Team' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Register Team' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Register Team' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Schedule Match\
+    \ (UC2)\",\n            \"Check Venue Availability (UC2a)\"\n          ],\n  \
+    \        \"explanation\": \"'Check Venue Availability' (UC2a) is included by 'Schedule\
+    \ Match' (UC2), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Schedule Match' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Schedule Match' via the include relationship.\"\n        }\n      ]\n  \
+    \  }\n  ]\n}"

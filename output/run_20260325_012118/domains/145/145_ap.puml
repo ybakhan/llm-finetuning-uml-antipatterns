@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Staff" as Staff
+
+rectangle "Sports Equipment Rental System" {
+  usecase "Browse Equipment" as UC1
+  usecase "Rent Equipment" as UC2
+  usecase "Verify Availability" as UC3
+  usecase "Return Equipment" as UC4
+  usecase "Process Payment" as UC5
+  usecase "Manage Inventory" as UC6
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Staff -- UC6
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC5 : <<include>>
+@enduml

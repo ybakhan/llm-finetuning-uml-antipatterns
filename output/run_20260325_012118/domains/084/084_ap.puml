@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor "Bidder" as Bidder
+actor "Seller" as Seller
+actor "Admin" as Admin
+
+rectangle "Online Auction Platform" {
+  usecase "Browse Auctions" as UC1
+  usecase "Place Bid" as UC2
+  usecase "Create Auction Listing" as UC3
+  usecase "Manage Account" as UC4
+  usecase "View Bid History" as UC5
+  usecase "Close Auction" as UC6
+  usecase "Resolve Dispute" as UC7
+  usecase "Leave Feedback" as UC8
+  usecase "Monitor Platform Activity" as UC9
+  usecase "Pay for Won Item" as UC10
+  usecase "Validate Payment Details" as UC11
+  usecase "Search Auctions" as UC12
+  usecase "Set Reserve Price" as UC13
+  usecase "Suspend User Account" as UC14
+}
+
+Bidder -- UC1
+Bidder -- UC2
+Bidder -- UC5
+Bidder -- UC8
+Bidder -- UC10
+Bidder -- UC12
+
+Seller -- UC3
+Seller -- UC6
+Seller -- UC8
+Seller -- UC4
+
+Admin -- UC7
+Admin -- UC9
+Admin -- UC14
+
+UC10 ..> UC11 : <<include>>
+
+UC13 ..> UC3 : <<extend>>
+@enduml

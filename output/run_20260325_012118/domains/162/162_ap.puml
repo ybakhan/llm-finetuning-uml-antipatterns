@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Pet Owner" as PO
+actor "Veterinarian" as Vet
+
+rectangle "Pet Care Service Booking" {
+  usecase "Book Grooming Session" as UC1
+  usecase "Book Vet Appointment" as UC2
+  usecase "Cancel Booking" as UC3
+  usecase "View Booking History" as UC4
+  usecase "Select Time Slot" as UC5
+  usecase "Confirm Appointment" as UC6
+}
+
+PO -- UC1
+PO -- UC2
+PO -- UC3
+PO -- UC4
+Vet -- UC6
+
+UC2 ..> UC5 : <<include>>
+@enduml

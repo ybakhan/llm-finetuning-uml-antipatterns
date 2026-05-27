@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor "Volunteer" as V
+actor "Coordinator" as C
+actor "Administrator" as A
+
+rectangle "Volunteer Management System" {
+  usecase "Register as Volunteer" as UC1
+  usecase "Browse Opportunities" as UC2
+  usecase "Sign Up for Event" as UC3
+  usecase "Log Volunteer Hours" as UC4
+  usecase "Validate Hours Entry" as UC5
+  usecase "Create Volunteer Event" as UC6
+  usecase "Assign Volunteers to Roles" as UC7
+  usecase "Track Attendance" as UC8
+  usecase "Generate Attendance Report" as UC9
+  usecase "Manage Volunteer Profiles" as UC10
+  usecase "Send Notifications" as UC11
+  usecase "Approve Hour Submissions" as UC12
+  usecase "View Volunteer Statistics" as UC13
+  usecase "Deactivate Volunteer Account" as UC14
+  usecase "Export Volunteer Data" as UC15
+  usecase "Provide Feedback on Event" as UC16
+}
+
+V -- UC1
+V -- UC2
+V -- UC3
+V -- UC4
+UC4 ..> UC5 : <<include>>
+C -- UC6
+C -- UC7
+C -- UC8
+C -- UC9
+C -- UC11
+C -- UC12
+A -- UC10
+A -- UC13
+A -- UC14
+A -- UC15
+V -- UC16
+
+@enduml

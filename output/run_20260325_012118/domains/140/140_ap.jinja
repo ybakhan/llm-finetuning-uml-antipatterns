@@ -1,0 +1,51 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reader" as Reader
+
+rectangle "E-Book Publishing System" {
+  usecase "Upload Manuscript" as UC1
+  usecase "Validate File Format" as UC2
+  usecase "Browse Catalog" as UC3
+  usecase "Purchase E-Book" as UC4
+  usecase "Download E-Book" as UC5
+}
+
+Author -- UC1
+UC1 ..> UC2 : <<include>>
+Reader -- UC3
+Reader -- UC4
+Reader -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Upload Manuscript (UC1)",
+            "Validate File Format (UC2)"
+          ],
+          "explanation": "'Validate File Format' (UC2) is included by 'Upload Manuscript' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Manuscript' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Manuscript' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 142
+  domain: swimming_pool_booking_system
+  domain_display: Swimming Pool Booking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:16:54.569637'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Guest\" as Guest\n\
+    actor \"Lifeguard\" as Lifeguard\nactor \"Admin\" as Admin\nactor \"Payment Gateway\"\
+    \ as PG\n\nrectangle \"Swimming Pool Booking System\" {\n  usecase \"Book Lane\
+    \ Session\" as UC1\n  usecase \"Cancel Booking\" as UC2\n  usecase \"View Pool\
+    \ Schedule\" as UC3\n  usecase \"Register Account\" as UC4\n  usecase \"Process\
+    \ Payment\" as UC5\n  usecase \"Manage Pool Availability\" as UC6\n  usecase \"\
+    Record Attendance\" as UC7\n  usecase \"Book Swimming Lesson\" as UC8\n  usecase\
+    \ \"View Booking History\" as UC9\n  usecase \"Issue Refund\" as UC10\n  usecase\
+    \ \"Report Pool Incident\" as UC11\n  usecase \"Manage Membership Plans\" as UC12\n\
+    }\n\nMember -- UC1\nMember -- UC2\nMember -- UC3\nMember -- UC8\nMember -- UC9\n\
+    Guest -- UC4\nGuest -- UC3\nLifeguard -- UC7\nLifeguard -- UC11\nAdmin -- UC6\n\
+    Admin -- UC10\nAdmin -- UC12\nPG -- UC5\n\nUC1 ..> UC5 : <<include>>\nUC2 ..>\
+    \ UC10 : <<extend>>\n}\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

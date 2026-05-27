@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Traveler" as Traveler
+actor "Travel Agent" as Agent
+actor "Admin" as Admin
+
+rectangle "Flight Booking System" {
+  usecase "Search Flights" as UC1
+  usecase "Book Flight" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Process Payment" as UC4
+  usecase "Cancel Booking" as UC5
+  usecase "View Booking History" as UC6
+  usecase "Manage Flight Schedules" as UC7
+  usecase "Generate Ticket Confirmation" as UC8
+  usecase "Book Flight on Behalf of Customer" as UC9
+  usecase "Check Seat Availability" as UC10
+  usecase "Manage Promotions" as UC11
+}
+
+Traveler -- UC1
+Traveler -- UC2
+Traveler -- UC5
+Traveler -- UC6
+Agent -- UC9
+Agent -- UC6
+Admin -- UC7
+Admin -- UC11
+
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC2 ..> UC8 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC9 ..> UC2 : <<include>>
+@enduml

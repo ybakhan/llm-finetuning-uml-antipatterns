@@ -1,0 +1,106 @@
+metadata:
+  domain_id: 93
+  domain: social_benefits_management_system
+  domain_display: Social Benefits Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Benefits Application (UC1)
+      - Validate Personal Information (UC2)
+      explanation: '''Validate Personal Information'' (UC2) is included by ''Submit
+        Benefits Application'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Submit Benefits Application'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Submit Benefits Application''
+        via the include relationship.'
+    - elements:
+      - Submit Benefits Application (UC1)
+      - Check Document Completeness (UC3)
+      explanation: '''Check Document Completeness'' (UC3) is included by ''Submit
+        Benefits Application'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Submit Benefits Application'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Submit Benefits Application''
+        via the include relationship.'
+    - elements:
+      - Review Application (UC4)
+      - Verify Eligibility (UC5)
+      explanation: '''Verify Eligibility'' (UC5) is included by ''Review Application''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Review Application'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Review Application'' via the include relationship.'
+    - elements:
+      - Verify Eligibility (UC5)
+      - Retrieve Income Data (UC6)
+      explanation: '''Retrieve Income Data'' (UC6) is included by ''Verify Eligibility''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Verify Eligibility'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Verify Eligibility'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:10:07.128002'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Citizen\" as Citizen\nactor \"Case Worker\"\
+    \ as CaseWorker\nactor \"Benefits Administrator\" as Admin\nactor \"External Verifier\"\
+    \ as Verifier\n\nrectangle \"Social Benefits Management System\" {\n  usecase\
+    \ \"Submit Benefits Application\" as UC1\n  usecase \"Validate Personal Information\"\
+    \ as UC2\n  usecase \"Check Document Completeness\" as UC3\n  usecase \"Review\
+    \ Application\" as UC4\n  usecase \"Verify Eligibility\" as UC5\n  usecase \"\
+    Retrieve Income Data\" as UC6\n  usecase \"Approve Benefits\" as UC7\n  usecase\
+    \ \"Deny Benefits\" as UC8\n  usecase \"Disburse Payment\" as UC9\n  usecase \"\
+    Track Application Status\" as UC10\n  usecase \"Generate Reports\" as UC11\n \
+    \ usecase \"Appeal Decision\" as UC12\n  usecase \"Verify Identity\" as UC13\n\
+    \  usecase \"Update Beneficiary Record\" as UC14\n}\n\nCitizen -- UC1\nCitizen\
+    \ -- UC10\nCitizen -- UC12\nCaseWorker -- UC4\nCaseWorker -- UC7\nCaseWorker --\
+    \ UC8\nCaseWorker -- UC14\nAdmin -- UC9\nAdmin -- UC11\nVerifier -- UC13\n\nUC1\
+    \ ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nUC4 ..> UC5 : <<include>>\n\
+    UC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Benefits Application\
+    \ (UC1)\",\n            \"Validate Personal Information (UC2)\"\n          ],\n\
+    \          \"explanation\": \"'Validate Personal Information' (UC2) is included\
+    \ by 'Submit Benefits Application' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Benefits Application' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Submit Benefits Application'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Submit Benefits Application (UC1)\",\n            \"Check Document\
+    \ Completeness (UC3)\"\n          ],\n          \"explanation\": \"'Check Document\
+    \ Completeness' (UC3) is included by 'Submit Benefits Application' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Benefits Application' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Benefits Application' via the include relationship.\"\n        },\n\
+    \        {\n          \"elements\": [\n            \"Review Application (UC4)\"\
+    ,\n            \"Verify Eligibility (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'Verify Eligibility' (UC5) is included by 'Review Application' (UC4), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Review Application' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Review\
+    \ Application' via the include relationship.\"\n        },\n        {\n      \
+    \    \"elements\": [\n            \"Verify Eligibility (UC5)\",\n            \"\
+    Retrieve Income Data (UC6)\"\n          ],\n          \"explanation\": \"'Retrieve\
+    \ Income Data' (UC6) is included by 'Verify Eligibility' (UC5), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Verify Eligibility' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Verify Eligibility'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 6
+  domain: messaging_application
+  domain_display: Messaging Application
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Send Message (UC1)
+      - Validate Message Content (UC2)
+      explanation: '''Validate Message Content'' (UC2) is included by ''Send Message''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Send Message'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Send Message'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:23:25.556947'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"User\" as User\nactor \"Administrator\" as\
+    \ Admin\n\nrectangle \"Messaging Application\" {\n  usecase \"Send Message\" as\
+    \ UC1\n  usecase \"Validate Message Content\" as UC2\n  usecase \"View Conversations\"\
+    \ as UC3\n  usecase \"Delete Message\" as UC4\n  usecase \"Manage Users\" as UC5\n\
+    \  usecase \"Search Messages\" as UC6\n}\n\nUser -- UC1\nUser -- UC3\nUser --\
+    \ UC4\nUser -- UC6\nAdmin -- UC5\n\nUC1 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Send Message (UC1)\"\
+    ,\n            \"Validate Message Content (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Message Content' (UC2) is included by 'Send Message'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Send Message' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Send Message' via the include relationship.\"\n        }\n      ]\n    }\n\
+    \  ]\n}"

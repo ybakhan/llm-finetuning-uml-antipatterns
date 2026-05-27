@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 163
+  domain: laundry_pickup_service
+  domain_display: Laundry Pickup Service
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Schedule Pickup (UC1)
+      - Validate Address (UC2)
+      explanation: '''Validate Address'' (UC2) is included by ''Schedule Pickup''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Schedule Pickup'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Schedule Pickup'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:25:14.282197'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Driver\" as\
+    \ Driver\n\nrectangle \"Laundry Pickup Service\" {\n  usecase \"Schedule Pickup\"\
+    \ as UC1\n  usecase \"Validate Address\" as UC2\n  usecase \"Track Order\" as\
+    \ UC3\n  usecase \"Complete Delivery\" as UC4\n  usecase \"Rate Service\" as UC5\n\
+    }\n\nCustomer -- UC1\nCustomer -- UC3\nCustomer -- UC5\nDriver -- UC4\n\nUC1 ..>\
+    \ UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Schedule Pickup (UC1)\"\
+    ,\n            \"Validate Address (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Address' (UC2) is included by 'Schedule Pickup' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Schedule Pickup' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Schedule Pickup' via\
+    \ the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

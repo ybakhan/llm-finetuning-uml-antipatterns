@@ -1,0 +1,74 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "License Administrator" as Admin
+actor "End User" as EndUser
+actor "Compliance Auditor" as Auditor
+
+rectangle "Software License Management System" {
+  usecase "Register New License" as UC1
+  usecase "Assign License to User" as UC2
+  usecase "Revoke License" as UC3
+  usecase "View License Dashboard" as UC4
+  usecase "Request License" as UC5
+  usecase "Generate Compliance Report" as UC6
+  usecase "Conduct License Audit" as UC7
+  usecase "Renew License" as UC8
+  usecase "Manage Vendor Contracts" as UC9
+  usecase "Track Software Usage" as UC10
+  usecase "Validate License Key" as UC11
+  usecase "Calculate Renewal Cost" as UC12
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC4
+Admin -- UC8
+Admin -- UC9
+EndUser -- UC5
+EndUser -- UC10
+Auditor -- UC6
+Auditor -- UC7
+
+UC1 ..> UC11 : <<include>>
+UC8 ..> UC12 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Register New License (UC1)",
+            "Validate License Key (UC11)"
+          ],
+          "explanation": "'Validate License Key' (UC11) is included by 'Register New License' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register New License' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register New License' via the include relationship."
+        },
+        {
+          "elements": [
+            "Renew License (UC8)",
+            "Calculate Renewal Cost (UC12)"
+          ],
+          "explanation": "'Calculate Renewal Cost' (UC12) is included by 'Renew License' (UC8), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Renew License' rather than a standalone service observable to any actor, making it a functional decomposition of 'Renew License' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+actor "Homeowner" as Homeowner
+
+rectangle "Home Services Booking" {
+  usecase "Browse Services" as UC1
+  usecase "Book Service" as UC2
+  usecase "Cancel Booking" as UC4
+  usecase "View Booking History" as UC5
+}
+
+Homeowner -- UC1
+Homeowner -- UC2
+Homeowner -- UC4
+Homeowner -- UC5
+@enduml

@@ -1,0 +1,84 @@
+metadata:
+  domain_id: 172
+  domain: print_on_demand_platform
+  domain_display: Print-on-Demand Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Upload Design (UC1)
+      - Validate File Format (UC2)
+      explanation: '''Validate File Format'' (UC2) is included by ''Upload Design''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Design'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Upload Design'' via the include relationship.'
+    - elements:
+      - Upload Design (UC1)
+      - Generate Thumbnail (UC3)
+      explanation: '''Generate Thumbnail'' (UC3) is included by ''Upload Design''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Design'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Upload Design'' via the include relationship.'
+    - elements:
+      - Place Order (UC5)
+      - Calculate Shipping Cost (UC6)
+      explanation: '''Calculate Shipping Cost'' (UC6) is included by ''Place Order''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:23:22.670688'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Designer\" as Designer\nactor \"Customer\"\
+    \ as Customer\nactor \"Admin\" as Admin\nactor \"Shipping Carrier\" as Carrier\n\
+    \nrectangle \"Print-on-Demand Platform\" {\n  usecase \"Upload Design\" as UC1\n\
+    \  usecase \"Validate File Format\" as UC2\n  usecase \"Generate Thumbnail\" as\
+    \ UC3\n  usecase \"Browse Product Catalog\" as UC4\n  usecase \"Place Order\"\
+    \ as UC5\n  usecase \"Calculate Shipping Cost\" as UC6\n  usecase \"Track Order\"\
+    \ as UC7\n  usecase \"Manage Product Templates\" as UC8\n  usecase \"Generate\
+    \ Sales Report\" as UC9\n  usecase \"Handle Return Request\" as UC10\n  usecase\
+    \ \"Review Design Proof\" as UC11\n  usecase \"Set Pricing\" as UC12\n  usecase\
+    \ \"Ship Order\" as UC13\n}\n\nDesigner -- UC1\nDesigner -- UC11\nDesigner --\
+    \ UC12\nCustomer -- UC4\nCustomer -- UC5\nCustomer -- UC7\nCustomer -- UC10\n\
+    Admin -- UC8\nAdmin -- UC9\nCarrier -- UC13\nCarrier -- UC7\n\nUC1 ..> UC2 : <<include>>\n\
+    UC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Upload Design (UC1)\"\
+    ,\n            \"Validate File Format (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate File Format' (UC2) is included by 'Upload Design' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Upload Design' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Upload\
+    \ Design' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Upload Design (UC1)\",\n            \"Generate Thumbnail\
+    \ (UC3)\"\n          ],\n          \"explanation\": \"'Generate Thumbnail' (UC3)\
+    \ is included by 'Upload Design' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Upload Design' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Upload Design' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Place Order\
+    \ (UC5)\",\n            \"Calculate Shipping Cost (UC6)\"\n          ],\n    \
+    \      \"explanation\": \"'Calculate Shipping Cost' (UC6) is included by 'Place\
+    \ Order' (UC5), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Place Order' rather than a\
+    \ standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Place Order' via the include relationship.\"\n        }\n      ]\n    }\n\
+    \  ]\n}"

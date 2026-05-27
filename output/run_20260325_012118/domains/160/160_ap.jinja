@@ -1,0 +1,73 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Staff" as Staff
+actor "Admin" as Admin
+
+rectangle "Escape Room Booking System" {
+  usecase "Browse Available Rooms" as UC1
+  usecase "Book Escape Room" as UC2
+  usecase "Validate Time Slot" as UC3
+  usecase "Cancel Booking" as UC4
+  usecase "Request Refund" as UC5
+  usecase "Check In Group" as UC6
+  usecase "Leave Review" as UC7
+  usecase "Apply Promo Code" as UC8
+  usecase "Manage Room Inventory" as UC9
+  usecase "View Booking Reports" as UC10
+  usecase "Manage Staff Schedule" as UC11
+  usecase "View Customer Feedback" as UC12
+  usecase "Reschedule Booking" as UC13
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC13
+
+Staff -- UC6
+Staff -- UC5
+
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+Admin -- UC12
+
+UC2 ..> UC3 : <<include>>
+UC8 ..> UC2 : <<extend>>
+UC5 ..> UC4 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Book Escape Room (UC2)",
+            "Validate Time Slot (UC3)"
+          ],
+          "explanation": "'Validate Time Slot' (UC3) is included by 'Book Escape Room' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Escape Room' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Escape Room' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

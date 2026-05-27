@@ -1,0 +1,60 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Tourist" as Tourist
+actor "Tour Guide" as Guide
+
+rectangle "City Tour Guide App" {
+  usecase "Browse Tours" as UC1
+  usecase "Book Tour" as UC2
+  usecase "Rate Tour" as UC3
+  usecase "Create Tour Listing" as UC4
+  usecase "View Tour Details" as UC5
+  usecase "Load Map Data" as UC6
+}
+
+Tourist -- UC1
+Tourist -- UC2
+Tourist -- UC3
+Guide -- UC4
+UC1 .> UC5 : <<include>>
+UC5 .> UC6 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Browse Tours (UC1)",
+            "View Tour Details (UC5)"
+          ],
+          "explanation": "'View Tour Details' (UC5) is included by 'Browse Tours' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Browse Tours' rather than a standalone service observable to any actor, making it a functional decomposition of 'Browse Tours' via the include relationship."
+        },
+        {
+          "elements": [
+            "View Tour Details (UC5)",
+            "Load Map Data (UC6)"
+          ],
+          "explanation": "'Load Map Data' (UC6) is included by 'View Tour Details' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'View Tour Details' rather than a standalone service observable to any actor, making it a functional decomposition of 'View Tour Details' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

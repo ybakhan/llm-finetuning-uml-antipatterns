@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Farmer" as Farmer
+actor "Veterinarian" as Vet
+
+rectangle "Farm Management System" {
+  usecase "Register Livestock" as UC1
+  usecase "Schedule Vaccination" as UC2
+  usecase "Monitor Crop Growth" as UC3
+  usecase "Generate Farm Report" as UC4
+  usecase "Compile Report Data" as UC5
+}
+
+Farmer -- UC1
+Farmer -- UC2
+Farmer -- UC3
+Farmer -- UC4
+Vet -- UC2
+
+UC4 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Generate Farm Report (UC4)",
+            "Compile Report Data (UC5)"
+          ],
+          "explanation": "'Compile Report Data' (UC5) is included by 'Generate Farm Report' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Farm Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Farm Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

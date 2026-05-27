@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Parent" as Parent
+
+rectangle "Baby Equipment Rental Service" {
+  usecase "Browse Equipment" as UC1
+  usecase "Rent Equipment" as UC2
+  usecase "Process Payment" as UC3
+  usecase "Return Equipment" as UC4
+  usecase "Check Availability" as UC5
+}
+
+Parent -- UC1
+Parent -- UC2
+Parent -- UC4
+
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC5 : <<include>>
+@enduml

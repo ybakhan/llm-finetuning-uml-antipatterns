@@ -1,0 +1,93 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Warehouse Manager" as WM
+actor "Purchasing Officer" as PO
+actor "Sales Staff" as SS
+actor "Inventory Auditor" as IA
+actor "System Administrator" as SA
+
+rectangle "Inventory Management System" {
+  usecase "Receive Shipment" as UC1
+  usecase "Validate Shipment Contents" as UC2
+  usecase "Update Stock Quantities" as UC3
+  usecase "Create Purchase Order" as UC4
+  usecase "Check Reorder Levels" as UC5
+  usecase "Generate Supplier Order" as UC6
+  usecase "Process Sales Order" as UC7
+  usecase "View Stock Levels" as UC8
+  usecase "Conduct Stock Audit" as UC9
+  usecase "Adjust Inventory Discrepancies" as UC10
+  usecase "Manage Product Catalog" as UC11
+  usecase "Configure Warehouse Locations" as UC12
+  usecase "Generate Inventory Report" as UC13
+  usecase "Transfer Stock Between Warehouses" as UC14
+}
+
+WM -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+PO -- UC4
+UC4 ..> UC5 : <<include>>
+UC4 ..> UC6 : <<include>>
+SS -- UC7
+SS -- UC8
+IA -- UC9
+IA -- UC10
+SA -- UC11
+SA -- UC12
+WM -- UC13
+WM -- UC14
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Receive Shipment (UC1)",
+            "Validate Shipment Contents (UC2)"
+          ],
+          "explanation": "'Validate Shipment Contents' (UC2) is included by 'Receive Shipment' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Receive Shipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Receive Shipment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Receive Shipment (UC1)",
+            "Update Stock Quantities (UC3)"
+          ],
+          "explanation": "'Update Stock Quantities' (UC3) is included by 'Receive Shipment' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Receive Shipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Receive Shipment' via the include relationship."
+        },
+        {
+          "elements": [
+            "Create Purchase Order (UC4)",
+            "Check Reorder Levels (UC5)"
+          ],
+          "explanation": "'Check Reorder Levels' (UC5) is included by 'Create Purchase Order' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Purchase Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Purchase Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Create Purchase Order (UC4)",
+            "Generate Supplier Order (UC6)"
+          ],
+          "explanation": "'Generate Supplier Order' (UC6) is included by 'Create Purchase Order' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Purchase Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Purchase Order' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

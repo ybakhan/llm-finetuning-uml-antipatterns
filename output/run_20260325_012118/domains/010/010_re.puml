@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Passenger" as Passenger
+actor "Driver" as Driver
+actor "Admin" as Admin
+
+rectangle "Ride Sharing Service" {
+  usecase "Request Ride" as UC1
+  usecase "Accept Ride" as UC4
+  usecase "Complete Ride" as UC5
+  usecase "Rate Driver" as UC8
+  usecase "Rate Passenger" as UC9
+  usecase "View Ride History" as UC10
+  usecase "Manage Driver Accounts" as UC11
+  usecase "Register as Driver" as UC12
+  usecase "Track Ride in Progress" as UC13
+  usecase "Cancel Ride" as UC14
+  usecase "View Earnings" as UC15
+}
+
+Passenger -- UC1
+Passenger -- UC8
+Passenger -- UC10
+Passenger -- UC13
+Passenger -- UC14
+
+Driver -- UC4
+Driver -- UC5
+Driver -- UC9
+Driver -- UC12
+Driver -- UC15
+
+Admin -- UC11
+Admin -- UC10
+@enduml

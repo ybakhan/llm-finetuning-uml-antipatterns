@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+actor "Alumni" as A1
+actor "University Admin" as A2
+actor "Event Coordinator" as A3
+actor "Career Services" as A4
+
+rectangle "Alumni Network System" {
+  usecase "Register Profile" as UC1
+  usecase "Update Profile" as UC2
+  usecase "Search Alumni Directory" as UC3
+  usecase "Send Message" as UC4
+  usecase "Create Event" as UC5
+  usecase "RSVP to Event" as UC6
+  usecase "Post Job Opportunity" as UC7
+  usecase "Apply for Job" as UC8
+  usecase "Manage Memberships" as UC9
+  usecase "Generate Alumni Report" as UC10
+  usecase "Donate to University" as UC11
+  usecase "Join Interest Group" as UC12
+  usecase "Moderate Content" as UC13
+  usecase "Validate Payment Details" as UC14
+  usecase "Manage Mentorship Program" as UC15
+  usecase "View Event Calendar" as UC16
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC3
+A1 -- UC4
+A1 -- UC6
+A1 -- UC8
+A1 -- UC11
+A1 -- UC12
+A2 -- UC9
+A2 -- UC10
+A2 -- UC13
+A3 -- UC5
+A3 -- UC16
+A4 -- UC7
+A4 -- UC15
+
+UC11 ..> UC14 : <<include>>
+@enduml

@@ -1,0 +1,69 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Photographer" as Photographer
+
+rectangle "Photography Studio Booking System" {
+  usecase "Browse Available Studios" as UC1
+  usecase "Book Studio Session" as UC2
+  usecase "Select Time Slot" as UC3
+  usecase "Make Payment" as UC4
+  usecase "View Booking Schedule" as UC5
+  usecase "Cancel Booking" as UC6
+  usecase "Validate Payment Details" as UC7
+}
+
+Customer -- UC1
+Customer -- UC2
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC4 ..> UC7 : <<include>>
+Photographer -- UC5
+Photographer -- UC6
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Book Studio Session (UC2)",
+            "Select Time Slot (UC3)"
+          ],
+          "explanation": "'Select Time Slot' (UC3) is included by 'Book Studio Session' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Studio Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Studio Session' via the include relationship."
+        },
+        {
+          "elements": [
+            "Book Studio Session (UC2)",
+            "Make Payment (UC4)"
+          ],
+          "explanation": "'Make Payment' (UC4) is included by 'Book Studio Session' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Studio Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Studio Session' via the include relationship."
+        },
+        {
+          "elements": [
+            "Make Payment (UC4)",
+            "Validate Payment Details (UC7)"
+          ],
+          "explanation": "'Validate Payment Details' (UC7) is included by 'Make Payment' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Make Payment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Make Payment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

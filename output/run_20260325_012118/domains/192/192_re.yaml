@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 192
+  domain: border_control_system
+  domain_display: Border Control System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-28T02:34:19.355542'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Border Officer\" as BO\nactor \"Traveler\"\
+    \ as TR\nactor \"Immigration Supervisor\" as IS\nactor \"Customs Officer\" as\
+    \ CO\n\nrectangle \"Border Control System\" {\n  usecase \"Scan Travel Document\"\
+    \ as UC1\n  usecase \"Perform Identity Check\" as UC3\n  usecase \"Query Watchlist\
+    \ Database\" as UC4\n  usecase \"Submit Entry Declaration\" as UC5\n  usecase\
+    \ \"Approve Border Crossing\" as UC6\n  usecase \"Deny Entry\" as UC7\n  usecase\
+    \ \"Conduct Secondary Inspection\" as UC8\n  usecase \"Perform Customs Screening\"\
+    \ as UC9\n  usecase \"Override Entry Decision\" as UC10\n  usecase \"Record Traveler\
+    \ Exit\" as UC11\n  usecase \"Generate Crossing Report\" as UC12\n  usecase \"\
+    Validate Visa Details\" as UC13\n}\n\nBO -- UC1\nBO -- UC3\nBO -- UC4\nBO -- UC6\n\
+    BO -- UC7\nBO -- UC8\nBO -- UC11\nBO -- UC12\nTR -- UC5\nIS -- UC8\nIS -- UC10\n\
+    CO -- UC9\nUC13 ..> UC6 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

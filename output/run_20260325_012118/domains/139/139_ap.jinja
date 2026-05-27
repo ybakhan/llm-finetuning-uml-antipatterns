@@ -1,0 +1,87 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor Photographer as P
+actor Viewer as V
+actor Administrator as A
+
+rectangle "Digital Photography Platform" {
+  usecase "Upload Photo" as UC1
+  usecase "Validate File Format" as UC2
+  usecase "Generate Thumbnail" as UC3
+  usecase "Browse Gallery" as UC4
+  usecase "Search Photos" as UC5
+  usecase "Parse Search Query" as UC6
+  usecase "Download Photo" as UC7
+  usecase "Rate Photo" as UC8
+  usecase "Comment on Photo" as UC9
+  usecase "Create Album" as UC10
+  usecase "Moderate Content" as UC11
+  usecase "Manage User Accounts" as UC12
+  usecase "View Photo Details" as UC13
+}
+
+P -- UC1
+P -- UC10
+P -- UC4
+P -- UC13
+V -- UC4
+V -- UC5
+V -- UC7
+V -- UC8
+V -- UC9
+V -- UC13
+A -- UC11
+A -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC4 ..> UC13 : <<include>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Upload Photo (UC1)",
+            "Validate File Format (UC2)"
+          ],
+          "explanation": "'Validate File Format' (UC2) is included by 'Upload Photo' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Photo' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Photo' via the include relationship."
+        },
+        {
+          "elements": [
+            "Upload Photo (UC1)",
+            "Generate Thumbnail (UC3)"
+          ],
+          "explanation": "'Generate Thumbnail' (UC3) is included by 'Upload Photo' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload Photo' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload Photo' via the include relationship."
+        },
+        {
+          "elements": [
+            "Search Photos (UC5)",
+            "Parse Search Query (UC6)"
+          ],
+          "explanation": "'Parse Search Query' (UC6) is included by 'Search Photos' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Search Photos' rather than a standalone service observable to any actor, making it a functional decomposition of 'Search Photos' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Event Organizer" as Organizer
+actor "System Administrator" as Admin
+
+rectangle "Event Ticketing System" {
+  usecase "Browse Events" as UC1
+  usecase "Purchase Ticket" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Generate E-Ticket" as UC4
+  usecase "Reserve Seat" as UC5
+  usecase "View Order History" as UC6
+  usecase "Cancel Ticket" as UC7
+  usecase "Process Payment" as UC8
+  usecase "Create Event" as UC9
+  usecase "Manage Event Pricing" as UC10
+  usecase "View Sales Reports" as UC11
+  usecase "Manage Venues" as UC12
+  usecase "Manage User Accounts" as UC13
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC6
+Customer -- UC7
+
+Organizer -- UC9
+Organizer -- UC10
+Organizer -- UC11
+
+Admin -- UC12
+Admin -- UC13
+
+UC8 ..> UC2 : <<extend>>
+
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC2 ..> UC5 : <<include>>
+@enduml

@@ -1,0 +1,103 @@
+metadata:
+  domain_id: 66
+  domain: it_help_desk_system
+  domain_display: IT Help Desk System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Ticket (UC1)
+      - Validate User Credentials (UC2)
+      explanation: '''Validate User Credentials'' (UC2) is included by ''Submit Ticket''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Ticket'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Ticket'' via the include relationship.'
+    - elements:
+      - Submit Ticket (UC1)
+      - Categorize Ticket (UC3)
+      explanation: '''Categorize Ticket'' (UC3) is included by ''Submit Ticket'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Ticket'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Ticket'' via the include relationship.'
+    - elements:
+      - Resolve Ticket (UC5)
+      - Log Resolution Details (UC6)
+      explanation: '''Log Resolution Details'' (UC6) is included by ''Resolve Ticket''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Resolve Ticket'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Resolve Ticket'' via the include relationship.'
+    - elements:
+      - Generate Performance Report (UC9)
+      - Calculate Average Resolution Time (UC10)
+      explanation: '''Calculate Average Resolution Time'' (UC10) is included by ''Generate
+        Performance Report'' (UC9), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Generate Performance Report'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Generate Performance
+        Report'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:55:18.540702'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"End User\" as EU\nactor \"Support Agent\" as\
+    \ SA\nactor \"IT Manager\" as MGR\n\nrectangle \"IT Help Desk System\" {\n  usecase\
+    \ \"Submit Ticket\" as UC1\n  usecase \"Validate User Credentials\" as UC2\n \
+    \ usecase \"Categorize Ticket\" as UC3\n  usecase \"View Ticket Status\" as UC4\n\
+    \  usecase \"Resolve Ticket\" as UC5\n  usecase \"Log Resolution Details\" as\
+    \ UC6\n  usecase \"Escalate Ticket\" as UC7\n  usecase \"Reassign Ticket\" as\
+    \ UC8\n  usecase \"Generate Performance Report\" as UC9\n  usecase \"Calculate\
+    \ Average Resolution Time\" as UC10\n  usecase \"Manage Knowledge Base\" as UC11\n\
+    \  usecase \"Search Knowledge Base\" as UC12\n  usecase \"Rate Support Experience\"\
+    \ as UC13\n  usecase \"Close Ticket\" as UC14\n}\n\nEU -- UC1\nEU -- UC4\nEU --\
+    \ UC12\nEU -- UC13\n\nSA -- UC5\nSA -- UC7\nSA -- UC8\nSA -- UC12\nSA -- UC14\n\
+    \nMGR -- UC9\nMGR -- UC11\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n\
+    UC5 ..> UC6 : <<include>>\nUC9 ..> UC10 : <<include>>\nUC7 ..> UC8 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Ticket (UC1)\"\
+    ,\n            \"Validate User Credentials (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate User Credentials' (UC2) is included by 'Submit Ticket'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Submit Ticket' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Ticket' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Submit Ticket (UC1)\",\n           \
+    \ \"Categorize Ticket (UC3)\"\n          ],\n          \"explanation\": \"'Categorize\
+    \ Ticket' (UC3) is included by 'Submit Ticket' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Ticket' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Submit Ticket' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Resolve Ticket\
+    \ (UC5)\",\n            \"Log Resolution Details (UC6)\"\n          ],\n     \
+    \     \"explanation\": \"'Log Resolution Details' (UC6) is included by 'Resolve\
+    \ Ticket' (UC5), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Resolve Ticket' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Resolve Ticket' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Generate Performance Report (UC9)\"\
+    ,\n            \"Calculate Average Resolution Time (UC10)\"\n          ],\n  \
+    \        \"explanation\": \"'Calculate Average Resolution Time' (UC10) is included\
+    \ by 'Generate Performance Report' (UC9), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Generate Performance Report' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Generate Performance\
+    \ Report' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

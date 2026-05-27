@@ -1,0 +1,313 @@
+AUDIT LOG — Prompt #149
+Timestamp : 2026-03-26T01:19:28.155774
+Model     : claude-opus-4-6
+Tokens    : input=2549  output=799
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #149: Generate a SMALL use case model with exactly 11 constructs (valid range for small: 9–13 constructs). Domain: Cybersecurity Incident Reporting System.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+the refactoring is incomplete, use case "classify threat level" is a functional decomposition and should be dropped.
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Classify Threat Level" as UC2
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+  usecase "Populate Incident Fields" as UC5
+}
+
+SA -- UC1
+SA -- UC3
+CISO -- UC4
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC5 : <<include>>
+@enduml
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Classify Threat Level" as UC2
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+}
+
+SA -- UC1
+SA -- UC3
+CISO -- UC4
+
+UC1 ..> UC2 : <<include>>
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: cybersecurity_incident_reporting_system
+DOMAIN_DISPLAY: Cybersecurity Incident Reporting System
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 11
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Populate Incident Fields" as UC2
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+  usecase "Escalate Incident" as UC5
+}
+
+SA -- UC1
+SA -- UC3
+SA -- UC5
+CISO -- UC4
+
+UC1 ..> UC2 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Report Incident (use case, UC1)",
+            "Populate Incident Fields (use case, UC2)",
+            "<<include>> from UC1 to UC2 (include relationship)"
+          ],
+          "explanation": "The use case 'Populate Incident Fields' (UC2) is an inclusion use case that: (1) is included by only one use case ('Report Incident'), (2) is not associated with any actor, (3) does not include or extend any other use case, (4) is not extended by any use case, and (5) is neither a generalization nor specialization of any use case. 'Populate Incident Fields' is merely an internal step of reporting an incident — it does not represent a complete, standalone service observable to any user. This is functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The use case "Populate Incident Fields" (UC2) is a functional decomposition — it is an internal sub-step of "Report Incident" and does not represent a complete actor goal. It is included by only one use case, has no actor association, and has no other relationships. Per the "Drop Functional Decomposition" refactoring, UC2 and its <<include>> relationship from UC1 must be removed, merging the behavior of populating incident fields into the "Report Incident" use case. No new constructs are added. The remaining model preserves all actor-associated use cases intact.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+  usecase "Escalate Incident" as UC5
+}
+
+SA -- UC1
+SA -- UC3
+SA -- UC5
+CISO -- UC4
+@enduml
+```

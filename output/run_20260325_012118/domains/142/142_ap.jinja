@@ -1,0 +1,93 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Guest" as Guest
+actor "Lifeguard" as Lifeguard
+actor "Admin" as Admin
+actor "Payment Gateway" as PG
+
+rectangle "Swimming Pool Booking System" {
+  usecase "Book Lane Session" as UC1
+  usecase "Cancel Booking" as UC2
+  usecase "View Pool Schedule" as UC3
+  usecase "Register Account" as UC4
+  usecase "Process Payment" as UC5
+  usecase "Manage Pool Availability" as UC6
+  usecase "Record Attendance" as UC7
+  usecase "Book Swimming Lesson" as UC8
+  usecase "View Booking History" as UC9
+  usecase "Issue Refund" as UC10
+  usecase "Report Pool Incident" as UC11
+  usecase "Manage Membership Plans" as UC12
+  usecase "Check Lane Capacity" as UC13
+  usecase "Select Time Slot" as UC14
+  usecase "Validate Membership Status" as UC15
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Member -- UC8
+Member -- UC9
+Guest -- UC4
+Guest -- UC3
+Lifeguard -- UC7
+Lifeguard -- UC11
+Admin -- UC6
+Admin -- UC10
+Admin -- UC12
+PG -- UC5
+
+UC1 ..> UC13 : <<include>>
+UC1 ..> UC14 : <<include>>
+UC1 ..> UC15 : <<include>>
+UC1 ..> UC5 : <<include>>
+UC2 ..> UC10 : <<extend>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Book Lane Session (UC1)",
+            "Check Lane Capacity (UC13)"
+          ],
+          "explanation": "'Check Lane Capacity' (UC13) is included by 'Book Lane Session' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Lane Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Lane Session' via the include relationship."
+        },
+        {
+          "elements": [
+            "Book Lane Session (UC1)",
+            "Select Time Slot (UC14)"
+          ],
+          "explanation": "'Select Time Slot' (UC14) is included by 'Book Lane Session' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Lane Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Lane Session' via the include relationship."
+        },
+        {
+          "elements": [
+            "Book Lane Session (UC1)",
+            "Validate Membership Status (UC15)"
+          ],
+          "explanation": "'Validate Membership Status' (UC15) is included by 'Book Lane Session' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Lane Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Lane Session' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

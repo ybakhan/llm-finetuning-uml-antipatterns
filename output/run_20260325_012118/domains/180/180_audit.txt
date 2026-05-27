@@ -1,0 +1,289 @@
+AUDIT LOG — Prompt #180
+Timestamp : 2026-03-25T02:31:42.721470
+Model     : claude-opus-4-6
+Tokens    : input=1595  output=1555
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #180: Generate a MEDIUM use case model with exactly 29 constructs (valid range for medium: 24–30 constructs). Domain: Crop Monitoring System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: crop_monitoring_system
+DOMAIN_DISPLAY: Crop Monitoring System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 29
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Agronomist" as AG
+actor "Weather Service" as WS
+
+rectangle "Crop Monitoring System" {
+  usecase "Monitor Crop Health" as UC1
+  usecase "Validate Sensor Data" as UC2
+  usecase "Record Field Observation" as UC3
+  usecase "Parse GPS Coordinates" as UC4
+  usecase "Generate Yield Forecast" as UC5
+  usecase "Normalize Historical Data" as UC6
+  usecase "Configure Alert Thresholds" as UC7
+  usecase "View Dashboard" as UC8
+  usecase "Manage Irrigation Schedule" as UC9
+  usecase "Detect Pest Outbreak" as UC10
+  usecase "Recommend Treatment Plan" as UC11
+  usecase "Receive Weather Data" as UC12
+  usecase "Generate Seasonal Report" as UC13
+  usecase "Register Field Parcel" as UC14
+}
+
+FM -- UC1
+FM -- UC8
+FM -- UC7
+FM -- UC9
+FM -- UC13
+FT -- UC3
+FT -- UC14
+AG -- UC5
+AG -- UC10
+AG -- UC11
+WS -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC10 .> UC11 : <<extend>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Monitor Crop Health (use case, UC1)",
+            "Validate Sensor Data (use case, UC2)",
+            "<<include>> relationship from UC1 to UC2"
+          ],
+          "explanation": "'Validate Sensor Data' is included only by 'Monitor Crop Health', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal sub-step (data validation) rather than a complete, independently valuable service to any actor. This is functional decomposition of 'Monitor Crop Health' via the include relationship."
+        },
+        {
+          "constructs": [
+            "Record Field Observation (use case, UC3)",
+            "Parse GPS Coordinates (use case, UC4)",
+            "<<include>> relationship from UC3 to UC4"
+          ],
+          "explanation": "'Parse GPS Coordinates' is included only by 'Record Field Observation', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. Parsing GPS coordinates is a low-level internal processing step, not a complete service observable by a user. This is functional decomposition of 'Record Field Observation' via the include relationship."
+        },
+        {
+          "constructs": [
+            "Generate Yield Forecast (use case, UC5)",
+            "Normalize Historical Data (use case, UC6)",
+            "<<include>> relationship from UC5 to UC6"
+          ],
+          "explanation": "'Normalize Historical Data' is included only by 'Generate Yield Forecast', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. Normalizing data is an internal computational step that provides no observable result to a user on its own. This is functional decomposition of 'Generate Yield Forecast' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three functional decomposition instances must be resolved by merging each inclusion use case back into its sole base use case, since each inclusion use case (1) is included by only one use case, (2) has no actor association, (3) neither includes nor extends any other use case, (4) is not extended by any use case, and (5) is not part of any generalization. Specifically: (1) "Validate Sensor Data" (UC2) is merged into "Monitor Crop Health" (UC1), removing UC2 and the include relationship — sensor data validation becomes an internal step of monitoring crop health. (2) "Parse GPS Coordinates" (UC4) is merged into "Record Field Observation" (UC3), removing UC4 and the include relationship — GPS parsing becomes an internal step of recording observations. (3) "Normalize Historical Data" (UC6) is merged into "Generate Yield Forecast" (UC5), removing UC6 and the include relationship — data normalization becomes an internal step of yield forecasting. This removes 3 use cases and 3 include relationships (6 constructs total), resulting in 23 constructs.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Agronomist" as AG
+actor "Weather Service" as WS
+
+rectangle "Crop Monitoring System" {
+  usecase "Monitor Crop Health" as UC1
+  usecase "Record Field Observation" as UC3
+  usecase "Generate Yield Forecast" as UC5
+  usecase "Configure Alert Thresholds" as UC7
+  usecase "View Dashboard" as UC8
+  usecase "Manage Irrigation Schedule" as UC9
+  usecase "Detect Pest Outbreak" as UC10
+  usecase "Recommend Treatment Plan" as UC11
+  usecase "Receive Weather Data" as UC12
+  usecase "Generate Seasonal Report" as UC13
+  usecase "Register Field Parcel" as UC14
+}
+
+FM -- UC1
+FM -- UC8
+FM -- UC7
+FM -- UC9
+FM -- UC13
+FT -- UC3
+FT -- UC14
+AG -- UC5
+AG -- UC10
+AG -- UC11
+WS -- UC12
+
+UC10 .> UC11 : <<extend>>
+@enduml
+```

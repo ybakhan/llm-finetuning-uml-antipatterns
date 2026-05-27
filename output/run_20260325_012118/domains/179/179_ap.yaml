@@ -1,0 +1,61 @@
+metadata:
+  domain_id: 179
+  domain: air_quality_monitoring_system
+  domain_display: Air Quality Monitoring System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Generate Report (UC5)
+      - Fetch Sensor Data (UC6)
+      explanation: '''Fetch Sensor Data'' (UC6) is included by ''Generate Report''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Generate Report'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Generate Report'' via the include relationship.'
+    - elements:
+      - Generate Report (UC5)
+      - Format Report Output (UC7)
+      explanation: '''Format Report Output'' (UC7) is included by ''Generate Report''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Generate Report'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Generate Report'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:24:51.396342'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Environmental Officer\" as EO\nactor \"Technician\"\
+    \ as Tech\n\nrectangle \"Air Quality Monitoring System\" {\n  usecase \"View Air\
+    \ Quality Report\" as UC1\n  usecase \"Configure Sensor\" as UC2\n  usecase \"\
+    Set Alert Thresholds\" as UC3\n  usecase \"Receive Pollution Alert\" as UC4\n\
+    \  usecase \"Generate Report\" as UC5\n  usecase \"Fetch Sensor Data\" as UC6\n\
+    \  usecase \"Format Report Output\" as UC7\n}\n\nEO -- UC1\nEO -- UC3\nEO -- UC4\n\
+    Tech -- UC2\nEO -- UC5\nUC5 .> UC6 : <<include>>\nUC5 .> UC7 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Generate Report (UC5)\"\
+    ,\n            \"Fetch Sensor Data (UC6)\"\n          ],\n          \"explanation\"\
+    : \"'Fetch Sensor Data' (UC6) is included by 'Generate Report' (UC5), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Generate Report' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Generate Report' via\
+    \ the include relationship.\"\n        },\n        {\n          \"elements\":\
+    \ [\n            \"Generate Report (UC5)\",\n            \"Format Report Output\
+    \ (UC7)\"\n          ],\n          \"explanation\": \"'Format Report Output' (UC7)\
+    \ is included by 'Generate Report' (UC5), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Generate Report' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Generate Report' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

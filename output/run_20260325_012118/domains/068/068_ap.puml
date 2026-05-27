@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Attorney" as Attorney
+actor "Paralegal" as Paralegal
+
+rectangle "Legal Case Management System" {
+  usecase "Open New Case" as UC1
+  usecase "Assign Case to Attorney" as UC2
+  usecase "Search Cases" as UC3
+  usecase "Upload Document" as UC4
+  usecase "Validate Document Format" as UC5
+  usecase "Close Case" as UC6
+}
+
+Attorney -- UC1
+Attorney -- UC2
+Attorney -- UC3
+Attorney -- UC6
+Paralegal -- UC3
+Paralegal -- UC4
+UC4 ..> UC5 : <<include>>
+@enduml

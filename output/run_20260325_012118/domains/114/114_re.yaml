@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 114
+  domain: hostel_booking_system
+  domain_display: Hostel Booking System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:20.844812'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Guest\" as Guest\nactor \"Receptionist\" as\
+    \ Receptionist\n\nrectangle \"Hostel Booking System\" {\n  usecase \"Search Available\
+    \ Rooms\" as UC1\n  usecase \"Book Room\" as UC2\n  usecase \"Check In Guest\"\
+    \ as UC3\n  usecase \"Cancel Booking\" as UC4\n}\n\nGuest -- UC1\nGuest -- UC2\n\
+    Guest -- UC4\nReceptionist -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

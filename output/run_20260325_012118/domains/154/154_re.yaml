@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 154
+  domain: remote_desktop_service
+  domain_display: Remote Desktop Service
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:21:55.216398'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"End User\" as EU\nactor \"IT Administrator\"\
+    \ as Admin\nactor \"Security Officer\" as SO\n\nrectangle \"Remote Desktop Service\"\
+    \ {\n  usecase \"Initiate Remote Session\" as UC1\n  usecase \"Manage Virtual\
+    \ Machines\" as UC4\n  usecase \"Transfer Files\" as UC6\n  usecase \"Monitor\
+    \ Active Sessions\" as UC8\n  usecase \"Terminate Session\" as UC9\n  usecase\
+    \ \"Configure Access Policies\" as UC10\n  usecase \"View Session Logs\" as UC11\n\
+    \  usecase \"Adjust Display Settings\" as UC12\n}\n\nEU -- UC1\nEU -- UC6\nEU\
+    \ -- UC12\nEU -- UC9\nAdmin -- UC4\nAdmin -- UC8\nAdmin -- UC9\nSO -- UC10\nSO\
+    \ -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

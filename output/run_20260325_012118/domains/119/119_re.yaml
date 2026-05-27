@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 119
+  domain: mortgage_application_system
+  domain_display: Mortgage Application System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:14:01.082465'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Applicant\" as Applicant\nactor \"Loan\
+    \ Officer\" as Officer\nactor \"Underwriter\" as Underwriter\nactor \"Credit Bureau\"\
+    \ as CreditBureau\n\nrectangle \"Mortgage Application System\" {\n  usecase \"\
+    Submit Mortgage Application\" as UC1\n  usecase \"Review Application\" as UC4\n\
+    \  usecase \"Pull Credit Report\" as UC6\n  usecase \"Perform Underwriting\" as\
+    \ UC7\n  usecase \"Approve Mortgage\" as UC9\n  usecase \"Deny Mortgage\" as UC10\n\
+    \  usecase \"Generate Pre-Approval Letter\" as UC11\n  usecase \"Schedule Closing\"\
+    \ as UC12\n  usecase \"Track Application Status\" as UC13\n  usecase \"Upload\
+    \ Income Verification\" as UC14\n}\n\nApplicant -- UC1\nApplicant -- UC13\nApplicant\
+    \ -- UC14\nOfficer -- UC4\nOfficer -- UC6\nOfficer -- UC9\nOfficer -- UC10\nOfficer\
+    \ -- UC11\nOfficer -- UC12\nUnderwriter -- UC7\nCreditBureau -- UC6\n\nUnderwriter\
+    \ -- UC9\nUnderwriter -- UC10\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

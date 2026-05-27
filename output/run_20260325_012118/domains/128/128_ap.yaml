@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 128
+  domain: land_registry_system
+  domain_display: Land Registry System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Transfer Ownership (UC3)
+      - Validate Ownership Proof (UC4)
+      explanation: '''Validate Ownership Proof'' (UC4) is included by ''Transfer Ownership''
+        (UC3), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Transfer Ownership'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Transfer Ownership'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:16:16.636788'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Property Owner\" as PO\nactor \"Registrar\"\
+    \ as REG\n\nrectangle \"Land Registry System\" {\n  usecase \"Register Property\"\
+    \ as UC1\n  usecase \"Search Land Records\" as UC2\n  usecase \"Transfer Ownership\"\
+    \ as UC3\n  usecase \"Validate Ownership Proof\" as UC4\n  usecase \"Issue Title\
+    \ Deed\" as UC5\n  usecase \"Resolve Boundary Dispute\" as UC6\n}\n\nPO -- UC1\n\
+    PO -- UC2\nREG -- UC3\nREG -- UC5\nREG -- UC6\n\nUC3 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Transfer Ownership (UC3)\"\
+    ,\n            \"Validate Ownership Proof (UC4)\"\n          ],\n          \"\
+    explanation\": \"'Validate Ownership Proof' (UC4) is included by 'Transfer Ownership'\
+    \ (UC3), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Transfer Ownership' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Transfer Ownership' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

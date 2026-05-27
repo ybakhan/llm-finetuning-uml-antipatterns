@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Barista" as Barista
+actor "Manager" as Manager
+
+rectangle "Cafe Order Management System" {
+  usecase "Place Order" as UC1
+  usecase "Select Menu Items" as UC2
+  usecase "Calculate Order Total" as UC3
+  usecase "Process Payment" as UC4
+  usecase "Validate Payment Details" as UC5
+  usecase "Prepare Order" as UC6
+  usecase "Generate Receipt" as UC7
+  usecase "View Menu" as UC8
+  usecase "Update Menu" as UC9
+  usecase "View Sales Report" as UC10
+  usecase "Cancel Order" as UC11
+  usecase "Apply Discount" as UC12
+  usecase "Provide Feedback" as UC13
+}
+
+Customer -- UC1
+Customer -- UC8
+Customer -- UC4
+Customer -- UC11
+Customer -- UC13
+Barista -- UC6
+Barista -- UC1
+Manager -- UC9
+Manager -- UC10
+Manager -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC12 ..> UC4 : <<extend>>
+UC4 ..> UC7 : <<include>>
+@enduml

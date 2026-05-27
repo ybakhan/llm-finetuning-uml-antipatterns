@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 166
+  domain: event_decoration_booking_system
+  domain_display: Event Decoration Booking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:26:21.487780'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Decorator\"\
+    \ as Decorator\nactor \"Admin\" as Admin\n\nrectangle \"Event Decoration Booking\
+    \ System\" {\n  usecase \"Browse Decoration Packages\" as UC1\n  usecase \"Book\
+    \ Decoration Service\" as UC2\n  usecase \"Make Payment\" as UC3\n  usecase \"\
+    Cancel Booking\" as UC4\n  usecase \"View Booking History\" as UC5\n  usecase\
+    \ \"Submit Review\" as UC6\n  usecase \"Accept Booking Request\" as UC7\n  usecase\
+    \ \"Update Portfolio\" as UC8\n  usecase \"Manage Availability\" as UC9\n  usecase\
+    \ \"Manage Users\" as UC10\n  usecase \"Generate Revenue Report\" as UC11\n  usecase\
+    \ \"Resolve Dispute\" as UC12\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer\
+    \ -- UC3\nCustomer -- UC4\nCustomer -- UC5\nCustomer -- UC6\n\nDecorator -- UC7\n\
+    Decorator -- UC8\nDecorator -- UC9\n\nAdmin -- UC10\nAdmin -- UC11\nAdmin -- UC12\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

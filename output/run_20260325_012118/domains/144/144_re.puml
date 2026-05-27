@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Athlete" as Athlete
+actor "Coach" as Coach
+actor "Nutritionist" as Nutritionist
+actor "Team Doctor" as TeamDoctor
+
+rectangle "Athlete Training System" {
+  usecase "View Training Schedule" as UC1
+  usecase "Log Workout" as UC2
+  usecase "Track Performance Metrics" as UC4
+  usecase "Create Training Plan" as UC5
+  usecase "Assign Drills to Athlete" as UC7
+  usecase "Review Athlete Progress" as UC8
+  usecase "Create Nutrition Plan" as UC9
+  usecase "Log Dietary Intake" as UC10
+  usecase "Record Injury" as UC11
+  usecase "Manage Recovery Program" as UC12
+  usecase "Generate Performance Report" as UC13
+  usecase "Set Training Goals" as UC14
+}
+
+Athlete -- UC1
+Athlete -- UC2
+Athlete -- UC4
+Coach -- UC5
+Coach -- UC7
+Coach -- UC8
+Coach -- UC13
+Nutritionist -- UC9
+Athlete -- UC10
+TeamDoctor -- UC11
+TeamDoctor -- UC12
+Athlete -- UC14
+@enduml

@@ -1,0 +1,69 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Wallet User" as WU
+actor "Merchant" as M
+actor "Admin" as A
+actor "Payment Gateway" as PG
+
+rectangle "Digital Wallet System" {
+  usecase "Add Funds" as UC1
+  usecase "Send Money" as UC2
+  usecase "Request Money" as UC3
+  usecase "Pay Merchant" as UC4
+  usecase "View Transaction History" as UC5
+  usecase "Manage Profile" as UC6
+  usecase "Issue Refund" as UC7
+  usecase "Generate Sales Report" as UC8
+  usecase "Freeze Account" as UC9
+  usecase "Link Bank Account" as UC10
+  usecase "Validate Bank Details" as UC11
+  usecase "Set Spending Limit" as UC12
+}
+
+WU -- UC1
+WU -- UC2
+WU -- UC3
+WU -- UC4
+WU -- UC5
+WU -- UC6
+WU -- UC10
+WU -- UC12
+M -- UC4
+M -- UC7
+M -- UC8
+A -- UC9
+PG -- UC1
+UC10 ..> UC11 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Link Bank Account (UC10)",
+            "Validate Bank Details (UC11)"
+          ],
+          "explanation": "'Validate Bank Details' (UC11) is included by 'Link Bank Account' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Link Bank Account' rather than a standalone service observable to any actor, making it a functional decomposition of 'Link Bank Account' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

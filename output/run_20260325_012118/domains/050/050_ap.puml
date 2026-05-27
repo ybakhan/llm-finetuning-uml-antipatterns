@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+
+actor "Employee" as EMP
+actor "Manager" as MGR
+actor "HR Administrator" as HR
+actor "Department Head" as DH
+
+rectangle "Employee Performance Review System" {
+  usecase "Submit Self-Assessment" as UC1
+  usecase "View Review History" as UC2
+  usecase "Conduct Performance Review" as UC3
+  usecase "Set Performance Goals" as UC4
+  usecase "Approve Final Rating" as UC5
+  usecase "Generate Performance Report" as UC6
+  usecase "Manage Review Cycles" as UC7
+  usecase "Assign Reviewers" as UC8
+  usecase "Submit Peer Feedback" as UC9
+  usecase "Request Appeal" as UC10
+  usecase "Configure Rating Criteria" as UC11
+  usecase "View Team Performance Dashboard" as UC12
+  usecase "Acknowledge Review" as UC13
+  usecase "Calculate Overall Score" as UC14
+  usecase "Schedule Review Meeting" as UC15
+  usecase "Archive Completed Reviews" as UC16
+}
+
+EMP -- UC1
+EMP -- UC2
+EMP -- UC9
+EMP -- UC10
+EMP -- UC13
+
+MGR -- UC3
+MGR -- UC4
+MGR -- UC12
+MGR -- UC15
+
+DH -- UC5
+DH -- UC6
+
+HR -- UC7
+HR -- UC8
+HR -- UC11
+HR -- UC16
+
+UC3 ..> UC14 : <<include>>
+@enduml

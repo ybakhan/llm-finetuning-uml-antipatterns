@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Employee" as Employee
+actor "Manager" as Manager
+
+rectangle "Expense Tracking System" {
+  usecase "Submit Expense Report" as UC1
+  usecase "Validate Receipt Data" as UC2
+  usecase "Review Expense Report" as UC3
+  usecase "Generate Spending Summary" as UC4
+  usecase "Approve Expense Report" as UC5
+}
+
+Employee -- UC1
+Employee -- UC4
+Manager -- UC3
+Manager -- UC5
+
+UC1 ..> UC2 : <<include>>
+@enduml

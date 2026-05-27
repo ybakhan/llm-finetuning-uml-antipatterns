@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+
+actor "Budget Owner" as BO
+actor "Financial Advisor" as FA
+actor "Administrator" as Admin
+
+rectangle "Budgeting Application" {
+  usecase "Create Budget" as UC1
+  usecase "View Budget Summary" as UC4
+  usecase "Track Expenses" as UC5
+  usecase "Set Spending Limits" as UC7
+  usecase "Generate Financial Report" as UC8
+  usecase "Manage Budget Categories" as UC9
+  usecase "Review Client Budgets" as UC10
+  usecase "Manage User Accounts" as UC11
+  usecase "Configure System Settings" as UC12
+  usecase "Send Budget Alert" as UC13
+}
+
+BO -- UC1
+BO -- UC4
+BO -- UC5
+BO -- UC7
+BO -- UC8
+BO -- UC9
+BO -- UC13
+
+FA -- UC10
+FA -- UC8
+
+Admin -- UC11
+Admin -- UC12
+@enduml

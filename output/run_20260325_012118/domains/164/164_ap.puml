@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Facility Manager" as Manager
+
+rectangle "Self-Storage Facility System" {
+  usecase "Reserve Unit" as UC1
+  usecase "Check Unit Availability" as UC2
+  usecase "Make Payment" as UC3
+  usecase "Manage Units" as UC4
+  usecase "View Rental Agreement" as UC5
+}
+
+Customer -- UC1
+Customer -- UC3
+Customer -- UC5
+UC1 ..> UC2 : <<include>>
+Manager -- UC4
+
+@enduml

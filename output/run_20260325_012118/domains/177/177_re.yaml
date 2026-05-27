@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 177
+  domain: agricultural_marketplace
+  domain_display: Agricultural Marketplace
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:24:14.502060'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Farmer\" as Farmer\nactor \"Buyer\" as Buyer\n\
+    \nrectangle \"Agricultural Marketplace\" {\n  usecase \"List Produce\" as UC1\n\
+    \  usecase \"Browse Listings\" as UC2\n  usecase \"Place Order\" as UC3\n  usecase\
+    \ \"Track Delivery\" as UC5\n  usecase \"Leave Review\" as UC6\n}\n\nFarmer --\
+    \ UC1\nBuyer -- UC2\nBuyer -- UC3\nBuyer -- UC5\nBuyer -- UC6\nFarmer -- UC5\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

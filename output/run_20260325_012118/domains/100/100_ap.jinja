@@ -1,0 +1,76 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Dispatcher" as Dispatcher
+actor "Caller" as Caller
+actor "Field Unit" as FieldUnit
+actor "Supervisor" as Supervisor
+
+rectangle "Emergency Dispatch System" {
+  usecase "Receive Emergency Call" as UC1
+  usecase "Validate Caller Information" as UC2
+  usecase "Classify Emergency Type" as UC3
+  usecase "Dispatch Field Unit" as UC4
+  usecase "Track Unit Location" as UC5
+  usecase "Update Incident Status" as UC6
+  usecase "Report On Scene" as UC7
+  usecase "Request Backup" as UC8
+  usecase "Review Dispatch Logs" as UC9
+  usecase "Manage Unit Roster" as UC10
+  usecase "Close Incident" as UC11
+  usecase "Generate Shift Report" as UC12
+}
+
+Caller -- UC1
+Dispatcher -- UC1
+Dispatcher -- UC4
+Dispatcher -- UC5
+Dispatcher -- UC6
+Dispatcher -- UC11
+FieldUnit -- UC7
+FieldUnit -- UC8
+Supervisor -- UC9
+Supervisor -- UC10
+Supervisor -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Receive Emergency Call (UC1)",
+            "Validate Caller Information (UC2)"
+          ],
+          "explanation": "'Validate Caller Information' (UC2) is included by 'Receive Emergency Call' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Receive Emergency Call' rather than a standalone service observable to any actor, making it a functional decomposition of 'Receive Emergency Call' via the include relationship."
+        },
+        {
+          "elements": [
+            "Receive Emergency Call (UC1)",
+            "Classify Emergency Type (UC3)"
+          ],
+          "explanation": "'Classify Emergency Type' (UC3) is included by 'Receive Emergency Call' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Receive Emergency Call' rather than a standalone service observable to any actor, making it a functional decomposition of 'Receive Emergency Call' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

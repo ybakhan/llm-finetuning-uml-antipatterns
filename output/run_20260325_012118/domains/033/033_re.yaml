@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 33
+  domain: real_estate_listing_platform
+  domain_display: Real Estate Listing Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:49:47.116856'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Property Seller\" as Seller\nactor \"Property\
+    \ Buyer\" as Buyer\nactor \"Real Estate Agent\" as Agent\nactor \"System Administrator\"\
+    \ as Admin\n\nrectangle \"Real Estate Listing Platform\" {\n  usecase \"Create\
+    \ Property Listing\" as UC1\n  usecase \"Search Properties\" as UC3\n  usecase\
+    \ \"Schedule Property Viewing\" as UC5\n  usecase \"Submit Offer\" as UC6\n  usecase\
+    \ \"Manage Agent Profile\" as UC8\n  usecase \"Generate Market Report\" as UC9\n\
+    \  usecase \"Save Favorite Listings\" as UC10\n  usecase \"Moderate Listings\"\
+    \ as UC11\n  usecase \"Manage User Accounts\" as UC12\n  usecase \"Contact Seller\"\
+    \ as UC13\n}\n\nSeller -- UC1\nBuyer -- UC3\nBuyer -- UC5\nBuyer -- UC6\nAgent\
+    \ -- UC8\nAgent -- UC9\nBuyer -- UC10\nAdmin -- UC11\nAdmin -- UC12\nBuyer --\
+    \ UC13\nAgent -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

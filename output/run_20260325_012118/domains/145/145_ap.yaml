@@ -1,0 +1,62 @@
+metadata:
+  domain_id: 145
+  domain: sports_equipment_rental
+  domain_display: Sports Equipment Rental
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Rent Equipment (UC2)
+      - Verify Availability (UC3)
+      explanation: '''Verify Availability'' is included by ''Rent Equipment'', has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Rent Equipment'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Rent
+        Equipment'' via the include relationship.'
+    - elements:
+      - Rent Equipment (UC2)
+      - Process Payment (UC5)
+      explanation: '''Process Payment'' is included by ''Rent Equipment'', has no
+        direct actor association, does not include or extend any other use case, is
+        not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Rent Equipment'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Rent
+        Equipment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:18:32.437537'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Staff\" as\
+    \ Staff\n\nrectangle \"Sports Equipment Rental System\" {\n  usecase \"Browse\
+    \ Equipment\" as UC1\n  usecase \"Rent Equipment\" as UC2\n  usecase \"Verify\
+    \ Availability\" as UC3\n  usecase \"Return Equipment\" as UC4\n  usecase \"Process\
+    \ Payment\" as UC5\n  usecase \"Manage Inventory\" as UC6\n}\n\nCustomer -- UC1\n\
+    Customer -- UC2\nCustomer -- UC4\nStaff -- UC6\nUC2 ..> UC3 : <<include>>\nUC2\
+    \ ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Rent Equipment (UC2)\"\
+    ,\n            \"Verify Availability (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Verify Availability' is included by 'Rent Equipment', has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Rent Equipment' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Rent Equipment' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Rent Equipment (UC2)\",\n            \"Process Payment (UC5)\"\n\
+    \          ],\n          \"explanation\": \"'Process Payment' is included by 'Rent\
+    \ Equipment', has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Rent Equipment' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Rent Equipment' via the include relationship.\"\n        }\n      ]\n  \
+    \  }\n  ]\n}"

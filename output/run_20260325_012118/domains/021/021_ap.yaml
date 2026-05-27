@@ -1,0 +1,69 @@
+metadata:
+  domain_id: 21
+  domain: movie_ticket_booking
+  domain_display: Movie Ticket Booking
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Ticket (UC6)
+      - Select Seats (UC5)
+      explanation: '''Select Seats'' (UC5) is included by ''Book Ticket'' (UC6), has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Book Ticket'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Book
+        Ticket'' via the include relationship.'
+    - elements:
+      - Book Ticket (UC6)
+      - Validate Seat Availability (UC7)
+      explanation: '''Validate Seat Availability'' (UC7) is included by ''Book Ticket''
+        (UC6), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Ticket'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Book Ticket'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:29:21.501970'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Admin\" as\
+    \ Admin\nactor \"Payment Gateway\" as PG\n\nrectangle \"Movie Ticket Booking System\"\
+    \ {\n  usecase \"Browse Movies\" as UC1\n  usecase \"Search Movies\" as UC2\n\
+    \  usecase \"View Movie Details\" as UC3\n  usecase \"Select Showtime\" as UC4\n\
+    \  usecase \"Select Seats\" as UC5\n  usecase \"Book Ticket\" as UC6\n  usecase\
+    \ \"Validate Seat Availability\" as UC7\n  usecase \"Process Payment\" as UC8\n\
+    \  usecase \"Cancel Booking\" as UC9\n  usecase \"View Booking History\" as UC10\n\
+    \  usecase \"Manage Movies\" as UC11\n  usecase \"Manage Showtimes\" as UC12\n\
+    \  usecase \"Generate Reports\" as UC13\n  usecase \"Apply Promo Code\" as UC14\n\
+    \  usecase \"Rate Movie\" as UC15\n  usecase \"Register Account\" as UC16\n}\n\
+    \nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC3\nCustomer -- UC4\nCustomer\
+    \ -- UC6\nCustomer -- UC9\nCustomer -- UC10\nCustomer -- UC14\nCustomer -- UC15\n\
+    Customer -- UC16\n\nAdmin -- UC11\nAdmin -- UC12\nAdmin -- UC13\n\nPG -- UC8\n\
+    \nUC6 ..> UC5 : <<include>>\nUC6 ..> UC8 : <<include>>\nUC6 ..> UC7 : <<include>>\n\
+    \nUC9 ..> UC8 : <<include>>\n}\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Ticket (UC6)\",\n\
+    \            \"Select Seats (UC5)\"\n          ],\n          \"explanation\":\
+    \ \"'Select Seats' (UC5) is included by 'Book Ticket' (UC6), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Book Ticket' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Book Ticket' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Book Ticket (UC6)\",\n            \"Validate Seat Availability\
+    \ (UC7)\"\n          ],\n          \"explanation\": \"'Validate Seat Availability'\
+    \ (UC7) is included by 'Book Ticket' (UC6), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Book Ticket' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Book Ticket' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

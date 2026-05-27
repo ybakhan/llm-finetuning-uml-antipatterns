@@ -1,0 +1,45 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "IT Administrator" as Admin
+actor "Security Officer" as SO
+
+rectangle "Remote Desktop Service" {
+  usecase "Initiate Remote Session" as UC1
+  usecase "Manage Virtual Machines" as UC4
+  usecase "Transfer Files" as UC6
+  usecase "Monitor Active Sessions" as UC8
+  usecase "Terminate Session" as UC9
+  usecase "Configure Access Policies" as UC10
+  usecase "View Session Logs" as UC11
+  usecase "Adjust Display Settings" as UC12
+}
+
+EU -- UC1
+EU -- UC6
+EU -- UC12
+EU -- UC9
+Admin -- UC4
+Admin -- UC8
+Admin -- UC9
+SO -- UC10
+SO -- UC11
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

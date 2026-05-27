@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Farmer" as Farmer
+actor "Veterinarian" as Vet
+
+rectangle "Farm Management System" {
+  usecase "Register Livestock" as UC1
+  usecase "Schedule Vaccination" as UC2
+  usecase "Monitor Crop Growth" as UC3
+  usecase "Generate Farm Report" as UC4
+  usecase "Compile Report Data" as UC5
+}
+
+Farmer -- UC1
+Farmer -- UC2
+Farmer -- UC3
+Farmer -- UC4
+Vet -- UC2
+
+UC4 ..> UC5 : <<include>>
+@enduml

@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 183
+  domain: forest_fire_detection_system
+  domain_display: Forest Fire Detection System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:52:02.305350'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Park Ranger\" as Ranger\nactor \"System Administrator\"\
+    \ as Admin\nactor \"Emergency Dispatcher\" as Dispatcher\nactor \"Meteorologist\"\
+    \ as Meteo\n\nrectangle \"Forest Fire Detection System\" {\n  usecase \"Monitor\
+    \ Forest Zones\" as UC1\n  usecase \"Generate Fire Alert\" as UC2\n  usecase \"\
+    Dispatch Emergency Team\" as UC3\n  usecase \"View Fire Risk Map\" as UC4\n  usecase\
+    \ \"Configure Alert Thresholds\" as UC5\n  usecase \"Manage Sensor Network\" as\
+    \ UC6\n  usecase \"Review Historical Data\" as UC7\n  usecase \"Submit Weather\
+    \ Forecast\" as UC8\n  usecase \"Acknowledge Alert\" as UC9\n  usecase \"Generate\
+    \ Incident Report\" as UC10\n}\n\nRanger -- UC1\nRanger -- UC4\nRanger -- UC9\n\
+    Ranger -- UC10\nDispatcher -- UC2\nDispatcher -- UC3\nAdmin -- UC5\nAdmin -- UC6\n\
+    Meteo -- UC8\nMeteo -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

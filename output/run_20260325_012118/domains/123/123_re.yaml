@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 123
+  domain: budgeting_application
+  domain_display: Budgeting Application
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:14:41.741175'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Budget Owner\" as BO\nactor \"Financial Advisor\"\
+    \ as FA\nactor \"Administrator\" as Admin\n\nrectangle \"Budgeting Application\"\
+    \ {\n  usecase \"Create Budget\" as UC1\n  usecase \"View Budget Summary\" as\
+    \ UC4\n  usecase \"Track Expenses\" as UC5\n  usecase \"Set Spending Limits\"\
+    \ as UC7\n  usecase \"Generate Financial Report\" as UC8\n  usecase \"Manage Budget\
+    \ Categories\" as UC9\n  usecase \"Review Client Budgets\" as UC10\n  usecase\
+    \ \"Manage User Accounts\" as UC11\n  usecase \"Configure System Settings\" as\
+    \ UC12\n  usecase \"Send Budget Alert\" as UC13\n}\n\nBO -- UC1\nBO -- UC4\nBO\
+    \ -- UC5\nBO -- UC7\nBO -- UC8\nBO -- UC9\nBO -- UC13\n\nFA -- UC10\nFA -- UC8\n\
+    \nAdmin -- UC11\nAdmin -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

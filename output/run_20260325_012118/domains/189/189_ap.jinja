@@ -1,0 +1,88 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Quality Inspector" as QI
+actor "Recall Coordinator" as RC
+actor "Regulatory Authority" as RA
+actor "Customer Service Rep" as CSR
+actor "Warehouse Manager" as WM
+
+rectangle "Product Recall Management System" {
+  usecase "Initiate Recall" as UC1
+  usecase "Validate Batch Numbers" as UC2
+  usecase "Notify Regulatory Authority" as UC3
+  usecase "Generate Recall Report" as UC4
+  usecase "Process Customer Returns" as UC5
+  usecase "Calculate Refund Amount" as UC6
+  usecase "Track Recalled Inventory" as UC7
+  usecase "Classify Recall Severity" as UC8
+  usecase "Communicate Recall to Public" as UC9
+  usecase "Verify Product Destruction" as UC10
+  usecase "Close Recall Case" as UC11
+  usecase "Review Recall History" as UC12
+  usecase "Manage Refund Requests" as UC13
+  usecase "Verify Destruction Certificate" as UC14
+}
+
+QI -- UC1
+QI -- UC8
+RC -- UC1
+RC -- UC3
+RC -- UC9
+RC -- UC11
+RC -- UC12
+RA -- UC4
+CSR -- UC5
+CSR -- UC13
+WM -- UC7
+WM -- UC10
+
+UC1 ..> UC2 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC10 ..> UC14 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Initiate Recall (UC1)",
+            "Validate Batch Numbers (UC2)"
+          ],
+          "explanation": "'Validate Batch Numbers' (UC2) is included by 'Initiate Recall' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Initiate Recall' rather than a standalone service observable to any actor, making it a functional decomposition of 'Initiate Recall' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Customer Returns (UC5)",
+            "Calculate Refund Amount (UC6)"
+          ],
+          "explanation": "'Calculate Refund Amount' (UC6) is included by 'Process Customer Returns' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Customer Returns' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Customer Returns' via the include relationship."
+        },
+        {
+          "elements": [
+            "Verify Product Destruction (UC10)",
+            "Verify Destruction Certificate (UC14)"
+          ],
+          "explanation": "'Verify Destruction Certificate' (UC14) is included by 'Verify Product Destruction' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Verify Product Destruction' rather than a standalone service observable to any actor, making it a functional decomposition of 'Verify Product Destruction' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

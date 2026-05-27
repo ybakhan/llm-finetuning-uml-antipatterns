@@ -1,0 +1,74 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "HR Manager" as HRM
+actor "Employee" as EMP
+actor "Recruiter" as REC
+actor "Payroll Officer" as PAY
+actor "Department Head" as DH
+
+rectangle "Human Resources System" {
+  usecase "Post Job Opening" as UC1
+  usecase "Screen Applications" as UC2
+  usecase "Schedule Interview" as UC3
+  usecase "Submit Leave Request" as UC4
+  usecase "Approve Leave Request" as UC5
+  usecase "View Pay Slip" as UC6
+  usecase "Process Monthly Payroll" as UC7
+  usecase "Validate Tax Deductions" as UC8
+  usecase "Conduct Performance Review" as UC9
+  usecase "Update Employee Profile" as UC10
+  usecase "Generate HR Report" as UC11
+  usecase "Manage Benefits Enrollment" as UC12
+  usecase "Onboard New Employee" as UC13
+  usecase "Terminate Employee" as UC14
+}
+
+REC -- UC1
+REC -- UC2
+REC -- UC3
+EMP -- UC4
+EMP -- UC6
+EMP -- UC10
+HRM -- UC5
+HRM -- UC9
+HRM -- UC11
+HRM -- UC13
+HRM -- UC14
+PAY -- UC7
+DH -- UC9
+DH -- UC12
+
+UC7 ..> UC8 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Process Monthly Payroll (UC7)",
+            "Validate Tax Deductions (UC8)"
+          ],
+          "explanation": "'Validate Tax Deductions' (UC8) is included by 'Process Monthly Payroll' (UC7), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Monthly Payroll' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Monthly Payroll' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

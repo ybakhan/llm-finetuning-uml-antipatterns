@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 16
+  domain: grocery_delivery_service
+  domain_display: Grocery Delivery Service
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Order (UC2)
+      - Validate Payment (UC3)
+      explanation: '''Validate Payment'' (UC3) is included by ''Place Order'' (UC2),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:27:31.680633'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Delivery Driver\"\
+    \ as Driver\n\nrectangle \"Grocery Delivery Service\" {\n  usecase \"Browse Products\"\
+    \ as UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Validate Payment\" as\
+    \ UC3\n  usecase \"Track Delivery\" as UC4\n  usecase \"Complete Delivery\" as\
+    \ UC5\n}\n\nCustomer -- UC1\nCustomer -- UC2\nUC2 ..> UC3 : <<include>>\nCustomer\
+    \ -- UC4\nDriver -- UC5\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Order (UC2)\",\n\
+    \            \"Validate Payment (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Payment' (UC3) is included by 'Place Order' (UC2), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Place Order' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Place Order' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

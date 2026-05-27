@@ -1,0 +1,84 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Fitness Coach" as Coach
+actor "Admin" as Admin
+
+rectangle "Fitness Tracking App" {
+  usecase "Log Workout" as UC1
+  usecase "View Workout History" as UC2
+  usecase "Set Fitness Goal" as UC3
+  usecase "Track Calories" as UC4
+  usecase "View Progress Dashboard" as UC5
+  usecase "Share Achievement" as UC6
+  usecase "Manage User Accounts" as UC7
+  usecase "Create Training Plan" as UC8
+  usecase "Send Motivational Alert" as UC9
+  usecase "Sync Wearable Device" as UC10
+  usecase "Connect to Device API" as UC11
+  usecase "Parse Sensor Data" as UC12
+  usecase "Generate Weekly Report" as UC13
+  usecase "Export Data" as UC14
+  usecase "Update Profile" as UC15
+}
+
+User -- UC1
+User -- UC2
+User -- UC3
+User -- UC4
+User -- UC5
+User -- UC6
+User -- UC10
+User -- UC14
+User -- UC15
+
+Coach -- UC8
+Coach -- UC9
+Coach -- UC13
+
+Admin -- UC7
+
+UC10 ..> UC11 : <<include>>
+UC10 ..> UC12 : <<include>>
+
+UC14 ..> UC13 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Sync Wearable Device (UC10)",
+            "Connect to Device API (UC11)"
+          ],
+          "explanation": "'Connect to Device API' (UC11) is included by 'Sync Wearable Device' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Sync Wearable Device' rather than a standalone service observable to any actor, making it a functional decomposition of 'Sync Wearable Device' via the include relationship."
+        },
+        {
+          "elements": [
+            "Sync Wearable Device (UC10)",
+            "Parse Sensor Data (UC12)"
+          ],
+          "explanation": "'Parse Sensor Data' (UC12) is included by 'Sync Wearable Device' (UC10), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Sync Wearable Device' rather than a standalone service observable to any actor, making it a functional decomposition of 'Sync Wearable Device' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

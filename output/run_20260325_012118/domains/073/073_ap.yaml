@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 73
+  domain: construction_project_management
+  domain_display: Construction Project Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Create Project Schedule (UC1)
+      - Define Task Dependencies (UC1a)
+      explanation: '''Define Task Dependencies'' (UC1a) is included by ''Create Project
+        Schedule'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Project
+        Schedule'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Create Project Schedule'' via the include
+        relationship.'
+    - elements:
+      - Create Project Schedule (UC1)
+      - Assign Resources to Tasks (UC1b)
+      explanation: '''Assign Resources to Tasks'' (UC1b) is included by ''Create Project
+        Schedule'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Project
+        Schedule'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Create Project Schedule'' via the include
+        relationship.'
+    - elements:
+      - Track Daily Progress (UC2)
+      - Log Work Completion (UC2a)
+      explanation: '''Log Work Completion'' (UC2a) is included by ''Track Daily Progress''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Track Daily Progress''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Track Daily Progress'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:49:07.065474'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Project Manager\" as PM\nactor \"Site Engineer\"\
+    \ as SE\nactor \"Contractor\" as CO\nactor \"Safety Officer\" as SO\nactor \"\
+    Client\" as CL\n\nrectangle \"Construction Project Management System\" {\n  usecase\
+    \ \"Create Project Schedule\" as UC1\n  usecase \"Define Task Dependencies\" as\
+    \ UC1a\n  usecase \"Assign Resources to Tasks\" as UC1b\n  usecase \"Track Daily\
+    \ Progress\" as UC2\n  usecase \"Log Work Completion\" as UC2a\n  usecase \"Submit\
+    \ Change Order\" as UC3\n  usecase \"Approve Change Order\" as UC4\n  usecase\
+    \ \"Conduct Safety Inspection\" as UC5\n  usecase \"Generate Safety Report\" as\
+    \ UC6\n  usecase \"Manage Subcontractor Bids\" as UC7\n  usecase \"Review Project\
+    \ Milestones\" as UC8\n  usecase \"Upload Site Documents\" as UC9\n  usecase \"\
+    Request Material Delivery\" as UC10\n  usecase \"View Project Dashboard\" as UC11\n\
+    }\n\nPM -- UC1\nUC1 ..> UC1a : <<include>>\nUC1 ..> UC1b : <<include>>\nPM --\
+    \ UC2\nUC2 ..> UC2a : <<include>>\nPM -- UC3\nPM -- UC4\nPM -- UC8\nPM -- UC11\n\
+    SE -- UC2\nSE -- UC9\nSE -- UC10\nCO -- UC3\nCO -- UC7\nSO -- UC5\nSO -- UC6\n\
+    CL -- UC8\nCL -- UC11\n}\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Create Project Schedule\
+    \ (UC1)\",\n            \"Define Task Dependencies (UC1a)\"\n          ],\n  \
+    \        \"explanation\": \"'Define Task Dependencies' (UC1a) is included by 'Create\
+    \ Project Schedule' (UC1), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Create\
+    \ Project Schedule' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Create Project Schedule' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Create Project Schedule (UC1)\",\n            \"Assign Resources to Tasks\
+    \ (UC1b)\"\n          ],\n          \"explanation\": \"'Assign Resources to Tasks'\
+    \ (UC1b) is included by 'Create Project Schedule' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Create Project Schedule' rather than a standalone service observable to\
+    \ any actor, making it a functional decomposition of 'Create Project Schedule'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Track Daily Progress (UC2)\",\n            \"Log Work Completion\
+    \ (UC2a)\"\n          ],\n          \"explanation\": \"'Log Work Completion' (UC2a)\
+    \ is included by 'Track Daily Progress' (UC2), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Track Daily Progress' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Track Daily Progress' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

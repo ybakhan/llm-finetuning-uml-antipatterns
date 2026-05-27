@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 162
+  domain: pet_care_service_booking
+  domain_display: Pet Care Service Booking
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:24:56.872947'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Pet Owner\" as PO\nactor \"Veterinarian\" as\
+    \ Vet\n\nrectangle \"Pet Care Service Booking\" {\n  usecase \"Book Grooming Session\"\
+    \ as UC1\n  usecase \"Book Vet Appointment\" as UC2\n  usecase \"Cancel Booking\"\
+    \ as UC3\n  usecase \"View Booking History\" as UC4\n  usecase \"Confirm Appointment\"\
+    \ as UC6\n}\n\nPO -- UC1\nPO -- UC2\nPO -- UC3\nPO -- UC4\nVet -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

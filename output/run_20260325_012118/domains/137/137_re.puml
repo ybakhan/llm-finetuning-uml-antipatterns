@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Gardener" as Gardener
+actor "Garden Manager" as Manager
+actor "Volunteer" as Volunteer
+
+rectangle "Community Garden Management System" {
+  usecase "Register for Plot" as UC1
+  usecase "Manage Plot Assignment" as UC2
+  usecase "Log Planting Activity" as UC3
+  usecase "Schedule Watering" as UC4
+  usecase "Report Harvest" as UC5
+  usecase "View Garden Map" as UC6
+  usecase "Organize Community Event" as UC7
+  usecase "Sign Up for Volunteer Shift" as UC8
+  usecase "Track Compost Usage" as UC9
+  usecase "Submit Maintenance Request" as UC10
+  usecase "Generate Seasonal Report" as UC11
+  usecase "Manage Tool Inventory" as UC12
+  usecase "Pay Plot Fees" as UC13
+}
+
+Gardener -- UC1
+Gardener -- UC3
+Gardener -- UC4
+Gardener -- UC5
+Gardener -- UC6
+Gardener -- UC10
+Gardener -- UC13
+
+Manager -- UC2
+Manager -- UC7
+Manager -- UC9
+Manager -- UC11
+Manager -- UC12
+
+Volunteer -- UC8
+@enduml

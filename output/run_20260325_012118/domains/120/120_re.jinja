@@ -1,0 +1,33 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Backer" as Backer
+actor "Project Creator" as Creator
+
+rectangle "Crowdfunding Platform" {
+  usecase "Back Project" as UC2
+  usecase "Browse Projects" as UC1
+  usecase "Create Campaign" as UC4
+}
+
+Backer -- UC1
+Backer -- UC2
+Creator -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

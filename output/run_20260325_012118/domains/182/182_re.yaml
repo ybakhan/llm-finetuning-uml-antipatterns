@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 182
+  domain: wildlife_conservation_system
+  domain_display: Wildlife Conservation System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:25:15.158324'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Park Ranger\" as Ranger\nactor \"Conservation\
+    \ Scientist\" as Scientist\nactor \"System Administrator\" as Admin\n\nrectangle\
+    \ \"Wildlife Conservation System\" {\n  usecase \"Record Animal Sighting\" as\
+    \ UC1\n  usecase \"Monitor Endangered Species\" as UC4\n  usecase \"Generate Population\
+    \ Report\" as UC5\n  usecase \"Manage Protected Zones\" as UC7\n  usecase \"Track\
+    \ Animal Migration\" as UC8\n  usecase \"Respond to Poaching Alert\" as UC9\n\
+    \  usecase \"Log Habitat Conditions\" as UC10\n  usecase \"Manage User Accounts\"\
+    \ as UC11\n  usecase \"Assign Patrol Routes\" as UC12\n  usecase \"Review Conservation\
+    \ Plans\" as UC13\n}\n\nRanger -- UC1\nRanger -- UC9\nRanger -- UC10\nRanger --\
+    \ UC8\nScientist -- UC4\nScientist -- UC5\nScientist -- UC13\nAdmin -- UC7\nAdmin\
+    \ -- UC11\nAdmin -- UC12\n\nUC4 ..> UC8 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

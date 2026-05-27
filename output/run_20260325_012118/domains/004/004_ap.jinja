@@ -1,0 +1,79 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Doctor" as Doctor
+actor "Nurse" as Nurse
+actor "Receptionist" as Receptionist
+actor "Patient" as Patient
+actor "Lab Technician" as LabTech
+
+rectangle "Hospital Management System" {
+  usecase "Diagnose Patient" as UC1
+  usecase "Validate Patient Identity" as UC2
+  usecase "Retrieve Medical History" as UC3
+  usecase "Prescribe Medication" as UC4
+  usecase "Register Patient" as UC5
+  usecase "Schedule Appointment" as UC6
+  usecase "Record Vital Signs" as UC7
+  usecase "Administer Medication" as UC8
+  usecase "Process Lab Request" as UC9
+  usecase "Upload Lab Results" as UC10
+  usecase "View Appointment Schedule" as UC11
+  usecase "Generate Discharge Summary" as UC12
+  usecase "View Lab Results" as UC13
+}
+
+Doctor -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Doctor -- UC4
+Doctor -- UC12
+Receptionist -- UC5
+Receptionist -- UC6
+Nurse -- UC7
+Nurse -- UC8
+LabTech -- UC9
+LabTech -- UC10
+Patient -- UC11
+Patient -- UC13
+Doctor -- UC13
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Diagnose Patient (UC1)",
+            "Validate Patient Identity (UC2)"
+          ],
+          "explanation": "'Validate Patient Identity' is included by 'Diagnose Patient', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Diagnose Patient' rather than a standalone service observable to any actor, making it a functional decomposition of 'Diagnose Patient' via the include relationship."
+        },
+        {
+          "elements": [
+            "Diagnose Patient (UC1)",
+            "Retrieve Medical History (UC3)"
+          ],
+          "explanation": "'Retrieve Medical History' is included by 'Diagnose Patient', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Diagnose Patient' rather than a standalone service observable to any actor, making it a functional decomposition of 'Diagnose Patient' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

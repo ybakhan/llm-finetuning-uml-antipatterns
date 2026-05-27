@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 185
+  domain: quality_control_system
+  domain_display: Quality Control System
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Perform Inspection (UC1)
+      - Record Measurements (UC2)
+      explanation: '''Record Measurements'' is included by ''Perform Inspection'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Perform Inspection'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Perform Inspection'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:34:07.825444'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Inspector\" as Inspector\nactor \"Production\
+    \ Manager\" as PM\n\nrectangle \"Quality Control System\" {\n  usecase \"Perform\
+    \ Inspection\" as UC1\n  usecase \"Record Measurements\" as UC2\n  usecase \"\
+    Generate Quality Report\" as UC3\n  usecase \"Review Defect Trends\" as UC4\n\
+    \  usecase \"Log Defect\" as UC5\n}\n\nInspector -- UC1\nUC1 ..> UC2 : <<include>>\n\
+    Inspector -- UC5\nPM -- UC3\nPM -- UC4\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Perform Inspection (UC1)\"\
+    ,\n            \"Record Measurements (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Record Measurements' is included by 'Perform Inspection', has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Perform Inspection' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Perform Inspection'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

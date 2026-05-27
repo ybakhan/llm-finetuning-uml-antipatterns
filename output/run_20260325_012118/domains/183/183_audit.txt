@@ -1,0 +1,572 @@
+AUDIT LOG — Prompt #183
+Timestamp : 2026-03-26T01:52:02.304346
+Model     : claude-opus-4-6
+Tokens    : input=3009  output=1410
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #183: Generate a MEDIUM use case model with exactly 25 constructs (valid range for medium: 24–30 constructs). Domain: Forest Fire Detection System.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+actor "Field Sensor" as Sensor
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Receive Sensor Data" as UC2
+  usecase "Generate Fire Alert" as UC3
+  usecase "Dispatch Emergency Team" as UC4
+  usecase "View Fire Risk Map" as UC5
+  usecase "Configure Alert Thresholds" as UC6
+  usecase "Manage Sensor Network" as UC7
+  usecase "Review Historical Data" as UC8
+  usecase "Submit Weather Forecast" as UC9
+  usecase "Acknowledge Alert" as UC10
+  usecase "Generate Incident Report" as UC11
+  usecase "Validate Sensor Reading" as UC12
+  usecase "Calculate Wind Factor" as UC13
+}
+
+Ranger -- UC1
+Ranger -- UC5
+Ranger -- UC10
+Ranger -- UC11
+Sensor -- UC2
+Dispatcher -- UC3
+Dispatcher -- UC4
+Admin -- UC6
+Admin -- UC7
+Meteo -- UC9
+Meteo -- UC8
+
+UC2 ..> UC12 : <<include>>
+UC9 ..> UC13 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC10 : <<include>>
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+actor "Field Sensor" as Sensor
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Receive Sensor Data" as UC2
+  usecase "Generate Fire Alert" as UC3
+  usecase "Dispatch Emergency Team" as UC4
+  usecase "View Fire Risk Map" as UC5
+  usecase "Configure Alert Thresholds" as UC6
+  usecase "Manage Sensor Network" as UC7
+  usecase "Review Historical Data" as UC8
+  usecase "Submit Weather Forecast" as UC9
+  usecase "Acknowledge Alert" as UC10
+  usecase "Generate Incident Report" as UC11
+}
+
+Ranger -- UC1
+Ranger -- UC5
+Ranger -- UC10
+Ranger -- UC11
+Sensor -- UC2
+Dispatcher -- UC3
+Dispatcher -- UC4
+Admin -- UC6
+Admin -- UC7
+Meteo -- UC9
+Meteo -- UC8
+
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC10 : <<include>>
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: forest_fire_detection_system
+DOMAIN_DISPLAY: Forest Fire Detection System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 25
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Generate Fire Alert" as UC2
+  usecase "Dispatch Emergency Team" as UC3
+  usecase "View Fire Risk Map" as UC4
+  usecase "Configure Alert Thresholds" as UC5
+  usecase "Manage Sensor Network" as UC6
+  usecase "Review Historical Data" as UC7
+  usecase "Submit Weather Forecast" as UC8
+  usecase "Acknowledge Alert" as UC9
+  usecase "Generate Incident Report" as UC10
+  usecase "Validate Sensor Reading" as UC12
+  usecase "Calculate Fire Risk Score" as UC13
+  usecase "Parse Weather Data" as UC14
+}
+
+Ranger -- UC1
+Ranger -- UC4
+Ranger -- UC9
+Ranger -- UC10
+Dispatcher -- UC2
+Dispatcher -- UC3
+Admin -- UC5
+Admin -- UC6
+Meteo -- UC8
+Meteo -- UC7
+
+UC1 ..> UC12 : <<include>>
+UC1 ..> UC13 : <<include>>
+UC8 ..> UC14 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Monitor Forest Zones (use case, UC1)",
+            "Validate Sensor Reading (use case, UC12)",
+            "<<include>> from UC1 to UC12"
+          ],
+          "explanation": "'Validate Sensor Reading' is included only by 'Monitor Forest Zones', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal validation step rather than a complete service observable to an actor, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Monitor Forest Zones (use case, UC1)",
+            "Calculate Fire Risk Score (use case, UC13)",
+            "<<include>> from UC1 to UC13"
+          ],
+          "explanation": "'Calculate Fire Risk Score' is included only by 'Monitor Forest Zones', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal calculation step rather than a standalone service offered to an actor, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Submit Weather Forecast (use case, UC8)",
+            "Parse Weather Data (use case, UC14)",
+            "<<include>> from UC8 to UC14"
+          ],
+          "explanation": "'Parse Weather Data' is included only by 'Submit Weather Forecast', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal processing step rather than a complete service observable to an actor, making it a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three functional decomposition instances must be resolved by merging each orphan inclusion use case into its sole base use case. (1) "Validate Sensor Reading" (UC12) is merged into "Monitor Forest Zones" (UC1) — sensor validation is an internal step of monitoring, not an actor goal. The use case and the <<include>> relationship are removed. (2) "Calculate Fire Risk Score" (UC13) is merged into "Monitor Forest Zones" (UC1) — risk score calculation is an internal computation within the monitoring activity. The use case and the <<include>> relationship are removed. (3) "Parse Weather Data" (UC14) is merged into "Submit Weather Forecast" (UC8) — parsing is an internal processing step when a meteorologist submits forecast data. The use case and the <<include>> relationship are removed. No new constructs are introduced; the remaining model retains all actor-to-use-case associations and represents only complete, business-level actor goals.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Generate Fire Alert" as UC2
+  usecase "Dispatch Emergency Team" as UC3
+  usecase "View Fire Risk Map" as UC4
+  usecase "Configure Alert Thresholds" as UC5
+  usecase "Manage Sensor Network" as UC6
+  usecase "Review Historical Data" as UC7
+  usecase "Submit Weather Forecast" as UC8
+  usecase "Acknowledge Alert" as UC9
+  usecase "Generate Incident Report" as UC10
+}
+
+Ranger -- UC1
+Ranger -- UC4
+Ranger -- UC9
+Ranger -- UC10
+Dispatcher -- UC2
+Dispatcher -- UC3
+Admin -- UC5
+Admin -- UC6
+Meteo -- UC8
+Meteo -- UC7
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T02:09:18.590392
+Model     : claude-opus-4-6
+Tokens    : input=1112  output=434
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Generate Fire Alert" as UC2
+  usecase "Dispatch Emergency Team" as UC3
+  usecase "View Fire Risk Map" as UC4
+  usecase "Configure Alert Thresholds" as UC5
+  usecase "Manage Sensor Network" as UC6
+  usecase "Review Historical Data" as UC7
+  usecase "Submit Weather Forecast" as UC8
+  usecase "Acknowledge Alert" as UC9
+  usecase "Generate Incident Report" as UC10
+  usecase "Validate Sensor Reading" as UC12
+  usecase "Calculate Fire Risk Score" as UC13
+  usecase "Parse Weather Data" as UC14
+}
+
+Ranger -- UC1
+Ranger -- UC4
+Ranger -- UC9
+Ranger -- UC10
+Dispatcher -- UC2
+Dispatcher -- UC3
+Admin -- UC5
+Admin -- UC6
+Meteo -- UC8
+Meteo -- UC7
+
+UC1 ..> UC12 : <<include>>
+UC1 ..> UC13 : <<include>>
+UC8 ..> UC14 : <<include>>
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Monitor Forest Zones (use case, UC1)",
+            "Validate Sensor Reading (use case, UC12)",
+            "<<include>> from UC1 to UC12"
+          ],
+          "explanation": "'Validate Sensor Reading' is included only by 'Monitor Forest Zones', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal validation step rather than a complete service observable to an actor, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Monitor Forest Zones (use case, UC1)",
+            "Calculate Fire Risk Score (use case, UC13)",
+            "<<include>> from UC1 to UC13"
+          ],
+          "explanation": "'Calculate Fire Risk Score' is included only by 'Monitor Forest Zones', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal calculation step rather than a standalone service offered to an actor, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Submit Weather Forecast (use case, UC8)",
+            "Parse Weather Data (use case, UC14)",
+            "<<include>> from UC8 to UC14"
+          ],
+          "explanation": "'Parse Weather Data' is included only by 'Submit Weather Forecast', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal processing step rather than a complete service observable to an actor, making it a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+first two antipattern instances are actually one because they share same base use case "Monitor Forest Zones". Update count and explanation accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Monitor Forest Zones (use case, UC1)",
+            "Validate Sensor Reading (use case, UC12)",
+            "Calculate Fire Risk Score (use case, UC13)",
+            "<<include>> from UC1 to UC12",
+            "<<include>> from UC1 to UC13"
+          ],
+          "explanation": "'Monitor Forest Zones' includes both 'Validate Sensor Reading' and 'Calculate Fire Risk Score'. Neither of these included use cases is associated with any actor, includes or extends any other use case, is extended by any use case, or participates in any generalisation. Each is included only by 'Monitor Forest Zones'. They represent internal processing steps (validation and calculation) rather than complete services observable to an actor, making this a functional decomposition of 'Monitor Forest Zones' via the include relationship."
+        },
+        {
+          "constructs": [
+            "Submit Weather Forecast (use case, UC8)",
+            "Parse Weather Data (use case, UC14)",
+            "<<include>> from UC8 to UC14"
+          ],
+          "explanation": "'Parse Weather Data' is included only by 'Submit Weather Forecast', is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation. It represents an internal processing step rather than a complete service observable to an actor, making it a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Trainer" as Trainer
+
+rectangle "Gym Membership System" {
+  usecase "Register Membership" as UC1
+  usecase "Book Class" as UC2
+  usecase "Manage Schedule" as UC3
+  usecase "Cancel Membership" as UC4
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC4
+Trainer -- UC3
+@enduml

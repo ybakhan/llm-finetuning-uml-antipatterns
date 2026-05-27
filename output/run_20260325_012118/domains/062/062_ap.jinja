@@ -1,0 +1,78 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Voter" as Voter
+actor "Election Administrator" as Admin
+actor "Auditor" as Auditor
+
+rectangle "E-Voting System" {
+  usecase "Register to Vote" as UC1
+  usecase "Verify Identity" as UC2
+  usecase "Cast Ballot" as UC3
+  usecase "Select Candidates" as UC4
+  usecase "View Election Results" as UC5
+  usecase "Configure Election" as UC6
+  usecase "Manage Candidate List" as UC7
+  usecase "Open Voting Period" as UC8
+  usecase "Close Voting Period" as UC9
+  usecase "Generate Audit Report" as UC10
+  usecase "Verify Vote Integrity" as UC11
+  usecase "Monitor Live Turnout" as UC12
+  usecase "Export Audit Trail" as UC13
+}
+
+Voter -- UC1
+Voter -- UC3
+Voter -- UC5
+
+Admin -- UC6
+Admin -- UC7
+Admin -- UC8
+Admin -- UC9
+Admin -- UC12
+
+Auditor -- UC10
+Auditor -- UC11
+Auditor -- UC13
+
+UC1 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Register to Vote (UC1)",
+            "Verify Identity (UC2)"
+          ],
+          "explanation": "'Verify Identity' (UC2) is included by 'Register to Vote' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register to Vote' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register to Vote' via the include relationship."
+        },
+        {
+          "elements": [
+            "Cast Ballot (UC3)",
+            "Select Candidates (UC4)"
+          ],
+          "explanation": "'Select Candidates' (UC4) is included by 'Cast Ballot' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Cast Ballot' rather than a standalone service observable to any actor, making it a functional decomposition of 'Cast Ballot' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

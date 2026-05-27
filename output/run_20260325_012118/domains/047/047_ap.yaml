@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 47
+  domain: freelance_marketplace
+  domain_display: Freelance Marketplace
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Process Payment (UC5)
+      - Validate Payment Details (UC6)
+      explanation: '''Validate Payment Details'' (UC6) is included by ''Process Payment''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Payment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Payment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:38:49.104946'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Freelancer\" as Freelancer\nactor \"Client\"\
+    \ as Client\n\nrectangle \"Freelance Marketplace\" {\n  usecase \"Browse Projects\"\
+    \ as UC1\n  usecase \"Submit Proposal\" as UC2\n  usecase \"Post Project\" as\
+    \ UC3\n  usecase \"Hire Freelancer\" as UC4\n  usecase \"Process Payment\" as\
+    \ UC5\n  usecase \"Validate Payment Details\" as UC6\n  usecase \"Leave Review\"\
+    \ as UC7\n}\n\nFreelancer -- UC1\nFreelancer -- UC2\nFreelancer -- UC7\nClient\
+    \ -- UC3\nClient -- UC4\nClient -- UC5\nClient -- UC7\nUC5 ..> UC6 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Process Payment (UC5)\"\
+    ,\n            \"Validate Payment Details (UC6)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' (UC6) is included by 'Process Payment'\
+    \ (UC5), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Process Payment' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Process Payment' via the include relationship.\"\n        }\n      ]\n \
+    \   }\n  ]\n}"

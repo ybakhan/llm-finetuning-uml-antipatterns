@@ -1,0 +1,35 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Resident" as Resident
+actor "Coordinator" as Coordinator
+
+rectangle "Neighbourhood Watch App" {
+  usecase "Report Incident" as UC1
+  usecase "View Alert Feed" as UC3
+  usecase "Manage Members" as UC4
+  usecase "Send Community Alert" as UC5
+}
+
+Resident -- UC1
+Resident -- UC3
+Coordinator -- UC4
+Coordinator -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

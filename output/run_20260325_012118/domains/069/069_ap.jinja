@@ -1,0 +1,84 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Attendee" as A1
+actor "Organizer" as A2
+actor "Reviewer" as A3
+actor "Payment Gateway" as A4
+
+rectangle "Conference Registration System" {
+  usecase "Register for Conference" as UC1
+  usecase "Submit Paper" as UC2
+  usecase "Review Paper" as UC3
+  usecase "Manage Conference Schedule" as UC4
+  usecase "Process Payment" as UC5
+  usecase "View Conference Program" as UC6
+  usecase "Cancel Registration" as UC7
+  usecase "Assign Reviewers" as UC8
+  usecase "Generate Attendance Certificate" as UC9
+  usecase "Validate Registration Data" as UC10
+  usecase "Send Confirmation Email" as UC11
+  usecase "Check Session Availability" as UC12
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC6
+A1 -- UC7
+A1 -- UC9
+A2 -- UC4
+A2 -- UC8
+A3 -- UC3
+A4 -- UC5
+
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC10 : <<include>>
+UC1 ..> UC11 : <<include>>
+UC1 ..> UC12 : <<include>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Register for Conference (UC1)",
+            "Validate Registration Data (UC10)"
+          ],
+          "explanation": "'Validate Registration Data' (UC10) is included by 'Register for Conference' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register for Conference' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register for Conference' via the include relationship."
+        },
+        {
+          "elements": [
+            "Register for Conference (UC1)",
+            "Send Confirmation Email (UC11)"
+          ],
+          "explanation": "'Send Confirmation Email' (UC11) is included by 'Register for Conference' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register for Conference' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register for Conference' via the include relationship."
+        },
+        {
+          "elements": [
+            "Register for Conference (UC1)",
+            "Check Session Availability (UC12)"
+          ],
+          "explanation": "'Check Session Availability' (UC12) is included by 'Register for Conference' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register for Conference' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register for Conference' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Guest" as Guest
+actor "Lifeguard" as Lifeguard
+actor "Admin" as Admin
+actor "Payment Gateway" as PG
+
+rectangle "Swimming Pool Booking System" {
+  usecase "Book Lane Session" as UC1
+  usecase "Cancel Booking" as UC2
+  usecase "View Pool Schedule" as UC3
+  usecase "Register Account" as UC4
+  usecase "Process Payment" as UC5
+  usecase "Manage Pool Availability" as UC6
+  usecase "Record Attendance" as UC7
+  usecase "Book Swimming Lesson" as UC8
+  usecase "View Booking History" as UC9
+  usecase "Issue Refund" as UC10
+  usecase "Report Pool Incident" as UC11
+  usecase "Manage Membership Plans" as UC12
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Member -- UC8
+Member -- UC9
+Guest -- UC4
+Guest -- UC3
+Lifeguard -- UC7
+Lifeguard -- UC11
+Admin -- UC6
+Admin -- UC10
+Admin -- UC12
+PG -- UC5
+
+UC1 ..> UC5 : <<include>>
+UC2 ..> UC10 : <<extend>>
+}
+@enduml

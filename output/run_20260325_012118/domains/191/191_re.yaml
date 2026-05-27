@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 191
+  domain: military_personnel_management_system
+  domain_display: Military Personnel Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:26:57.009745'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"HR Officer\" as HR\nactor \"Unit Commander\"\
+    \ as CMD\nactor \"Recruiting Officer\" as REC\nactor \"System Administrator\"\
+    \ as ADMIN\n\nrectangle \"Military Personnel Management System\" {\n  usecase\
+    \ \"Register New Recruit\" as UC1\n  usecase \"Assign Personnel to Unit\" as UC2\n\
+    \  usecase \"Process Promotion\" as UC3\n  usecase \"Manage Leave Requests\" as\
+    \ UC4\n  usecase \"View Personnel Records\" as UC5\n  usecase \"Generate Readiness\
+    \ Report\" as UC6\n  usecase \"Manage User Accounts\" as UC7\n  usecase \"Track\
+    \ Disciplinary Actions\" as UC8\n  usecase \"Process Discharge\" as UC9\n  usecase\
+    \ \"Manage Training Certifications\" as UC10\n}\n\nHR -- UC2\nHR -- UC3\nHR --\
+    \ UC4\nHR -- UC5\nHR -- UC9\n\nCMD -- UC6\nCMD -- UC8\nCMD -- UC10\n\nREC -- UC1\n\
+    \nADMIN -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Maintenance Technician" as Tech
+actor "Supervisor" as Super
+
+rectangle "Equipment Maintenance System" {
+  usecase "Log Maintenance Request" as UC1
+  usecase "Perform Repair" as UC2
+  usecase "Approve Work Order" as UC4
+  usecase "View Maintenance History" as UC5
+  usecase "Generate Report" as UC6
+}
+
+Tech -- UC1
+Tech -- UC2
+Tech -- UC5
+Super -- UC4
+Super -- UC6
+@enduml

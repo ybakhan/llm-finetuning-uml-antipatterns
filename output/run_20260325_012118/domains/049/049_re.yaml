@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 49
+  domain: supply_chain_management
+  domain_display: Supply Chain Management
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:39:25.358510'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Warehouse Manager\" as WM\nactor \"Supplier\"\
+    \ as SUP\n\nrectangle \"Supply Chain Management System\" {\n  usecase \"Track\
+    \ Inventory\" as UC1\n  usecase \"Place Purchase Order\" as UC2\n  usecase \"\
+    Confirm Shipment\" as UC3\n  usecase \"Receive Goods\" as UC5\n}\n\nWM -- UC1\n\
+    WM -- UC2\nWM -- UC5\nSUP -- UC3\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

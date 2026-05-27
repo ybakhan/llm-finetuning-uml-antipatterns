@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Job Seeker" as JS
+actor "Employer" as EM
+
+rectangle "Job Portal" {
+  usecase "Search Jobs" as UC1
+  usecase "Apply for Job" as UC2
+  usecase "Post Job Listing" as UC4
+  usecase "Review Applications" as UC5
+}
+
+JS -- UC1
+JS -- UC2
+EM -- UC4
+EM -- UC5
+@enduml

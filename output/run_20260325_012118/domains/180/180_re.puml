@@ -1,0 +1,36 @@
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Agronomist" as AG
+actor "Weather Service" as WS
+
+rectangle "Crop Monitoring System" {
+  usecase "Monitor Crop Health" as UC1
+  usecase "Record Field Observation" as UC3
+  usecase "Generate Yield Forecast" as UC5
+  usecase "Configure Alert Thresholds" as UC7
+  usecase "View Dashboard" as UC8
+  usecase "Manage Irrigation Schedule" as UC9
+  usecase "Detect Pest Outbreak" as UC10
+  usecase "Recommend Treatment Plan" as UC11
+  usecase "Receive Weather Data" as UC12
+  usecase "Generate Seasonal Report" as UC13
+  usecase "Register Field Parcel" as UC14
+}
+
+FM -- UC1
+FM -- UC8
+FM -- UC7
+FM -- UC9
+FM -- UC13
+FT -- UC3
+FT -- UC14
+AG -- UC5
+AG -- UC10
+AG -- UC11
+WS -- UC12
+
+UC10 .> UC11 : <<extend>>
+@enduml

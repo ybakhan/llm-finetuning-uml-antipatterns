@@ -1,0 +1,88 @@
+metadata:
+  domain_id: 165
+  domain: language_translation_service
+  domain_display: Language Translation Service
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Text for Translation (UC1)
+      - Parse Input Text (UC2)
+      explanation: '''Parse Input Text'' (UC2) is included by ''Submit Text for Translation''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Text for Translation''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Text for Translation'' via the include relationship.'
+    - elements:
+      - Submit Text for Translation (UC1)
+      - Detect Source Language (UC3)
+      explanation: '''Detect Source Language'' (UC3) is included by ''Submit Text
+        for Translation'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Submit Text for Translation'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Submit Text for Translation''
+        via the include relationship.'
+    - elements:
+      - Request Document Translation (UC10)
+      - Validate Document Format (UC11)
+      explanation: '''Validate Document Format'' (UC11) is included by ''Request Document
+        Translation'' (UC10), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Request
+        Document Translation'' rather than a standalone service observable to any
+        actor, making it a functional decomposition of ''Request Document Translation''
+        via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:22:04.063072'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"End User\" as EU\nactor \"Professional Translator\"\
+    \ as PT\nactor \"Admin\" as AD\n\nrectangle \"Language Translation Service\" {\n\
+    \  usecase \"Submit Text for Translation\" as UC1\n  usecase \"Parse Input Text\"\
+    \ as UC2\n  usecase \"Detect Source Language\" as UC3\n  usecase \"Review Machine\
+    \ Translation\" as UC4\n  usecase \"Approve Translation\" as UC5\n  usecase \"\
+    Manage Glossaries\" as UC6\n  usecase \"View Translation History\" as UC7\n  usecase\
+    \ \"Manage User Accounts\" as UC8\n  usecase \"Generate Quality Report\" as UC9\n\
+    \  usecase \"Request Document Translation\" as UC10\n  usecase \"Validate Document\
+    \ Format\" as UC11\n  usecase \"Rate Translation Quality\" as UC12\n  usecase\
+    \ \"Configure Language Pairs\" as UC13\n}\n\nEU -- UC1\nEU -- UC7\nEU -- UC10\n\
+    EU -- UC12\nPT -- UC4\nPT -- UC5\nPT -- UC6\nAD -- UC8\nAD -- UC9\nAD -- UC13\n\
+    \nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nUC10 ..> UC11 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Text for Translation\
+    \ (UC1)\",\n            \"Parse Input Text (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Parse Input Text' (UC2) is included by 'Submit Text for Translation'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Submit Text for Translation'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Submit Text for Translation' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Submit Text\
+    \ for Translation (UC1)\",\n            \"Detect Source Language (UC3)\"\n   \
+    \       ],\n          \"explanation\": \"'Detect Source Language' (UC3) is included\
+    \ by 'Submit Text for Translation' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Text for Translation' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Submit Text for Translation'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Request Document Translation (UC10)\",\n            \"Validate\
+    \ Document Format (UC11)\"\n          ],\n          \"explanation\": \"'Validate\
+    \ Document Format' (UC11) is included by 'Request Document Translation' (UC10),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Request Document Translation' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Request Document Translation' via the include relationship.\"\n        }\n\
+    \      ]\n    }\n  ]\n}"

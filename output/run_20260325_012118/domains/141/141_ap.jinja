@@ -1,0 +1,92 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Event Coordinator" as EC
+actor "Security Officer" as SO
+actor "Maintenance Staff" as MS
+actor "Ticket Office Manager" as TOM
+
+rectangle "Stadium Management System" {
+  usecase "Schedule Event" as UC1
+  usecase "Validate Venue Availability" as UC2
+  usecase "Assign Seating Layout" as UC3
+  usecase "Monitor Crowd Control" as UC4
+  usecase "Manage Access Gates" as UC5
+  usecase "Log Security Incident" as UC6
+  usecase "Dispatch Security Team" as UC7
+  usecase "Submit Maintenance Request" as UC8
+  usecase "Inspect Stadium Facilities" as UC9
+  usecase "Configure Ticket Pricing" as UC10
+  usecase "Generate Sales Report" as UC11
+  usecase "Retrieve Transaction Data" as UC12
+  usecase "Manage Parking Allocation" as UC13
+  usecase "Coordinate Emergency Evacuation" as UC14
+}
+
+EC -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+SO -- UC4
+SO -- UC5
+SO -- UC6
+UC6 ..> UC7 : <<include>>
+MS -- UC8
+MS -- UC9
+TOM -- UC10
+TOM -- UC11
+UC11 ..> UC12 : <<include>>
+TOM -- UC13
+SO -- UC14
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 4,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 4,
+      "instances": [
+        {
+          "elements": [
+            "Schedule Event (UC1)",
+            "Validate Venue Availability (UC2)"
+          ],
+          "explanation": "'Validate Venue Availability' (UC2) is included by 'Schedule Event' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Schedule Event' rather than a standalone service observable to any actor, making it a functional decomposition of 'Schedule Event' via the include relationship."
+        },
+        {
+          "elements": [
+            "Schedule Event (UC1)",
+            "Assign Seating Layout (UC3)"
+          ],
+          "explanation": "'Assign Seating Layout' (UC3) is included by 'Schedule Event' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Schedule Event' rather than a standalone service observable to any actor, making it a functional decomposition of 'Schedule Event' via the include relationship."
+        },
+        {
+          "elements": [
+            "Log Security Incident (UC6)",
+            "Dispatch Security Team (UC7)"
+          ],
+          "explanation": "'Dispatch Security Team' (UC7) is included by 'Log Security Incident' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Log Security Incident' rather than a standalone service observable to any actor, making it a functional decomposition of 'Log Security Incident' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Sales Report (UC11)",
+            "Retrieve Transaction Data (UC12)"
+          ],
+          "explanation": "'Retrieve Transaction Data' (UC12) is included by 'Generate Sales Report' (UC11), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Sales Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Sales Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

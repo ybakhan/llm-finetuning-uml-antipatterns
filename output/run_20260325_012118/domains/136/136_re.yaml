@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 136
+  domain: book_club_platform
+  domain_display: Book Club Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:14:26.907842'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Club Leader\" as\
+    \ Leader\nactor \"Administrator\" as Admin\n\nrectangle \"Book Club Platform\"\
+    \ {\n  usecase \"Browse Book Catalog\" as UC1\n  usecase \"Join Book Club\" as\
+    \ UC2\n  usecase \"Leave Book Club\" as UC3\n  usecase \"Submit Book Review\"\
+    \ as UC4\n  usecase \"Rate Book\" as UC5\n  usecase \"Schedule Meeting\" as UC6\n\
+    \  usecase \"Create Book Club\" as UC9\n  usecase \"Select Book of the Month\"\
+    \ as UC10\n  usecase \"Manage Members\" as UC11\n  usecase \"Moderate Discussions\"\
+    \ as UC12\n  usecase \"Generate Reading Reports\" as UC13\n  usecase \"Manage\
+    \ Platform Settings\" as UC16\n  usecase \"View Discussion Thread\" as UC17\n\
+    \  usecase \"Post Discussion Comment\" as UC18\n}\n\nMember -- UC1\nMember --\
+    \ UC2\nMember -- UC3\nMember -- UC4\nMember -- UC5\nMember -- UC17\nMember --\
+    \ UC18\n\nLeader -- UC6\nLeader -- UC9\nLeader -- UC10\nLeader -- UC11\nLeader\
+    \ -- UC12\nLeader -- UC13\n\nAdmin -- UC16\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

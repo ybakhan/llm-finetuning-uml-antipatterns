@@ -1,0 +1,55 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Player" as Player
+actor "Tournament Admin" as Admin
+
+rectangle "Tournament Registration System" {
+  usecase "Register for Tournament" as UC1
+  usecase "Validate Player Eligibility" as UC2
+  usecase "View Tournament Schedule" as UC3
+  usecase "Create Tournament" as UC4
+  usecase "Cancel Registration" as UC5
+  usecase "Manage Seedings" as UC6
+}
+
+Player -- UC1
+Player -- UC3
+Player -- UC5
+Admin -- UC4
+Admin -- UC6
+
+UC1 ..> UC2 : <<include>>
+
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Register for Tournament (UC1)",
+            "Validate Player Eligibility (UC2)"
+          ],
+          "explanation": "'Validate Player Eligibility' (UC2) is included by 'Register for Tournament' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register for Tournament' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register for Tournament' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

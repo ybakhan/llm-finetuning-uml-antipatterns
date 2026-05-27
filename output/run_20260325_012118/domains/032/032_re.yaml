@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 32
+  domain: loan_approval_system
+  domain_display: Loan Approval System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:49:20.804810'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Applicant\" as Applicant\nactor \"Loan\
+    \ Officer\" as Officer\n\nrectangle \"Loan Approval System\" {\n  usecase \"Submit\
+    \ Loan Application\" as UC1\n  usecase \"Review Loan Application\" as UC2\n  usecase\
+    \ \"Approve or Reject Loan\" as UC3\n  usecase \"View Loan Status\" as UC5\n \
+    \ usecase \"Generate Loan Agreement\" as UC6\n}\n\nApplicant -- UC1\nApplicant\
+    \ -- UC5\nOfficer -- UC2\nOfficer -- UC3\nOfficer -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

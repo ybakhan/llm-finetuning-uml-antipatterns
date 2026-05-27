@@ -1,0 +1,75 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Shipper" as Shipper
+actor "Carrier" as Carrier
+actor "Warehouse Manager" as WM
+actor "Customer" as Customer
+actor "System Administrator" as Admin
+
+rectangle "Freight Tracking System" {
+  usecase "Create Shipment" as UC1
+  usecase "Update Shipment Status" as UC2
+  usecase "Track Shipment" as UC3
+  usecase "Assign Carrier" as UC4
+  usecase "Register Freight Arrival" as UC5
+  usecase "Manage Routes" as UC6
+  usecase "Generate Shipment Report" as UC7
+  usecase "Request Delivery Estimate" as UC8
+  usecase "File Damage Claim" as UC9
+  usecase "Cancel Shipment" as UC10
+  usecase "Manage User Accounts" as UC11
+  usecase "Validate Tracking Number" as UC12
+  usecase "Schedule Pickup" as UC13
+  usecase "View Shipment History" as UC14
+}
+
+Shipper -- UC1
+Shipper -- UC4
+Shipper -- UC10
+Shipper -- UC13
+Carrier -- UC2
+Carrier -- UC5
+WM -- UC5
+WM -- UC7
+Customer -- UC3
+Customer -- UC8
+Customer -- UC9
+Customer -- UC14
+Admin -- UC6
+Admin -- UC11
+
+UC3 ..> UC12 : <<include>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Track Shipment (UC3)",
+            "Validate Tracking Number (UC12)"
+          ],
+          "explanation": "'Validate Tracking Number' (UC12) is included by 'Track Shipment' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Track Shipment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Track Shipment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

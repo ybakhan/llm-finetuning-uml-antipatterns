@@ -1,0 +1,31 @@
+metadata:
+  domain_id: 187
+  domain: assembly_line_monitoring_system
+  domain_display: Assembly Line Monitoring System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:34:53.598166'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Line Operator\" as Operator\nactor \"Production\
+    \ Manager\" as Manager\nactor \"Maintenance Technician\" as Technician\nactor\
+    \ \"Quality Inspector\" as Inspector\n\nrectangle \"Assembly Line Monitoring System\"\
+    \ {\n  usecase \"Monitor Line Status\" as UC1\n  usecase \"Report Downtime\" as\
+    \ UC4\n  usecase \"View Production Metrics\" as UC6\n  usecase \"Configure Alert\
+    \ Thresholds\" as UC7\n  usecase \"Acknowledge Alert\" as UC8\n  usecase \"Schedule\
+    \ Preventive Maintenance\" as UC9\n  usecase \"View Maintenance History\" as UC10\n\
+    \  usecase \"Record Quality Inspection\" as UC11\n  usecase \"Generate Shift Report\"\
+    \ as UC12\n  usecase \"Manage Line Configuration\" as UC13\n  usecase \"Track\
+    \ Defect Rate\" as UC14\n  usecase \"Escalate Critical Fault\" as UC15\n  usecase\
+    \ \"View Real-Time Throughput\" as UC16\n}\n\nOperator -- UC1\nOperator -- UC4\n\
+    Operator -- UC8\nOperator -- UC16\n\nManager -- UC6\nManager -- UC7\nManager --\
+    \ UC12\nManager -- UC13\n\nTechnician -- UC9\nTechnician -- UC10\nTechnician --\
+    \ UC15\n\nInspector -- UC11\nInspector -- UC14\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

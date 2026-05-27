@@ -1,0 +1,517 @@
+AUDIT LOG — Prompt #066
+Timestamp : 2026-03-26T00:55:18.539706
+Model     : claude-opus-4-6
+Tokens    : input=2278  output=1513
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #066: Generate a MEDIUM use case model with exactly 30 constructs (valid range for medium: 24–30 constructs). Domain: IT Help Desk System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: it_help_desk_system
+DOMAIN_DISPLAY: IT Help Desk System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 30
+
+```plantuml
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "Support Agent" as SA
+actor "IT Manager" as MGR
+
+rectangle "IT Help Desk System" {
+  usecase "Submit Ticket" as UC1
+  usecase "Validate User Credentials" as UC2
+  usecase "Categorize Ticket" as UC3
+  usecase "View Ticket Status" as UC4
+  usecase "Resolve Ticket" as UC5
+  usecase "Log Resolution Details" as UC6
+  usecase "Escalate Ticket" as UC7
+  usecase "Reassign Ticket" as UC8
+  usecase "Generate Performance Report" as UC9
+  usecase "Calculate Average Resolution Time" as UC10
+  usecase "Manage Knowledge Base" as UC11
+  usecase "Search Knowledge Base" as UC12
+  usecase "Rate Support Experience" as UC13
+  usecase "Close Ticket" as UC14
+}
+
+EU -- UC1
+EU -- UC4
+EU -- UC12
+EU -- UC13
+
+SA -- UC5
+SA -- UC7
+SA -- UC8
+SA -- UC12
+SA -- UC14
+
+MGR -- UC9
+MGR -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC7 ..> UC8 : <<extend>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Submit Ticket (use case, UC1)",
+            "Validate User Credentials (use case, UC2)",
+            "<<include>> relationship from UC1 to UC2"
+          ],
+          "explanation": "'Validate User Credentials' is an inclusion use case included only by 'Submit Ticket'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal validation step rather than a complete service observable to a user, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Submit Ticket (use case, UC1)",
+            "Categorize Ticket (use case, UC3)",
+            "<<include>> relationship from UC1 to UC3"
+          ],
+          "explanation": "'Categorize Ticket' is an inclusion use case included only by 'Submit Ticket'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. Categorizing a ticket is an internal processing step within ticket submission, not a standalone service offered to any actor."
+        },
+        {
+          "constructs": [
+            "Generate Performance Report (use case, UC9)",
+            "Calculate Average Resolution Time (use case, UC10)",
+            "<<include>> relationship from UC9 to UC10"
+          ],
+          "explanation": "'Calculate Average Resolution Time' is an inclusion use case included only by 'Generate Performance Report'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It is a computational sub-step within report generation, not a complete service observable to a user."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three functional decomposition instances must be resolved by merging each orphaned inclusion use case into its sole base use case:
+
+1. **"Validate User Credentials" (UC2)** is merged into "Submit Ticket" (UC1). Credential validation is an internal step of submitting a ticket. The use case UC2 and the <<include>> from UC1 to UC2 are removed.
+
+2. **"Categorize Ticket" (UC3)** is merged into "Submit Ticket" (UC1). Ticket categorization is an internal step of the submission process. The use case UC3 and the <<include>> from UC1 to UC3 are removed.
+
+3. **"Calculate Average Resolution Time" (UC10)** is merged into "Generate Performance Report" (UC9). Calculating resolution time is a computational sub-step within report generation. The use case UC10 and the <<include>> from UC9 to UC10 are removed.
+
+Additionally, **"Log Resolution Details" (UC6)** is merged into "Resolve Ticket" (UC5) and the <<include>> is removed, because UC6 has no actor association and is an internal logging step within ticket resolution — it fails the actor coverage rule and the use case granularity rule. The remaining model preserves all legitimate actor-goal use cases and relationships.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "Support Agent" as SA
+actor "IT Manager" as MGR
+
+rectangle "IT Help Desk System" {
+  usecase "Submit Ticket" as UC1
+  usecase "View Ticket Status" as UC4
+  usecase "Resolve Ticket" as UC5
+  usecase "Escalate Ticket" as UC7
+  usecase "Reassign Ticket" as UC8
+  usecase "Generate Performance Report" as UC9
+  usecase "Manage Knowledge Base" as UC11
+  usecase "Search Knowledge Base" as UC12
+  usecase "Rate Support Experience" as UC13
+  usecase "Close Ticket" as UC14
+}
+
+EU -- UC1
+EU -- UC4
+EU -- UC12
+EU -- UC13
+
+SA -- UC5
+SA -- UC7
+SA -- UC8
+SA -- UC12
+SA -- UC14
+
+MGR -- UC9
+MGR -- UC11
+
+UC7 ..> UC8 : <<extend>>
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T00:02:48.010801
+Model     : claude-opus-4-6
+Tokens    : input=1179  output=606
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "Support Agent" as SA
+actor "IT Manager" as MGR
+
+rectangle "IT Help Desk System" {
+  usecase "Submit Ticket" as UC1
+  usecase "Validate User Credentials" as UC2
+  usecase "Categorize Ticket" as UC3
+  usecase "View Ticket Status" as UC4
+  usecase "Resolve Ticket" as UC5
+  usecase "Log Resolution Details" as UC6
+  usecase "Escalate Ticket" as UC7
+  usecase "Reassign Ticket" as UC8
+  usecase "Generate Performance Report" as UC9
+  usecase "Calculate Average Resolution Time" as UC10
+  usecase "Manage Knowledge Base" as UC11
+  usecase "Search Knowledge Base" as UC12
+  usecase "Rate Support Experience" as UC13
+  usecase "Close Ticket" as UC14
+}
+
+EU -- UC1
+EU -- UC4
+EU -- UC12
+EU -- UC13
+
+SA -- UC5
+SA -- UC7
+SA -- UC8
+SA -- UC12
+SA -- UC14
+
+MGR -- UC9
+MGR -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC7 ..> UC8 : <<extend>>
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Submit Ticket (use case, UC1)",
+            "Validate User Credentials (use case, UC2)",
+            "<<include>> relationship from UC1 to UC2"
+          ],
+          "explanation": "'Validate User Credentials' is an inclusion use case included only by 'Submit Ticket'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It represents an internal validation step rather than a complete service observable to a user, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Submit Ticket (use case, UC1)",
+            "Categorize Ticket (use case, UC3)",
+            "<<include>> relationship from UC1 to UC3"
+          ],
+          "explanation": "'Categorize Ticket' is an inclusion use case included only by 'Submit Ticket'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. Categorizing a ticket is an internal processing step within ticket submission, not a standalone service offered to any actor."
+        },
+        {
+          "constructs": [
+            "Generate Performance Report (use case, UC9)",
+            "Calculate Average Resolution Time (use case, UC10)",
+            "<<include>> relationship from UC9 to UC10"
+          ],
+          "explanation": "'Calculate Average Resolution Time' is an inclusion use case included only by 'Generate Performance Report'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It is a computational sub-step within report generation, not a complete service observable to a user."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+The first two antipattern instances are actually one instance becasue they share the same base use "Submit Ticket".
+
+Furthermore, you missed one antipattern instance. Inclusion use case "Log Resolution Details" is a functional decomposition of base use case "Resolve Ticket"
+
+Adjust counts and explanations accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Submit Ticket (use case, UC1)",
+            "Validate User Credentials (use case, UC2)",
+            "Categorize Ticket (use case, UC3)",
+            "<<include>> relationship from UC1 to UC2",
+            "<<include>> relationship from UC1 to UC3"
+          ],
+          "explanation": "'Submit Ticket' includes both 'Validate User Credentials' and 'Categorize Ticket'. Neither UC2 nor UC3 is associated with any actor, includes or extends any other use case, is extended by any use case, or participates in any generalization. Both are included only by 'Submit Ticket'. They represent internal sub-steps (credential validation and ticket categorization) within the ticket submission process rather than complete services observable to a user, making this a functional decomposition of 'Submit Ticket' via the include relationship."
+        },
+        {
+          "constructs": [
+            "Resolve Ticket (use case, UC5)",
+            "Log Resolution Details (use case, UC6)",
+            "<<include>> relationship from UC5 to UC6"
+          ],
+          "explanation": "'Log Resolution Details' is an inclusion use case included only by 'Resolve Ticket'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. Logging resolution details is an internal processing step within ticket resolution, not a standalone service offered to any actor, making it a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Generate Performance Report (use case, UC9)",
+            "Calculate Average Resolution Time (use case, UC10)",
+            "<<include>> relationship from UC9 to UC10"
+          ],
+          "explanation": "'Calculate Average Resolution Time' is an inclusion use case included only by 'Generate Performance Report'. It is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization. It is a computational sub-step within report generation, not a complete service observable to a user, making it a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}

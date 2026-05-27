@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 181
+  domain: irrigation_control_system
+  domain_display: Irrigation Control System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Configure Irrigation Schedule (UC1)
+      - Parse Schedule Parameters (UC10)
+      explanation: '''Parse Schedule Parameters'' (UC10) is included by ''Configure
+        Irrigation Schedule'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Configure Irrigation Schedule'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Configure Irrigation
+        Schedule'' via the include relationship.'
+    - elements:
+      - Generate Water Usage Report (UC6)
+      - Format Report Data (UC11)
+      explanation: '''Format Report Data'' (UC11) is included by ''Generate Water
+        Usage Report'' (UC6), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Water Usage Report'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Generate Water Usage Report'' via
+        the include relationship.'
+    - elements:
+      - Activate Zone Valves (UC3)
+      - Log Valve Activity (UC14)
+      explanation: '''Log Valve Activity'' (UC14) is included by ''Activate Zone Valves''
+        (UC3), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Activate Zone Valves''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Activate Zone Valves'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:32:11.395462'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Farm Manager\" as FM\nactor \"Field Technician\"\
+    \ as FT\nactor \"Weather Service\" as WS\n\nrectangle \"Irrigation Control System\"\
+    \ {\n  usecase \"Configure Irrigation Schedule\" as UC1\n  usecase \"Monitor Soil\
+    \ Moisture\" as UC2\n  usecase \"Activate Zone Valves\" as UC3\n  usecase \"View\
+    \ Dashboard\" as UC4\n  usecase \"Receive Weather Forecast\" as UC5\n  usecase\
+    \ \"Generate Water Usage Report\" as UC6\n  usecase \"Set Alert Thresholds\" as\
+    \ UC7\n  usecase \"Perform Field Inspection\" as UC8\n  usecase \"Validate Sensor\
+    \ Readings\" as UC9\n  usecase \"Parse Schedule Parameters\" as UC10\n  usecase\
+    \ \"Format Report Data\" as UC11\n  usecase \"Manage Sensor Calibration\" as UC12\n\
+    \  usecase \"Override Automatic Irrigation\" as UC13\n  usecase \"Log Valve Activity\"\
+    \ as UC14\n}\n\nFM -- UC1\nFM -- UC2\nFM -- UC4\nFM -- UC6\nFM -- UC7\nFM -- UC13\n\
+    FT -- UC8\nFT -- UC3\nFT -- UC12\nWS -- UC5\n\nUC1 ..> UC10 : <<include>>\nUC6\
+    \ ..> UC11 : <<include>>\nUC3 ..> UC14 : <<include>>\nUC8 ..> UC9 : <<include>>\n\
+    UC2 ..> UC9 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Configure Irrigation\
+    \ Schedule (UC1)\",\n            \"Parse Schedule Parameters (UC10)\"\n      \
+    \    ],\n          \"explanation\": \"'Parse Schedule Parameters' (UC10) is included\
+    \ by 'Configure Irrigation Schedule' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Configure Irrigation Schedule' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Configure Irrigation\
+    \ Schedule' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Generate Water Usage Report (UC6)\",\n      \
+    \      \"Format Report Data (UC11)\"\n          ],\n          \"explanation\"\
+    : \"'Format Report Data' (UC11) is included by 'Generate Water Usage Report' (UC6),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Generate Water Usage Report' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Generate Water Usage Report' via the include relationship.\"\n        },\n\
+    \        {\n          \"elements\": [\n            \"Activate Zone Valves (UC3)\"\
+    ,\n            \"Log Valve Activity (UC14)\"\n          ],\n          \"explanation\"\
+    : \"'Log Valve Activity' (UC14) is included by 'Activate Zone Valves' (UC3), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Activate Zone Valves' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Activate\
+    \ Zone Valves' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n\
+    }"

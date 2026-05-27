@@ -1,0 +1,62 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Environmental Officer" as EO
+actor "Technician" as Tech
+
+rectangle "Air Quality Monitoring System" {
+  usecase "View Air Quality Report" as UC1
+  usecase "Configure Sensor" as UC2
+  usecase "Set Alert Thresholds" as UC3
+  usecase "Receive Pollution Alert" as UC4
+  usecase "Generate Report" as UC5
+  usecase "Fetch Sensor Data" as UC6
+  usecase "Format Report Output" as UC7
+}
+
+EO -- UC1
+EO -- UC3
+EO -- UC4
+Tech -- UC2
+EO -- UC5
+UC5 .> UC6 : <<include>>
+UC5 .> UC7 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Generate Report (UC5)",
+            "Fetch Sensor Data (UC6)"
+          ],
+          "explanation": "'Fetch Sensor Data' (UC6) is included by 'Generate Report' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Report' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Report (UC5)",
+            "Format Report Output (UC7)"
+          ],
+          "explanation": "'Format Report Output' (UC7) is included by 'Generate Report' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

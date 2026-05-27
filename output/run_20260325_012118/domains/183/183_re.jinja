@@ -1,0 +1,49 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Generate Fire Alert" as UC2
+  usecase "Dispatch Emergency Team" as UC3
+  usecase "View Fire Risk Map" as UC4
+  usecase "Configure Alert Thresholds" as UC5
+  usecase "Manage Sensor Network" as UC6
+  usecase "Review Historical Data" as UC7
+  usecase "Submit Weather Forecast" as UC8
+  usecase "Acknowledge Alert" as UC9
+  usecase "Generate Incident Report" as UC10
+}
+
+Ranger -- UC1
+Ranger -- UC4
+Ranger -- UC9
+Ranger -- UC10
+Dispatcher -- UC2
+Dispatcher -- UC3
+Admin -- UC5
+Admin -- UC6
+Meteo -- UC8
+Meteo -- UC7
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

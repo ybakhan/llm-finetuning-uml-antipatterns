@@ -1,0 +1,83 @@
+metadata:
+  domain_id: 139
+  domain: digital_photography_platform
+  domain_display: Digital Photography Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Upload Photo (UC1)
+      - Validate File Format (UC2)
+      explanation: '''Validate File Format'' (UC2) is included by ''Upload Photo''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Photo'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Upload Photo'' via the include relationship.'
+    - elements:
+      - Upload Photo (UC1)
+      - Generate Thumbnail (UC3)
+      explanation: '''Generate Thumbnail'' (UC3) is included by ''Upload Photo'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Photo'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Upload Photo'' via the include relationship.'
+    - elements:
+      - Search Photos (UC5)
+      - Parse Search Query (UC6)
+      explanation: '''Parse Search Query'' (UC6) is included by ''Search Photos''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Search Photos'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Search Photos'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:15:35.066568'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Photographer as P\nactor Viewer as V\nactor Administrator\
+    \ as A\n\nrectangle \"Digital Photography Platform\" {\n  usecase \"Upload Photo\"\
+    \ as UC1\n  usecase \"Validate File Format\" as UC2\n  usecase \"Generate Thumbnail\"\
+    \ as UC3\n  usecase \"Browse Gallery\" as UC4\n  usecase \"Search Photos\" as\
+    \ UC5\n  usecase \"Parse Search Query\" as UC6\n  usecase \"Download Photo\" as\
+    \ UC7\n  usecase \"Rate Photo\" as UC8\n  usecase \"Comment on Photo\" as UC9\n\
+    \  usecase \"Create Album\" as UC10\n  usecase \"Moderate Content\" as UC11\n\
+    \  usecase \"Manage User Accounts\" as UC12\n  usecase \"View Photo Details\"\
+    \ as UC13\n}\n\nP -- UC1\nP -- UC10\nP -- UC4\nP -- UC13\nV -- UC4\nV -- UC5\n\
+    V -- UC7\nV -- UC8\nV -- UC9\nV -- UC13\nA -- UC11\nA -- UC12\n\nUC1 ..> UC2 :\
+    \ <<include>>\nUC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\nUC4 ..> UC13\
+    \ : <<include>>\n}\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Upload Photo (UC1)\"\
+    ,\n            \"Validate File Format (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate File Format' (UC2) is included by 'Upload Photo' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Upload Photo' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Upload Photo' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Upload Photo (UC1)\",\n            \"Generate Thumbnail (UC3)\"\
+    \n          ],\n          \"explanation\": \"'Generate Thumbnail' (UC3) is included\
+    \ by 'Upload Photo' (UC1), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Upload\
+    \ Photo' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Upload Photo' via the include relationship.\"\n\
+    \        },\n        {\n          \"elements\": [\n            \"Search Photos\
+    \ (UC5)\",\n            \"Parse Search Query (UC6)\"\n          ],\n         \
+    \ \"explanation\": \"'Parse Search Query' (UC6) is included by 'Search Photos'\
+    \ (UC5), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Search Photos' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Search Photos' via the include relationship.\"\n        }\n      ]\n   \
+    \ }\n  ]\n}"

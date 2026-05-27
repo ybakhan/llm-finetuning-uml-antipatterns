@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "General User" as GU
+actor "Meteorologist" as MET
+actor "Emergency Manager" as EM
+actor "System Administrator" as SA
+
+rectangle "Weather Forecasting Service" {
+  usecase "View Current Weather" as UC1
+  usecase "Search Location" as UC2
+  usecase "View Extended Forecast" as UC3
+  usecase "Issue Severe Weather Alert" as UC4
+  usecase "Subscribe to Notifications" as UC6
+  usecase "Manage Weather Stations" as UC7
+  usecase "Review Historical Data" as UC8
+  usecase "Generate Forecast Model" as UC9
+  usecase "Configure System Settings" as UC11
+  usecase "View Emergency Briefing" as UC12
+  usecase "Export Weather Report" as UC13
+}
+
+GU -- UC1
+GU -- UC2
+GU -- UC3
+GU -- UC6
+MET -- UC4
+MET -- UC8
+MET -- UC9
+MET -- UC13
+EM -- UC12
+EM -- UC3
+SA -- UC7
+SA -- UC11
+@enduml

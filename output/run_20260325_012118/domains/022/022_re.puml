@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Player" as Player
+actor "Administrator" as Admin
+
+rectangle "Online Gaming Platform" {
+  usecase "Browse Games" as UC1
+  usecase "Play Game" as UC2
+  usecase "Purchase In-Game Items" as UC4
+  usecase "Manage Game Catalog" as UC5
+  usecase "View Leaderboard" as UC6
+}
+
+Player -- UC1
+Player -- UC2
+Player -- UC4
+Admin -- UC5
+Player -- UC6
+@enduml

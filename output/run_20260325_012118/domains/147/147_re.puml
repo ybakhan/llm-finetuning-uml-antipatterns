@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Staff" as Staff
+
+rectangle "Climbing Gym Management System" {
+  usecase "Check In" as UC1
+  usecase "Book Climbing Session" as UC3
+  usecase "Manage Routes" as UC4
+  usecase "Process Day Pass" as UC5
+  usecase "Rent Equipment" as UC6
+}
+
+Member -- UC1
+Member -- UC3
+Member -- UC6
+Staff -- UC4
+Staff -- UC5
+@enduml

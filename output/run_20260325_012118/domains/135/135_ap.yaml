@@ -1,0 +1,84 @@
+metadata:
+  domain_id: 135
+  domain: lost_and_found_system
+  domain_display: Lost and Found System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Report Found Item (UC1)
+      - Categorize Item (UC2)
+      explanation: '''Categorize Item'' (UC2) is included by ''Report Found Item''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Report Found Item'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Report Found Item'' via the include relationship.'
+    - elements:
+      - Report Found Item (UC1)
+      - Generate Item Tag (UC3)
+      explanation: '''Generate Item Tag'' (UC3) is included by ''Report Found Item''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Report Found Item'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Report Found Item'' via the include relationship.'
+    - elements:
+      - Submit Claim (UC5)
+      - Validate Claim Details (UC6)
+      explanation: '''Validate Claim Details'' (UC6) is included by ''Submit Claim''
+        (UC5), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Claim'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Submit Claim'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:17:56.839393'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Finder\" as Finder\nactor \"Claimant\" as Claimant\n\
+    actor \"Administrator\" as Admin\n\nrectangle \"Lost and Found System\" {\n  usecase\
+    \ \"Report Found Item\" as UC1\n  usecase \"Categorize Item\" as UC2\n  usecase\
+    \ \"Generate Item Tag\" as UC3\n  usecase \"Search Lost Items\" as UC4\n  usecase\
+    \ \"Submit Claim\" as UC5\n  usecase \"Validate Claim Details\" as UC6\n  usecase\
+    \ \"Upload Proof of Ownership\" as UC7\n  usecase \"Verify Claim\" as UC8\n  usecase\
+    \ \"Approve Item Release\" as UC9\n  usecase \"Manage Item Categories\" as UC10\n\
+    \  usecase \"View Inventory Dashboard\" as UC11\n  usecase \"Dispose Unclaimed\
+    \ Items\" as UC12\n  usecase \"Generate Reports\" as UC13\n  usecase \"Register\
+    \ Account\" as UC14\n}\n\nFinder -- UC1\nFinder -- UC14\nClaimant -- UC4\nClaimant\
+    \ -- UC5\nClaimant -- UC7\nClaimant -- UC14\nAdmin -- UC8\nAdmin -- UC9\nAdmin\
+    \ -- UC10\nAdmin -- UC11\nAdmin -- UC12\nAdmin -- UC13\n\nUC1 ..> UC2 : <<include>>\n\
+    UC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Report Found Item (UC1)\"\
+    ,\n            \"Categorize Item (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Categorize Item' (UC2) is included by 'Report Found Item' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Report Found Item' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Report Found\
+    \ Item' via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Report Found Item (UC1)\",\n            \"Generate Item Tag\
+    \ (UC3)\"\n          ],\n          \"explanation\": \"'Generate Item Tag' (UC3)\
+    \ is included by 'Report Found Item' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Report Found Item' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Report Found Item' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Submit Claim (UC5)\",\n            \"Validate Claim Details (UC6)\"\n \
+    \         ],\n          \"explanation\": \"'Validate Claim Details' (UC6) is included\
+    \ by 'Submit Claim' (UC5), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Submit\
+    \ Claim' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Submit Claim' via the include relationship.\"\n\
+    \        }\n      ]\n    }\n  ]\n}"

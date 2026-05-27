@@ -1,0 +1,50 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Property Seller" as Seller
+actor "Property Buyer" as Buyer
+actor "Real Estate Agent" as Agent
+actor "System Administrator" as Admin
+
+rectangle "Real Estate Listing Platform" {
+  usecase "Create Property Listing" as UC1
+  usecase "Search Properties" as UC3
+  usecase "Schedule Property Viewing" as UC5
+  usecase "Submit Offer" as UC6
+  usecase "Manage Agent Profile" as UC8
+  usecase "Generate Market Report" as UC9
+  usecase "Save Favorite Listings" as UC10
+  usecase "Moderate Listings" as UC11
+  usecase "Manage User Accounts" as UC12
+  usecase "Contact Seller" as UC13
+}
+
+Seller -- UC1
+Buyer -- UC3
+Buyer -- UC5
+Buyer -- UC6
+Agent -- UC8
+Agent -- UC9
+Buyer -- UC10
+Admin -- UC11
+Admin -- UC12
+Buyer -- UC13
+Agent -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

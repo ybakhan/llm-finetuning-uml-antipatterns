@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 14
+  domain: e_learning_platform
+  domain_display: E-Learning Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:47:16.887829'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Student\nactor Instructor\nactor Administrator\n\
+    \nrectangle \"E-Learning Platform\" {\n  usecase \"Browse Course Catalog\" as\
+    \ UC1\n  usecase \"Enroll in Course\" as UC2\n  usecase \"Watch Lecture\" as UC3\n\
+    \  usecase \"Take Quiz\" as UC4\n  usecase \"Submit Assignment\" as UC7\n  usecase\
+    \ \"View Grades\" as UC8\n  usecase \"Create Course\" as UC9\n  usecase \"Upload\
+    \ Lecture Content\" as UC10\n  usecase \"Grade Assignment\" as UC11\n  usecase\
+    \ \"Manage User Accounts\" as UC12\n  usecase \"Generate Platform Report\" as\
+    \ UC13\n  usecase \"Post Discussion Message\" as UC14\n  usecase \"Track Learning\
+    \ Progress\" as UC15\n}\n\nStudent -- UC1\nStudent -- UC2\nStudent -- UC3\nStudent\
+    \ -- UC4\nStudent -- UC7\nStudent -- UC8\nStudent -- UC14\nStudent -- UC15\n\n\
+    Instructor -- UC9\nInstructor -- UC10\nInstructor -- UC11\nInstructor -- UC14\n\
+    \nAdministrator -- UC12\nAdministrator -- UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

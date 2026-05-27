@@ -1,0 +1,61 @@
+metadata:
+  domain_id: 34
+  domain: news_publishing_system
+  domain_display: News Publishing System
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Publish Article (UC3)
+      - Validate Content (UC6)
+      explanation: '''Validate Content'' is included by ''Publish Article'', has no
+        direct actor association, does not include or extend any other use case, is
+        not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Publish Article'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Publish
+        Article'' via the include relationship.'
+    - elements:
+      - Publish Article (UC3)
+      - Format Article (UC7)
+      explanation: '''Format Article'' is included by ''Publish Article'', has no
+        direct actor association, does not include or extend any other use case, is
+        not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Publish Article'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Publish
+        Article'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:34:19.458824'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Editor\" as Editor\nactor \"Reader\" as Reader\n\
+    \nrectangle \"News Publishing System\" {\n  usecase \"Write Article\" as UC1\n\
+    \  usecase \"Review Article\" as UC2\n  usecase \"Publish Article\" as UC3\n \
+    \ usecase \"Browse News\" as UC4\n  usecase \"Search Articles\" as UC5\n  usecase\
+    \ \"Validate Content\" as UC6\n  usecase \"Format Article\" as UC7\n}\n\nEditor\
+    \ -- UC1\nEditor -- UC2\nEditor -- UC3\nReader -- UC4\nReader -- UC5\n\nUC3 ..>\
+    \ UC6 : <<include>>\nUC3 ..> UC7 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Publish Article (UC3)\"\
+    ,\n            \"Validate Content (UC6)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Content' is included by 'Publish Article', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Publish Article' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Publish Article' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Publish Article\
+    \ (UC3)\",\n            \"Format Article (UC7)\"\n          ],\n          \"explanation\"\
+    : \"'Format Article' is included by 'Publish Article', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Publish Article' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Publish Article' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,92 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Line Operator" as Operator
+actor "Production Manager" as Manager
+actor "Maintenance Technician" as Technician
+actor "Quality Inspector" as Inspector
+
+rectangle "Assembly Line Monitoring System" {
+  usecase "Monitor Line Status" as UC1
+  usecase "Fetch Sensor Readings" as UC2
+  usecase "Format Status Dashboard" as UC3
+  usecase "Report Downtime" as UC4
+  usecase "Log Downtime Entry" as UC5
+  usecase "View Production Metrics" as UC6
+  usecase "Configure Alert Thresholds" as UC7
+  usecase "Acknowledge Alert" as UC8
+  usecase "Schedule Preventive Maintenance" as UC9
+  usecase "View Maintenance History" as UC10
+  usecase "Record Quality Inspection" as UC11
+  usecase "Generate Shift Report" as UC12
+  usecase "Manage Line Configuration" as UC13
+  usecase "Track Defect Rate" as UC14
+  usecase "Escalate Critical Fault" as UC15
+  usecase "View Real-Time Throughput" as UC16
+}
+
+Operator -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Operator -- UC4
+UC4 ..> UC5 : <<include>>
+Operator -- UC8
+Operator -- UC16
+
+Manager -- UC6
+Manager -- UC7
+Manager -- UC12
+Manager -- UC13
+
+Technician -- UC9
+Technician -- UC10
+Technician -- UC15
+
+Inspector -- UC11
+Inspector -- UC14
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Monitor Line Status (UC1)",
+            "Fetch Sensor Readings (UC2)"
+          ],
+          "explanation": "'Fetch Sensor Readings' (UC2) is included by 'Monitor Line Status' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Line Status' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Line Status' via the include relationship."
+        },
+        {
+          "elements": [
+            "Monitor Line Status (UC1)",
+            "Format Status Dashboard (UC3)"
+          ],
+          "explanation": "'Format Status Dashboard' (UC3) is included by 'Monitor Line Status' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Line Status' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Line Status' via the include relationship."
+        },
+        {
+          "elements": [
+            "Report Downtime (UC4)",
+            "Log Downtime Entry (UC5)"
+          ],
+          "explanation": "'Log Downtime Entry' (UC5) is included by 'Report Downtime' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Report Downtime' rather than a standalone service observable to any actor, making it a functional decomposition of 'Report Downtime' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

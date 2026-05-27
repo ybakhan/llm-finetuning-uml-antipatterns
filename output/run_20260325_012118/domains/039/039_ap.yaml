@@ -1,0 +1,51 @@
+metadata:
+  domain_id: 39
+  domain: school_administration_system
+  domain_display: School Administration System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Grades (UC2)
+      - Validate Grade Scale (UC3)
+      explanation: '''Validate Grade Scale'' (UC3) is included by ''Submit Grades''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Grades'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Grades'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:51:29.648971'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Teacher\" as Teacher\nactor \"Student\" as\
+    \ Student\nactor \"Administrator\" as Admin\nactor \"Parent\" as Parent\n\nrectangle\
+    \ \"School Administration System\" {\n  usecase \"Record Attendance\" as UC1\n\
+    \  usecase \"Submit Grades\" as UC2\n  usecase \"Validate Grade Scale\" as UC3\n\
+    \  usecase \"View Report Card\" as UC4\n  usecase \"Enroll Student\" as UC5\n\
+    \  usecase \"Manage Class Schedule\" as UC6\n  usecase \"Request Transcript\"\
+    \ as UC7\n  usecase \"Send Notification to Parents\" as UC8\n  usecase \"Register\
+    \ for Course\" as UC9\n  usecase \"View Attendance Record\" as UC10\n  usecase\
+    \ \"Generate Annual Report\" as UC11\n  usecase \"Update Student Profile\" as\
+    \ UC12\n  usecase \"Assign Teacher to Class\" as UC13\n  usecase \"View Class\
+    \ Schedule\" as UC14\n}\n\nTeacher -- UC1\nTeacher -- UC2\nUC2 ..> UC3 : <<include>>\n\
+    Student -- UC4\nStudent -- UC9\nStudent -- UC7\nAdmin -- UC5\nAdmin -- UC6\nAdmin\
+    \ -- UC11\nAdmin -- UC13\nAdmin -- UC8\nAdmin -- UC12\nParent -- UC10\nParent\
+    \ -- UC4\nTeacher -- UC14\nStudent -- UC14\n}\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Grades (UC2)\"\
+    ,\n            \"Validate Grade Scale (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Grade Scale' (UC3) is included by 'Submit Grades' (UC2), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Grades' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Submit\
+    \ Grades' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

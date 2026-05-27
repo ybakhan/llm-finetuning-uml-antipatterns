@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 150
+  domain: it_asset_management_system
+  domain_display: IT Asset Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:20:02.714789'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"IT Administrator\" as Admin\nactor \"Employee\"\
+    \ as Emp\n\nrectangle \"IT Asset Management System\" {\n  usecase \"Register New\
+    \ Asset\" as UC1\n  usecase \"Assign Asset to Employee\" as UC2\n  usecase \"\
+    Return Asset\" as UC3\n  usecase \"View Assigned Assets\" as UC4\n  usecase \"\
+    Generate Asset Report\" as UC5\n}\n\nAdmin -- UC1\nAdmin -- UC2\nAdmin -- UC3\n\
+    Admin -- UC5\nEmp -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

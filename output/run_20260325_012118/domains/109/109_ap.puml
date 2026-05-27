@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reviewer" as Reviewer
+actor "Program Chair" as Chair
+actor "Attendee" as Attendee
+
+rectangle "Academic Conference Management System" {
+  usecase "Submit Paper" as UC1
+  usecase "Upload Manuscript File" as UC2
+  usecase "Register Author Metadata" as UC3
+  usecase "Review Paper" as UC4
+  usecase "Validate Review Criteria" as UC5
+  usecase "Assign Reviewers" as UC6
+  usecase "Make Acceptance Decision" as UC7
+  usecase "Manage Conference Schedule" as UC8
+  usecase "Register for Conference" as UC9
+  usecase "Browse Accepted Papers" as UC10
+  usecase "Submit Camera-Ready Version" as UC11
+  usecase "Send Notifications" as UC12
+  usecase "Track Submission Status" as UC13
+}
+
+Author -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Author -- UC11
+Author -- UC13
+Reviewer -- UC4
+UC4 ..> UC5 : <<include>>
+Chair -- UC6
+Chair -- UC7
+Chair -- UC8
+Chair -- UC12
+Attendee -- UC9
+Attendee -- UC10
+@enduml

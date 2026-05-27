@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Player" as Player
+actor "Administrator" as Admin
+
+rectangle "Online Gaming Platform" {
+  usecase "Browse Games" as UC1
+  usecase "Play Game" as UC2
+  usecase "Load Game Assets" as UC3
+  usecase "Purchase In-Game Items" as UC4
+  usecase "Manage Game Catalog" as UC5
+  usecase "View Leaderboard" as UC6
+}
+
+Player -- UC1
+Player -- UC2
+UC2 ..> UC3 : <<include>>
+Player -- UC4
+Admin -- UC5
+Player -- UC6
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Play Game (UC2)",
+            "Load Game Assets (UC3)"
+          ],
+          "explanation": "'Load Game Assets' (UC3) is included by 'Play Game' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Play Game' rather than a standalone service observable to any actor, making it a functional decomposition of 'Play Game' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

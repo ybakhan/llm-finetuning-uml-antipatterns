@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Doctor" as Doctor
+
+rectangle "Telemedicine System" {
+  usecase "Schedule Appointment" as UC1
+  usecase "Conduct Video Consultation" as UC2
+  usecase "View Medical Records" as UC3
+  usecase "Write Prescription" as UC4
+  usecase "Request Prescription Refill" as UC6
+}
+
+Patient -- UC1
+Patient -- UC2
+Patient -- UC3
+Patient -- UC6
+Doctor -- UC2
+Doctor -- UC3
+Doctor -- UC4
+@enduml

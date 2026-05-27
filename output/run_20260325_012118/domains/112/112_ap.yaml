@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 112
+  domain: tour_package_booking_system
+  domain_display: Tour Package Booking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Tour Package (UC2)
+      - Validate Payment Details (UC3)
+      explanation: '''Validate Payment Details'' (UC3) is included by ''Book Tour
+        Package'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Book Tour
+        Package'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Book Tour Package'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:05.318649'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Traveler\" as Traveler\nactor \"Travel Agent\"\
+    \ as Agent\n\nrectangle \"Tour Package Booking System\" {\n  usecase \"Browse\
+    \ Tour Packages\" as UC1\n  usecase \"Book Tour Package\" as UC2\n  usecase \"\
+    Validate Payment Details\" as UC3\n  usecase \"Manage Tour Packages\" as UC4\n\
+    \  usecase \"Cancel Booking\" as UC5\n}\n\nTraveler -- UC1\nTraveler -- UC2\n\
+    UC2 ..> UC3 : <<include>>\nAgent -- UC4\nTraveler -- UC5\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Tour Package (UC2)\"\
+    ,\n            \"Validate Payment Details (UC3)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' (UC3) is included by 'Book Tour Package'\
+    \ (UC2), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Book Tour Package' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Book Tour Package' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

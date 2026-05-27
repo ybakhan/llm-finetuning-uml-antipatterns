@@ -1,0 +1,89 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Network Administrator" as Admin
+actor "Security Analyst" as SecAnalyst
+actor "NOC Operator" as NOC
+
+rectangle "Network Monitoring System" {
+  usecase "View Dashboard" as UC1
+  usecase "Configure Alert Rules" as UC2
+  usecase "Monitor Traffic" as UC3
+  usecase "Investigate Security Incident" as UC4
+  usecase "Generate Performance Report" as UC5
+  usecase "Manage Device Inventory" as UC6
+  usecase "Acknowledge Alarm" as UC7
+  usecase "Run Diagnostic Test" as UC8
+  usecase "Analyze Packet Capture" as UC9
+  usecase "Schedule Maintenance Window" as UC10
+  usecase "View Historical Logs" as UC11
+  usecase "Validate Rule Syntax" as UC12
+  usecase "Fetch Device Metrics" as UC13
+  usecase "Export Report to PDF" as UC14
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC6
+Admin -- UC8
+Admin -- UC10
+
+SecAnalyst -- UC4
+SecAnalyst -- UC9
+SecAnalyst -- UC11
+
+NOC -- UC1
+NOC -- UC5
+NOC -- UC7
+
+UC2 ..> UC12 : <<include>>
+UC3 ..> UC13 : <<include>>
+UC5 ..> UC14 : <<include>>
+UC4 ..> UC11 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Configure Alert Rules (UC2)",
+            "Validate Rule Syntax (UC12)"
+          ],
+          "explanation": "'Validate Rule Syntax' (UC12) is included by 'Configure Alert Rules' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Configure Alert Rules' rather than a standalone service observable to any actor, making it a functional decomposition of 'Configure Alert Rules' via the include relationship."
+        },
+        {
+          "elements": [
+            "Monitor Traffic (UC3)",
+            "Fetch Device Metrics (UC13)"
+          ],
+          "explanation": "'Fetch Device Metrics' (UC13) is included by 'Monitor Traffic' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Traffic' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Traffic' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Performance Report (UC5)",
+            "Export Report to PDF (UC14)"
+          ],
+          "explanation": "'Export Report to PDF' (UC14) is included by 'Generate Performance Report' (UC5), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Performance Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Performance Report' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

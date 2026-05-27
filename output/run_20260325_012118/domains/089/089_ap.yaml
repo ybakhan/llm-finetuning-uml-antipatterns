@@ -1,0 +1,86 @@
+metadata:
+  domain_id: 89
+  domain: wholesale_distribution_system
+  domain_display: Wholesale Distribution System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Bulk Order (UC1)
+      - Validate Customer Credit (UC2)
+      explanation: '''Validate Customer Credit'' (UC2) is included by ''Place Bulk
+        Order'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Bulk
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Bulk Order'' via the include relationship.'
+    - elements:
+      - Place Bulk Order (UC1)
+      - Calculate Line Item Totals (UC3)
+      explanation: '''Calculate Line Item Totals'' (UC3) is included by ''Place Bulk
+        Order'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Bulk
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Bulk Order'' via the include relationship.'
+    - elements:
+      - Fulfill Shipment (UC7)
+      - Arrange Freight Delivery (UC8)
+      explanation: '''Arrange Freight Delivery'' (UC8) is included by ''Fulfill Shipment''
+        (UC7), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Fulfill Shipment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Fulfill Shipment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:09:19.101330'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Sales Representative\" as SalesRep\nactor \"\
+    Warehouse Manager\" as WarehouseMgr\nactor \"Purchasing Agent\" as PurchAgent\n\
+    actor \"Accounting Clerk\" as AcctClerk\n\nrectangle \"Wholesale Distribution\
+    \ System\" {\n  usecase \"Place Bulk Order\" as UC1\n  usecase \"Validate Customer\
+    \ Credit\" as UC2\n  usecase \"Calculate Line Item Totals\" as UC3\n  usecase\
+    \ \"Process Payment\" as UC5\n  usecase \"Manage Inventory\" as UC6\n  usecase\
+    \ \"Fulfill Shipment\" as UC7\n  usecase \"Arrange Freight Delivery\" as UC8\n\
+    \  usecase \"Create Purchase Order\" as UC9\n  usecase \"Receive Goods\" as UC10\n\
+    \  usecase \"Track Shipment\" as UC11\n  usecase \"Manage Customer Accounts\"\
+    \ as UC12\n  usecase \"Generate Sales Report\" as UC13\n  usecase \"Apply Volume\
+    \ Discount\" as UC14\n  usecase \"Process Return\" as UC15\n}\n\nSalesRep -- UC1\n\
+    SalesRep -- UC12\nSalesRep -- UC13\nSalesRep -- UC15\n\nUC1 ..> UC2 : <<include>>\n\
+    UC1 ..> UC3 : <<include>>\n\nWarehouseMgr -- UC6\nWarehouseMgr -- UC7\nWarehouseMgr\
+    \ -- UC10\n\nUC7 ..> UC8 : <<include>>\n\nPurchAgent -- UC9\nPurchAgent -- UC11\n\
+    \nAcctClerk -- UC5\n\nUC14 ..> UC1 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Bulk Order (UC1)\"\
+    ,\n            \"Validate Customer Credit (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Customer Credit' (UC2) is included by 'Place Bulk Order'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Place Bulk Order' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Place Bulk Order' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Place Bulk Order (UC1)\",\n        \
+    \    \"Calculate Line Item Totals (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Line Item Totals' (UC3) is included by 'Place Bulk Order' (UC1),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Place Bulk Order' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Place\
+    \ Bulk Order' via the include relationship.\"\n        },\n        {\n       \
+    \   \"elements\": [\n            \"Fulfill Shipment (UC7)\",\n            \"Arrange\
+    \ Freight Delivery (UC8)\"\n          ],\n          \"explanation\": \"'Arrange\
+    \ Freight Delivery' (UC8) is included by 'Fulfill Shipment' (UC7), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Fulfill Shipment' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Fulfill Shipment'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

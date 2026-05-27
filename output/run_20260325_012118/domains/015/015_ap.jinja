@@ -1,0 +1,51 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Job Seeker" as JS
+actor "Employer" as EM
+
+rectangle "Job Portal" {
+  usecase "Search Jobs" as UC1
+  usecase "Apply for Job" as UC2
+  usecase "Validate Application Data" as UC3
+  usecase "Post Job Listing" as UC4
+  usecase "Review Applications" as UC5
+}
+
+JS -- UC1
+JS -- UC2
+UC2 ..> UC3 : <<include>>
+EM -- UC4
+EM -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Apply for Job (UC2)",
+            "Validate Application Data (UC3)"
+          ],
+          "explanation": "'Validate Application Data' is included by 'Apply for Job', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Apply for Job' rather than a standalone service observable to any actor, making it a functional decomposition of 'Apply for Job' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

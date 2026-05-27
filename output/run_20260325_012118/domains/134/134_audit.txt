@@ -1,0 +1,268 @@
+AUDIT LOG — Prompt #134
+Timestamp : 2026-03-25T02:13:29.153079
+Model     : claude-opus-4-6
+Tokens    : input=1479  output=1261
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #134: Generate a MEDIUM use case model with exactly 30 constructs (valid range for medium: 24–30 constructs). Domain: Alumni Network System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: alumni_network_system
+DOMAIN_DISPLAY: Alumni Network System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 30
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Alumni" as A1
+actor "University Admin" as A2
+actor "Event Coordinator" as A3
+actor "Career Services" as A4
+
+rectangle "Alumni Network System" {
+  usecase "Register Profile" as UC1
+  usecase "Update Profile" as UC2
+  usecase "Search Alumni Directory" as UC3
+  usecase "Send Message" as UC4
+  usecase "Create Event" as UC5
+  usecase "RSVP to Event" as UC6
+  usecase "Post Job Opportunity" as UC7
+  usecase "Apply for Job" as UC8
+  usecase "Manage Memberships" as UC9
+  usecase "Generate Alumni Report" as UC10
+  usecase "Donate to University" as UC11
+  usecase "Join Interest Group" as UC12
+  usecase "Moderate Content" as UC13
+  usecase "Validate Payment Details" as UC14
+  usecase "Manage Mentorship Program" as UC15
+  usecase "View Event Calendar" as UC16
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC3
+A1 -- UC4
+A1 -- UC6
+A1 -- UC8
+A1 -- UC11
+A1 -- UC12
+A2 -- UC9
+A2 -- UC10
+A2 -- UC13
+A3 -- UC5
+A3 -- UC16
+A4 -- UC7
+A4 -- UC15
+
+UC11 ..> UC14 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Donate to University (use case, UC11)",
+            "Validate Payment Details (use case, UC14)",
+            "<<include>> relationship from UC11 to UC14"
+          ],
+          "explanation": "The use case 'Validate Payment Details' (UC14) is an inclusion use case that: (1) is included by only one use case ('Donate to University'), (2) is not directly associated with any actor, (3) does not include or extend any other use case, (4) is not extended by any other use case, and (5) is not involved in any generalization. It represents a decomposed step of the donation process rather than a complete, standalone service observable to any actor. This is functional decomposition — the 'Donate to University' use case has been improperly broken down by extracting payment validation as a separate inclusion use case that provides no independent value to any user."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The "Validate Payment Details" (UC14) use case must be merged back into "Donate to University" (UC11) because it is a functionally decomposed fragment — it is included by only one use case, has no actor association, and participates in no other relationships. The payment validation logic is an internal step of the donation process and should be absorbed into the "Donate to University" use case. This eliminates UC14 and the <<include>> relationship between UC11 and UC14, removing 2 constructs (1 use case + 1 include) and resulting in 28 constructs total.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Alumni" as A1
+actor "University Admin" as A2
+actor "Event Coordinator" as A3
+actor "Career Services" as A4
+
+rectangle "Alumni Network System" {
+  usecase "Register Profile" as UC1
+  usecase "Update Profile" as UC2
+  usecase "Search Alumni Directory" as UC3
+  usecase "Send Message" as UC4
+  usecase "Create Event" as UC5
+  usecase "RSVP to Event" as UC6
+  usecase "Post Job Opportunity" as UC7
+  usecase "Apply for Job" as UC8
+  usecase "Manage Memberships" as UC9
+  usecase "Generate Alumni Report" as UC10
+  usecase "Donate to University" as UC11
+  usecase "Join Interest Group" as UC12
+  usecase "Moderate Content" as UC13
+  usecase "Manage Mentorship Program" as UC15
+  usecase "View Event Calendar" as UC16
+}
+
+A1 -- UC1
+A1 -- UC2
+A1 -- UC3
+A1 -- UC4
+A1 -- UC6
+A1 -- UC8
+A1 -- UC11
+A1 -- UC12
+A2 -- UC9
+A2 -- UC10
+A2 -- UC13
+A3 -- UC5
+A3 -- UC16
+A4 -- UC7
+A4 -- UC15
+@enduml
+```

@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 99
+  domain: optometry_clinic_system
+  domain_display: Optometry Clinic System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:00:08.768800'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Optometrist\"\
+    \ as Optometrist\nactor \"Receptionist\" as Receptionist\nactor \"Lab Technician\"\
+    \ as LabTech\n\nrectangle \"Optometry Clinic System\" {\n  usecase \"Book Appointment\"\
+    \ as UC1\n  usecase \"Check In Patient\" as UC2\n  usecase \"Conduct Eye Exam\"\
+    \ as UC3\n  usecase \"Prescribe Corrective Lenses\" as UC6\n  usecase \"Order\
+    \ Lenses from Lab\" as UC7\n  usecase \"Verify Insurance Coverage\" as UC8\n \
+    \ usecase \"Process Payment\" as UC9\n  usecase \"Manage Patient Records\" as\
+    \ UC11\n  usecase \"Dispense Eyewear\" as UC12\n  usecase \"Schedule Follow-Up\"\
+    \ as UC13\n}\n\nPatient -- UC1\nPatient -- UC9\nReceptionist -- UC1\nReceptionist\
+    \ -- UC2\nReceptionist -- UC8\nOptometrist -- UC3\nOptometrist -- UC6\nOptometrist\
+    \ -- UC13\nLabTech -- UC7\nLabTech -- UC12\nReceptionist -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

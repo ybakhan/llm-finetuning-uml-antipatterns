@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Homeowner" as HO
+actor "Guest" as GU
+
+rectangle "Smart Home Management System" {
+  usecase "Control Lighting" as UC1
+  usecase "Validate Room Selection" as UC2
+  usecase "Monitor Security Cameras" as UC3
+  usecase "Set Thermostat" as UC4
+  usecase "Manage Guest Access" as UC5
+}
+
+HO -- UC1
+HO -- UC3
+HO -- UC4
+HO -- UC5
+GU -- UC1
+UC1 ..> UC2 : <<include>>
+@enduml

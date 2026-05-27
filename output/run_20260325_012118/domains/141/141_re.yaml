@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 141
+  domain: stadium_management_system
+  domain_display: Stadium Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-28T01:29:09.066279'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Event Coordinator\" as EC\nactor \"Security\
+    \ Officer\" as SO\nactor \"Maintenance Staff\" as MS\nactor \"Ticket Office Manager\"\
+    \ as TOM\n\nrectangle \"Stadium Management System\" {\n  usecase \"Schedule Event\"\
+    \ as UC1\n  usecase \"Monitor Crowd Control\" as UC4\n  usecase \"Manage Access\
+    \ Gates\" as UC5\n  usecase \"Log Security Incident\" as UC6\n  usecase \"Submit\
+    \ Maintenance Request\" as UC8\n  usecase \"Inspect Stadium Facilities\" as UC9\n\
+    \  usecase \"Configure Ticket Pricing\" as UC10\n  usecase \"Generate Sales Report\"\
+    \ as UC11\n  usecase \"Manage Parking Allocation\" as UC13\n  usecase \"Coordinate\
+    \ Emergency Evacuation\" as UC14\n}\n\nEC -- UC1\nSO -- UC4\nSO -- UC5\nSO --\
+    \ UC6\nMS -- UC8\nMS -- UC9\nTOM -- UC10\nTOM -- UC11\nTOM -- UC13\nSO -- UC14\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

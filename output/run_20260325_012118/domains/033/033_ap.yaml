@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 33
+  domain: real_estate_listing_platform
+  domain_display: Real Estate Listing Platform
+  size: medium
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 3
+    instances:
+    - elements:
+      - Create Property Listing (UC1)
+      - Upload Photos (UC2)
+      explanation: '''Upload Photos'' is included by ''Create Property Listing'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Create Property Listing''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Create Property Listing'' via the include relationship.'
+    - elements:
+      - Search Properties (UC3)
+      - Filter Search Results (UC4)
+      explanation: '''Filter Search Results'' is included by ''Search Properties'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Search Properties'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Search Properties'' via the include relationship.'
+    - elements:
+      - Submit Offer (UC6)
+      - Validate Offer Amount (UC7)
+      explanation: '''Validate Offer Amount'' is included by ''Submit Offer'', has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Submit Offer'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Submit
+        Offer'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:49:47.116856'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Property Seller\" as Seller\nactor \"Property\
+    \ Buyer\" as Buyer\nactor \"Real Estate Agent\" as Agent\nactor \"System Administrator\"\
+    \ as Admin\n\nrectangle \"Real Estate Listing Platform\" {\n  usecase \"Create\
+    \ Property Listing\" as UC1\n  usecase \"Upload Photos\" as UC2\n  usecase \"\
+    Search Properties\" as UC3\n  usecase \"Filter Search Results\" as UC4\n  usecase\
+    \ \"Schedule Property Viewing\" as UC5\n  usecase \"Submit Offer\" as UC6\n  usecase\
+    \ \"Validate Offer Amount\" as UC7\n  usecase \"Manage Agent Profile\" as UC8\n\
+    \  usecase \"Generate Market Report\" as UC9\n  usecase \"Save Favorite Listings\"\
+    \ as UC10\n  usecase \"Moderate Listings\" as UC11\n  usecase \"Manage User Accounts\"\
+    \ as UC12\n  usecase \"Contact Seller\" as UC13\n}\n\nSeller -- UC1\nUC1 ..> UC2\
+    \ : <<include>>\nBuyer -- UC3\nUC3 ..> UC4 : <<include>>\nBuyer -- UC5\nBuyer\
+    \ -- UC6\nUC6 ..> UC7 : <<include>>\nAgent -- UC8\nAgent -- UC9\nBuyer -- UC10\n\
+    Admin -- UC11\nAdmin -- UC12\nBuyer -- UC13\nAgent -- UC5\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Create Property Listing\
+    \ (UC1)\",\n            \"Upload Photos (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Upload Photos' is included by 'Create Property Listing', has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Create Property Listing' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Create Property\
+    \ Listing' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Search Properties (UC3)\",\n            \"Filter\
+    \ Search Results (UC4)\"\n          ],\n          \"explanation\": \"'Filter Search\
+    \ Results' is included by 'Search Properties', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Search Properties' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Search Properties' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Submit Offer (UC6)\",\n            \"Validate Offer Amount (UC7)\"\n  \
+    \        ],\n          \"explanation\": \"'Validate Offer Amount' is included\
+    \ by 'Submit Offer', has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Submit Offer'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Submit Offer' via the include relationship.\"\n        }\n\
+    \      ]\n    }\n  ]\n}"

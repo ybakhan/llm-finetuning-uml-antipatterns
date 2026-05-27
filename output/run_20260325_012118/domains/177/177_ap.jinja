@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Farmer" as Farmer
+actor "Buyer" as Buyer
+
+rectangle "Agricultural Marketplace" {
+  usecase "List Produce" as UC1
+  usecase "Browse Listings" as UC2
+  usecase "Place Order" as UC3
+  usecase "Validate Payment Details" as UC4
+  usecase "Track Delivery" as UC5
+  usecase "Leave Review" as UC6
+}
+
+Farmer -- UC1
+Buyer -- UC2
+Buyer -- UC3
+UC3 ..> UC4 : <<include>>
+Buyer -- UC5
+Buyer -- UC6
+Farmer -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Place Order (UC3)",
+            "Validate Payment Details (UC4)"
+          ],
+          "explanation": "'Validate Payment Details' (UC4) is included by 'Place Order' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Order' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

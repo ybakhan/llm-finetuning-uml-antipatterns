@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Resident" as Resident
+actor "Waste Collector" as Collector
+actor "Recycling Officer" as RecyclingOfficer
+actor "Fleet Manager" as FleetManager
+actor "City Administrator" as CityAdmin
+
+rectangle "Municipal Waste Management System" {
+  usecase "Submit Waste Complaint" as UC1
+  usecase "Validate Complaint Details" as UC2
+  usecase "Schedule Waste Pickup" as UC3
+  usecase "Determine Optimal Route" as UC4
+  usecase "Record Collection Completion" as UC5
+  usecase "Sort Recyclable Materials" as UC6
+  usecase "Generate Recycling Report" as UC7
+  usecase "Manage Collection Fleet" as UC8
+  usecase "Request Special Pickup" as UC9
+  usecase "View Collection Schedule" as UC10
+  usecase "Register Recycling Drop-off" as UC11
+  usecase "Monitor Landfill Capacity" as UC12
+  usecase "Assign Collection Zones" as UC13
+}
+
+Resident -- UC1
+Resident -- UC9
+Resident -- UC10
+Collector -- UC5
+Collector -- UC3
+RecyclingOfficer -- UC6
+RecyclingOfficer -- UC7
+RecyclingOfficer -- UC11
+FleetManager -- UC8
+CityAdmin -- UC12
+CityAdmin -- UC13
+
+UC1 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+}
+@enduml

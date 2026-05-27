@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Floor Supervisor" as FS
+actor "Maintenance Technician" as MT
+
+rectangle "Factory Floor Management System" {
+  usecase "Monitor Production Line" as UC1
+  usecase "Report Equipment Fault" as UC2
+  usecase "Schedule Maintenance" as UC3
+  usecase "Perform Maintenance" as UC4
+  usecase "Log Maintenance Details" as UC5
+  usecase "Generate Shift Report" as UC6
+}
+
+FS -- UC1
+FS -- UC2
+FS -- UC6
+MT -- UC3
+MT -- UC4
+
+UC4 ..> UC5 : <<include>>
+@enduml

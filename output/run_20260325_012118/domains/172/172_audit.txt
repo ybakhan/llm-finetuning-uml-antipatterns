@@ -1,0 +1,557 @@
+AUDIT LOG — Prompt #172
+Timestamp : 2026-03-26T01:23:22.669559
+Model     : claude-opus-4-6
+Tokens    : input=2912  output=1241
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (2 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #172: Generate a MEDIUM use case model with exactly 27 constructs (valid range for medium: 24–30 constructs). Domain: Print-on-Demand Platform.
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+the models are wrong, use case "process payment" is not associated with any actor.
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Validate File Format" as UC2
+  usecase "Generate Thumbnail" as UC3
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Calculate Shipping Cost" as UC6
+  usecase "Process Payment" as UC7
+  usecase "Track Order" as UC8
+  usecase "Manage Product Templates" as UC9
+  usecase "Generate Sales Report" as UC10
+  usecase "Handle Return Request" as UC11
+  usecase "Update Inventory" as UC12
+  usecase "Review Design Proof" as UC13
+  usecase "Set Pricing" as UC14
+  usecase "Ship Order" as UC15
+}
+
+Designer -- UC1
+Designer -- UC13
+Designer -- UC14
+Customer -- UC4
+Customer -- UC5
+Customer -- UC8
+Customer -- UC11
+Admin -- UC9
+Admin -- UC10
+Admin -- UC12
+Carrier -- UC15
+Carrier -- UC8
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+@enduml
+```
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Process Payment" as UC7
+  usecase "Track Order" as UC8
+  usecase "Manage Product Templates" as UC9
+  usecase "Generate Sales Report" as UC10
+  usecase "Handle Return Request" as UC11
+  usecase "Update Inventory" as UC12
+  usecase "Review Design Proof" as UC13
+  usecase "Set Pricing" as UC14
+  usecase "Ship Order" as UC15
+}
+
+Designer -- UC1
+Designer -- UC13
+Designer -- UC14
+Customer -- UC4
+Customer -- UC5
+Customer -- UC8
+Customer -- UC11
+Admin -- UC9
+Admin -- UC10
+Admin -- UC12
+Carrier -- UC15
+Carrier -- UC8
+@enduml
+```
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: print_on_demand_platform
+DOMAIN_DISPLAY: Print-on-Demand Platform
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 27
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Validate File Format" as UC2
+  usecase "Generate Thumbnail" as UC3
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Calculate Shipping Cost" as UC6
+  usecase "Track Order" as UC7
+  usecase "Manage Product Templates" as UC8
+  usecase "Generate Sales Report" as UC9
+  usecase "Handle Return Request" as UC10
+  usecase "Review Design Proof" as UC11
+  usecase "Set Pricing" as UC12
+  usecase "Ship Order" as UC13
+}
+
+Designer -- UC1
+Designer -- UC11
+Designer -- UC12
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Admin -- UC8
+Admin -- UC9
+Carrier -- UC13
+Carrier -- UC7
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Upload Design (use case, UC1)",
+            "Validate File Format (use case, UC2)",
+            "<<include>> from UC1 to UC2 (relationship)"
+          ],
+          "explanation": "The use case 'Validate File Format' (UC2) is included only by 'Upload Design' (UC1), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and has no generalisation relationships. It represents an internal processing step (file validation) rather than a complete service observable to an actor, making this a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Upload Design (use case, UC1)",
+            "Generate Thumbnail (use case, UC3)",
+            "<<include>> from UC1 to UC3 (relationship)"
+          ],
+          "explanation": "The use case 'Generate Thumbnail' (UC3) is included only by 'Upload Design' (UC1), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and has no generalisation relationships. Generating a thumbnail is an internal system step within the design upload process, not a standalone service an actor would initiate, making this a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Two functional decomposition instances must be resolved. (1) "Validate File Format" (UC2) is only included by "Upload Design" (UC1), has no actor association, and represents an internal step — it is merged into "Upload Design" and the <<include>> relationship is removed. (2) "Generate Thumbnail" (UC3) is only included by "Upload Design" (UC1), has no actor association, and represents an internal step — it is merged into "Upload Design" and the <<include>> relationship is removed. Additionally, "Calculate Shipping Cost" (UC6) was only included by "Place Order" (UC5) with no actor association and represents a sub-step, so it is also removed as a functional decomposition per the Use Case Granularity Rule. The result is a clean model where every use case represents a complete, actor-initiated business goal.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Track Order" as UC7
+  usecase "Manage Product Templates" as UC8
+  usecase "Generate Sales Report" as UC9
+  usecase "Handle Return Request" as UC10
+  usecase "Review Design Proof" as UC11
+  usecase "Set Pricing" as UC12
+  usecase "Ship Order" as UC13
+}
+
+Designer -- UC1
+Designer -- UC11
+Designer -- UC12
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Admin -- UC8
+Admin -- UC9
+Carrier -- UC13
+Carrier -- UC7
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T02:09:03.029529
+Model     : claude-opus-4-6
+Tokens    : input=1011  output=463
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Designer" as Designer
+actor "Customer" as Customer
+actor "Admin" as Admin
+actor "Shipping Carrier" as Carrier
+
+rectangle "Print-on-Demand Platform" {
+  usecase "Upload Design" as UC1
+  usecase "Validate File Format" as UC2
+  usecase "Generate Thumbnail" as UC3
+  usecase "Browse Product Catalog" as UC4
+  usecase "Place Order" as UC5
+  usecase "Calculate Shipping Cost" as UC6
+  usecase "Track Order" as UC7
+  usecase "Manage Product Templates" as UC8
+  usecase "Generate Sales Report" as UC9
+  usecase "Handle Return Request" as UC10
+  usecase "Review Design Proof" as UC11
+  usecase "Set Pricing" as UC12
+  usecase "Ship Order" as UC13
+}
+
+Designer -- UC1
+Designer -- UC11
+Designer -- UC12
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Admin -- UC8
+Admin -- UC9
+Carrier -- UC13
+Carrier -- UC7
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Upload Design (use case, UC1)",
+            "Validate File Format (use case, UC2)",
+            "<<include>> from UC1 to UC2 (relationship)"
+          ],
+          "explanation": "The use case 'Validate File Format' (UC2) is included only by 'Upload Design' (UC1), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and has no generalisation relationships. It represents an internal processing step (file validation) rather than a complete service observable to an actor, making this a functional decomposition via the include relationship."
+        },
+        {
+          "constructs": [
+            "Upload Design (use case, UC1)",
+            "Generate Thumbnail (use case, UC3)",
+            "<<include>> from UC1 to UC3 (relationship)"
+          ],
+          "explanation": "The use case 'Generate Thumbnail' (UC3) is included only by 'Upload Design' (UC1), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and has no generalisation relationships. Generating a thumbnail is an internal system step within the design upload process, not a standalone service an actor would initiate, making this a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+the two instances should be one instance because they share same base use case "Upload Design".
+
+One antipattern instance is missing becasue "Calculate Shipping Cost" is a functional decomposition of base use case "Place Order".
+
+Update count and explanation fields accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Upload Design (use case, UC1)",
+            "Validate File Format (use case, UC2)",
+            "Generate Thumbnail (use case, UC3)",
+            "<<include>> from UC1 to UC2 (relationship)",
+            "<<include>> from UC1 to UC3 (relationship)"
+          ],
+          "explanation": "The use case 'Upload Design' (UC1) includes both 'Validate File Format' (UC2) and 'Generate Thumbnail' (UC3). Neither UC2 nor UC3 is associated with any actor, and neither includes or extends any other use case, is extended by any use case, or has any generalisation relationships. Both represent internal processing steps (file validation and thumbnail generation) within the design upload process rather than complete services observable to an actor, making this a functional decomposition of UC1 via the include relationship."
+        },
+        {
+          "constructs": [
+            "Place Order (use case, UC5)",
+            "Calculate Shipping Cost (use case, UC6)",
+            "<<include>> from UC5 to UC6 (relationship)"
+          ],
+          "explanation": "The use case 'Calculate Shipping Cost' (UC6) is included only by 'Place Order' (UC5), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and has no generalisation relationships. Calculating shipping cost is an internal processing step within the order placement process rather than a standalone service observable to an actor, making this a functional decomposition via the include relationship."
+        }
+      ]
+    }
+  ]
+}

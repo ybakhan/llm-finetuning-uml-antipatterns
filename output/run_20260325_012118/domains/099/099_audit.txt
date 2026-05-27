@@ -1,0 +1,275 @@
+AUDIT LOG — Prompt #099
+Timestamp : 2026-03-25T02:00:08.767693
+Model     : claude-opus-4-6
+Tokens    : input=1539  output=1506
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (2 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #099: Generate a MEDIUM use case model with exactly 24 constructs (valid range for medium: 24–30 constructs). Domain: Optometry Clinic System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: optometry_clinic_system
+DOMAIN_DISPLAY: Optometry Clinic System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 24
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Optometrist" as Optometrist
+actor "Receptionist" as Receptionist
+actor "Lab Technician" as LabTech
+
+rectangle "Optometry Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Check In Patient" as UC2
+  usecase "Conduct Eye Exam" as UC3
+  usecase "Record Visual Acuity" as UC4
+  usecase "Perform Refraction Test" as UC5
+  usecase "Prescribe Corrective Lenses" as UC6
+  usecase "Order Lenses from Lab" as UC7
+  usecase "Verify Insurance Coverage" as UC8
+  usecase "Process Payment" as UC9
+  usecase "Validate Payment Details" as UC10
+  usecase "Manage Patient Records" as UC11
+  usecase "Dispense Eyewear" as UC12
+  usecase "Schedule Follow-Up" as UC13
+}
+
+Patient -- UC1
+Patient -- UC9
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC8
+Optometrist -- UC3
+Optometrist -- UC6
+Optometrist -- UC13
+LabTech -- UC7
+LabTech -- UC12
+Receptionist -- UC11
+
+UC3 ..> UC4 : <<include>>
+UC3 ..> UC5 : <<include>>
+UC9 ..> UC10 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Conduct Eye Exam (use case, UC3)",
+            "Record Visual Acuity (use case, UC4)",
+            "Perform Refraction Test (use case, UC5)",
+            "UC3 --include--> UC4 (include relationship)",
+            "UC3 --include--> UC5 (include relationship)"
+          ],
+          "explanation": "The use case 'Conduct Eye Exam' has been functionally decomposed into two inclusion use cases: 'Record Visual Acuity' and 'Perform Refraction Test'. Each of these inclusion use cases is included by only one use case (UC3), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. They do not represent complete services observable to a user on their own — they are merely sub-steps of conducting an eye exam, which constitutes the Functional Decomposition antipattern."
+        },
+        {
+          "constructs": [
+            "Process Payment (use case, UC9)",
+            "Validate Payment Details (use case, UC10)",
+            "UC9 --include--> UC10 (include relationship)"
+          ],
+          "explanation": "The use case 'Process Payment' includes 'Validate Payment Details' as a decomposed sub-step. 'Validate Payment Details' is included by only one use case (UC9), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It does not provide an independently observable result to any user — it is merely an internal step of processing a payment, which constitutes the Functional Decomposition antipattern."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Two instances of Functional Decomposition must be resolved by merging the improperly decomposed inclusion use cases back into their respective base use cases.
+
+**Instance 1:** The inclusion use cases "Record Visual Acuity" (UC4) and "Perform Refraction Test" (UC5) are merged back into "Conduct Eye Exam" (UC3). Both UC4 and UC5 are only included by UC3, have no actor associations, and represent sub-steps rather than complete services. The two include relationships (UC3→UC4, UC3→UC5) and the two use cases (UC4, UC5) are removed. The base use case UC3 now encompasses the full eye examination process.
+
+**Instance 2:** The inclusion use case "Validate Payment Details" (UC10) is merged back into "Process Payment" (UC9). UC10 is only included by UC9, has no actor associations, and represents an internal validation step rather than a complete service. The include relationship (UC9→UC10) and use case UC10 are removed. The base use case UC9 now encompasses the full payment process including validation.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Optometrist" as Optometrist
+actor "Receptionist" as Receptionist
+actor "Lab Technician" as LabTech
+
+rectangle "Optometry Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Check In Patient" as UC2
+  usecase "Conduct Eye Exam" as UC3
+  usecase "Prescribe Corrective Lenses" as UC6
+  usecase "Order Lenses from Lab" as UC7
+  usecase "Verify Insurance Coverage" as UC8
+  usecase "Process Payment" as UC9
+  usecase "Manage Patient Records" as UC11
+  usecase "Dispense Eyewear" as UC12
+  usecase "Schedule Follow-Up" as UC13
+}
+
+Patient -- UC1
+Patient -- UC9
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC8
+Optometrist -- UC3
+Optometrist -- UC6
+Optometrist -- UC13
+LabTech -- UC7
+LabTech -- UC12
+Receptionist -- UC11
+@enduml
+```

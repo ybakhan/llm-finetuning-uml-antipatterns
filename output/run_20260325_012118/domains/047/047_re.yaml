@@ -1,0 +1,24 @@
+metadata:
+  domain_id: 47
+  domain: freelance_marketplace
+  domain_display: Freelance Marketplace
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:38:49.104946'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Freelancer\" as Freelancer\nactor \"Client\"\
+    \ as Client\n\nrectangle \"Freelance Marketplace\" {\n  usecase \"Browse Projects\"\
+    \ as UC1\n  usecase \"Submit Proposal\" as UC2\n  usecase \"Post Project\" as\
+    \ UC3\n  usecase \"Hire Freelancer\" as UC4\n  usecase \"Process Payment\" as\
+    \ UC5\n  usecase \"Leave Review\" as UC7\n}\n\nFreelancer -- UC1\nFreelancer --\
+    \ UC2\nFreelancer -- UC7\nClient -- UC3\nClient -- UC4\nClient -- UC5\nClient\
+    \ -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

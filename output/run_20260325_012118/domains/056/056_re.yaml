@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 56
+  domain: mental_health_appointment_system
+  domain_display: Mental Health Appointment System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:42:05.992973'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Therapist\" as\
+    \ Therapist\n\nrectangle \"Mental Health Appointment System\" {\n  usecase \"\
+    Book Appointment\" as UC1\n  usecase \"View Schedule\" as UC3\n  usecase \"Cancel\
+    \ Appointment\" as UC4\n  usecase \"Record Session Notes\" as UC5\n}\n\nPatient\
+    \ -- UC1\nPatient -- UC4\nTherapist -- UC3\nTherapist -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

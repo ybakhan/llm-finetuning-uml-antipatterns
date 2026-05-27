@@ -1,0 +1,61 @@
+metadata:
+  domain_id: 170
+  domain: price_comparison_portal
+  domain_display: Price Comparison Portal
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Search Products (UC1)
+      - Filter Results (UC5)
+      explanation: '''Filter Results'' is included by ''Search Products'', has no
+        direct actor association, does not include or extend any other use case, is
+        not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Search Products'' rather than a standalone
+        service observable to any actor, making it a functional decomposition of ''Search
+        Products'' via the include relationship.'
+    - elements:
+      - Search Products (UC1)
+      - Validate Search Input (UC6)
+      explanation: '''Validate Search Input'' is included by ''Search Products'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Search Products'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Search Products'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:22:40.268459'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Shopper\" as Shopper\nactor \"Retailer\" as\
+    \ Retailer\n\nrectangle \"Price Comparison Portal\" {\n  usecase \"Search Products\"\
+    \ as UC1\n  usecase \"Compare Prices\" as UC2\n  usecase \"Submit Listing\" as\
+    \ UC3\n  usecase \"View Deal Alerts\" as UC4\n  usecase \"Filter Results\" as\
+    \ UC5\n  usecase \"Validate Search Input\" as UC6\n}\n\nShopper -- UC1\nShopper\
+    \ -- UC2\nShopper -- UC4\nRetailer -- UC3\nUC1 ..> UC5 : <<include>>\nUC1 ..>\
+    \ UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Search Products (UC1)\"\
+    ,\n            \"Filter Results (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'Filter Results' is included by 'Search Products', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Search Products' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Search Products' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Search Products\
+    \ (UC1)\",\n            \"Validate Search Input (UC6)\"\n          ],\n      \
+    \    \"explanation\": \"'Validate Search Input' is included by 'Search Products',\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Search Products' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Search\
+    \ Products' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

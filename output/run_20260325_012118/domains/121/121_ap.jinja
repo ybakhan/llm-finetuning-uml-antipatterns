@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Accountant" as Accountant
+actor "Manager" as Manager
+
+rectangle "Accounting System" {
+  usecase "Record Journal Entry" as UC1
+  usecase "Validate Account Codes" as UC2
+  usecase "Generate Financial Report" as UC3
+  usecase "Approve Expenses" as UC4
+  usecase "View Ledger" as UC5
+  usecase "Reconcile Bank Statement" as UC6
+}
+
+Accountant -- UC1
+Accountant -- UC5
+Accountant -- UC6
+Manager -- UC3
+Manager -- UC4
+
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Record Journal Entry (UC1)",
+            "Validate Account Codes (UC2)"
+          ],
+          "explanation": "'Validate Account Codes' is included by 'Record Journal Entry', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Record Journal Entry' rather than a standalone service observable to any actor, making it a functional decomposition of 'Record Journal Entry' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

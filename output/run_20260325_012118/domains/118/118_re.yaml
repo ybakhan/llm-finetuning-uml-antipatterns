@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 118
+  domain: cruise_booking_system
+  domain_display: Cruise Booking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:13:37.867475'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Passenger\" as Passenger\nactor \"Travel Agent\"\
+    \ as TravelAgent\nactor \"Cruise Administrator\" as Admin\nactor \"Payment Gateway\"\
+    \ as PaymentGW\n\nrectangle \"Cruise Booking System\" {\n  usecase \"Search Available\
+    \ Cruises\" as UC1\n  usecase \"Book Cruise\" as UC2\n  usecase \"Process Payment\"\
+    \ as UC4\n  usecase \"Cancel Booking\" as UC5\n  usecase \"Apply Discount Code\"\
+    \ as UC6\n  usecase \"Manage Cruise Itineraries\" as UC7\n  usecase \"View Booking\
+    \ History\" as UC8\n  usecase \"Manage Passenger Manifest\" as UC9\n  usecase\
+    \ \"Request Shore Excursion\" as UC10\n  usecase \"Update Passenger Profile\"\
+    \ as UC12\n  usecase \"Add Travel Insurance\" as UC13\n}\n\nPassenger -- UC1\n\
+    Passenger -- UC2\nPassenger -- UC5\nPassenger -- UC8\nPassenger -- UC10\nPassenger\
+    \ -- UC12\nPassenger -- UC13\n\nTravelAgent -- UC1\nTravelAgent -- UC2\nTravelAgent\
+    \ -- UC6\n\nAdmin -- UC7\nAdmin -- UC9\n\nPaymentGW -- UC4\n\nUC2 ..> UC4 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

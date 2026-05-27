@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Doctor" as Doctor
+actor "Receptionist" as Receptionist
+actor "Nurse" as Nurse
+
+rectangle "Medical Clinic System" {
+  usecase "Schedule Appointment" as UC1
+  usecase "Check Available Slots" as UC2
+  usecase "Conduct Consultation" as UC3
+  usecase "Prescribe Medication" as UC4
+  usecase "Register Patient" as UC6
+  usecase "Record Vitals" as UC7
+  usecase "View Medical History" as UC8
+  usecase "Cancel Appointment" as UC9
+  usecase "Generate Invoice" as UC10
+  usecase "Request Lab Test" as UC11
+}
+
+Patient -- UC1
+Patient -- UC9
+Patient -- UC8
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC6
+Receptionist -- UC9
+Receptionist -- UC10
+Doctor -- UC3
+Doctor -- UC4
+Doctor -- UC8
+Doctor -- UC11
+Nurse -- UC7
+
+UC1 ..> UC2 : <<include>>
+@enduml

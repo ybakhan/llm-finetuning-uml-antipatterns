@@ -1,0 +1,86 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Gift Giver" as Giver
+actor "Registrant" as Registrant
+actor "Store Admin" as Admin
+
+rectangle "Gift Registry System" {
+  usecase "Browse Registries" as UC1
+  usecase "Purchase Gift" as UC2
+  usecase "Validate Payment" as UC3
+  usecase "Update Inventory" as UC4
+  usecase "Create Registry" as UC5
+  usecase "Add Items to Registry" as UC6
+  usecase "Share Registry" as UC7
+  usecase "Track Purchased Gifts" as UC8
+  usecase "Manage Store Catalog" as UC9
+  usecase "Generate Sales Report" as UC10
+  usecase "Send Thank You Note" as UC11
+  usecase "Mark Gift as Received" as UC12
+  usecase "Search Gift by Category" as UC13
+  usecase "Generate Confirmation Email" as UC14
+}
+
+Giver -- UC1
+Giver -- UC2
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC2 ..> UC14 : <<include>>
+Giver -- UC13
+
+Registrant -- UC5
+Registrant -- UC6
+Registrant -- UC7
+Registrant -- UC8
+Registrant -- UC11
+Registrant -- UC12
+
+Admin -- UC9
+Admin -- UC10
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Purchase Gift (UC2)",
+            "Validate Payment (UC3)"
+          ],
+          "explanation": "'Validate Payment' (UC3) is included by 'Purchase Gift' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Gift' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Gift' via the include relationship."
+        },
+        {
+          "elements": [
+            "Purchase Gift (UC2)",
+            "Update Inventory (UC4)"
+          ],
+          "explanation": "'Update Inventory' (UC4) is included by 'Purchase Gift' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Gift' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Gift' via the include relationship."
+        },
+        {
+          "elements": [
+            "Purchase Gift (UC2)",
+            "Generate Confirmation Email (UC14)"
+          ],
+          "explanation": "'Generate Confirmation Email' (UC14) is included by 'Purchase Gift' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Gift' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Gift' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

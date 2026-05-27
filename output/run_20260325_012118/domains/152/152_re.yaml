@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 152
+  domain: data_backup_and_recovery_system
+  domain_display: Data Backup and Recovery System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:20:08.142763'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"System Administrator\" as Admin\nactor \"End\
+    \ User\" as User\nactor \"Scheduler\" as Scheduler\n\nrectangle \"Data Backup\
+    \ and Recovery System\" {\n  usecase \"Configure Backup Policy\" as UC1\n  usecase\
+    \ \"Run Full Backup\" as UC2\n  usecase \"Run Incremental Backup\" as UC3\n  usecase\
+    \ \"Restore Files\" as UC4\n  usecase \"View Backup Logs\" as UC5\n  usecase \"\
+    Schedule Automated Backup\" as UC6\n  usecase \"Monitor Storage Capacity\" as\
+    \ UC7\n  usecase \"Request File Recovery\" as UC8\n  usecase \"Verify Backup Integrity\"\
+    \ as UC9\n  usecase \"Notify Admin on Failure\" as UC11\n  usecase \"Generate\
+    \ Recovery Report\" as UC12\n}\n\nAdmin -- UC1\nAdmin -- UC2\nAdmin -- UC3\nAdmin\
+    \ -- UC5\nAdmin -- UC7\nAdmin -- UC9\nScheduler -- UC6\nUser -- UC8\nUser -- UC4\n\
+    \nUC6 ..> UC3 : <<include>>\nUC11 ..> UC2 : <<extend>>\nUC12 ..> UC8 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

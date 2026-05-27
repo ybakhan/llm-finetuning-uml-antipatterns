@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Courier" as Courier
+
+rectangle "Courier Delivery System" {
+  usecase "Place Delivery Order" as UC1
+  usecase "Track Shipment" as UC2
+  usecase "Pick Up Package" as UC3
+  usecase "Deliver Package" as UC4
+  usecase "Update Delivery Status" as UC5
+  usecase "Validate Address" as UC6
+}
+
+Customer -- UC1
+Customer -- UC2
+Courier -- UC3
+Courier -- UC4
+Courier -- UC5
+
+UC1 ..> UC6 : <<include>>
+@enduml

@@ -1,0 +1,65 @@
+metadata:
+  domain_id: 36
+  domain: dating_application
+  domain_display: Dating Application
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Upload Photos (UC10)
+      - Validate Photo Format (UC11)
+      explanation: '''Validate Photo Format'' (UC11) is included by ''Upload Photos''
+        (UC10), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Photos'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Upload Photos'' via the include relationship.'
+    - elements:
+      - Create Profile (UC1)
+      - Upload Photos (UC10)
+      explanation: '''Upload Photos'' (UC10) is included by ''Create Profile'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Create Profile'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Create Profile'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:50:30.489920'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"User\" as U\nactor \"Premium User\" as PU\n\
+    actor \"Admin\" as A\n\nrectangle \"Dating Application\" {\n  usecase \"Create\
+    \ Profile\" as UC1\n  usecase \"Browse Profiles\" as UC2\n  usecase \"Send Message\"\
+    \ as UC3\n  usecase \"Swipe / Match\" as UC4\n  usecase \"Report User\" as UC5\n\
+    \  usecase \"Manage Subscriptions\" as UC6\n  usecase \"Moderate Content\" as\
+    \ UC7\n  usecase \"View Analytics Dashboard\" as UC8\n  usecase \"Schedule Date\"\
+    \ as UC9\n  usecase \"Upload Photos\" as UC10\n  usecase \"Validate Photo Format\"\
+    \ as UC11\n  usecase \"Block User\" as UC12\n  usecase \"Video Call\" as UC13\n\
+    }\n\nU -- UC1\nU -- UC2\nU -- UC3\nU -- UC4\nU -- UC5\nU -- UC12\n\nPU -- UC6\n\
+    PU -- UC9\nPU -- UC13\n\nA -- UC7\nA -- UC8\n\nUC10 .> UC11 : <<include>>\nUC1\
+    \ .> UC10 : <<include>>\nU -- UC1\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Upload Photos (UC10)\"\
+    ,\n            \"Validate Photo Format (UC11)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Photo Format' (UC11) is included by 'Upload Photos' (UC10), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Upload Photos' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Upload\
+    \ Photos' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Create Profile (UC1)\",\n            \"Upload Photos\
+    \ (UC10)\"\n          ],\n          \"explanation\": \"'Upload Photos' (UC10)\
+    \ is included by 'Create Profile' (UC1), has no direct actor association, does\
+    \ not include or extend any other use case, is not extended by any use case, and\
+    \ is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Create Profile' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Create Profile' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

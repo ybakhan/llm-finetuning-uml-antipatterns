@@ -1,0 +1,87 @@
+metadata:
+  domain_id: 188
+  domain: industrial_safety_reporting_system
+  domain_display: Industrial Safety Reporting System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Report Incident (UC1)
+      - Validate Incident Data (UC2)
+      explanation: '''Validate Incident Data'' (UC2) is included by ''Report Incident''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Report Incident'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Report Incident'' via the include relationship.'
+    - elements:
+      - Report Incident (UC1)
+      - Assign Incident Category (UC3)
+      explanation: '''Assign Incident Category'' (UC3) is included by ''Report Incident''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Report Incident'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Report Incident'' via the include relationship.'
+    - elements:
+      - Generate Compliance Report (UC5)
+      - Retrieve Regulation Standards (UC6)
+      explanation: '''Retrieve Regulation Standards'' (UC6) is included by ''Generate
+        Compliance Report'' (UC5), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Generate Compliance Report'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Generate Compliance
+        Report'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:52:24.729891'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Worker\" as WK\nactor \"Safety Officer\" as\
+    \ SO\nactor \"Plant Manager\" as PM\nactor \"Regulatory Auditor\" as RA\n\nrectangle\
+    \ \"Industrial Safety Reporting System\" {\n  usecase \"Report Incident\" as UC1\n\
+    \  usecase \"Validate Incident Data\" as UC2\n  usecase \"Assign Incident Category\"\
+    \ as UC3\n  usecase \"Review Incident Reports\" as UC4\n  usecase \"Generate Compliance\
+    \ Report\" as UC5\n  usecase \"Retrieve Regulation Standards\" as UC6\n  usecase\
+    \ \"Conduct Safety Inspection\" as UC7\n  usecase \"Submit Near-Miss Report\"\
+    \ as UC8\n  usecase \"Track Corrective Actions\" as UC9\n  usecase \"View Safety\
+    \ Dashboard\" as UC10\n  usecase \"Approve Investigation Findings\" as UC11\n\
+    \  usecase \"Export Audit Trail\" as UC12\n  usecase \"Escalate Critical Incident\"\
+    \ as UC13\n}\n\nWK -- UC1\nWK -- UC8\nSO -- UC1\nSO -- UC4\nSO -- UC7\nSO -- UC9\n\
+    SO -- UC13\nPM -- UC10\nPM -- UC11\nRA -- UC5\nRA -- UC12\n\nUC1 ..> UC2 : <<include>>\n\
+    UC1 ..> UC3 : <<include>>\nUC5 ..> UC6 : <<include>>\nUC13 ..> UC4 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Report Incident (UC1)\"\
+    ,\n            \"Validate Incident Data (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Incident Data' (UC2) is included by 'Report Incident' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Report Incident' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Report\
+    \ Incident' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Report Incident (UC1)\",\n            \"Assign\
+    \ Incident Category (UC3)\"\n          ],\n          \"explanation\": \"'Assign\
+    \ Incident Category' (UC3) is included by 'Report Incident' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Report Incident' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Report Incident' via\
+    \ the include relationship.\"\n        },\n        {\n          \"elements\":\
+    \ [\n            \"Generate Compliance Report (UC5)\",\n            \"Retrieve\
+    \ Regulation Standards (UC6)\"\n          ],\n          \"explanation\": \"'Retrieve\
+    \ Regulation Standards' (UC6) is included by 'Generate Compliance Report' (UC5),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Generate Compliance Report' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Generate Compliance Report' via the include relationship.\"\n        }\n\
+    \      ]\n    }\n  ]\n}"

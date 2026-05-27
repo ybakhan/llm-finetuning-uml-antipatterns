@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 79
+  domain: tournament_registration_system
+  domain_display: Tournament Registration System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register for Tournament (UC1)
+      - Validate Player Eligibility (UC2)
+      explanation: '''Validate Player Eligibility'' (UC2) is included by ''Register
+        for Tournament'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Register for Tournament'' rather than a standalone service observable to
+        any actor, making it a functional decomposition of ''Register for Tournament''
+        via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:06:39.824721'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Player\" as Player\nactor \"Tournament Admin\"\
+    \ as Admin\n\nrectangle \"Tournament Registration System\" {\n  usecase \"Register\
+    \ for Tournament\" as UC1\n  usecase \"Validate Player Eligibility\" as UC2\n\
+    \  usecase \"View Tournament Schedule\" as UC3\n  usecase \"Create Tournament\"\
+    \ as UC4\n  usecase \"Cancel Registration\" as UC5\n  usecase \"Manage Seedings\"\
+    \ as UC6\n}\n\nPlayer -- UC1\nPlayer -- UC3\nPlayer -- UC5\nAdmin -- UC4\nAdmin\
+    \ -- UC6\n\nUC1 ..> UC2 : <<include>>\n\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register for Tournament\
+    \ (UC1)\",\n            \"Validate Player Eligibility (UC2)\"\n          ],\n\
+    \          \"explanation\": \"'Validate Player Eligibility' (UC2) is included\
+    \ by 'Register for Tournament' (UC1), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Register for Tournament' rather than a standalone service observable to\
+    \ any actor, making it a functional decomposition of 'Register for Tournament'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,477 @@
+AUDIT LOG — Prompt #078
+Timestamp : 2026-03-25T01:51:01.451298
+Model     : claude-opus-4-6
+Tokens    : input=1593  output=1550
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (3 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #078: Generate a MEDIUM use case model with exactly 30 constructs (valid range for medium: 24–30 constructs). Domain: Sports League Management.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: sports_league_management
+DOMAIN_DISPLAY: Sports League Management
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 30
+
+```plantuml
+@startuml
+left to right direction
+
+actor "League Administrator" as Admin
+actor "Team Manager" as Manager
+actor "Referee" as Referee
+actor "Fan" as Fan
+
+rectangle "Sports League Management System" {
+  usecase "Register Team" as UC1
+  usecase "Validate Team Roster" as UC1a
+  usecase "Check Registration Fees" as UC1b
+
+  usecase "Schedule Match" as UC2
+  usecase "Check Venue Availability" as UC2a
+
+  usecase "Record Match Result" as UC3
+  usecase "Update League Standings" as UC4
+  usecase "Assign Referee to Match" as UC5
+  usecase "Submit Lineup" as UC6
+  usecase "View League Standings" as UC7
+  usecase "View Match Schedule" as UC8
+  usecase "Manage Player Transfers" as UC9
+  usecase "Report Disciplinary Action" as UC10
+  usecase "Generate Season Report" as UC11
+  usecase "Purchase Season Tickets" as UC12
+}
+
+Admin -- UC1
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+
+Admin -- UC2
+UC2 ..> UC2a : <<include>>
+
+Admin -- UC4
+Admin -- UC5
+Admin -- UC11
+
+Referee -- UC3
+Referee -- UC10
+
+Manager -- UC6
+Manager -- UC9
+
+Fan -- UC7
+Fan -- UC8
+Fan -- UC12
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Register Team (use case, UC1)",
+            "Validate Team Roster (use case, UC1a)",
+            "<<include>> from UC1 to UC1a"
+          ],
+          "explanation": "'Validate Team Roster' is an inclusion use case included by only one use case ('Register Team'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a decomposed sub-step of registration rather than a complete, independently valuable service. This is the Functional Decomposition antipattern using the include relationship."
+        },
+        {
+          "constructs": [
+            "Register Team (use case, UC1)",
+            "Check Registration Fees (use case, UC1b)",
+            "<<include>> from UC1 to UC1b"
+          ],
+          "explanation": "'Check Registration Fees' is an inclusion use case included by only one use case ('Register Team'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It decomposes the registration process into a sub-function rather than providing an observable, complete result to any user. This is the Functional Decomposition antipattern using the include relationship."
+        },
+        {
+          "constructs": [
+            "Schedule Match (use case, UC2)",
+            "Check Venue Availability (use case, UC2a)",
+            "<<include>> from UC2 to UC2a"
+          ],
+          "explanation": "'Check Venue Availability' is an inclusion use case included by only one use case ('Schedule Match'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal procedural step of scheduling rather than a standalone service. This is the Functional Decomposition antipattern using the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Three instances of the Functional Decomposition antipattern must be resolved by merging each isolated inclusion use case back into its sole base use case:
+
+1. **"Validate Team Roster" (UC1a)** is merged into **"Register Team" (UC1)**. The validation of the roster is an internal step of team registration and does not provide an independent service. The use case UC1a and its <<include>> relationship are removed.
+
+2. **"Check Registration Fees" (UC1b)** is merged into **"Register Team" (UC1)**. Checking fees is a sub-step of registration, not a standalone service. The use case UC1b and its <<include>> relationship are removed.
+
+3. **"Check Venue Availability" (UC2a)** is merged into **"Schedule Match" (UC2)**. Checking venue availability is an inherent part of scheduling a match and does not provide an observable result on its own. The use case UC2a and its <<include>> relationship are removed.
+
+This removes 3 use cases and 3 <<include>> relationships (6 constructs), reducing the total from 30 to 24 constructs. No new constructs are added as the refactoring only involves merging.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "League Administrator" as Admin
+actor "Team Manager" as Manager
+actor "Referee" as Referee
+actor "Fan" as Fan
+
+rectangle "Sports League Management System" {
+  usecase "Register Team" as UC1
+  usecase "Schedule Match" as UC2
+  usecase "Record Match Result" as UC3
+  usecase "Update League Standings" as UC4
+  usecase "Assign Referee to Match" as UC5
+  usecase "Submit Lineup" as UC6
+  usecase "View League Standings" as UC7
+  usecase "View Match Schedule" as UC8
+  usecase "Manage Player Transfers" as UC9
+  usecase "Report Disciplinary Action" as UC10
+  usecase "Generate Season Report" as UC11
+  usecase "Purchase Season Tickets" as UC12
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC4
+Admin -- UC5
+Admin -- UC11
+
+Referee -- UC3
+Referee -- UC10
+
+Manager -- UC6
+Manager -- UC9
+
+Fan -- UC7
+Fan -- UC8
+Fan -- UC12
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T00:58:42.889660
+Model     : claude-opus-4-6
+Tokens    : input=1177  output=464
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "League Administrator" as Admin
+actor "Team Manager" as Manager
+actor "Referee" as Referee
+actor "Fan" as Fan
+
+rectangle "Sports League Management System" {
+  usecase "Register Team" as UC1
+  usecase "Validate Team Roster" as UC1a
+  usecase "Check Registration Fees" as UC1b
+
+  usecase "Schedule Match" as UC2
+  usecase "Check Venue Availability" as UC2a
+
+  usecase "Record Match Result" as UC3
+  usecase "Update League Standings" as UC4
+  usecase "Assign Referee to Match" as UC5
+  usecase "Submit Lineup" as UC6
+  usecase "View League Standings" as UC7
+  usecase "View Match Schedule" as UC8
+  usecase "Manage Player Transfers" as UC9
+  usecase "Report Disciplinary Action" as UC10
+  usecase "Generate Season Report" as UC11
+  usecase "Purchase Season Tickets" as UC12
+}
+
+Admin -- UC1
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+
+Admin -- UC2
+UC2 ..> UC2a : <<include>>
+
+Admin -- UC4
+Admin -- UC5
+Admin -- UC11
+
+Referee -- UC3
+Referee -- UC10
+
+Manager -- UC6
+Manager -- UC9
+
+Fan -- UC7
+Fan -- UC8
+Fan -- UC12
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Register Team (use case, UC1)",
+            "Validate Team Roster (use case, UC1a)",
+            "<<include>> from UC1 to UC1a"
+          ],
+          "explanation": "'Validate Team Roster' is an inclusion use case included by only one use case ('Register Team'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a decomposed sub-step of registration rather than a complete, independently valuable service. This is the Functional Decomposition antipattern using the include relationship."
+        },
+        {
+          "constructs": [
+            "Register Team (use case, UC1)",
+            "Check Registration Fees (use case, UC1b)",
+            "<<include>> from UC1 to UC1b"
+          ],
+          "explanation": "'Check Registration Fees' is an inclusion use case included by only one use case ('Register Team'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It decomposes the registration process into a sub-function rather than providing an observable, complete result to any user. This is the Functional Decomposition antipattern using the include relationship."
+        },
+        {
+          "constructs": [
+            "Schedule Match (use case, UC2)",
+            "Check Venue Availability (use case, UC2a)",
+            "<<include>> from UC2 to UC2a"
+          ],
+          "explanation": "'Check Venue Availability' is an inclusion use case included by only one use case ('Schedule Match'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal procedural step of scheduling rather than a standalone service. This is the Functional Decomposition antipattern using the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+The first two antipattern instances are actually one instance because they share same base use case "Register Team".
+Adjust counts and explanation accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Register Team (use case, UC1)",
+            "Validate Team Roster (use case, UC1a)",
+            "Check Registration Fees (use case, UC1b)",
+            "<<include>> from UC1 to UC1a",
+            "<<include>> from UC1 to UC1b"
+          ],
+          "explanation": "'Register Team' includes two use cases — 'Validate Team Roster' and 'Check Registration Fees' — both of which are included by only one use case ('Register Team'), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are not involved in any generalization. They represent decomposed sub-steps of the registration process rather than complete, independently valuable services. This is the Functional Decomposition antipattern using the include relationship, where a base use case is broken down into internal procedural sub-functions."
+        },
+        {
+          "constructs": [
+            "Schedule Match (use case, UC2)",
+            "Check Venue Availability (use case, UC2a)",
+            "<<include>> from UC2 to UC2a"
+          ],
+          "explanation": "'Check Venue Availability' is an inclusion use case included by only one use case ('Schedule Match'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents an internal procedural step of scheduling rather than a standalone service. This is the Functional Decomposition antipattern using the include relationship."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+
+rectangle "Messaging Application" {
+  usecase "Send Message" as UC1
+  usecase "Validate Message Content" as UC2
+  usecase "View Conversations" as UC3
+  usecase "Delete Message" as UC4
+  usecase "Manage Users" as UC5
+  usecase "Search Messages" as UC6
+}
+
+User -- UC1
+User -- UC3
+User -- UC4
+User -- UC6
+Admin -- UC5
+
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Send Message (UC1)",
+            "Validate Message Content (UC2)"
+          ],
+          "explanation": "'Validate Message Content' (UC2) is included by 'Send Message' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Send Message' rather than a standalone service observable to any actor, making it a functional decomposition of 'Send Message' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

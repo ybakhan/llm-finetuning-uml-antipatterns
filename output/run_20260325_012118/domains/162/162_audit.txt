@@ -1,0 +1,224 @@
+AUDIT LOG — Prompt #162
+Timestamp : 2026-03-25T02:24:56.871841
+Model     : claude-opus-4-6
+Tokens    : input=1481  output=868
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #162: Generate a SMALL use case model with exactly 11 constructs (valid range for small: 9–13 constructs). Domain: Pet Care Service Booking.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: pet_care_service_booking
+DOMAIN_DISPLAY: Pet Care Service Booking
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 11
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Pet Owner" as PO
+actor "Veterinarian" as Vet
+
+rectangle "Pet Care Service Booking" {
+  usecase "Book Grooming Session" as UC1
+  usecase "Book Vet Appointment" as UC2
+  usecase "Cancel Booking" as UC3
+  usecase "View Booking History" as UC4
+  usecase "Select Time Slot" as UC5
+  usecase "Confirm Appointment" as UC6
+}
+
+PO -- UC1
+PO -- UC2
+PO -- UC3
+PO -- UC4
+Vet -- UC6
+
+UC2 ..> UC5 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Book Vet Appointment (use case, UC2)",
+            "Select Time Slot (use case, UC5)",
+            "<<include>> relationship from UC2 to UC5"
+          ],
+          "explanation": "The use case 'Select Time Slot' (UC5) is an inclusion use case that is included by only one use case ('Book Vet Appointment'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not involved in any generalization. It represents a decomposed step of the booking process rather than a complete, standalone service offering an observable result to a user. This is functional decomposition via the include relationship — 'Select Time Slot' is merely a sub-step of 'Book Vet Appointment' and should be merged back into it."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The use case "Select Time Slot" (UC5) is only included by "Book Vet Appointment" (UC2), has no actor association, and does not participate in any other relationships (no include, extend, or generalization). It represents a decomposed sub-step rather than a complete service. Following the "Drop Functional Decomposition" refactoring, "Select Time Slot" is merged into "Book Vet Appointment," and the <<include>> relationship between UC2 and UC5 is removed. The time slot selection behavior becomes an internal part of the "Book Vet Appointment" use case. This removes 1 use case and 1 include relationship, reducing the construct count from 11 to 9.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Pet Owner" as PO
+actor "Veterinarian" as Vet
+
+rectangle "Pet Care Service Booking" {
+  usecase "Book Grooming Session" as UC1
+  usecase "Book Vet Appointment" as UC2
+  usecase "Cancel Booking" as UC3
+  usecase "View Booking History" as UC4
+  usecase "Confirm Appointment" as UC6
+}
+
+PO -- UC1
+PO -- UC2
+PO -- UC3
+PO -- UC4
+Vet -- UC6
+@enduml
+```

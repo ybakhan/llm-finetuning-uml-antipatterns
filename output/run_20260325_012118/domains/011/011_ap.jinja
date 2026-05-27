@@ -1,0 +1,87 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Listener" as Listener
+actor "Artist" as Artist
+actor "Admin" as Admin
+
+rectangle "Music Streaming Platform" {
+  usecase "Search Music" as UC1
+  usecase "Play Track" as UC2
+  usecase "Manage Playlist" as UC3
+  usecase "Subscribe to Premium" as UC4
+  usecase "Upload Album" as UC5
+  usecase "View Analytics" as UC6
+  usecase "Moderate Content" as UC7
+  usecase "Rate Track" as UC8
+  usecase "Download for Offline" as UC9
+  usecase "Validate Search Query" as UC10
+  usecase "Buffer Audio Stream" as UC11
+  usecase "Process Payment" as UC12
+  usecase "Share Playlist" as UC13
+  usecase "Browse Charts" as UC14
+}
+
+Listener -- UC1
+Listener -- UC2
+Listener -- UC3
+Listener -- UC4
+Listener -- UC8
+Listener -- UC9
+Listener -- UC13
+Listener -- UC14
+
+Artist -- UC5
+Artist -- UC6
+
+Admin -- UC7
+
+UC1 ..> UC10 : <<include>>
+UC2 ..> UC11 : <<include>>
+UC4 ..> UC12 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Search Music (UC1)",
+            "Validate Search Query (UC10)"
+          ],
+          "explanation": "'Validate Search Query' (UC10) is included by 'Search Music' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Search Music' rather than a standalone service observable to any actor, making it a functional decomposition of 'Search Music' via the include relationship."
+        },
+        {
+          "elements": [
+            "Play Track (UC2)",
+            "Buffer Audio Stream (UC11)"
+          ],
+          "explanation": "'Buffer Audio Stream' (UC11) is included by 'Play Track' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Play Track' rather than a standalone service observable to any actor, making it a functional decomposition of 'Play Track' via the include relationship."
+        },
+        {
+          "elements": [
+            "Subscribe to Premium (UC4)",
+            "Process Payment (UC12)"
+          ],
+          "explanation": "'Process Payment' (UC12) is included by 'Subscribe to Premium' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Subscribe to Premium' rather than a standalone service observable to any actor, making it a functional decomposition of 'Subscribe to Premium' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Security Analyst" as SA
+actor "CISO" as CISO
+
+rectangle "Cybersecurity Incident Reporting System" {
+  usecase "Report Incident" as UC1
+  usecase "Populate Incident Fields" as UC2
+  usecase "Review Incident Report" as UC3
+  usecase "Generate Compliance Report" as UC4
+  usecase "Escalate Incident" as UC5
+}
+
+SA -- UC1
+SA -- UC3
+SA -- UC5
+CISO -- UC4
+
+UC1 ..> UC2 : <<include>>
+@enduml

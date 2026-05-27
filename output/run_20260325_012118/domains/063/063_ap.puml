@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Donor" as Donor
+actor "Administrator" as Admin
+
+rectangle "Donation Management System" {
+  usecase "Make Donation" as UC1
+  usecase "Validate Payment Details" as UC2
+  usecase "View Donation History" as UC3
+  usecase "Generate Reports" as UC4
+  usecase "Manage Campaigns" as UC5
+  usecase "Send Thank You Receipt" as UC6
+}
+
+Donor -- UC1
+Donor -- UC3
+Admin -- UC4
+Admin -- UC5
+Admin -- UC6
+
+UC1 ..> UC2 : <<include>>
+@enduml

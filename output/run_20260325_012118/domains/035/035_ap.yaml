@@ -1,0 +1,73 @@
+metadata:
+  domain_id: 35
+  domain: event_ticketing_system
+  domain_display: Event Ticketing System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Purchase Ticket (UC2)
+      - Validate Payment Details (UC3)
+      explanation: '''Validate Payment Details'' (UC3) is included by ''Purchase Ticket'' (UC2), has no
+        direct actor association, does not include or extend any other use case, is not extended by any
+        use case, and is not part of any generalisation hierarchy. It represents an internal sub-step
+        of ''Purchase Ticket'' rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Ticket'' via the include relationship.'
+    - elements:
+      - Purchase Ticket (UC2)
+      - Generate E-Ticket (UC4)
+      explanation: '''Generate E-Ticket'' (UC4) is included by ''Purchase Ticket'' (UC2), has no direct
+        actor association, does not include or extend any other use case, is not extended by any use case,
+        and is not part of any generalisation hierarchy. It represents an internal sub-step of ''Purchase
+        Ticket'' rather than a standalone service observable to any actor, making it a functional decomposition
+        of ''Purchase Ticket'' via the include relationship.'
+    - elements:
+      - Purchase Ticket (UC2)
+      - Reserve Seat (UC5)
+      explanation: '''Reserve Seat'' (UC5) is included by ''Purchase Ticket'' (UC2), has no direct actor
+        association, does not include or extend any other use case, is not extended by any use case, and
+        is not part of any generalisation hierarchy. It represents an internal sub-step of ''Purchase
+        Ticket'' rather than a standalone service observable to any actor, making it a functional decomposition
+        of ''Purchase Ticket'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T05:10:07.501577'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains any antipatterns. Base\
+    \ your analysis solely on the model provided. Do not use any outside knowledge. Respond with a JSON\
+    \ object.\n\nPlantUML Model:\n@startuml\nleft to right direction\n\nactor \"Customer\" as Customer\n\
+    actor \"Event Organizer\" as Organizer\nactor \"System Administrator\" as Admin\n\nrectangle \"Event\
+    \ Ticketing System\" {\n  usecase \"Browse Events\" as UC1\n  usecase \"Purchase Ticket\" as UC2\n\
+    \  usecase \"Validate Payment Details\" as UC3\n  usecase \"Generate E-Ticket\" as UC4\n  usecase\
+    \ \"Reserve Seat\" as UC5\n  usecase \"View Order History\" as UC6\n  usecase \"Cancel Ticket\" as\
+    \ UC7\n  usecase \"Process Payment\" as UC8\n  usecase \"Create Event\" as UC9\n  usecase \"Manage\
+    \ Event Pricing\" as UC10\n  usecase \"View Sales Reports\" as UC11\n  usecase \"Manage Venues\" as\
+    \ UC12\n  usecase \"Manage User Accounts\" as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer\
+    \ -- UC6\nCustomer -- UC7\n\nOrganizer -- UC9\nOrganizer -- UC10\nOrganizer -- UC11\n\nAdmin -- UC12\n\
+    Admin -- UC13\n\nUC8 ..> UC2 : <<extend>>\n\nUC2 ..> UC3 : <<include>>\nUC2 ..> UC4 : <<include>>\n\
+    UC2 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\": 3,\n  \"\
+    antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition: Using the include\
+    \ relationship\",\n      \"instance_count\": 3,\n      \"instances\": [\n        {\n          \"elements\"\
+    : [\n            \"Purchase Ticket (UC2)\",\n            \"Validate Payment Details (UC3)\"\n    \
+    \      ],\n          \"explanation\": \"'Validate Payment Details' (UC3) is included by 'Purchase\
+    \ Ticket' (UC2), has no direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy. It represents an\
+    \ internal sub-step of 'Purchase Ticket' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Purchase Ticket' via the include relationship.\"\n    \
+    \    },\n        {\n          \"elements\": [\n            \"Purchase Ticket (UC2)\",\n          \
+    \  \"Generate E-Ticket (UC4)\"\n          ],\n          \"explanation\": \"'Generate E-Ticket' (UC4)\
+    \ is included by 'Purchase Ticket' (UC2), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Purchase Ticket' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Purchase Ticket' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Purchase Ticket (UC2)\",\n     \
+    \       \"Reserve Seat (UC5)\"\n          ],\n          \"explanation\": \"'Reserve Seat' (UC5) is\
+    \ included by 'Purchase Ticket' (UC2), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Purchase Ticket' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Purchase Ticket' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

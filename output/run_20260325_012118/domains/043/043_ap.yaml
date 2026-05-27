@@ -1,0 +1,70 @@
+metadata:
+  domain_id: 43
+  domain: weather_forecasting_service
+  domain_display: Weather Forecasting Service
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Issue Severe Weather Alert (UC4)
+      - Validate Alert Criteria (UC5)
+      explanation: '''Validate Alert Criteria'' (UC5) is included by ''Issue Severe
+        Weather Alert'' (UC4), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Issue
+        Severe Weather Alert'' rather than a standalone service observable to any
+        actor, making it a functional decomposition of ''Issue Severe Weather Alert''
+        via the include relationship.'
+    - elements:
+      - Generate Forecast Model (UC9)
+      - Calibrate Model Parameters (UC10)
+      explanation: '''Calibrate Model Parameters'' (UC10) is included by ''Generate
+        Forecast Model'' (UC9), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Generate Forecast Model'' rather than a standalone service observable to
+        any actor, making it a functional decomposition of ''Generate Forecast Model''
+        via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:51:52.009960'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"General User\" as GU\nactor \"Meteorologist\"\
+    \ as MET\nactor \"Emergency Manager\" as EM\nactor \"System Administrator\" as\
+    \ SA\n\nrectangle \"Weather Forecasting Service\" {\n  usecase \"View Current\
+    \ Weather\" as UC1\n  usecase \"Search Location\" as UC2\n  usecase \"View Extended\
+    \ Forecast\" as UC3\n  usecase \"Issue Severe Weather Alert\" as UC4\n  usecase\
+    \ \"Validate Alert Criteria\" as UC5\n  usecase \"Subscribe to Notifications\"\
+    \ as UC6\n  usecase \"Manage Weather Stations\" as UC7\n  usecase \"Review Historical\
+    \ Data\" as UC8\n  usecase \"Generate Forecast Model\" as UC9\n  usecase \"Calibrate\
+    \ Model Parameters\" as UC10\n  usecase \"Configure System Settings\" as UC11\n\
+    \  usecase \"View Emergency Briefing\" as UC12\n  usecase \"Export Weather Report\"\
+    \ as UC13\n}\n\nGU -- UC1\nGU -- UC2\nGU -- UC3\nGU -- UC6\nMET -- UC4\nMET --\
+    \ UC8\nMET -- UC9\nMET -- UC13\nEM -- UC12\nEM -- UC3\nSA -- UC7\nSA -- UC11\n\
+    \nUC4 ..> UC5 : <<include>>\nUC9 ..> UC10 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Issue Severe Weather\
+    \ Alert (UC4)\",\n            \"Validate Alert Criteria (UC5)\"\n          ],\n\
+    \          \"explanation\": \"'Validate Alert Criteria' (UC5) is included by 'Issue\
+    \ Severe Weather Alert' (UC4), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Issue\
+    \ Severe Weather Alert' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Issue Severe Weather Alert' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Generate Forecast Model (UC9)\",\n            \"Calibrate Model\
+    \ Parameters (UC10)\"\n          ],\n          \"explanation\": \"'Calibrate Model\
+    \ Parameters' (UC10) is included by 'Generate Forecast Model' (UC9), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Generate Forecast Model' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Generate Forecast\
+    \ Model' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,51 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Program Director" as PD
+actor "Broadcast Engineer" as BE
+
+rectangle "Broadcasting Management System" {
+  usecase "Schedule Program" as UC1
+  usecase "Validate Time Slot" as UC2
+  usecase "Monitor Live Broadcast" as UC3
+  usecase "Manage Channel Lineup" as UC4
+  usecase "Generate Broadcast Log" as UC5
+}
+
+PD -- UC1
+PD -- UC4
+BE -- UC3
+BE -- UC5
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Schedule Program (UC1)",
+            "Validate Time Slot (UC2)"
+          ],
+          "explanation": "'Validate Time Slot' (UC2) is included by 'Schedule Program' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Schedule Program' rather than a standalone service observable to any actor, making it a functional decomposition of 'Schedule Program' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

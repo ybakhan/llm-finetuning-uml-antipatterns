@@ -1,0 +1,49 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Pharmacist" as Pharmacist
+actor "Customer" as Customer
+
+rectangle "Pharmacy Management System" {
+  usecase "Dispense Medication" as UC1
+  usecase "Verify Prescription" as UC2
+  usecase "Purchase Over-the-Counter" as UC3
+  usecase "Manage Inventory" as UC4
+}
+
+Pharmacist -- UC1
+UC1 ..> UC2 : <<include>>
+Customer -- UC3
+Pharmacist -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Dispense Medication (UC1)",
+            "Verify Prescription (UC2)"
+          ],
+          "explanation": "'Verify Prescription' is included by 'Dispense Medication', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Dispense Medication' rather than a standalone service observable to any actor, making it a functional decomposition of 'Dispense Medication' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

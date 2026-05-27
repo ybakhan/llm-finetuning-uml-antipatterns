@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Adopter" as Adopter
+actor "Shelter Staff" as Staff
+actor "Veterinarian" as Vet
+actor "Administrator" as Admin
+
+rectangle "Pet Adoption System" {
+  usecase "Browse Available Pets" as UC1
+  usecase "Submit Adoption Application" as UC2
+  usecase "Track Application Status" as UC3
+  usecase "Register New Pet" as UC4
+  usecase "Review Adoption Application" as UC5
+  usecase "Perform Health Checkup" as UC6
+  usecase "Manage User Accounts" as UC7
+  usecase "Generate Adoption Reports" as UC8
+  usecase "Process Adoption Fee" as UC9
+  usecase "Validate Payment Details" as UC10
+  usecase "Finalize Adoption" as UC11
+  usecase "Schedule Meet and Greet" as UC12
+  usecase "Issue Health Certificate" as UC13
+
+  UC9 ..> UC10 : <<include>>
+  UC12 ..> UC5 : <<extend>>
+  UC13 ..> UC6 : <<extend>>
+}
+
+Adopter -- UC1
+Adopter -- UC2
+Adopter -- UC3
+Adopter -- UC9
+Staff -- UC4
+Staff -- UC5
+Staff -- UC11
+Vet -- UC6
+Admin -- UC7
+Admin -- UC8
+@enduml

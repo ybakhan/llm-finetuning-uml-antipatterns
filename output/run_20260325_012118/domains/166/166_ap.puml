@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Decorator" as Decorator
+actor "Admin" as Admin
+
+rectangle "Event Decoration Booking System" {
+  usecase "Browse Decoration Packages" as UC1
+  usecase "Book Decoration Service" as UC2
+  usecase "Make Payment" as UC3
+  usecase "Cancel Booking" as UC4
+  usecase "View Booking History" as UC5
+  usecase "Submit Review" as UC6
+  usecase "Accept Booking Request" as UC7
+  usecase "Update Portfolio" as UC8
+  usecase "Manage Availability" as UC9
+  usecase "Manage Users" as UC10
+  usecase "Generate Revenue Report" as UC11
+  usecase "Resolve Dispute" as UC12
+  usecase "Validate Payment Details" as UC13
+  usecase "Send Booking Confirmation" as UC14
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Customer -- UC4
+Customer -- UC5
+Customer -- UC6
+
+Decorator -- UC7
+Decorator -- UC8
+Decorator -- UC9
+
+Admin -- UC10
+Admin -- UC11
+Admin -- UC12
+
+UC2 ..> UC13 : <<include>>
+UC2 ..> UC14 : <<include>>
+@enduml

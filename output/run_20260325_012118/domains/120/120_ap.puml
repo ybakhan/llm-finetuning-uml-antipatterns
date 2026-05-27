@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Backer" as Backer
+actor "Project Creator" as Creator
+
+rectangle "Crowdfunding Platform" {
+  usecase "Browse Projects" as UC1
+  usecase "Back Project" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Create Campaign" as UC4
+}
+
+Backer -- UC1
+Backer -- UC2
+UC2 ..> UC3 : <<include>>
+Creator -- UC4
+@enduml

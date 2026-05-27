@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+actor "Traveler" as Traveler
+actor "Insurance Agent" as Agent
+actor "Claims Adjuster" as Adjuster
+
+rectangle "Travel Insurance System" {
+  usecase "Browse Insurance Plans" as UC1
+  usecase "Purchase Policy" as UC2
+  usecase "Validate Personal Details" as UC3
+  usecase "Submit Claim" as UC4
+  usecase "Upload Supporting Documents" as UC5
+  usecase "Review Claim" as UC6
+  usecase "Approve or Deny Claim" as UC7
+  usecase "Generate Policy Document" as UC8
+  usecase "Cancel Policy" as UC9
+  usecase "View Policy Details" as UC10
+  usecase "Manage Customer Profiles" as UC11
+  usecase "Generate Claims Report" as UC12
+  usecase "Renew Policy" as UC13
+}
+
+Traveler -- UC1
+Traveler -- UC2
+Traveler -- UC4
+Traveler -- UC9
+Traveler -- UC10
+Traveler -- UC13
+
+Agent -- UC8
+Agent -- UC11
+
+Adjuster -- UC6
+Adjuster -- UC7
+Adjuster -- UC12
+
+UC2 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+@enduml

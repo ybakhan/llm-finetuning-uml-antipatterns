@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Listener" as Listener
+actor "Artist" as Artist
+actor "Admin" as Admin
+
+rectangle "Music Streaming Platform" {
+  usecase "Search Music" as UC1
+  usecase "Play Track" as UC2
+  usecase "Manage Playlist" as UC3
+  usecase "Subscribe to Premium" as UC4
+  usecase "Upload Album" as UC5
+  usecase "View Analytics" as UC6
+  usecase "Moderate Content" as UC7
+  usecase "Rate Track" as UC8
+  usecase "Download for Offline" as UC9
+  usecase "Share Playlist" as UC13
+  usecase "Browse Charts" as UC14
+}
+
+Listener -- UC1
+Listener -- UC2
+Listener -- UC3
+Listener -- UC4
+Listener -- UC8
+Listener -- UC9
+Listener -- UC13
+Listener -- UC14
+
+Artist -- UC5
+Artist -- UC6
+
+Admin -- UC7
+@enduml

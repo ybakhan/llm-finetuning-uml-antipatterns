@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 93
+  domain: social_benefits_management_system
+  domain_display: Social Benefits Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:10:07.128002'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Citizen\" as Citizen\nactor \"Case Worker\"\
+    \ as CaseWorker\nactor \"Benefits Administrator\" as Admin\nactor \"External Verifier\"\
+    \ as Verifier\n\nrectangle \"Social Benefits Management System\" {\n  usecase\
+    \ \"Submit Benefits Application\" as UC1\n  usecase \"Review Application\" as\
+    \ UC4\n  usecase \"Approve Benefits\" as UC7\n  usecase \"Deny Benefits\" as UC8\n\
+    \  usecase \"Disburse Payment\" as UC9\n  usecase \"Track Application Status\"\
+    \ as UC10\n  usecase \"Generate Reports\" as UC11\n  usecase \"Appeal Decision\"\
+    \ as UC12\n  usecase \"Verify Identity\" as UC13\n  usecase \"Update Beneficiary\
+    \ Record\" as UC14\n}\n\nCitizen -- UC1\nCitizen -- UC10\nCitizen -- UC12\nCaseWorker\
+    \ -- UC4\nCaseWorker -- UC7\nCaseWorker -- UC8\nCaseWorker -- UC14\nAdmin -- UC9\n\
+    Admin -- UC11\nVerifier -- UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

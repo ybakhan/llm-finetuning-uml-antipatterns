@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 26
+  domain: payroll_management_system
+  domain_display: Payroll Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Process Monthly Payroll (UC3)
+      - Calculate Gross Pay (UC4)
+      explanation: '''Calculate Gross Pay'' (UC4) is included by ''Process Monthly
+        Payroll'' (UC3), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Process
+        Monthly Payroll'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Process Monthly Payroll'' via the
+        include relationship.'
+    - elements:
+      - Process Monthly Payroll (UC3)
+      - Apply Tax Deductions (UC5)
+      explanation: '''Apply Tax Deductions'' (UC5) is included by ''Process Monthly
+        Payroll'' (UC3), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Process
+        Monthly Payroll'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Process Monthly Payroll'' via the
+        include relationship.'
+    - elements:
+      - Process Monthly Payroll (UC3)
+      - Compute Net Pay (UC6)
+      explanation: '''Compute Net Pay'' (UC6) is included by ''Process Monthly Payroll''
+        (UC3), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Monthly Payroll''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Monthly Payroll'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:31:09.635475'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"HR Manager\" as HR\nactor \"Payroll Officer\"\
+    \ as PO\nactor \"Employee\" as EMP\nactor \"Finance Director\" as FD\nactor \"\
+    Tax Authority\" as TA\n\nrectangle \"Payroll Management System\" {\n  usecase\
+    \ \"Manage Employee Records\" as UC1\n  usecase \"Configure Pay Grades\" as UC2\n\
+    \  usecase \"Process Monthly Payroll\" as UC3\n  usecase \"Calculate Gross Pay\"\
+    \ as UC4\n  usecase \"Apply Tax Deductions\" as UC5\n  usecase \"Compute Net Pay\"\
+    \ as UC6\n  usecase \"Generate Payslips\" as UC7\n  usecase \"Submit Tax Filing\"\
+    \ as UC8\n  usecase \"View Payslip\" as UC9\n  usecase \"Request Leave\" as UC10\n\
+    \  usecase \"Approve Leave\" as UC11\n  usecase \"Generate Payroll Report\" as\
+    \ UC12\n  usecase \"Manage Overtime\" as UC13\n  usecase \"Approve Payroll\" as\
+    \ UC14\n  usecase \"Process Bonus Payment\" as UC15\n  usecase \"View Tax Summary\"\
+    \ as UC16\n}\n\nHR -- UC1\nHR -- UC2\nHR -- UC11\nHR -- UC13\nPO -- UC3\nPO --\
+    \ UC7\nPO -- UC8\nPO -- UC15\nEMP -- UC9\nEMP -- UC10\nEMP -- UC16\nFD -- UC12\n\
+    FD -- UC14\nTA -- UC8\n\nUC3 ..> UC4 : <<include>>\nUC3 ..> UC5 : <<include>>\n\
+    UC3 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Process Monthly Payroll\
+    \ (UC3)\",\n            \"Calculate Gross Pay (UC4)\"\n          ],\n        \
+    \  \"explanation\": \"'Calculate Gross Pay' (UC4) is included by 'Process Monthly\
+    \ Payroll' (UC3), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Process Monthly\
+    \ Payroll' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Process Monthly Payroll' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Process Monthly\
+    \ Payroll (UC3)\",\n            \"Apply Tax Deductions (UC5)\"\n          ],\n\
+    \          \"explanation\": \"'Apply Tax Deductions' (UC5) is included by 'Process\
+    \ Monthly Payroll' (UC3), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Process\
+    \ Monthly Payroll' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Process Monthly Payroll' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Process Monthly\
+    \ Payroll (UC3)\",\n            \"Compute Net Pay (UC6)\"\n          ],\n    \
+    \      \"explanation\": \"'Compute Net Pay' (UC6) is included by 'Process Monthly\
+    \ Payroll' (UC3), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Process Monthly\
+    \ Payroll' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Process Monthly Payroll' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

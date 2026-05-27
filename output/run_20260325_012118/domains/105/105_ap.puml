@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Student" as Student
+actor "Tutor" as Tutor
+
+rectangle "Tutoring Marketplace" {
+  usecase "Search for Tutor" as UC1
+  usecase "Book Session" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Conduct Session" as UC4
+  usecase "Leave Review" as UC5
+}
+
+Student -- UC1
+Student -- UC2
+UC2 ..> UC3 : <<include>>
+Tutor -- UC4
+Student -- UC5
+@enduml

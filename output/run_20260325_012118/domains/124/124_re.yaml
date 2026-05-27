@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 124
+  domain: cryptocurrency_exchange
+  domain_display: Cryptocurrency Exchange
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:15:02.040591'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Trader\" as Trader\nactor \"Admin\" as Admin\n\
+    actor \"Payment Gateway\" as PG\n\nrectangle \"Cryptocurrency Exchange\" {\n \
+    \ usecase \"Register Account\" as UC1\n  usecase \"Login\" as UC3\n  usecase \"\
+    Place Buy Order\" as UC4\n  usecase \"Place Sell Order\" as UC5\n  usecase \"\
+    View Portfolio\" as UC6\n  usecase \"Deposit Funds\" as UC7\n  usecase \"Withdraw\
+    \ Funds\" as UC8\n  usecase \"View Transaction History\" as UC9\n  usecase \"\
+    Manage Listings\" as UC10\n  usecase \"Monitor Suspicious Activity\" as UC11\n\
+    \  usecase \"Set Price Alert\" as UC12\n}\n\nTrader -- UC1\nTrader -- UC3\nTrader\
+    \ -- UC4\nTrader -- UC5\nTrader -- UC6\nTrader -- UC7\nTrader -- UC8\nTrader --\
+    \ UC9\nTrader -- UC12\n\nAdmin -- UC10\nAdmin -- UC11\n\nPG -- UC7\nPG -- UC8\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

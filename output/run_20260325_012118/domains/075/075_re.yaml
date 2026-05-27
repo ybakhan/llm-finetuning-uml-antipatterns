@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 75
+  domain: cafe_order_management
+  domain_display: Cafe Order Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:56:48.291926'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Barista\" as\
+    \ Barista\nactor \"Manager\" as Manager\n\nrectangle \"Cafe Order Management System\"\
+    \ {\n  usecase \"Place Order\" as UC1\n  usecase \"Process Payment\" as UC4\n\
+    \  usecase \"View Menu\" as UC8\n  usecase \"Update Menu\" as UC9\n  usecase \"\
+    View Sales Report\" as UC10\n  usecase \"Cancel Order\" as UC11\n  usecase \"\
+    Apply Discount\" as UC12\n  usecase \"Prepare Order\" as UC6\n  usecase \"Provide\
+    \ Feedback\" as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC8\nCustomer -- UC4\n\
+    Customer -- UC11\nCustomer -- UC13\nBarista -- UC6\nBarista -- UC1\nManager --\
+    \ UC9\nManager -- UC10\nManager -- UC12\n\nUC12 ..> UC4 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

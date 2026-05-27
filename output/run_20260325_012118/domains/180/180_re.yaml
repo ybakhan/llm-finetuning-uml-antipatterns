@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 180
+  domain: crop_monitoring_system
+  domain_display: Crop Monitoring System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:31:42.722834'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Farm Manager\" as FM\nactor \"Field Technician\"\
+    \ as FT\nactor \"Agronomist\" as AG\nactor \"Weather Service\" as WS\n\nrectangle\
+    \ \"Crop Monitoring System\" {\n  usecase \"Monitor Crop Health\" as UC1\n  usecase\
+    \ \"Record Field Observation\" as UC3\n  usecase \"Generate Yield Forecast\" as\
+    \ UC5\n  usecase \"Configure Alert Thresholds\" as UC7\n  usecase \"View Dashboard\"\
+    \ as UC8\n  usecase \"Manage Irrigation Schedule\" as UC9\n  usecase \"Detect\
+    \ Pest Outbreak\" as UC10\n  usecase \"Recommend Treatment Plan\" as UC11\n  usecase\
+    \ \"Receive Weather Data\" as UC12\n  usecase \"Generate Seasonal Report\" as\
+    \ UC13\n  usecase \"Register Field Parcel\" as UC14\n}\n\nFM -- UC1\nFM -- UC8\n\
+    FM -- UC7\nFM -- UC9\nFM -- UC13\nFT -- UC3\nFT -- UC14\nAG -- UC5\nAG -- UC10\n\
+    AG -- UC11\nWS -- UC12\n\nUC10 .> UC11 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

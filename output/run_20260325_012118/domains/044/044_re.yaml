@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 44
+  domain: podcast_platform
+  domain_display: Podcast Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:37:54.016111'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Listener\" as Listener\nactor \"Podcaster\"\
+    \ as Podcaster\nactor \"Admin\" as Admin\n\nrectangle \"Podcast Platform\" {\n\
+    \  usecase \"Browse Podcasts\" as UC1\n  usecase \"Play Episode\" as UC2\n  usecase\
+    \ \"Subscribe to Podcast\" as UC3\n  usecase \"Rate and Review\" as UC4\n  usecase\
+    \ \"Manage Playlist\" as UC5\n  usecase \"Upload Episode\" as UC6\n  usecase \"\
+    Manage Podcast Metadata\" as UC9\n  usecase \"View Analytics\" as UC10\n  usecase\
+    \ \"Moderate Content\" as UC12\n  usecase \"Manage Users\" as UC13\n  usecase\
+    \ \"Download Episode\" as UC14\n  usecase \"Search Podcasts\" as UC15\n}\n\nListener\
+    \ -- UC1\nListener -- UC2\nListener -- UC3\nListener -- UC4\nListener -- UC5\n\
+    Listener -- UC14\nListener -- UC15\n\nPodcaster -- UC6\nPodcaster -- UC9\nPodcaster\
+    \ -- UC10\n\nAdmin -- UC12\nAdmin -- UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

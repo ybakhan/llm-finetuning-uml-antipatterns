@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 121
+  domain: accounting_system
+  domain_display: Accounting System
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Record Journal Entry (UC1)
+      - Validate Account Codes (UC2)
+      explanation: '''Validate Account Codes'' is included by ''Record Journal Entry'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Record Journal Entry''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Record Journal Entry'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:08:27.894944'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Accountant\" as Accountant\nactor \"Manager\"\
+    \ as Manager\n\nrectangle \"Accounting System\" {\n  usecase \"Record Journal\
+    \ Entry\" as UC1\n  usecase \"Validate Account Codes\" as UC2\n  usecase \"Generate\
+    \ Financial Report\" as UC3\n  usecase \"Approve Expenses\" as UC4\n  usecase\
+    \ \"View Ledger\" as UC5\n  usecase \"Reconcile Bank Statement\" as UC6\n}\n\n\
+    Accountant -- UC1\nAccountant -- UC5\nAccountant -- UC6\nManager -- UC3\nManager\
+    \ -- UC4\n\nUC1 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Record Journal Entry\
+    \ (UC1)\",\n            \"Validate Account Codes (UC2)\"\n          ],\n     \
+    \     \"explanation\": \"'Validate Account Codes' is included by 'Record Journal\
+    \ Entry', has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Record Journal Entry' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Record Journal Entry' via the include relationship.\"\n        }\n     \
+    \ ]\n    }\n  ]\n}"

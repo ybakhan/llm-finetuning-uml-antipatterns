@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Candidate" as Candidate
+actor "Examiner" as Examiner
+
+rectangle "Certification Examination System" {
+  usecase "Register for Exam" as UC1
+  usecase "Take Exam" as UC2
+  usecase "Review Results" as UC3
+  usecase "Grade Exam" as UC4
+  usecase "Issue Certificate" as UC5
+  usecase "Validate Answers" as UC6
+}
+
+Candidate -- UC1
+Candidate -- UC2
+Candidate -- UC3
+Examiner -- UC4
+Examiner -- UC5
+UC4 ..> UC6 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Grade Exam (UC4)",
+            "Validate Answers (UC6)"
+          ],
+          "explanation": "'Validate Answers' (UC6) is included by 'Grade Exam' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Grade Exam' rather than a standalone service observable to any actor, making it a functional decomposition of 'Grade Exam' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

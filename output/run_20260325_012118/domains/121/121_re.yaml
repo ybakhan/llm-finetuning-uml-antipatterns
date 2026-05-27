@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 121
+  domain: accounting_system
+  domain_display: Accounting System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:08:27.894944'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Accountant\" as Accountant\nactor \"Manager\"\
+    \ as Manager\n\nrectangle \"Accounting System\" {\n  usecase \"Record Journal\
+    \ Entry\" as UC1\n  usecase \"Generate Financial Report\" as UC3\n  usecase \"\
+    Approve Expenses\" as UC4\n  usecase \"View Ledger\" as UC5\n  usecase \"Reconcile\
+    \ Bank Statement\" as UC6\n}\n\nAccountant -- UC1\nAccountant -- UC5\nAccountant\
+    \ -- UC6\nManager -- UC3\nManager -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 101
+  domain: nursing_home_management_system
+  domain_display: Nursing Home Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:11:06.207876'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Nurse\" as Nurse\nactor \"Doctor\" as Doctor\n\
+    actor \"Administrator\" as Admin\nactor \"Family Member\" as Family\nactor \"\
+    Pharmacist\" as Pharmacist\n\nrectangle \"Nursing Home Management System\" {\n\
+    \  usecase \"Admit Resident\" as UC1\n  usecase \"Record Vital Signs\" as UC2\n\
+    \  usecase \"Administer Medication\" as UC3\n  usecase \"Schedule Doctor Visit\"\
+    \ as UC4\n  usecase \"Generate Health Report\" as UC5\n  usecase \"View Resident\
+    \ Status\" as UC6\n  usecase \"Manage Staff Schedule\" as UC7\n  usecase \"Process\
+    \ Discharge\" as UC8\n  usecase \"Manage Diet Plans\" as UC9\n  usecase \"Handle\
+    \ Emergency Alert\" as UC10\n  usecase \"Request Visit Appointment\" as UC11\n\
+    \  usecase \"Dispense Medication\" as UC12\n}\n\nNurse -- UC1\nNurse -- UC2\n\
+    Nurse -- UC3\nNurse -- UC10\nDoctor -- UC4\nDoctor -- UC5\nDoctor -- UC9\nAdmin\
+    \ -- UC7\nAdmin -- UC8\nFamily -- UC6\nFamily -- UC11\nPharmacist -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

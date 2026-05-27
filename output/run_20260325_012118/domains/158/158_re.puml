@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Admin" as Admin
+
+rectangle "Coworking Space Booking System" {
+  usecase "Browse Available Spaces" as UC1
+  usecase "Book Workspace" as UC2
+  usecase "Cancel Booking" as UC4
+  usecase "Manage Spaces" as UC5
+  usecase "View Booking Reports" as UC6
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC4
+Admin -- UC5
+Admin -- UC6
+@enduml

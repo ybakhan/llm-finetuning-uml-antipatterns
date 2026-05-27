@@ -1,0 +1,46 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Teacher" as Teacher
+actor "Student" as Student
+actor "Administrator" as Admin
+
+rectangle "Student Attendance System" {
+  usecase "Mark Attendance" as UC1
+  usecase "View Attendance Report" as UC4
+  usecase "Register Student" as UC6
+  usecase "View Own Attendance" as UC8
+  usecase "Configure Attendance Policy" as UC9
+  usecase "Manage Class Schedule" as UC10
+  usecase "Send Absence Notification" as UC11
+  usecase "Export Attendance Data" as UC12
+}
+
+Teacher -- UC1
+Teacher -- UC4
+Teacher -- UC11
+Student -- UC8
+Admin -- UC6
+Admin -- UC9
+Admin -- UC10
+Admin -- UC12
+
+UC11 ..> UC8 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 68
+  domain: legal_case_management_system
+  domain_display: Legal Case Management System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Upload Document (UC4)
+      - Validate Document Format (UC5)
+      explanation: '''Validate Document Format'' (UC5) is included by ''Upload Document''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Upload Document'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Upload Document'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 11
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:55:59.847981'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Attorney\" as Attorney\nactor \"Paralegal\"\
+    \ as Paralegal\n\nrectangle \"Legal Case Management System\" {\n  usecase \"Open\
+    \ New Case\" as UC1\n  usecase \"Assign Case to Attorney\" as UC2\n  usecase \"\
+    Search Cases\" as UC3\n  usecase \"Upload Document\" as UC4\n  usecase \"Validate\
+    \ Document Format\" as UC5\n  usecase \"Close Case\" as UC6\n}\n\nAttorney --\
+    \ UC1\nAttorney -- UC2\nAttorney -- UC3\nAttorney -- UC6\nParalegal -- UC3\nParalegal\
+    \ -- UC4\nUC4 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Upload Document (UC4)\"\
+    ,\n            \"Validate Document Format (UC5)\"\n          ],\n          \"\
+    explanation\": \"'Validate Document Format' (UC5) is included by 'Upload Document'\
+    \ (UC4), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Upload Document' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Upload Document' via the include relationship.\"\n        }\n      ]\n \
+    \   }\n  ]\n}"

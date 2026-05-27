@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 57
+  domain: student_attendance_system
+  domain_display: Student Attendance System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:42:32.209546'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Teacher\" as Teacher\nactor \"Student\" as\
+    \ Student\nactor \"Administrator\" as Admin\n\nrectangle \"Student Attendance\
+    \ System\" {\n  usecase \"Mark Attendance\" as UC1\n  usecase \"View Attendance\
+    \ Report\" as UC4\n  usecase \"Register Student\" as UC6\n  usecase \"View Own\
+    \ Attendance\" as UC8\n  usecase \"Configure Attendance Policy\" as UC9\n  usecase\
+    \ \"Manage Class Schedule\" as UC10\n  usecase \"Send Absence Notification\" as\
+    \ UC11\n  usecase \"Export Attendance Data\" as UC12\n}\n\nTeacher -- UC1\nTeacher\
+    \ -- UC4\nTeacher -- UC11\nStudent -- UC8\nAdmin -- UC6\nAdmin -- UC9\nAdmin --\
+    \ UC10\nAdmin -- UC12\n\nUC11 ..> UC8 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

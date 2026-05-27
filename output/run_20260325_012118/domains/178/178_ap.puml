@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "System Administrator" as Admin
+actor "Energy Analyst" as Analyst
+actor "Maintenance Technician" as Technician
+actor "Homeowner" as Homeowner
+actor "Grid Operator" as GridOp
+
+rectangle "Solar Energy Management System" {
+  usecase "Configure Solar Panels" as UC1
+  usecase "Monitor Energy Production" as UC2
+  usecase "Analyze Energy Trends" as UC3
+  usecase "Schedule Panel Maintenance" as UC4
+  usecase "View Energy Dashboard" as UC5
+  usecase "Manage Battery Storage" as UC6
+  usecase "Report System Faults" as UC7
+  usecase "Export Energy to Grid" as UC8
+  usecase "Track Energy Consumption" as UC9
+  usecase "Set Energy Usage Alerts" as UC10
+  usecase "Generate Monthly Report" as UC11
+  usecase "Manage User Accounts" as UC12
+  usecase "Validate Panel Coordinates" as UC13
+  usecase "Calculate Energy Output" as UC14
+}
+
+Admin -- UC1
+Admin -- UC12
+Admin -- UC6
+Analyst -- UC3
+Analyst -- UC11
+Analyst -- UC2
+Technician -- UC4
+Technician -- UC7
+Homeowner -- UC5
+Homeowner -- UC9
+Homeowner -- UC10
+GridOp -- UC8
+
+UC1 ..> UC13 : <<include>>
+UC3 ..> UC14 : <<include>>
+@enduml

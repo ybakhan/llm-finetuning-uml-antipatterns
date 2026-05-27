@@ -1,0 +1,108 @@
+metadata:
+  domain_id: 119
+  domain: mortgage_application_system
+  domain_display: Mortgage Application System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Mortgage Application (UC1)
+      - Collect Personal Details (UC2)
+      explanation: '''Collect Personal Details'' (UC2) is included by ''Submit Mortgage
+        Application'' (UC1), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Submit
+        Mortgage Application'' rather than a standalone service observable to any
+        actor, making it a functional decomposition of ''Submit Mortgage Application''
+        via the include relationship.'
+    - elements:
+      - Submit Mortgage Application (UC1)
+      - Attach Supporting Documents (UC3)
+      explanation: '''Attach Supporting Documents'' (UC3) is included by ''Submit
+        Mortgage Application'' (UC1), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Submit Mortgage Application'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Submit Mortgage Application''
+        via the include relationship.'
+    - elements:
+      - Review Application (UC4)
+      - Calculate Debt-to-Income Ratio (UC5)
+      explanation: '''Calculate Debt-to-Income Ratio'' (UC5) is included by ''Review
+        Application'' (UC4), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Review
+        Application'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Review Application'' via the include relationship.'
+    - elements:
+      - Perform Underwriting (UC7)
+      - Evaluate Risk Score (UC8)
+      explanation: '''Evaluate Risk Score'' (UC8) is included by ''Perform Underwriting''
+        (UC7), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Perform Underwriting''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Perform Underwriting'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 30
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:14:01.082465'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Applicant\" as Applicant\nactor \"Loan\
+    \ Officer\" as Officer\nactor \"Underwriter\" as Underwriter\nactor \"Credit Bureau\"\
+    \ as CreditBureau\n\nrectangle \"Mortgage Application System\" {\n  usecase \"\
+    Submit Mortgage Application\" as UC1\n  usecase \"Collect Personal Details\" as\
+    \ UC2\n  usecase \"Attach Supporting Documents\" as UC3\n  usecase \"Review Application\"\
+    \ as UC4\n  usecase \"Calculate Debt-to-Income Ratio\" as UC5\n  usecase \"Pull\
+    \ Credit Report\" as UC6\n  usecase \"Perform Underwriting\" as UC7\n  usecase\
+    \ \"Evaluate Risk Score\" as UC8\n  usecase \"Approve Mortgage\" as UC9\n  usecase\
+    \ \"Deny Mortgage\" as UC10\n  usecase \"Generate Pre-Approval Letter\" as UC11\n\
+    \  usecase \"Schedule Closing\" as UC12\n  usecase \"Track Application Status\"\
+    \ as UC13\n  usecase \"Upload Income Verification\" as UC14\n}\n\nApplicant --\
+    \ UC1\nApplicant -- UC13\nApplicant -- UC14\nOfficer -- UC4\nOfficer -- UC6\n\
+    Officer -- UC9\nOfficer -- UC10\nOfficer -- UC11\nOfficer -- UC12\nUnderwriter\
+    \ -- UC7\nCreditBureau -- UC6\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\n\
+    UC4 ..> UC5 : <<include>>\nUC7 ..> UC8 : <<include>>\n\nUnderwriter -- UC9\nUnderwriter\
+    \ -- UC10\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Mortgage Application\
+    \ (UC1)\",\n            \"Collect Personal Details (UC2)\"\n          ],\n   \
+    \       \"explanation\": \"'Collect Personal Details' (UC2) is included by 'Submit\
+    \ Mortgage Application' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Submit\
+    \ Mortgage Application' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Submit Mortgage Application' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Submit Mortgage Application (UC1)\",\n            \"Attach Supporting\
+    \ Documents (UC3)\"\n          ],\n          \"explanation\": \"'Attach Supporting\
+    \ Documents' (UC3) is included by 'Submit Mortgage Application' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Mortgage Application' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Mortgage Application' via the include relationship.\"\n        },\n\
+    \        {\n          \"elements\": [\n            \"Review Application (UC4)\"\
+    ,\n            \"Calculate Debt-to-Income Ratio (UC5)\"\n          ],\n      \
+    \    \"explanation\": \"'Calculate Debt-to-Income Ratio' (UC5) is included by\
+    \ 'Review Application' (UC4), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Review\
+    \ Application' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Review Application' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Perform Underwriting\
+    \ (UC7)\",\n            \"Evaluate Risk Score (UC8)\"\n          ],\n        \
+    \  \"explanation\": \"'Evaluate Risk Score' (UC8) is included by 'Perform Underwriting'\
+    \ (UC7), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Perform Underwriting' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Perform Underwriting' via the include relationship.\"\n        }\n     \
+    \ ]\n    }\n  ]\n}"

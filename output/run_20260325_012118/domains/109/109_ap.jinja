@@ -1,0 +1,83 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reviewer" as Reviewer
+actor "Program Chair" as Chair
+actor "Attendee" as Attendee
+
+rectangle "Academic Conference Management System" {
+  usecase "Submit Paper" as UC1
+  usecase "Upload Manuscript File" as UC2
+  usecase "Register Author Metadata" as UC3
+  usecase "Review Paper" as UC4
+  usecase "Validate Review Criteria" as UC5
+  usecase "Assign Reviewers" as UC6
+  usecase "Make Acceptance Decision" as UC7
+  usecase "Manage Conference Schedule" as UC8
+  usecase "Register for Conference" as UC9
+  usecase "Browse Accepted Papers" as UC10
+  usecase "Submit Camera-Ready Version" as UC11
+  usecase "Send Notifications" as UC12
+  usecase "Track Submission Status" as UC13
+}
+
+Author -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Author -- UC11
+Author -- UC13
+Reviewer -- UC4
+UC4 ..> UC5 : <<include>>
+Chair -- UC6
+Chair -- UC7
+Chair -- UC8
+Chair -- UC12
+Attendee -- UC9
+Attendee -- UC10
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Submit Paper (UC1)",
+            "Upload Manuscript File (UC2)"
+          ],
+          "explanation": "'Upload Manuscript File' (UC2) is included by 'Submit Paper' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Paper' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Paper' via the include relationship."
+        },
+        {
+          "elements": [
+            "Submit Paper (UC1)",
+            "Register Author Metadata (UC3)"
+          ],
+          "explanation": "'Register Author Metadata' (UC3) is included by 'Submit Paper' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Paper' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Paper' via the include relationship."
+        },
+        {
+          "elements": [
+            "Review Paper (UC4)",
+            "Validate Review Criteria (UC5)"
+          ],
+          "explanation": "'Validate Review Criteria' (UC5) is included by 'Review Paper' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Review Paper' rather than a standalone service observable to any actor, making it a functional decomposition of 'Review Paper' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

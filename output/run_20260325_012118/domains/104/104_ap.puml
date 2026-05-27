@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Clinical Researcher" as Researcher
+actor "Site Coordinator" as Coordinator
+
+rectangle "Clinical Trial Management System" {
+  usecase "Register Patient" as UC1
+  usecase "Validate Patient Eligibility" as UC2
+  usecase "Record Adverse Event" as UC3
+  usecase "Monitor Trial Progress" as UC4
+  usecase "Submit Regulatory Report" as UC5
+}
+
+Researcher -- UC1
+Researcher -- UC3
+Coordinator -- UC4
+Coordinator -- UC5
+
+UC1 ..> UC2 : <<include>>
+@enduml

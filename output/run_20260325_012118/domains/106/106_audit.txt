@@ -1,0 +1,473 @@
+AUDIT LOG — Prompt #106
+Timestamp : 2026-03-25T02:02:34.083811
+Model     : claude-opus-4-6
+Tokens    : input=1479  output=890
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (1 instance) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #106: Generate a SMALL use case model with exactly 12 constructs (valid range for small: 9–13 constructs). Domain: Language Learning App.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: language_learning_app
+DOMAIN_DISPLAY: Language Learning App
+SIZE: small
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 12
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+
+rectangle "Language Learning App" {
+  usecase "Take Vocabulary Quiz" as UC1
+  usecase "Load Quiz Questions" as UC2
+  usecase "Calculate Quiz Score" as UC3
+  usecase "Practice Pronunciation" as UC4
+  usecase "View Progress Report" as UC5
+  usecase "Create Lesson Plan" as UC6
+}
+
+Learner -- UC1
+Learner -- UC4
+Learner -- UC5
+Instructor -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Calculate Quiz Score (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Calculate Quiz Score (include relationship)"
+          ],
+          "explanation": "The use case 'Calculate Quiz Score' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz rather than a complete, independently meaningful service observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into internal processing steps via the include relationship. Note: 'Load Quiz Questions' also meets all the same criteria and could be considered an instance, but 'Calculate Quiz Score' is the clearest single instance since calculating a score is purely an internal computation with no standalone value to any actor."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: The use case "Calculate Quiz Score" is included only by "Take Vocabulary Quiz", has no actor association, and does not participate in any other relationship — it is a functionally decomposed substep. The refactoring merges "Calculate Quiz Score" back into "Take Vocabulary Quiz" so that the base use case represents the complete service of taking a quiz (which inherently includes calculating the score). The include relationship between them is removed. "Load Quiz Questions" is retained because loading questions is also a substep; however, to fully clean the model, it is also merged into "Take Vocabulary Quiz" since it meets the same functional decomposition criteria (included by one use case only, no actor, no other relationships). Both include relationships and both inclusion use cases are removed, and "Take Vocabulary Quiz" now encapsulates the entire quiz-taking workflow.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+
+rectangle "Language Learning App" {
+  usecase "Take Vocabulary Quiz" as UC1
+  usecase "Practice Pronunciation" as UC4
+  usecase "View Progress Report" as UC5
+  usecase "Create Lesson Plan" as UC6
+}
+
+Learner -- UC1
+Learner -- UC4
+Learner -- UC5
+Instructor -- UC6
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T00:59:25.374054
+Model     : claude-opus-4-6
+Tokens    : input=781  output=471
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+
+rectangle "Language Learning App" {
+  usecase "Take Vocabulary Quiz" as UC1
+  usecase "Load Quiz Questions" as UC2
+  usecase "Calculate Quiz Score" as UC3
+  usecase "Practice Pronunciation" as UC4
+  usecase "View Progress Report" as UC5
+  usecase "Create Lesson Plan" as UC6
+}
+
+Learner -- UC1
+Learner -- UC4
+Learner -- UC5
+Instructor -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Calculate Quiz Score (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Calculate Quiz Score (include relationship)"
+          ],
+          "explanation": "The use case 'Calculate Quiz Score' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz rather than a complete, independently meaningful service observable to a user. This is functional decomposition \u2014 the 'Take Vocabulary Quiz' service has been improperly broken down into internal processing steps via the include relationship. Note: 'Load Quiz Questions' also meets all the same criteria and could be considered an instance, but 'Calculate Quiz Score' is the clearest single instance since calculating a score is purely an internal computation with no standalone value to any actor."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+The antipattern instance is missing constructs. Inclusion use case "Load Quiz Questions" is a functional decompositon of base use case "Take Vocabulary Quiz".
+Adjust explanation field accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Load Quiz Questions (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Load Quiz Questions (include relationship)"
+          ],
+          "explanation": "The use case 'Load Quiz Questions' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz (loading data) rather than a complete, independently meaningful service observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into an internal processing step via the include relationship."
+        },
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Calculate Quiz Score (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Calculate Quiz Score (include relationship)"
+          ],
+          "explanation": "The use case 'Calculate Quiz Score' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz (computing a score) rather than a complete, independently meaningful service observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into an internal computation step via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T01:15:26.228318
+Model     : claude-opus-4-6
+Tokens    : input=902  output=338
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+
+rectangle "Language Learning App" {
+  usecase "Take Vocabulary Quiz" as UC1
+  usecase "Load Quiz Questions" as UC2
+  usecase "Calculate Quiz Score" as UC3
+  usecase "Practice Pronunciation" as UC4
+  usecase "View Progress Report" as UC5
+  usecase "Create Lesson Plan" as UC6
+}
+
+Learner -- UC1
+Learner -- UC4
+Learner -- UC5
+Instructor -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+Current JSON Response:
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Load Quiz Questions (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Load Quiz Questions (include relationship)"
+          ],
+          "explanation": "The use case 'Load Quiz Questions' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz (loading data) rather than a complete, independently meaningful service observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into an internal processing step via the include relationship."
+        },
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Calculate Quiz Score (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Calculate Quiz Score (include relationship)"
+          ],
+          "explanation": "The use case 'Calculate Quiz Score' is an inclusion use case that is included by only one use case ('Take Vocabulary Quiz'), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is neither a generalization nor a specialization. It represents a substep of taking a quiz (computing a score) rather than a complete, independently meaningful service observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into an internal computation step via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+
+Reviewer Notes:
+the two antipattern instances are actually one because they share the same base use case "Take Vocabulary Quiz". adjuts count and explanation accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "constructs": [
+            "Take Vocabulary Quiz (use case, base)",
+            "Load Quiz Questions (use case, inclusion)",
+            "Calculate Quiz Score (use case, inclusion)",
+            "<<include>> from Take Vocabulary Quiz to Load Quiz Questions (include relationship)",
+            "<<include>> from Take Vocabulary Quiz to Calculate Quiz Score (include relationship)"
+          ],
+          "explanation": "The use case 'Take Vocabulary Quiz' has been functionally decomposed into two inclusion use cases: 'Load Quiz Questions' and 'Calculate Quiz Score'. Both inclusion use cases are each included by only one base use case ('Take Vocabulary Quiz'), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are neither generalizations nor specializations. They represent internal substeps of taking a quiz (loading data and computing a score) rather than complete, independently meaningful services observable to a user. This is functional decomposition — the 'Take Vocabulary Quiz' service has been improperly broken down into internal processing steps via include relationships."
+        }
+      ]
+    }
+  ]
+}

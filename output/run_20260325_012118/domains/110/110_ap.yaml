@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 110
+  domain: plagiarism_detection_system
+  domain_display: Plagiarism Detection System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Document (UC1)
+      - Parse Document Content (UC2)
+      explanation: '''Parse Document Content'' (UC2) is included by ''Submit Document''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Submit Document'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Document'' via the include relationship.'
+    - elements:
+      - Run Plagiarism Check (UC4)
+      - Compare Against Database (UC5)
+      explanation: '''Compare Against Database'' (UC5) is included by ''Run Plagiarism
+        Check'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Run Plagiarism
+        Check'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Run Plagiarism Check'' via the include relationship.'
+    - elements:
+      - Run Plagiarism Check (UC4)
+      - Calculate Similarity Score (UC6)
+      explanation: '''Calculate Similarity Score'' (UC6) is included by ''Run Plagiarism
+        Check'' (UC4), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Run Plagiarism
+        Check'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Run Plagiarism Check'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:11:31.770642'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Student\" as Student\nactor \"Instructor\"\
+    \ as Instructor\nactor \"Administrator\" as Admin\n\nrectangle \"Plagiarism Detection\
+    \ System\" {\n  usecase \"Submit Document\" as UC1\n  usecase \"Parse Document\
+    \ Content\" as UC2\n  usecase \"View Submission History\" as UC3\n  usecase \"\
+    Run Plagiarism Check\" as UC4\n  usecase \"Compare Against Database\" as UC5\n\
+    \  usecase \"Calculate Similarity Score\" as UC6\n  usecase \"Review Similarity\
+    \ Report\" as UC7\n  usecase \"Flag Submission\" as UC8\n  usecase \"Manage Source\
+    \ Database\" as UC9\n  usecase \"Configure Detection Thresholds\" as UC10\n  usecase\
+    \ \"Generate System Analytics\" as UC11\n  usecase \"Appeal Flagged Submission\"\
+    \ as UC12\n  usecase \"Manage User Accounts\" as UC13\n}\n\nStudent -- UC1\nUC1\
+    \ ..> UC2 : <<include>>\nStudent -- UC3\nInstructor -- UC4\nUC4 ..> UC5 : <<include>>\n\
+    UC4 ..> UC6 : <<include>>\nInstructor -- UC7\nInstructor -- UC8\nAdmin -- UC9\n\
+    Admin -- UC10\nAdmin -- UC11\nStudent -- UC12\nAdmin -- UC13\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Document (UC1)\"\
+    ,\n            \"Parse Document Content (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Parse Document Content' (UC2) is included by 'Submit Document' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Submit Document' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Submit\
+    \ Document' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Run Plagiarism Check (UC4)\",\n            \"\
+    Compare Against Database (UC5)\"\n          ],\n          \"explanation\": \"\
+    'Compare Against Database' (UC5) is included by 'Run Plagiarism Check' (UC4),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Run Plagiarism Check' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Run\
+    \ Plagiarism Check' via the include relationship.\"\n        },\n        {\n \
+    \         \"elements\": [\n            \"Run Plagiarism Check (UC4)\",\n     \
+    \       \"Calculate Similarity Score (UC6)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Similarity Score' (UC6) is included by 'Run Plagiarism Check' (UC4),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Run Plagiarism Check' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Run\
+    \ Plagiarism Check' via the include relationship.\"\n        }\n      ]\n    }\n\
+    \  ]\n}"

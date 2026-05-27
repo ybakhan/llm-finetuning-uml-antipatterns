@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 46
+  domain: expense_tracking_system
+  domain_display: Expense Tracking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Expense Report (UC1)
+      - Validate Receipt Data (UC2)
+      explanation: '''Validate Receipt Data'' (UC2) is included by ''Submit Expense
+        Report'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Submit Expense
+        Report'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Submit Expense Report'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:38:27.703909'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Employee\" as Employee\nactor \"Manager\" as\
+    \ Manager\n\nrectangle \"Expense Tracking System\" {\n  usecase \"Submit Expense\
+    \ Report\" as UC1\n  usecase \"Validate Receipt Data\" as UC2\n  usecase \"Review\
+    \ Expense Report\" as UC3\n  usecase \"Generate Spending Summary\" as UC4\n  usecase\
+    \ \"Approve Expense Report\" as UC5\n}\n\nEmployee -- UC1\nEmployee -- UC4\nManager\
+    \ -- UC3\nManager -- UC5\n\nUC1 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Submit Expense Report\
+    \ (UC1)\",\n            \"Validate Receipt Data (UC2)\"\n          ],\n      \
+    \    \"explanation\": \"'Validate Receipt Data' (UC2) is included by 'Submit Expense\
+    \ Report' (UC1), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Submit Expense Report' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Submit Expense Report' via the include relationship.\"\n        }\n    \
+    \  ]\n    }\n  ]\n}"

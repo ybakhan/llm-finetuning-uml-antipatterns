@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 27
+  domain: human_resources_system
+  domain_display: Human Resources System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:31:33.494250'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"HR Manager\" as HRM\nactor \"Employee\" as\
+    \ EMP\nactor \"Recruiter\" as REC\nactor \"Payroll Officer\" as PAY\nactor \"\
+    Department Head\" as DH\n\nrectangle \"Human Resources System\" {\n  usecase \"\
+    Post Job Opening\" as UC1\n  usecase \"Screen Applications\" as UC2\n  usecase\
+    \ \"Schedule Interview\" as UC3\n  usecase \"Submit Leave Request\" as UC4\n \
+    \ usecase \"Approve Leave Request\" as UC5\n  usecase \"View Pay Slip\" as UC6\n\
+    \  usecase \"Process Monthly Payroll\" as UC7\n  usecase \"Conduct Performance\
+    \ Review\" as UC9\n  usecase \"Update Employee Profile\" as UC10\n  usecase \"\
+    Generate HR Report\" as UC11\n  usecase \"Manage Benefits Enrollment\" as UC12\n\
+    \  usecase \"Onboard New Employee\" as UC13\n  usecase \"Terminate Employee\"\
+    \ as UC14\n}\n\nREC -- UC1\nREC -- UC2\nREC -- UC3\nEMP -- UC4\nEMP -- UC6\nEMP\
+    \ -- UC10\nHRM -- UC5\nHRM -- UC9\nHRM -- UC11\nHRM -- UC13\nHRM -- UC14\nPAY\
+    \ -- UC7\nDH -- UC9\nDH -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

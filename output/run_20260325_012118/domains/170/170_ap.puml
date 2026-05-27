@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Shopper" as Shopper
+actor "Retailer" as Retailer
+
+rectangle "Price Comparison Portal" {
+  usecase "Search Products" as UC1
+  usecase "Compare Prices" as UC2
+  usecase "Submit Listing" as UC3
+  usecase "View Deal Alerts" as UC4
+  usecase "Filter Results" as UC5
+  usecase "Validate Search Input" as UC6
+}
+
+Shopper -- UC1
+Shopper -- UC2
+Shopper -- UC4
+Retailer -- UC3
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+@enduml

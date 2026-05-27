@@ -1,0 +1,37 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Streamer" as Streamer
+actor "Viewer" as Viewer
+
+rectangle "Livestreaming Platform" {
+  usecase "Start Live Stream" as UC1
+  usecase "Watch Live Stream" as UC3
+  usecase "Send Chat Message" as UC4
+  usecase "Subscribe to Channel" as UC5
+  usecase "Donate to Streamer" as UC6
+}
+
+Streamer -- UC1
+Viewer -- UC3
+Viewer -- UC4
+Viewer -- UC5
+Viewer -- UC6
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

@@ -1,0 +1,60 @@
+metadata:
+  domain_id: 115
+  domain: city_tour_guide_app
+  domain_display: City Tour Guide App
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Browse Tours (UC1)
+      - View Tour Details (UC5)
+      explanation: '''View Tour Details'' (UC5) is included by ''Browse Tours'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Browse Tours'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Browse Tours'' via the include relationship.'
+    - elements:
+      - View Tour Details (UC5)
+      - Load Map Data (UC6)
+      explanation: '''Load Map Data'' (UC6) is included by ''View Tour Details'' (UC5),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''View Tour Details'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''View Tour Details'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 11
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:38.431565'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Tourist\" as Tourist\nactor \"Tour Guide\"\
+    \ as Guide\n\nrectangle \"City Tour Guide App\" {\n  usecase \"Browse Tours\"\
+    \ as UC1\n  usecase \"Book Tour\" as UC2\n  usecase \"Rate Tour\" as UC3\n  usecase\
+    \ \"Create Tour Listing\" as UC4\n  usecase \"View Tour Details\" as UC5\n  usecase\
+    \ \"Load Map Data\" as UC6\n}\n\nTourist -- UC1\nTourist -- UC2\nTourist -- UC3\n\
+    Guide -- UC4\nUC1 .> UC5 : <<include>>\nUC5 .> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Browse Tours (UC1)\"\
+    ,\n            \"View Tour Details (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'View Tour Details' (UC5) is included by 'Browse Tours' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Browse Tours' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Browse Tours' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"View Tour Details (UC5)\",\n            \"Load Map Data (UC6)\"\
+    \n          ],\n          \"explanation\": \"'Load Map Data' (UC6) is included\
+    \ by 'View Tour Details' (UC5), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'View\
+    \ Tour Details' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'View Tour Details' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

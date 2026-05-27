@@ -1,0 +1,21 @@
+metadata:
+  domain_id: 102
+  domain: rehabilitation_centre_system
+  domain_display: Rehabilitation Centre System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:01:17.374911'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Therapist\" as Therapist\nactor \"Patient\"\
+    \ as Patient\n\nrectangle \"Rehabilitation Centre System\" {\n  usecase \"Schedule\
+    \ Session\" as UC1\n  usecase \"Record Progress\" as UC3\n  usecase \"View Treatment\
+    \ Plan\" as UC4\n}\n\nTherapist -- UC1\nTherapist -- UC3\nPatient -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

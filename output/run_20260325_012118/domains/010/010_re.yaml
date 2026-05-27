@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 10
+  domain: ride_sharing_service
+  domain_display: Ride Sharing Service
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:46:55.586692'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Passenger\" as Passenger\nactor \"Driver\"\
+    \ as Driver\nactor \"Admin\" as Admin\n\nrectangle \"Ride Sharing Service\" {\n\
+    \  usecase \"Request Ride\" as UC1\n  usecase \"Accept Ride\" as UC4\n  usecase\
+    \ \"Complete Ride\" as UC5\n  usecase \"Rate Driver\" as UC8\n  usecase \"Rate\
+    \ Passenger\" as UC9\n  usecase \"View Ride History\" as UC10\n  usecase \"Manage\
+    \ Driver Accounts\" as UC11\n  usecase \"Register as Driver\" as UC12\n  usecase\
+    \ \"Track Ride in Progress\" as UC13\n  usecase \"Cancel Ride\" as UC14\n  usecase\
+    \ \"View Earnings\" as UC15\n}\n\nPassenger -- UC1\nPassenger -- UC8\nPassenger\
+    \ -- UC10\nPassenger -- UC13\nPassenger -- UC14\n\nDriver -- UC4\nDriver -- UC5\n\
+    Driver -- UC9\nDriver -- UC12\nDriver -- UC15\n\nAdmin -- UC11\nAdmin -- UC10\n\
+    @enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

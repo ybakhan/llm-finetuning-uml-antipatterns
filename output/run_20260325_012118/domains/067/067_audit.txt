@@ -1,0 +1,486 @@
+AUDIT LOG — Prompt #067
+Timestamp : 2026-03-26T00:55:42.237741
+Model     : claude-opus-4-6
+Tokens    : input=2221  output=1399
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (2 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ EXTEND DIRECTION RULE ════════════════════════════════════════════════════════
+The <<extend>> arrow MUST point FROM the extension use case TO the base use case.
+The extension use case is the optional/conditional behaviour; the base use case is
+the one being extended. The base use case does NOT know about the extension.
+  CORRECT:  UC_Extension ..> UC_Base : <<extend>>
+  WRONG:    UC_Base ..> UC_Extension : <<extend>>
+Example: "Apply Discount" extends "Process Payment", so:
+  "Apply Discount" ..> "Process Payment" : <<extend>>    ✓
+  "Process Payment" ..> "Apply Discount" : <<extend>>    ✗
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+  • You MUST NOT introduce actor-to-use-case associations that did not exist in Version 1.
+
+═══ USE CASE GRANULARITY RULE (VERSION 2 ONLY) ═══════════════════════════════════
+In Version 2, every use case MUST represent a complete, business-level goal that an
+actor consciously initiates. Internal system steps, technical operations, and
+sub-functions are NOT valid use cases and MUST be removed during refactoring.
+
+Ask: "Would an actor walk up to the system and say 'I want to do this'?"
+  • If YES → valid use case, keep it.
+  • If NO  → it is a functional decomposition; DROP it from Version 2.
+
+Common functional decompositions that MUST be removed in Version 2:
+  Validation/checks : "Validate Payment", "Verify Identity", "Check Credit Score",
+                      "Verify Eligibility", "Validate Document", "Verify Prescription"
+  Calculation       : "Calculate Tax", "Calculate Total", "Calculate Years of Service"
+  Generation        : "Generate Receipt", "Generate Invoice", "Export Report to PDF",
+                      "Generate Booking Confirmation"
+  Processing steps  : "Process Payment", "Process Visa Verification", "Capture Photo",
+                      "Filter Results", "Notify Applicant of Status"
+
+These are steps WITHIN a higher-level use case, not standalone actor goals. Do NOT
+retain them as supporting use cases connected via <<include>> or <<extend>>.
+
+Note: Version 1 may intentionally contain functional decompositions as antipattern
+instances. This rule applies to Version 2 only.
+
+═══ ACTOR COVERAGE RULE ══════════════════════════════════════════════════════════
+Every use case MUST be associated with at least one actor. A use case with no actor
+association is invalid — it means no one initiates or benefits from it. If you cannot
+identify an actor for a use case, the use case should be removed.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. Every use case in BOTH models must be associated with at least one actor.
+7. Version 2 MUST remove all functional decomposition use cases unless the assigned antipattern explicitly requires keeping them.
+8. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #067: Generate a MEDIUM use case model with exactly 29 constructs (valid range for medium: 24–30 constructs). Domain: Software Bug Tracking System.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: software_bug_tracking_system
+DOMAIN_DISPLAY: Software Bug Tracking System
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 29
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Developer" as Dev
+actor "Tester" as Tester
+actor "Project Manager" as PM
+
+rectangle "Software Bug Tracking System" {
+  usecase "Report Bug" as UC1
+  usecase "Validate Bug Fields" as UC2
+  usecase "Assign Bug to Developer" as UC3
+  usecase "Check Developer Availability" as UC4
+  usecase "Update Bug Status" as UC5
+  usecase "View Bug Dashboard" as UC6
+  usecase "Search Bugs" as UC7
+  usecase "Add Comment to Bug" as UC8
+  usecase "Resolve Bug" as UC9
+  usecase "Reopen Bug" as UC10
+  usecase "Close Bug" as UC11
+  usecase "Generate Bug Report" as UC12
+  usecase "Export Report to PDF" as UC13
+  usecase "Set Bug Priority" as UC14
+  usecase "View Bug History" as UC15
+}
+
+Tester -- UC1
+UC1 ..> UC2 : <<include>>
+PM -- UC3
+UC3 ..> UC4 : <<include>>
+Dev -- UC5
+PM -- UC6
+Tester -- UC7
+Dev -- UC8
+Tester -- UC8
+Dev -- UC9
+Tester -- UC10
+PM -- UC11
+PM -- UC12
+UC12 ..> UC13 : <<include>>
+PM -- UC14
+Dev -- UC15
+Tester -- UC15
+UC10 ..> UC1 : <<extend>>
+}
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Report Bug (use case, UC1)",
+            "Validate Bug Fields (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "The use case 'Validate Bug Fields' is an inclusion use case included only by 'Report Bug'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Validating fields is an internal step of reporting a bug, not a complete service observable to any user. This is functional decomposition of 'Report Bug' into a sub-step."
+        },
+        {
+          "constructs": [
+            "Assign Bug to Developer (use case, UC3)",
+            "Check Developer Availability (use case, UC4)",
+            "<<include>> from UC3 to UC4"
+          ],
+          "explanation": "The use case 'Check Developer Availability' is an inclusion use case included only by 'Assign Bug to Developer'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Checking availability is an internal processing step within bug assignment, not a standalone service offering an observable result to a user. This is functional decomposition of 'Assign Bug to Developer' into a sub-step."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Two functional decomposition instances must be resolved by merging inclusion use cases back into their base use cases. (1) "Validate Bug Fields" (UC2) is only included by "Report Bug" (UC1), has no actor association, and represents an internal validation step — it is merged into "Report Bug", and UC2 plus the <<include>> relationship are removed. (2) "Check Developer Availability" (UC4) is only included by "Assign Bug to Developer" (UC3), has no actor association, and represents an internal processing step — it is merged into "Assign Bug to Developer", and UC4 plus the <<include>> relationship are removed. Additionally, "Export Report to PDF" (UC13) is a functional decomposition sub-step of "Generate Bug Report" that no actor would independently initiate, so it is also merged into "Generate Bug Report" and the <<include>> removed to satisfy the use case granularity rule for Version 2.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Developer" as Dev
+actor "Tester" as Tester
+actor "Project Manager" as PM
+
+rectangle "Software Bug Tracking System" {
+  usecase "Report Bug" as UC1
+  usecase "Assign Bug to Developer" as UC3
+  usecase "Update Bug Status" as UC5
+  usecase "View Bug Dashboard" as UC6
+  usecase "Search Bugs" as UC7
+  usecase "Add Comment to Bug" as UC8
+  usecase "Resolve Bug" as UC9
+  usecase "Reopen Bug" as UC10
+  usecase "Close Bug" as UC11
+  usecase "Generate Bug Report" as UC12
+  usecase "Set Bug Priority" as UC14
+  usecase "View Bug History" as UC15
+}
+
+Tester -- UC1
+PM -- UC3
+Dev -- UC5
+PM -- UC6
+Tester -- UC7
+Dev -- UC8
+Tester -- UC8
+Dev -- UC9
+Tester -- UC10
+PM -- UC11
+PM -- UC12
+PM -- UC14
+Dev -- UC15
+Tester -- UC15
+UC10 ..> UC1 : <<extend>>
+@enduml
+```
+
+════════════════════════════════════════════════════════════════════════
+REPROCESS — JSON only
+Timestamp : 2026-03-28T00:02:57.014952
+Model     : claude-opus-4-6
+Tokens    : input=1079  output=610
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert in UML use case diagram analysis specialising in antipattern detection.
+You will be given:
+  1. A PlantUML use case model
+  2. The current JSON detection response for that model
+  3. Reviewer notes describing exactly what needs to be corrected
+
+Your task: produce a corrected JSON detection response that addresses the reviewer's notes.
+Respond with ONLY the JSON object — no explanation, no markdown fences.
+Use this exact structure:
+{
+  "detected": boolean,
+  "total_antipattern_types": number,
+  "total_instances": number,
+  "antipatterns": [
+    {
+      "antipattern_name": string,
+      "instance_count": number,
+      "instances": [
+        {
+          "constructs": [string],
+          "explanation": string
+        }
+      ]
+    }
+  ]
+}
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Developer" as Dev
+actor "Tester" as Tester
+actor "Project Manager" as PM
+
+rectangle "Software Bug Tracking System" {
+  usecase "Report Bug" as UC1
+  usecase "Validate Bug Fields" as UC2
+  usecase "Assign Bug to Developer" as UC3
+  usecase "Check Developer Availability" as UC4
+  usecase "Update Bug Status" as UC5
+  usecase "View Bug Dashboard" as UC6
+  usecase "Search Bugs" as UC7
+  usecase "Add Comment to Bug" as UC8
+  usecase "Resolve Bug" as UC9
+  usecase "Reopen Bug" as UC10
+  usecase "Close Bug" as UC11
+  usecase "Generate Bug Report" as UC12
+  usecase "Export Report to PDF" as UC13
+  usecase "Set Bug Priority" as UC14
+  usecase "View Bug History" as UC15
+}
+
+Tester -- UC1
+UC1 ..> UC2 : <<include>>
+PM -- UC3
+UC3 ..> UC4 : <<include>>
+Dev -- UC5
+PM -- UC6
+Tester -- UC7
+Dev -- UC8
+Tester -- UC8
+Dev -- UC9
+Tester -- UC10
+PM -- UC11
+PM -- UC12
+UC12 ..> UC13 : <<include>>
+PM -- UC14
+Dev -- UC15
+Tester -- UC15
+UC10 ..> UC1 : <<extend>>
+}
+@enduml
+
+Current JSON Response:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Report Bug (use case, UC1)",
+            "Validate Bug Fields (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "The use case 'Validate Bug Fields' is an inclusion use case included only by 'Report Bug'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Validating fields is an internal step of reporting a bug, not a complete service observable to any user. This is functional decomposition of 'Report Bug' into a sub-step."
+        },
+        {
+          "constructs": [
+            "Assign Bug to Developer (use case, UC3)",
+            "Check Developer Availability (use case, UC4)",
+            "<<include>> from UC3 to UC4"
+          ],
+          "explanation": "The use case 'Check Developer Availability' is an inclusion use case included only by 'Assign Bug to Developer'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Checking availability is an internal processing step within bug assignment, not a standalone service offering an observable result to a user. This is functional decomposition of 'Assign Bug to Developer' into a sub-step."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Reviewer Notes:
+One antipattern instance is missing. Inclusion use case "Export Report to PDF" is a functional decomposition of base use case "Generate Bug Report".
+
+Adjust count accordingly.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "constructs": [
+            "Report Bug (use case, UC1)",
+            "Validate Bug Fields (use case, UC2)",
+            "<<include>> from UC1 to UC2"
+          ],
+          "explanation": "The use case 'Validate Bug Fields' is an inclusion use case included only by 'Report Bug'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Validating fields is an internal step of reporting a bug, not a complete service observable to any user. This is functional decomposition of 'Report Bug' into a sub-step."
+        },
+        {
+          "constructs": [
+            "Assign Bug to Developer (use case, UC3)",
+            "Check Developer Availability (use case, UC4)",
+            "<<include>> from UC3 to UC4"
+          ],
+          "explanation": "The use case 'Check Developer Availability' is an inclusion use case included only by 'Assign Bug to Developer'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Checking availability is an internal processing step within bug assignment, not a standalone service offering an observable result to a user. This is functional decomposition of 'Assign Bug to Developer' into a sub-step."
+        },
+        {
+          "constructs": [
+            "Generate Bug Report (use case, UC12)",
+            "Export Report to PDF (use case, UC13)",
+            "<<include>> from UC12 to UC13"
+          ],
+          "explanation": "The use case 'Export Report to PDF' is an inclusion use case included only by 'Generate Bug Report'. It is not associated with any actor, is not included by any other use case, does not include or extend any use case, is not extended by any use case, and has no generalization relationships. Exporting to PDF is an internal sub-step of generating a bug report, not a standalone service providing an observable result to a user. This is functional decomposition of 'Generate Bug Report' into a sub-step."
+        }
+      ]
+    }
+  ]
+}

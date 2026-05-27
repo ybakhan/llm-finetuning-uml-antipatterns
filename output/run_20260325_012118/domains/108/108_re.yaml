@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 108
+  domain: kindergarten_management_system
+  domain_display: Kindergarten Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:03:20.383091'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Teacher\" as Teacher\nactor \"Parent\" as Parent\n\
+    \nrectangle \"Kindergarten Management System\" {\n  usecase \"Record Attendance\"\
+    \ as UC1\n  usecase \"View Child Progress\" as UC4\n  usecase \"Send Notification\
+    \ to Parent\" as UC5\n  usecase \"Register Child\" as UC6\n}\n\nTeacher -- UC1\n\
+    Teacher -- UC5\nParent -- UC4\nParent -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

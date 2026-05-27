@@ -1,0 +1,83 @@
+metadata:
+  domain_id: 85
+  domain: second_hand_marketplace
+  domain_display: Second-Hand Marketplace
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - List Item for Sale (UC1)
+      - Upload Photos (UC2)
+      explanation: '''Upload Photos'' (UC2) is included by ''List Item for Sale''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''List Item for Sale'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''List Item for Sale'' via the include relationship.'
+    - elements:
+      - List Item for Sale (UC1)
+      - Set Pricing (UC3)
+      explanation: '''Set Pricing'' (UC3) is included by ''List Item for Sale'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''List Item for Sale'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''List Item for Sale'' via the include relationship.'
+    - elements:
+      - Purchase Item (UC6)
+      - Validate Payment Details (UC7)
+      explanation: '''Validate Payment Details'' (UC7) is included by ''Purchase Item''
+        (UC6), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Purchase Item'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Purchase Item'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:08:05.291539'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Seller\nactor Buyer\nactor Admin\n\nrectangle\
+    \ \"Second-Hand Marketplace\" {\n  usecase \"List Item for Sale\" as UC1\n  usecase\
+    \ \"Upload Photos\" as UC2\n  usecase \"Set Pricing\" as UC3\n  usecase \"Browse\
+    \ Listings\" as UC4\n  usecase \"Search Items\" as UC5\n  usecase \"Purchase Item\"\
+    \ as UC6\n  usecase \"Validate Payment Details\" as UC7\n  usecase \"Send Message\
+    \ to Seller\" as UC8\n  usecase \"Leave Review\" as UC9\n  usecase \"Report Listing\"\
+    \ as UC10\n  usecase \"Manage Categories\" as UC11\n  usecase \"Remove Fraudulent\
+    \ Listing\" as UC12\n  usecase \"Track Order\" as UC13\n  usecase \"Make Offer\"\
+    \ as UC14\n  usecase \"Save to Wishlist\" as UC15\n}\n\nSeller -- UC1\nUC1 ..>\
+    \ UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nBuyer -- UC4\nBuyer -- UC5\nBuyer\
+    \ -- UC6\nUC6 ..> UC7 : <<include>>\nBuyer -- UC8\nBuyer -- UC9\nBuyer -- UC10\n\
+    Admin -- UC11\nAdmin -- UC12\nBuyer -- UC13\nBuyer -- UC14\nBuyer -- UC15\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"List Item for Sale (UC1)\"\
+    ,\n            \"Upload Photos (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Upload Photos' (UC2) is included by 'List Item for Sale' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'List Item for Sale' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'List Item\
+    \ for Sale' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"List Item for Sale (UC1)\",\n            \"Set\
+    \ Pricing (UC3)\"\n          ],\n          \"explanation\": \"'Set Pricing' (UC3)\
+    \ is included by 'List Item for Sale' (UC1), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'List Item for Sale' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'List Item for Sale' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Purchase Item (UC6)\",\n            \"Validate Payment Details (UC7)\"\n\
+    \          ],\n          \"explanation\": \"'Validate Payment Details' (UC7) is\
+    \ included by 'Purchase Item' (UC6), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Purchase Item' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Purchase Item' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

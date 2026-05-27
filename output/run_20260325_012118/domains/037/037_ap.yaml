@@ -1,0 +1,49 @@
+metadata:
+  domain_id: 37
+  domain: digital_wallet_system
+  domain_display: Digital Wallet System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Link Bank Account (UC10)
+      - Validate Bank Details (UC11)
+      explanation: '''Validate Bank Details'' (UC11) is included by ''Link Bank Account''
+        (UC10), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Link Bank Account'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Link Bank Account'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:50:50.795570'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Wallet User\" as WU\nactor \"Merchant\" as\
+    \ M\nactor \"Admin\" as A\nactor \"Payment Gateway\" as PG\n\nrectangle \"Digital\
+    \ Wallet System\" {\n  usecase \"Add Funds\" as UC1\n  usecase \"Send Money\"\
+    \ as UC2\n  usecase \"Request Money\" as UC3\n  usecase \"Pay Merchant\" as UC4\n\
+    \  usecase \"View Transaction History\" as UC5\n  usecase \"Manage Profile\" as\
+    \ UC6\n  usecase \"Issue Refund\" as UC7\n  usecase \"Generate Sales Report\"\
+    \ as UC8\n  usecase \"Freeze Account\" as UC9\n  usecase \"Link Bank Account\"\
+    \ as UC10\n  usecase \"Validate Bank Details\" as UC11\n  usecase \"Set Spending\
+    \ Limit\" as UC12\n}\n\nWU -- UC1\nWU -- UC2\nWU -- UC3\nWU -- UC4\nWU -- UC5\n\
+    WU -- UC6\nWU -- UC10\nWU -- UC12\nM -- UC4\nM -- UC7\nM -- UC8\nA -- UC9\nPG\
+    \ -- UC1\nUC10 ..> UC11 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Link Bank Account (UC10)\"\
+    ,\n            \"Validate Bank Details (UC11)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Bank Details' (UC11) is included by 'Link Bank Account' (UC10),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Link Bank Account' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Link\
+    \ Bank Account' via the include relationship.\"\n        }\n      ]\n    }\n \
+    \ ]\n}"

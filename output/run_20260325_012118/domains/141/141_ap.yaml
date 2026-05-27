@@ -1,0 +1,105 @@
+metadata:
+  domain_id: 141
+  domain: stadium_management_system
+  domain_display: Stadium Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Schedule Event (UC1)
+      - Validate Venue Availability (UC2)
+      explanation: '''Validate Venue Availability'' (UC2) is included by ''Schedule
+        Event'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Schedule
+        Event'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Schedule Event'' via the include relationship.'
+    - elements:
+      - Schedule Event (UC1)
+      - Assign Seating Layout (UC3)
+      explanation: '''Assign Seating Layout'' (UC3) is included by ''Schedule Event''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Schedule Event'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Schedule Event'' via the include relationship.'
+    - elements:
+      - Log Security Incident (UC6)
+      - Dispatch Security Team (UC7)
+      explanation: '''Dispatch Security Team'' (UC7) is included by ''Log Security
+        Incident'' (UC6), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Log Security
+        Incident'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Log Security Incident'' via the include
+        relationship.'
+    - elements:
+      - Generate Sales Report (UC11)
+      - Retrieve Transaction Data (UC12)
+      explanation: '''Retrieve Transaction Data'' (UC12) is included by ''Generate
+        Sales Report'' (UC11), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Sales Report'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Generate Sales Report'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-28T01:29:09.066279'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Event Coordinator\" as EC\nactor \"Security\
+    \ Officer\" as SO\nactor \"Maintenance Staff\" as MS\nactor \"Ticket Office Manager\"\
+    \ as TOM\n\nrectangle \"Stadium Management System\" {\n  usecase \"Schedule Event\"\
+    \ as UC1\n  usecase \"Validate Venue Availability\" as UC2\n  usecase \"Assign\
+    \ Seating Layout\" as UC3\n  usecase \"Monitor Crowd Control\" as UC4\n  usecase\
+    \ \"Manage Access Gates\" as UC5\n  usecase \"Log Security Incident\" as UC6\n\
+    \  usecase \"Dispatch Security Team\" as UC7\n  usecase \"Submit Maintenance Request\"\
+    \ as UC8\n  usecase \"Inspect Stadium Facilities\" as UC9\n  usecase \"Configure\
+    \ Ticket Pricing\" as UC10\n  usecase \"Generate Sales Report\" as UC11\n  usecase\
+    \ \"Retrieve Transaction Data\" as UC12\n  usecase \"Manage Parking Allocation\"\
+    \ as UC13\n  usecase \"Coordinate Emergency Evacuation\" as UC14\n}\n\nEC -- UC1\n\
+    UC1 ..> UC2 : <<include>>\nUC1 ..> UC3 : <<include>>\nSO -- UC4\nSO -- UC5\nSO\
+    \ -- UC6\nUC6 ..> UC7 : <<include>>\nMS -- UC8\nMS -- UC9\nTOM -- UC10\nTOM --\
+    \ UC11\nUC11 ..> UC12 : <<include>>\nTOM -- UC13\nSO -- UC14\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Schedule Event (UC1)\"\
+    ,\n            \"Validate Venue Availability (UC2)\"\n          ],\n         \
+    \ \"explanation\": \"'Validate Venue Availability' (UC2) is included by 'Schedule\
+    \ Event' (UC1), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Schedule Event' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Schedule Event' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Schedule Event (UC1)\",\n          \
+    \  \"Assign Seating Layout (UC3)\"\n          ],\n          \"explanation\": \"\
+    'Assign Seating Layout' (UC3) is included by 'Schedule Event' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Schedule Event' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Schedule Event' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Log Security Incident (UC6)\",\n            \"Dispatch Security\
+    \ Team (UC7)\"\n          ],\n          \"explanation\": \"'Dispatch Security\
+    \ Team' (UC7) is included by 'Log Security Incident' (UC6), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Log Security Incident' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Log Security\
+    \ Incident' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Generate Sales Report (UC11)\",\n           \
+    \ \"Retrieve Transaction Data (UC12)\"\n          ],\n          \"explanation\"\
+    : \"'Retrieve Transaction Data' (UC12) is included by 'Generate Sales Report'\
+    \ (UC11), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Generate Sales Report' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Generate Sales Report' via the include relationship.\"\n        }\n    \
+    \  ]\n    }\n  ]\n}"

@@ -1,0 +1,22 @@
+Prompt #{{ "%03d" | format(prompt_num) }}: Generate a {{ size | upper }} use case model with exactly {{ construct_count }} constructs (valid range for {{ size }}: {{ lo }}–{{ hi }} constructs). {% if domain_name %}Domain: {{ domain_name }}.{% else %}Select a NEW domain not yet used in this conversation.{% endif %}
+{% if reviewer_notes or ap_puml or ref_puml %}
+
+REVIEWER NOTES (from previous attempt — address these in your new output):
+{% if reviewer_notes %}
+{{ reviewer_notes }}
+{% endif %}
+{% if ap_puml %}
+
+Previous Version 1 (antipattern) PlantUML:
+```plantuml
+{{ ap_puml }}
+```
+{% endif %}
+{% if ref_puml %}
+
+Previous Version 2 (refactored) PlantUML:
+```plantuml
+{{ ref_puml }}
+```
+{% endif %}
+{% endif %}

@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+
+actor "Gift Giver" as Giver
+actor "Registrant" as Registrant
+actor "Store Admin" as Admin
+
+rectangle "Gift Registry System" {
+  usecase "Browse Registries" as UC1
+  usecase "Purchase Gift" as UC2
+  usecase "Create Registry" as UC5
+  usecase "Add Items to Registry" as UC6
+  usecase "Share Registry" as UC7
+  usecase "Track Purchased Gifts" as UC8
+  usecase "Manage Store Catalog" as UC9
+  usecase "Generate Sales Report" as UC10
+  usecase "Send Thank You Note" as UC11
+  usecase "Mark Gift as Received" as UC12
+  usecase "Search Gift by Category" as UC13
+}
+
+Giver -- UC1
+Giver -- UC2
+Giver -- UC13
+
+Registrant -- UC5
+Registrant -- UC6
+Registrant -- UC7
+Registrant -- UC8
+Registrant -- UC11
+Registrant -- UC12
+
+Admin -- UC9
+Admin -- UC10
+@enduml

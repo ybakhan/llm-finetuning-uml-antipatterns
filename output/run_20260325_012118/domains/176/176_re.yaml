@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 176
+  domain: farm_management_system
+  domain_display: Farm Management System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:30:03.495756'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Farmer\" as Farmer\nactor \"Veterinarian\"\
+    \ as Vet\n\nrectangle \"Farm Management System\" {\n  usecase \"Register Livestock\"\
+    \ as UC1\n  usecase \"Schedule Vaccination\" as UC2\n  usecase \"Monitor Crop\
+    \ Growth\" as UC3\n  usecase \"Generate Farm Report\" as UC4\n}\n\nFarmer -- UC1\n\
+    Farmer -- UC2\nFarmer -- UC3\nFarmer -- UC4\nVet -- UC2\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

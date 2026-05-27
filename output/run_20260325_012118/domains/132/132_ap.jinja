@@ -1,0 +1,91 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+actor "Administrator" as Admin
+
+rectangle "Skill Sharing Platform" {
+  usecase "Browse Skills Catalog" as UC1
+  usecase "Enroll in Course" as UC2
+  usecase "Validate Enrollment Data" as UC3
+  usecase "Complete Lesson" as UC4
+  usecase "Rate Instructor" as UC5
+  usecase "Create Course" as UC6
+  usecase "Upload Course Materials" as UC7
+  usecase "Generate Course Outline" as UC8
+  usecase "Track Earnings" as UC9
+  usecase "Manage User Accounts" as UC10
+  usecase "Review Reported Content" as UC11
+  usecase "Send Notification" as UC12
+  usecase "Search Instructors" as UC13
+  usecase "Request Certificate" as UC14
+  usecase "Verify Completion Status" as UC15
+  usecase "Schedule Live Session" as UC16
+}
+
+Learner -- UC1
+Learner -- UC2
+Learner -- UC4
+Learner -- UC5
+Learner -- UC13
+Learner -- UC14
+
+Instructor -- UC6
+Instructor -- UC7
+Instructor -- UC9
+Instructor -- UC16
+
+Admin -- UC10
+Admin -- UC11
+
+UC2 ..> UC3 : <<include>>
+UC6 ..> UC8 : <<include>>
+UC14 ..> UC15 : <<include>>
+UC12 ..> UC11 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Enroll in Course (UC2)",
+            "Validate Enrollment Data (UC3)"
+          ],
+          "explanation": "'Validate Enrollment Data' is included by 'Enroll in Course', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Enroll in Course' rather than a standalone service observable to any actor, making it a functional decomposition of 'Enroll in Course' via the include relationship."
+        },
+        {
+          "elements": [
+            "Create Course (UC6)",
+            "Generate Course Outline (UC8)"
+          ],
+          "explanation": "'Generate Course Outline' is included by 'Create Course', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Create Course' rather than a standalone service observable to any actor, making it a functional decomposition of 'Create Course' via the include relationship."
+        },
+        {
+          "elements": [
+            "Request Certificate (UC14)",
+            "Verify Completion Status (UC15)"
+          ],
+          "explanation": "'Verify Completion Status' is included by 'Request Certificate', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Request Certificate' rather than a standalone service observable to any actor, making it a functional decomposition of 'Request Certificate' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

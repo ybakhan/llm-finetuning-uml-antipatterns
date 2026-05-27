@@ -1,0 +1,86 @@
+metadata:
+  domain_id: 52
+  domain: investment_portfolio_system
+  domain_display: Investment Portfolio System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Buy Securities (UC2)
+      - Validate Order (UC4)
+      explanation: '''Validate Order'' (UC4) is included by ''Buy Securities'' (UC2),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Buy Securities'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Buy Securities'' via the include relationship.'
+    - elements:
+      - Generate Performance Report (UC6)
+      - Calculate Portfolio Returns (UC7)
+      explanation: '''Calculate Portfolio Returns'' (UC7) is included by ''Generate
+        Performance Report'' (UC6), has no direct actor association, does not include
+        or extend any other use case, is not extended by any use case, and is not
+        part of any generalisation hierarchy. It represents an internal sub-step of
+        ''Generate Performance Report'' rather than a standalone service observable
+        to any actor, making it a functional decomposition of ''Generate Performance
+        Report'' via the include relationship.'
+    - elements:
+      - Generate Performance Report (UC6)
+      - Calculate Tax Liability (UC12)
+      explanation: '''Calculate Tax Liability'' (UC12) is included by ''Generate Performance
+        Report'' (UC6), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Generate
+        Performance Report'' rather than a standalone service observable to any actor,
+        making it a functional decomposition of ''Generate Performance Report'' via
+        the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:52:37.710938'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Investor\" as INV\nactor \"Financial Advisor\"\
+    \ as FA\nactor \"System Administrator\" as SA\n\nrectangle \"Investment Portfolio\
+    \ System\" {\n  usecase \"View Portfolio\" as UC1\n  usecase \"Buy Securities\"\
+    \ as UC2\n  usecase \"Sell Securities\" as UC3\n  usecase \"Validate Order\" as\
+    \ UC4\n  usecase \"Rebalance Portfolio\" as UC5\n  usecase \"Generate Performance\
+    \ Report\" as UC6\n  usecase \"Calculate Portfolio Returns\" as UC7\n  usecase\
+    \ \"Manage Client Accounts\" as UC8\n  usecase \"Set Risk Profile\" as UC9\n \
+    \ usecase \"Configure System Settings\" as UC10\n  usecase \"Monitor Market Data\"\
+    \ as UC11\n  usecase \"Calculate Tax Liability\" as UC12\n}\n\nINV -- UC1\nINV\
+    \ -- UC2\nINV -- UC3\nINV -- UC6\nINV -- UC9\nFA -- UC5\nFA -- UC8\nFA -- UC11\n\
+    SA -- UC10\n\nUC2 ..> UC4 : <<include>>\nUC6 ..> UC7 : <<include>>\nUC6 ..> UC12\
+    \ : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Buy Securities (UC2)\"\
+    ,\n            \"Validate Order (UC4)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Order' (UC4) is included by 'Buy Securities' (UC2), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Buy Securities' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Buy Securities' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Generate Performance Report (UC6)\",\n            \"Calculate Portfolio\
+    \ Returns (UC7)\"\n          ],\n          \"explanation\": \"'Calculate Portfolio\
+    \ Returns' (UC7) is included by 'Generate Performance Report' (UC6), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Generate Performance Report' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Generate\
+    \ Performance Report' via the include relationship.\"\n        },\n        {\n\
+    \          \"elements\": [\n            \"Generate Performance Report (UC6)\"\
+    ,\n            \"Calculate Tax Liability (UC12)\"\n          ],\n          \"\
+    explanation\": \"'Calculate Tax Liability' (UC12) is included by 'Generate Performance\
+    \ Report' (UC6), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Generate Performance Report'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Generate Performance Report' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

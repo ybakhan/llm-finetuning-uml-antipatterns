@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 110
+  domain: plagiarism_detection_system
+  domain_display: Plagiarism Detection System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:11:31.770642'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Student\" as Student\nactor \"Instructor\"\
+    \ as Instructor\nactor \"Administrator\" as Admin\n\nrectangle \"Plagiarism Detection\
+    \ System\" {\n  usecase \"Submit Document\" as UC1\n  usecase \"View Submission\
+    \ History\" as UC3\n  usecase \"Run Plagiarism Check\" as UC4\n  usecase \"Review\
+    \ Similarity Report\" as UC7\n  usecase \"Flag Submission\" as UC8\n  usecase\
+    \ \"Manage Source Database\" as UC9\n  usecase \"Configure Detection Thresholds\"\
+    \ as UC10\n  usecase \"Generate System Analytics\" as UC11\n  usecase \"Appeal\
+    \ Flagged Submission\" as UC12\n  usecase \"Manage User Accounts\" as UC13\n}\n\
+    \nStudent -- UC1\nStudent -- UC3\nInstructor -- UC4\nInstructor -- UC7\nInstructor\
+    \ -- UC8\nAdmin -- UC9\nAdmin -- UC10\nAdmin -- UC11\nStudent -- UC12\nAdmin --\
+    \ UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

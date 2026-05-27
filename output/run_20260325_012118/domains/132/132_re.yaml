@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 132
+  domain: skill_sharing_platform
+  domain_display: Skill Sharing Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:51:18.375584'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Learner\" as Learner\nactor \"Instructor\"\
+    \ as Instructor\nactor \"Administrator\" as Admin\n\nrectangle \"Skill Sharing\
+    \ Platform\" {\n  usecase \"Browse Skills Catalog\" as UC1\n  usecase \"Enroll\
+    \ in Course\" as UC2\n  usecase \"Complete Lesson\" as UC4\n  usecase \"Rate Instructor\"\
+    \ as UC5\n  usecase \"Create Course\" as UC6\n  usecase \"Upload Course Materials\"\
+    \ as UC7\n  usecase \"Track Earnings\" as UC9\n  usecase \"Manage User Accounts\"\
+    \ as UC10\n  usecase \"Review Reported Content\" as UC11\n  usecase \"Send Notification\"\
+    \ as UC12\n  usecase \"Search Instructors\" as UC13\n  usecase \"Request Certificate\"\
+    \ as UC14\n  usecase \"Schedule Live Session\" as UC16\n}\n\nLearner -- UC1\n\
+    Learner -- UC2\nLearner -- UC4\nLearner -- UC5\nLearner -- UC13\nLearner -- UC14\n\
+    \nInstructor -- UC6\nInstructor -- UC7\nInstructor -- UC9\nInstructor -- UC16\n\
+    \nAdmin -- UC10\nAdmin -- UC11\n\nUC12 ..> UC11 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

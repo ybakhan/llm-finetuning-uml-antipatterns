@@ -1,0 +1,55 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Cardholder" as CH
+actor "Customer Service Agent" as CSA
+actor "Fraud Analyst" as FA
+actor "System Administrator" as SA
+
+rectangle "Credit Card Management System" {
+  usecase "Apply for Credit Card" as UC1
+  usecase "View Account Statement" as UC4
+  usecase "Make Payment" as UC5
+  usecase "Report Lost Card" as UC7
+  usecase "Block Card" as UC8
+  usecase "Investigate Fraud" as UC9
+  usecase "Manage Card Limits" as UC11
+  usecase "Dispute Transaction" as UC12
+  usecase "Request Credit Limit Increase" as UC13
+  usecase "Redeem Rewards" as UC14
+  usecase "Manage User Accounts" as UC15
+}
+
+CH -- UC1
+CH -- UC4
+CH -- UC5
+CH -- UC7
+CH -- UC12
+CH -- UC13
+CH -- UC14
+
+CSA -- UC7
+CSA -- UC8
+CSA -- UC11
+
+FA -- UC9
+
+SA -- UC15
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

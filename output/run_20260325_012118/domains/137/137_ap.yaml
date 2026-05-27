@@ -1,0 +1,87 @@
+metadata:
+  domain_id: 137
+  domain: community_garden_management_system
+  domain_display: Community Garden Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register for Plot (UC1)
+      - Validate Gardener Info (UC1a)
+      explanation: '''Validate Gardener Info'' (UC1a) is included by ''Register for
+        Plot'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        for Plot'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Register for Plot'' via the include relationship.'
+    - elements:
+      - Register for Plot (UC1)
+      - Check Plot Availability (UC1b)
+      explanation: '''Check Plot Availability'' (UC1b) is included by ''Register for
+        Plot'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        for Plot'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Register for Plot'' via the include relationship.'
+    - elements:
+      - Log Planting Activity (UC3)
+      - Record Soil Data (UC3a)
+      explanation: '''Record Soil Data'' (UC3a) is included by ''Log Planting Activity''
+        (UC3), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Log Planting Activity''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Log Planting Activity'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:14:51.895018'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Gardener\" as Gardener\nactor \"Garden Manager\"\
+    \ as Manager\nactor \"Volunteer\" as Volunteer\n\nrectangle \"Community Garden\
+    \ Management System\" {\n  usecase \"Register for Plot\" as UC1\n  usecase \"\
+    Validate Gardener Info\" as UC1a\n  usecase \"Check Plot Availability\" as UC1b\n\
+    \  usecase \"Manage Plot Assignment\" as UC2\n  usecase \"Log Planting Activity\"\
+    \ as UC3\n  usecase \"Record Soil Data\" as UC3a\n  usecase \"Schedule Watering\"\
+    \ as UC4\n  usecase \"Report Harvest\" as UC5\n  usecase \"View Garden Map\" as\
+    \ UC6\n  usecase \"Organize Community Event\" as UC7\n  usecase \"Sign Up for\
+    \ Volunteer Shift\" as UC8\n  usecase \"Track Compost Usage\" as UC9\n  usecase\
+    \ \"Submit Maintenance Request\" as UC10\n  usecase \"Generate Seasonal Report\"\
+    \ as UC11\n  usecase \"Manage Tool Inventory\" as UC12\n  usecase \"Pay Plot Fees\"\
+    \ as UC13\n}\n\nGardener -- UC1\nGardener -- UC3\nGardener -- UC4\nGardener --\
+    \ UC5\nGardener -- UC6\nGardener -- UC10\nGardener -- UC13\n\nManager -- UC2\n\
+    Manager -- UC7\nManager -- UC9\nManager -- UC11\nManager -- UC12\n\nVolunteer\
+    \ -- UC8\n\nUC1 ..> UC1a : <<include>>\nUC1 ..> UC1b : <<include>>\nUC3 ..> UC3a\
+    \ : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register for Plot (UC1)\"\
+    ,\n            \"Validate Gardener Info (UC1a)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Gardener Info' (UC1a) is included by 'Register for Plot' (UC1),\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Register for Plot' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Register\
+    \ for Plot' via the include relationship.\"\n        },\n        {\n         \
+    \ \"elements\": [\n            \"Register for Plot (UC1)\",\n            \"Check\
+    \ Plot Availability (UC1b)\"\n          ],\n          \"explanation\": \"'Check\
+    \ Plot Availability' (UC1b) is included by 'Register for Plot' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Register for Plot' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Register for\
+    \ Plot' via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Log Planting Activity (UC3)\",\n            \"Record Soil Data\
+    \ (UC3a)\"\n          ],\n          \"explanation\": \"'Record Soil Data' (UC3a)\
+    \ is included by 'Log Planting Activity' (UC3), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Log Planting Activity' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Log Planting Activity' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

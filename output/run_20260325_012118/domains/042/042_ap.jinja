@@ -1,0 +1,63 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+
+rectangle "Cloud Storage Service" {
+  usecase "Upload File" as UC1
+  usecase "Download File" as UC2
+  usecase "Manage Storage Quota" as UC3
+  usecase "Share File" as UC4
+  usecase "Delete File" as UC5
+  usecase "Validate File Format" as UC6
+  usecase "Generate Upload Token" as UC7
+}
+
+User -- UC1
+User -- UC2
+User -- UC4
+User -- UC5
+Admin -- UC3
+
+UC1 ..> UC6 : <<include>>
+UC1 ..> UC7 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Upload File (UC1)",
+            "Validate File Format (UC6)"
+          ],
+          "explanation": "'Validate File Format' is included by 'Upload File', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload File' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload File' via the include relationship."
+        },
+        {
+          "elements": [
+            "Upload File (UC1)",
+            "Generate Upload Token (UC7)"
+          ],
+          "explanation": "'Generate Upload Token' is included by 'Upload File', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Upload File' rather than a standalone service observable to any actor, making it a functional decomposition of 'Upload File' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

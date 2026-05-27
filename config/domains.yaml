@@ -1,0 +1,594 @@
+# domains.yaml
+#
+# Pool of application domains for use case diagram generation.
+# Ordered from most common/recognisable to most niche.
+
+domains:
+
+  # ── Everyday / universally recognisable ───────────────────────────────────
+  - id: 1
+    name: Banking System
+    group: Finance & Banking
+  - id: 2
+    name: Restaurant Management System
+    group: Food & Hospitality
+  - id: 3
+    name: Online Store
+    group: Retail & Commerce
+  - id: 4
+    name: Hospital Management System
+    group: Healthcare
+  - id: 5
+    name: Social Media Platform
+    group: Social & Community
+  - id: 6
+    name: Messaging Application
+    group: Social & Community
+  - id: 7
+    name: Hotel Booking System
+    group: Food & Hospitality
+  - id: 8
+    name: Flight Booking System
+    group: Transport & Logistics
+  - id: 9
+    name: Food Delivery Platform
+    group: Food & Hospitality
+  - id: 10
+    name: Ride Sharing Service
+    group: Transport & Logistics
+  - id: 11
+    name: Music Streaming Platform
+    group: Media & Entertainment
+  - id: 12
+    name: Video Streaming Platform
+    group: Media & Entertainment
+  - id: 13
+    name: Library Management System
+    group: Education
+  - id: 14
+    name: E-Learning Platform
+    group: Education
+  - id: 15
+    name: Job Portal
+    group: Human Resources & Business
+  - id: 16
+    name: Grocery Delivery Service
+    group: Retail & Commerce
+  - id: 17
+    name: Medical Clinic System
+    group: Healthcare
+  - id: 18
+    name: Pharmacy Management System
+    group: Healthcare
+  - id: 19
+    name: Car Rental System
+    group: Transport & Logistics
+  - id: 20
+    name: University Enrollment System
+    group: Education
+  - id: 21
+    name: Movie Ticket Booking
+    group: Media & Entertainment
+  - id: 22
+    name: Online Gaming Platform
+    group: Media & Entertainment
+  - id: 23
+    name: Gym Membership System
+    group: Sports & Fitness
+  - id: 24
+    name: Fitness Tracking App
+    group: Sports & Fitness
+  - id: 25
+    name: Insurance Management System
+    group: Finance & Banking
+  - id: 26
+    name: Payroll Management System
+    group: Finance & Banking
+  - id: 27
+    name: Human Resources System
+    group: Human Resources & Business
+  - id: 28
+    name: Customer Relationship Management
+    group: Human Resources & Business
+  - id: 29
+    name: Inventory Management System
+    group: Human Resources & Business
+  - id: 30
+    name: Tax Filing System
+    group: Finance & Banking
+  - id: 31
+    name: Credit Card Management System
+    group: Finance & Banking
+  - id: 32
+    name: Loan Approval System
+    group: Finance & Banking
+  - id: 33
+    name: Real Estate Listing Platform
+    group: Real Estate & Property
+  - id: 34
+    name: News Publishing System
+    group: Media & Entertainment
+  - id: 35
+    name: Event Ticketing System
+    group: Media & Entertainment
+  - id: 36
+    name: Dating Application
+    group: Social & Community
+  - id: 37
+    name: Digital Wallet System
+    group: Finance & Banking
+  - id: 38
+    name: Telemedicine System
+    group: Healthcare
+  - id: 39
+    name: School Administration System
+    group: Education
+  - id: 40
+    name: Exam Management System
+    group: Education
+  - id: 41
+    name: Courier Delivery System
+    group: Transport & Logistics
+  - id: 42
+    name: Cloud Storage Service
+    group: Technology & IT
+  - id: 43
+    name: Weather Forecasting Service
+    group: Technology & IT
+  - id: 44
+    name: Podcast Platform
+    group: Media & Entertainment
+  - id: 45
+    name: Smart Home Management System
+    group: Technology & IT
+  - id: 46
+    name: Expense Tracking System
+    group: Finance & Banking
+  - id: 47
+    name: Freelance Marketplace
+    group: Human Resources & Business
+  - id: 48
+    name: Document Management System
+    group: Human Resources & Business
+  - id: 49
+    name: Supply Chain Management
+    group: Human Resources & Business
+  - id: 50
+    name: Employee Performance Review System
+    group: Human Resources & Business
+  - id: 51
+    name: Public Transport System
+    group: Transport & Logistics
+  - id: 52
+    name: Investment Portfolio System
+    group: Finance & Banking
+  - id: 53
+    name: Patient Records System
+    group: Healthcare
+  - id: 54
+    name: Blood Bank Management
+    group: Healthcare
+  - id: 55
+    name: Veterinary Clinic System
+    group: Healthcare
+  - id: 56
+    name: Mental Health Appointment System
+    group: Healthcare
+  - id: 57
+    name: Student Attendance System
+    group: Education
+  - id: 58
+    name: Course Registration System
+    group: Education
+  - id: 59
+    name: Scholarship Application System
+    group: Education
+  - id: 60
+    name: Passport Application System
+    group: Government & Public Services
+  - id: 61
+    name: Driver License Renewal System
+    group: Government & Public Services
+  - id: 62
+    name: E-Voting System
+    group: Government & Public Services
+  - id: 63
+    name: Donation Management System
+    group: Social & Community
+  - id: 64
+    name: Volunteer Management System
+    group: Social & Community
+  - id: 65
+    name: Forum and Discussion System
+    group: Social & Community
+  - id: 66
+    name: IT Help Desk System
+    group: Technology & IT
+  - id: 67
+    name: Software Bug Tracking System
+    group: Technology & IT
+  - id: 68
+    name: Legal Case Management System
+    group: Technology & IT
+  - id: 69
+    name: Conference Registration System
+    group: Technology & IT
+  - id: 70
+    name: Museum Ticketing System
+    group: Technology & IT
+  - id: 71
+    name: Property Management System
+    group: Real Estate & Property
+  - id: 72
+    name: Home Services Booking
+    group: Real Estate & Property
+  - id: 73
+    name: Construction Project Management
+    group: Real Estate & Property
+  - id: 74
+    name: Restaurant Reservation System
+    group: Food & Hospitality
+  - id: 75
+    name: Cafe Order Management
+    group: Food & Hospitality
+  - id: 76
+    name: Catering Service System
+    group: Food & Hospitality
+  - id: 77
+    name: Room Service Management
+    group: Food & Hospitality
+  - id: 78
+    name: Sports League Management
+    group: Sports & Fitness
+  - id: 79
+    name: Tournament Registration System
+    group: Sports & Fitness
+  - id: 80
+    name: Freight Tracking System
+    group: Transport & Logistics
+  - id: 81
+    name: Bike Sharing System
+    group: Transport & Logistics
+  - id: 82
+    name: Electric Vehicle Charging Network
+    group: Transport & Logistics
+  - id: 83
+    name: Port Management System
+    group: Transport & Logistics
+  - id: 84
+    name: Online Auction Platform
+    group: Retail & Commerce
+  - id: 85
+    name: Second-Hand Marketplace
+    group: Retail & Commerce
+  - id: 86
+    name: Loyalty Rewards Program
+    group: Retail & Commerce
+  - id: 87
+    name: Subscription Box Service
+    group: Retail & Commerce
+  - id: 88
+    name: Flash Sale Platform
+    group: Retail & Commerce
+  - id: 89
+    name: Wholesale Distribution System
+    group: Retail & Commerce
+  - id: 90
+    name: Broadcasting Management System
+    group: Media & Entertainment
+  - id: 91
+    name: Public Complaint Management System
+    group: Government & Public Services
+  - id: 92
+    name: Tax Authority Portal
+    group: Government & Public Services
+  - id: 93
+    name: Social Benefits Management System
+    group: Government & Public Services
+  - id: 94
+    name: Municipal Waste Management
+    group: Government & Public Services
+  - id: 95
+    name: Water Utility Management
+    group: Government & Public Services
+  - id: 96
+    name: Pet Adoption System
+    group: Social & Community
+  - id: 97
+    name: Neighbourhood Watch App
+    group: Social & Community
+
+  # ── Moderately common ─────────────────────────────────────────────────────
+  - id: 98
+    name: Dental Clinic System
+    group: Healthcare
+  - id: 99
+    name: Optometry Clinic System
+    group: Healthcare
+  - id: 100
+    name: Emergency Dispatch System
+    group: Healthcare
+  - id: 101
+    name: Nursing Home Management System
+    group: Healthcare
+  - id: 102
+    name: Rehabilitation Centre System
+    group: Healthcare
+  - id: 103
+    name: Medical Imaging System
+    group: Healthcare
+  - id: 104
+    name: Clinical Trial Management System
+    group: Healthcare
+  - id: 105
+    name: Tutoring Marketplace
+    group: Education
+  - id: 106
+    name: Language Learning App
+    group: Education
+  - id: 107
+    name: Certification Examination System
+    group: Education
+  - id: 108
+    name: Kindergarten Management System
+    group: Education
+  - id: 109
+    name: Academic Conference Management System
+    group: Education
+  - id: 110
+    name: Plagiarism Detection System
+    group: Education
+  - id: 111
+    name: Research Grant Management System
+    group: Education
+  - id: 112
+    name: Tour Package Booking System
+    group: Travel & Tourism
+  - id: 113
+    name: Vacation Rental Platform
+    group: Travel & Tourism
+  - id: 114
+    name: Hostel Booking System
+    group: Travel & Tourism
+  - id: 115
+    name: City Tour Guide App
+    group: Travel & Tourism
+  - id: 116
+    name: Visa Application System
+    group: Travel & Tourism
+  - id: 117
+    name: Travel Insurance System
+    group: Travel & Tourism
+  - id: 118
+    name: Cruise Booking System
+    group: Travel & Tourism
+  - id: 119
+    name: Mortgage Application System
+    group: Finance & Banking
+  - id: 120
+    name: Crowdfunding Platform
+    group: Finance & Banking
+  - id: 121
+    name: Accounting System
+    group: Finance & Banking
+  - id: 122
+    name: Stock Trading Platform
+    group: Finance & Banking
+  - id: 123
+    name: Budgeting Application
+    group: Finance & Banking
+  - id: 124
+    name: Cryptocurrency Exchange
+    group: Finance & Banking
+  - id: 125
+    name: Microfinance System
+    group: Finance & Banking
+  - id: 126
+    name: Court Case Management System
+    group: Government & Public Services
+  - id: 127
+    name: Company Registration System
+    group: Government & Public Services
+  - id: 128
+    name: Land Registry System
+    group: Government & Public Services
+  - id: 129
+    name: Legal Aid Management System
+    group: Government & Public Services
+  - id: 130
+    name: Electoral Roll Management System
+    group: Government & Public Services
+  - id: 131
+    name: Carpooling App
+    group: Social & Community
+  - id: 132
+    name: Skill Sharing Platform
+    group: Social & Community
+  - id: 133
+    name: Mentorship Platform
+    group: Social & Community
+  - id: 134
+    name: Alumni Network System
+    group: Social & Community
+  - id: 135
+    name: Lost and Found System
+    group: Social & Community
+  - id: 136
+    name: Book Club Platform
+    group: Social & Community
+  - id: 137
+    name: Community Garden Management System
+    group: Social & Community
+  - id: 138
+    name: Livestreaming Platform
+    group: Media & Entertainment
+  - id: 139
+    name: Digital Photography Platform
+    group: Media & Entertainment
+  - id: 140
+    name: E-Book Publishing System
+    group: Media & Entertainment
+  - id: 141
+    name: Stadium Management System
+    group: Sports & Fitness
+  - id: 142
+    name: Swimming Pool Booking System
+    group: Sports & Fitness
+  - id: 143
+    name: Esports Tournament Platform
+    group: Sports & Fitness
+  - id: 144
+    name: Athlete Training System
+    group: Sports & Fitness
+  - id: 145
+    name: Sports Equipment Rental
+    group: Sports & Fitness
+  - id: 146
+    name: Yoga Class Booking
+    group: Sports & Fitness
+  - id: 147
+    name: Climbing Gym Management System
+    group: Sports & Fitness
+  - id: 148
+    name: Network Monitoring System
+    group: Technology & IT
+  - id: 149
+    name: Cybersecurity Incident Reporting System
+    group: Technology & IT
+  - id: 150
+    name: IT Asset Management System
+    group: Technology & IT
+  - id: 151
+    name: Software License Management System
+    group: Technology & IT
+  - id: 152
+    name: Data Backup and Recovery System
+    group: Technology & IT
+  - id: 153
+    name: API Management Portal
+    group: Technology & IT
+  - id: 154
+    name: Remote Desktop Service
+    group: Technology & IT
+
+  # ── Niche / specialised ───────────────────────────────────────────────────
+  - id: 155
+    name: Driving School Management System
+    group: Lifestyle & Personal Services
+  - id: 156
+    name: Wedding Planning Platform
+    group: Lifestyle & Personal Services
+  - id: 157
+    name: Spa and Wellness Booking System
+    group: Lifestyle & Personal Services
+  - id: 158
+    name: Coworking Space Booking System
+    group: Lifestyle & Personal Services
+  - id: 159
+    name: Parking Lot Management System
+    group: Lifestyle & Personal Services
+  - id: 160
+    name: Escape Room Booking System
+    group: Lifestyle & Personal Services
+  - id: 161
+    name: Photography Studio Booking System
+    group: Lifestyle & Personal Services
+  - id: 162
+    name: Pet Care Service Booking
+    group: Lifestyle & Personal Services
+  - id: 163
+    name: Laundry Pickup Service
+    group: Lifestyle & Personal Services
+  - id: 164
+    name: Self-Storage Facility System
+    group: Lifestyle & Personal Services
+  - id: 165
+    name: Language Translation Service
+    group: Lifestyle & Personal Services
+  - id: 166
+    name: Event Decoration Booking System
+    group: Lifestyle & Personal Services
+  - id: 167
+    name: Funeral Service Management System
+    group: Lifestyle & Personal Services
+  - id: 168
+    name: Notary Service Booking System
+    group: Lifestyle & Personal Services
+  - id: 169
+    name: Baby Equipment Rental Service
+    group: Lifestyle & Personal Services
+  - id: 170
+    name: Price Comparison Portal
+    group: Retail & Commerce
+  - id: 171
+    name: Gift Registry System
+    group: Retail & Commerce
+  - id: 172
+    name: Print-on-Demand Platform
+    group: Retail & Commerce
+  - id: 173
+    name: Vending Machine Management System
+    group: Retail & Commerce
+  - id: 174
+    name: Second-Hand Clothing Marketplace
+    group: Retail & Commerce
+  - id: 175
+    name: Furniture Rental Service
+    group: Retail & Commerce
+  - id: 176
+    name: Farm Management System
+    group: Agriculture & Environment
+  - id: 177
+    name: Agricultural Marketplace
+    group: Agriculture & Environment
+  - id: 178
+    name: Solar Energy Management System
+    group: Agriculture & Environment
+  - id: 179
+    name: Air Quality Monitoring System
+    group: Agriculture & Environment
+  - id: 180
+    name: Crop Monitoring System
+    group: Agriculture & Environment
+  - id: 181
+    name: Irrigation Control System
+    group: Agriculture & Environment
+  - id: 182
+    name: Wildlife Conservation System
+    group: Agriculture & Environment
+  - id: 183
+    name: Forest Fire Detection System
+    group: Agriculture & Environment
+  - id: 184
+    name: Factory Floor Management System
+    group: Manufacturing & Industry
+  - id: 185
+    name: Quality Control System
+    group: Manufacturing & Industry
+  - id: 186
+    name: Equipment Maintenance System
+    group: Manufacturing & Industry
+  - id: 187
+    name: Assembly Line Monitoring System
+    group: Manufacturing & Industry
+  - id: 188
+    name: Industrial Safety Reporting System
+    group: Manufacturing & Industry
+  - id: 189
+    name: Product Recall Management System
+    group: Manufacturing & Industry
+  - id: 190
+    name: Hazardous Materials Tracking System
+    group: Manufacturing & Industry
+  - id: 191
+    name: Military Personnel Management System
+    group: Government & Public Services
+  - id: 192
+    name: Border Control System
+    group: Government & Public Services
+  - id: 193
+    name: Graphic Novel Platform
+    group: Media & Entertainment
+  - id: 194
+    name: Fan Fiction Community
+    group: Social & Community

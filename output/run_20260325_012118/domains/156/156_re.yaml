@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 156
+  domain: wedding_planning_platform
+  domain_display: Wedding Planning Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:20:29.114393'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Couple\" as Couple\nactor \"Vendor\" as Vendor\n\
+    actor \"Wedding Planner\" as Planner\nactor \"Admin\" as Admin\n\nrectangle \"\
+    Wedding Planning Platform\" {\n  usecase \"Browse Vendors\" as UC1\n  usecase\
+    \ \"Book Vendor\" as UC2\n  usecase \"Create Guest List\" as UC4\n  usecase \"\
+    Send Invitations\" as UC5\n  usecase \"Track Budget\" as UC7\n  usecase \"Create\
+    \ Seating Chart\" as UC8\n  usecase \"Register Couple Account\" as UC9\n  usecase\
+    \ \"View RSVP Responses\" as UC10\n  usecase \"Review Vendor\" as UC11\n  usecase\
+    \ \"Manage Venue Listings\" as UC12\n  usecase \"Submit Quote\" as UC13\n  usecase\
+    \ \"Manage Wedding Timeline\" as UC14\n  usecase \"Generate Reports\" as UC15\n\
+    \  usecase \"Manage Platform Settings\" as UC16\n}\n\nCouple -- UC1\nCouple --\
+    \ UC2\nCouple -- UC4\nCouple -- UC5\nCouple -- UC7\nCouple -- UC8\nCouple -- UC9\n\
+    Couple -- UC10\nCouple -- UC11\n\nVendor -- UC12\nVendor -- UC13\n\nPlanner --\
+    \ UC14\n\nAdmin -- UC15\nAdmin -- UC16\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

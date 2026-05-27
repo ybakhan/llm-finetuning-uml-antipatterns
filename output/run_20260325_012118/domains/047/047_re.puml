@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Freelancer" as Freelancer
+actor "Client" as Client
+
+rectangle "Freelance Marketplace" {
+  usecase "Browse Projects" as UC1
+  usecase "Submit Proposal" as UC2
+  usecase "Post Project" as UC3
+  usecase "Hire Freelancer" as UC4
+  usecase "Process Payment" as UC5
+  usecase "Leave Review" as UC7
+}
+
+Freelancer -- UC1
+Freelancer -- UC2
+Freelancer -- UC7
+Client -- UC3
+Client -- UC4
+Client -- UC5
+Client -- UC7
+@enduml

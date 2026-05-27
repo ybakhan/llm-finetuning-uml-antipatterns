@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 9
+  domain: food_delivery_platform
+  domain_display: Food Delivery Platform
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:46:29.215478'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Restaurant\"\
+    \ as Restaurant\nactor \"Delivery Driver\" as Driver\nactor \"Admin\" as Admin\n\
+    \nrectangle \"Food Delivery Platform\" {\n  usecase \"Browse Restaurants\" as\
+    \ UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Track Delivery\" as UC4\n\
+    \  usecase \"Rate Order\" as UC5\n  usecase \"Manage Menu\" as UC6\n  usecase\
+    \ \"Accept Order\" as UC7\n  usecase \"Update Delivery Status\" as UC8\n  usecase\
+    \ \"Manage Promotions\" as UC10\n  usecase \"View Order History\" as UC11\n  usecase\
+    \ \"Register Account\" as UC12\n  usecase \"Handle Customer Complaints\" as UC14\n\
+    \  usecase \"View Earnings\" as UC15\n}\n\nCustomer -- UC1\nCustomer -- UC2\n\
+    Customer -- UC4\nCustomer -- UC5\nCustomer -- UC11\nCustomer -- UC12\nRestaurant\
+    \ -- UC6\nRestaurant -- UC7\nDriver -- UC8\nDriver -- UC15\nAdmin -- UC10\nAdmin\
+    \ -- UC14\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

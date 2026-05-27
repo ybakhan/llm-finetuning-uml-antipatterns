@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 69
+  domain: conference_registration_system
+  domain_display: Conference Registration System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:47:20.053071'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Attendee\" as A1\nactor \"Organizer\" as A2\n\
+    actor \"Reviewer\" as A3\nactor \"Payment Gateway\" as A4\n\nrectangle \"Conference\
+    \ Registration System\" {\n  usecase \"Register for Conference\" as UC1\n  usecase\
+    \ \"Submit Paper\" as UC2\n  usecase \"Review Paper\" as UC3\n  usecase \"Manage\
+    \ Conference Schedule\" as UC4\n  usecase \"Process Payment\" as UC5\n  usecase\
+    \ \"View Conference Program\" as UC6\n  usecase \"Cancel Registration\" as UC7\n\
+    \  usecase \"Assign Reviewers\" as UC8\n  usecase \"Generate Attendance Certificate\"\
+    \ as UC9\n}\n\nA1 -- UC1\nA1 -- UC2\nA1 -- UC6\nA1 -- UC7\nA1 -- UC9\nA2 -- UC4\n\
+    A2 -- UC8\nA3 -- UC3\nA4 -- UC5\n\nUC1 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Farmer" as Farmer
+actor "Buyer" as Buyer
+
+rectangle "Agricultural Marketplace" {
+  usecase "List Produce" as UC1
+  usecase "Browse Listings" as UC2
+  usecase "Place Order" as UC3
+  usecase "Track Delivery" as UC5
+  usecase "Leave Review" as UC6
+}
+
+Farmer -- UC1
+Buyer -- UC2
+Buyer -- UC3
+Buyer -- UC5
+Buyer -- UC6
+Farmer -- UC5
+@enduml

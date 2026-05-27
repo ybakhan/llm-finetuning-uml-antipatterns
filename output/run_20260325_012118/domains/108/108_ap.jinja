@@ -1,0 +1,61 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Teacher" as Teacher
+actor "Parent" as Parent
+
+rectangle "Kindergarten Management System" {
+  usecase "Record Attendance" as UC1
+  usecase "Mark Child Present" as UC2
+  usecase "Save Attendance Entry" as UC3
+  usecase "View Child Progress" as UC4
+  usecase "Send Notification to Parent" as UC5
+  usecase "Register Child" as UC6
+}
+
+Teacher -- UC1
+Teacher -- UC5
+Parent -- UC4
+Parent -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Record Attendance (UC1)",
+            "Mark Child Present (UC2)"
+          ],
+          "explanation": "'Mark Child Present' is included by 'Record Attendance', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Record Attendance' rather than a standalone service observable to any actor, making it a functional decomposition of 'Record Attendance' via the include relationship."
+        },
+        {
+          "elements": [
+            "Record Attendance (UC1)",
+            "Save Attendance Entry (UC3)"
+          ],
+          "explanation": "'Save Attendance Entry' is included by 'Record Attendance', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Record Attendance' rather than a standalone service observable to any actor, making it a functional decomposition of 'Record Attendance' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

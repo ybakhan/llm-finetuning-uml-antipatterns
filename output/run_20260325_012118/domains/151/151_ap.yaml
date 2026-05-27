@@ -1,0 +1,68 @@
+metadata:
+  domain_id: 151
+  domain: software_license_management
+  domain_display: Software License Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register New License (UC1)
+      - Validate License Key (UC11)
+      explanation: '''Validate License Key'' (UC11) is included by ''Register New
+        License'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        New License'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Register New License'' via the include
+        relationship.'
+    - elements:
+      - Renew License (UC8)
+      - Calculate Renewal Cost (UC12)
+      explanation: '''Calculate Renewal Cost'' (UC12) is included by ''Renew License''
+        (UC8), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Renew License'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Renew License'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 24
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:55:12.503595'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"License Administrator\" as Admin\nactor \"\
+    End User\" as EndUser\nactor \"Compliance Auditor\" as Auditor\n\nrectangle \"\
+    Software License Management System\" {\n  usecase \"Register New License\" as\
+    \ UC1\n  usecase \"Assign License to User\" as UC2\n  usecase \"Revoke License\"\
+    \ as UC3\n  usecase \"View License Dashboard\" as UC4\n  usecase \"Request License\"\
+    \ as UC5\n  usecase \"Generate Compliance Report\" as UC6\n  usecase \"Conduct\
+    \ License Audit\" as UC7\n  usecase \"Renew License\" as UC8\n  usecase \"Manage\
+    \ Vendor Contracts\" as UC9\n  usecase \"Track Software Usage\" as UC10\n  usecase\
+    \ \"Validate License Key\" as UC11\n  usecase \"Calculate Renewal Cost\" as UC12\n\
+    }\n\nAdmin -- UC1\nAdmin -- UC2\nAdmin -- UC3\nAdmin -- UC4\nAdmin -- UC8\nAdmin\
+    \ -- UC9\nEndUser -- UC5\nEndUser -- UC10\nAuditor -- UC6\nAuditor -- UC7\n\n\
+    UC1 ..> UC11 : <<include>>\nUC8 ..> UC12 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register New License\
+    \ (UC1)\",\n            \"Validate License Key (UC11)\"\n          ],\n      \
+    \    \"explanation\": \"'Validate License Key' (UC11) is included by 'Register\
+    \ New License' (UC1), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Register New\
+    \ License' rather than a standalone service observable to any actor, making it\
+    \ a functional decomposition of 'Register New License' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Renew License\
+    \ (UC8)\",\n            \"Calculate Renewal Cost (UC12)\"\n          ],\n    \
+    \      \"explanation\": \"'Calculate Renewal Cost' (UC12) is included by 'Renew\
+    \ License' (UC8), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Renew License'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Renew License' via the include relationship.\"\n        }\n\
+    \      ]\n    }\n  ]\n}"

@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 16
+  domain: grocery_delivery_service
+  domain_display: Grocery Delivery Service
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:27:31.680633'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Delivery Driver\"\
+    \ as Driver\n\nrectangle \"Grocery Delivery Service\" {\n  usecase \"Browse Products\"\
+    \ as UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Track Delivery\" as UC4\n\
+    \  usecase \"Complete Delivery\" as UC5\n}\n\nCustomer -- UC1\nCustomer -- UC2\n\
+    Customer -- UC4\nDriver -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

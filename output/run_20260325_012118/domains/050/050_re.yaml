@@ -1,0 +1,31 @@
+metadata:
+  domain_id: 50
+  domain: employee_performance_review_system
+  domain_display: Employee Performance Review System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:52:13.851151'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Employee\" as EMP\nactor \"Manager\" as MGR\n\
+    actor \"HR Administrator\" as HR\nactor \"Department Head\" as DH\n\nrectangle\
+    \ \"Employee Performance Review System\" {\n  usecase \"Submit Self-Assessment\"\
+    \ as UC1\n  usecase \"View Review History\" as UC2\n  usecase \"Conduct Performance\
+    \ Review\" as UC3\n  usecase \"Set Performance Goals\" as UC4\n  usecase \"Approve\
+    \ Final Rating\" as UC5\n  usecase \"Generate Performance Report\" as UC6\n  usecase\
+    \ \"Manage Review Cycles\" as UC7\n  usecase \"Assign Reviewers\" as UC8\n  usecase\
+    \ \"Submit Peer Feedback\" as UC9\n  usecase \"Request Appeal\" as UC10\n  usecase\
+    \ \"Configure Rating Criteria\" as UC11\n  usecase \"View Team Performance Dashboard\"\
+    \ as UC12\n  usecase \"Acknowledge Review\" as UC13\n  usecase \"Schedule Review\
+    \ Meeting\" as UC15\n  usecase \"Archive Completed Reviews\" as UC16\n}\n\nEMP\
+    \ -- UC1\nEMP -- UC2\nEMP -- UC9\nEMP -- UC10\nEMP -- UC13\n\nMGR -- UC3\nMGR\
+    \ -- UC4\nMGR -- UC12\nMGR -- UC15\n\nDH -- UC5\nDH -- UC6\n\nHR -- UC7\nHR --\
+    \ UC8\nHR -- UC11\nHR -- UC16\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

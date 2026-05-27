@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+actor "Learner" as Learner
+actor "Instructor" as Instructor
+actor "Administrator" as Admin
+
+rectangle "Skill Sharing Platform" {
+  usecase "Browse Skills Catalog" as UC1
+  usecase "Enroll in Course" as UC2
+  usecase "Validate Enrollment Data" as UC3
+  usecase "Complete Lesson" as UC4
+  usecase "Rate Instructor" as UC5
+  usecase "Create Course" as UC6
+  usecase "Upload Course Materials" as UC7
+  usecase "Generate Course Outline" as UC8
+  usecase "Track Earnings" as UC9
+  usecase "Manage User Accounts" as UC10
+  usecase "Review Reported Content" as UC11
+  usecase "Send Notification" as UC12
+  usecase "Search Instructors" as UC13
+  usecase "Request Certificate" as UC14
+  usecase "Verify Completion Status" as UC15
+  usecase "Schedule Live Session" as UC16
+}
+
+Learner -- UC1
+Learner -- UC2
+Learner -- UC4
+Learner -- UC5
+Learner -- UC13
+Learner -- UC14
+
+Instructor -- UC6
+Instructor -- UC7
+Instructor -- UC9
+Instructor -- UC16
+
+Admin -- UC10
+Admin -- UC11
+
+UC2 ..> UC3 : <<include>>
+UC6 ..> UC8 : <<include>>
+UC14 ..> UC15 : <<include>>
+UC12 ..> UC11 : <<extend>>
+@enduml

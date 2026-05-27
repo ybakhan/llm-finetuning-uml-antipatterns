@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 71
+  domain: property_management_system
+  domain_display: Property Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:48:18.624856'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Property Manager\" as PM\nactor \"Tenant\"\
+    \ as T\nactor \"Maintenance Staff\" as MS\nactor \"Owner\" as OW\n\nrectangle\
+    \ \"Property Management System\" {\n  usecase \"List Property\" as UC1\n  usecase\
+    \ \"Sign Lease Agreement\" as UC2\n  usecase \"Collect Rent\" as UC3\n  usecase\
+    \ \"Submit Maintenance Request\" as UC4\n  usecase \"Assign Maintenance Task\"\
+    \ as UC5\n  usecase \"Complete Maintenance Task\" as UC6\n  usecase \"View Property\
+    \ Portfolio\" as UC7\n  usecase \"Generate Financial Report\" as UC8\n  usecase\
+    \ \"Screen Tenant Application\" as UC9\n  usecase \"Schedule Property Inspection\"\
+    \ as UC10\n  usecase \"Send Lease Renewal Notice\" as UC11\n  usecase \"Track\
+    \ Expenses\" as UC12\n}\n\nPM -- UC1\nPM -- UC2\nPM -- UC3\nPM -- UC5\nPM -- UC9\n\
+    PM -- UC10\nPM -- UC11\nPM -- UC12\n\nT -- UC2\nT -- UC4\n\nMS -- UC6\n\nOW --\
+    \ UC7\nOW -- UC8\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

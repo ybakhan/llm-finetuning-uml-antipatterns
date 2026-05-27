@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "Conservation Scientist" as Scientist
+actor "System Administrator" as Admin
+
+rectangle "Wildlife Conservation System" {
+  usecase "Record Animal Sighting" as UC1
+  usecase "Monitor Endangered Species" as UC4
+  usecase "Generate Population Report" as UC5
+  usecase "Manage Protected Zones" as UC7
+  usecase "Track Animal Migration" as UC8
+  usecase "Respond to Poaching Alert" as UC9
+  usecase "Log Habitat Conditions" as UC10
+  usecase "Manage User Accounts" as UC11
+  usecase "Assign Patrol Routes" as UC12
+  usecase "Review Conservation Plans" as UC13
+}
+
+Ranger -- UC1
+Ranger -- UC9
+Ranger -- UC10
+Ranger -- UC8
+Scientist -- UC4
+Scientist -- UC5
+Scientist -- UC13
+Admin -- UC7
+Admin -- UC11
+Admin -- UC12
+
+UC4 ..> UC8 : <<include>>
+@enduml

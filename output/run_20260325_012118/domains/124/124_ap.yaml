@@ -1,0 +1,84 @@
+metadata:
+  domain_id: 124
+  domain: cryptocurrency_exchange
+  domain_display: Cryptocurrency Exchange
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Account (UC1)
+      - Verify Identity (UC2)
+      explanation: '''Verify Identity'' (UC2) is included by ''Register Account''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Account'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Account'' via the include relationship.'
+    - elements:
+      - Place Buy Order (UC4)
+      - Calculate Trading Fee (UC13)
+      explanation: '''Calculate Trading Fee'' (UC13) is included by ''Place Buy Order''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Buy Order'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Place Buy Order'' via the include relationship.'
+    - elements:
+      - Deposit Funds (UC7)
+      - Validate Payment Details (UC14)
+      explanation: '''Validate Payment Details'' (UC14) is included by ''Deposit Funds''
+        (UC7), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Deposit Funds'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Deposit Funds'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:15:02.040591'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Trader\" as Trader\nactor \"Admin\" as Admin\n\
+    actor \"Payment Gateway\" as PG\n\nrectangle \"Cryptocurrency Exchange\" {\n \
+    \ usecase \"Register Account\" as UC1\n  usecase \"Verify Identity\" as UC2\n\
+    \  usecase \"Login\" as UC3\n  usecase \"Place Buy Order\" as UC4\n  usecase \"\
+    Place Sell Order\" as UC5\n  usecase \"View Portfolio\" as UC6\n  usecase \"Deposit\
+    \ Funds\" as UC7\n  usecase \"Withdraw Funds\" as UC8\n  usecase \"View Transaction\
+    \ History\" as UC9\n  usecase \"Manage Listings\" as UC10\n  usecase \"Monitor\
+    \ Suspicious Activity\" as UC11\n  usecase \"Set Price Alert\" as UC12\n  usecase\
+    \ \"Calculate Trading Fee\" as UC13\n  usecase \"Validate Payment Details\" as\
+    \ UC14\n}\n\nTrader -- UC1\nTrader -- UC3\nTrader -- UC4\nTrader -- UC5\nTrader\
+    \ -- UC6\nTrader -- UC7\nTrader -- UC8\nTrader -- UC9\nTrader -- UC12\n\nAdmin\
+    \ -- UC10\nAdmin -- UC11\n\nPG -- UC7\nPG -- UC8\n\nUC1 ..> UC2 : <<include>>\n\
+    UC4 ..> UC13 : <<include>>\nUC7 ..> UC14 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Account (UC1)\"\
+    ,\n            \"Verify Identity (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Verify Identity' (UC2) is included by 'Register Account' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Register Account' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Register Account'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Place Buy Order (UC4)\",\n            \"Calculate Trading Fee\
+    \ (UC13)\"\n          ],\n          \"explanation\": \"'Calculate Trading Fee'\
+    \ (UC13) is included by 'Place Buy Order' (UC4), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Place Buy Order' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Place Buy Order' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Deposit Funds\
+    \ (UC7)\",\n            \"Validate Payment Details (UC14)\"\n          ],\n  \
+    \        \"explanation\": \"'Validate Payment Details' (UC14) is included by 'Deposit\
+    \ Funds' (UC7), has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Deposit Funds' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Deposit Funds' via the include relationship.\"\n        }\n      ]\n   \
+    \ }\n  ]\n}"

@@ -1,0 +1,56 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Taxpayer" as Taxpayer
+actor "Tax Officer" as TaxOfficer
+actor "Auditor" as Auditor
+
+rectangle "Tax Authority Portal" {
+  usecase "File Tax Return" as UC1
+  usecase "View Tax History" as UC4
+  usecase "Process Refund" as UC5
+  usecase "Submit Supporting Documents" as UC7
+  usecase "Pay Outstanding Tax" as UC8
+  usecase "Generate Tax Assessment" as UC9
+  usecase "Conduct Audit" as UC10
+  usecase "Update Taxpayer Profile" as UC11
+  usecase "Register New Taxpayer" as UC12
+  usecase "Appeal Assessment" as UC13
+  usecase "Generate Compliance Report" as UC14
+  usecase "Send Tax Notification" as UC15
+  usecase "Manage Tax Exemptions" as UC16
+}
+
+Taxpayer -- UC1
+Taxpayer -- UC4
+Taxpayer -- UC7
+Taxpayer -- UC8
+Taxpayer -- UC11
+Taxpayer -- UC12
+Taxpayer -- UC13
+
+TaxOfficer -- UC5
+TaxOfficer -- UC9
+TaxOfficer -- UC15
+TaxOfficer -- UC16
+
+Auditor -- UC10
+Auditor -- UC14
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

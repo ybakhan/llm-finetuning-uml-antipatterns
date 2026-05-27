@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Applicant" as A1
+actor "Case Worker" as A2
+
+rectangle "Legal Aid Management System" {
+  usecase "Submit Application" as UC1
+  usecase "Review Application" as UC2
+  usecase "Assign Attorney" as UC3
+  usecase "Track Case Progress" as UC4
+}
+
+A1 -- UC1
+A1 -- UC4
+A2 -- UC2
+A2 -- UC3
+@enduml

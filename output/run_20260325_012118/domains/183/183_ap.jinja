@@ -1,0 +1,84 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Park Ranger" as Ranger
+actor "System Administrator" as Admin
+actor "Emergency Dispatcher" as Dispatcher
+actor "Meteorologist" as Meteo
+
+rectangle "Forest Fire Detection System" {
+  usecase "Monitor Forest Zones" as UC1
+  usecase "Generate Fire Alert" as UC2
+  usecase "Dispatch Emergency Team" as UC3
+  usecase "View Fire Risk Map" as UC4
+  usecase "Configure Alert Thresholds" as UC5
+  usecase "Manage Sensor Network" as UC6
+  usecase "Review Historical Data" as UC7
+  usecase "Submit Weather Forecast" as UC8
+  usecase "Acknowledge Alert" as UC9
+  usecase "Generate Incident Report" as UC10
+  usecase "Validate Sensor Reading" as UC12
+  usecase "Calculate Fire Risk Score" as UC13
+  usecase "Parse Weather Data" as UC14
+}
+
+Ranger -- UC1
+Ranger -- UC4
+Ranger -- UC9
+Ranger -- UC10
+Dispatcher -- UC2
+Dispatcher -- UC3
+Admin -- UC5
+Admin -- UC6
+Meteo -- UC8
+Meteo -- UC7
+
+UC1 ..> UC12 : <<include>>
+UC1 ..> UC13 : <<include>>
+UC8 ..> UC14 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Monitor Forest Zones (UC1)",
+            "Validate Sensor Reading (UC12)"
+          ],
+          "explanation": "'Validate Sensor Reading' (UC12) is included by 'Monitor Forest Zones' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Forest Zones' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Forest Zones' via the include relationship."
+        },
+        {
+          "elements": [
+            "Monitor Forest Zones (UC1)",
+            "Calculate Fire Risk Score (UC13)"
+          ],
+          "explanation": "'Calculate Fire Risk Score' (UC13) is included by 'Monitor Forest Zones' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Monitor Forest Zones' rather than a standalone service observable to any actor, making it a functional decomposition of 'Monitor Forest Zones' via the include relationship."
+        },
+        {
+          "elements": [
+            "Submit Weather Forecast (UC8)",
+            "Parse Weather Data (UC14)"
+          ],
+          "explanation": "'Parse Weather Data' (UC14) is included by 'Submit Weather Forecast' (UC8), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Submit Weather Forecast' rather than a standalone service observable to any actor, making it a functional decomposition of 'Submit Weather Forecast' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

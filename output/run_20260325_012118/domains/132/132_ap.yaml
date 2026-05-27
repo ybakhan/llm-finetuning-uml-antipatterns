@@ -1,0 +1,88 @@
+metadata:
+  domain_id: 132
+  domain: skill_sharing_platform
+  domain_display: Skill Sharing Platform
+  size: medium
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 3
+    instances:
+    - elements:
+      - Enroll in Course (UC2)
+      - Validate Enrollment Data (UC3)
+      explanation: '''Validate Enrollment Data'' is included by ''Enroll in Course'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Enroll in Course'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Enroll in Course'' via the include relationship.'
+    - elements:
+      - Create Course (UC6)
+      - Generate Course Outline (UC8)
+      explanation: '''Generate Course Outline'' is included by ''Create Course'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Create Course'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Create Course'' via the include relationship.'
+    - elements:
+      - Request Certificate (UC14)
+      - Verify Completion Status (UC15)
+      explanation: '''Verify Completion Status'' is included by ''Request Certificate'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Request Certificate'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Request Certificate'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 26
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:51:18.375584'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Learner\" as Learner\nactor \"Instructor\"\
+    \ as Instructor\nactor \"Administrator\" as Admin\n\nrectangle \"Skill Sharing\
+    \ Platform\" {\n  usecase \"Browse Skills Catalog\" as UC1\n  usecase \"Enroll\
+    \ in Course\" as UC2\n  usecase \"Validate Enrollment Data\" as UC3\n  usecase\
+    \ \"Complete Lesson\" as UC4\n  usecase \"Rate Instructor\" as UC5\n  usecase\
+    \ \"Create Course\" as UC6\n  usecase \"Upload Course Materials\" as UC7\n  usecase\
+    \ \"Generate Course Outline\" as UC8\n  usecase \"Track Earnings\" as UC9\n  usecase\
+    \ \"Manage User Accounts\" as UC10\n  usecase \"Review Reported Content\" as UC11\n\
+    \  usecase \"Send Notification\" as UC12\n  usecase \"Search Instructors\" as\
+    \ UC13\n  usecase \"Request Certificate\" as UC14\n  usecase \"Verify Completion\
+    \ Status\" as UC15\n  usecase \"Schedule Live Session\" as UC16\n}\n\nLearner\
+    \ -- UC1\nLearner -- UC2\nLearner -- UC4\nLearner -- UC5\nLearner -- UC13\nLearner\
+    \ -- UC14\n\nInstructor -- UC6\nInstructor -- UC7\nInstructor -- UC9\nInstructor\
+    \ -- UC16\n\nAdmin -- UC10\nAdmin -- UC11\n\nUC2 ..> UC3 : <<include>>\nUC6 ..>\
+    \ UC8 : <<include>>\nUC14 ..> UC15 : <<include>>\nUC12 ..> UC11 : <<extend>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Enroll in Course (UC2)\"\
+    ,\n            \"Validate Enrollment Data (UC3)\"\n          ],\n          \"\
+    explanation\": \"'Validate Enrollment Data' is included by 'Enroll in Course',\
+    \ has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Enroll in Course' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Enroll\
+    \ in Course' via the include relationship.\"\n        },\n        {\n        \
+    \  \"elements\": [\n            \"Create Course (UC6)\",\n            \"Generate\
+    \ Course Outline (UC8)\"\n          ],\n          \"explanation\": \"'Generate\
+    \ Course Outline' is included by 'Create Course', has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Create Course' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Create Course' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Request Certificate\
+    \ (UC14)\",\n            \"Verify Completion Status (UC15)\"\n          ],\n \
+    \         \"explanation\": \"'Verify Completion Status' is included by 'Request\
+    \ Certificate', has no direct actor association, does not include or extend any\
+    \ other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Request Certificate' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Request Certificate' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

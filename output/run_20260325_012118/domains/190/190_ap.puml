@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Safety Officer" as SO
+actor "Warehouse Manager" as WM
+actor "Transport Driver" as TD
+actor "Regulatory Inspector" as RI
+actor "Emergency Responder" as ER
+
+rectangle "Hazardous Materials Tracking System" {
+  usecase "Register Hazardous Material" as UC1
+  usecase "Update Material Inventory" as UC2
+  usecase "Assign Storage Location" as UC3
+  usecase "Create Shipment Record" as UC4
+  usecase "Track Shipment in Transit" as UC5
+  usecase "Report Spill Incident" as UC6
+  usecase "Conduct Safety Audit" as UC7
+  usecase "Generate Compliance Report" as UC8
+  usecase "View Emergency Procedures" as UC9
+  usecase "Validate SDS Document" as UC10
+  usecase "Log Material Classification" as UC11
+  usecase "Review Incident History" as UC12
+}
+
+SO -- UC1
+SO -- UC7
+SO -- UC6
+WM -- UC2
+WM -- UC3
+WM -- UC1
+TD -- UC4
+TD -- UC5
+RI -- UC7
+RI -- UC8
+ER -- UC6
+ER -- UC9
+SO -- UC12
+
+UC1 ..> UC10 : <<include>>
+UC1 ..> UC11 : <<include>>
+
+@enduml

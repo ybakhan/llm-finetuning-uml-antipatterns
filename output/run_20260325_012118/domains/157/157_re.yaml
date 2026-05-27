@@ -1,0 +1,30 @@
+metadata:
+  domain_id: 157
+  domain: spa_and_wellness_booking_system
+  domain_display: Spa and Wellness Booking System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:20:47.966493'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Therapist\"\
+    \ as Therapist\nactor \"Receptionist\" as Receptionist\nactor \"Manager\" as Manager\n\
+    \nrectangle \"Spa and Wellness Booking System\" {\n  usecase \"Browse Treatments\"\
+    \ as UC1\n  usecase \"Book Appointment\" as UC2\n  usecase \"Process Payment\"\
+    \ as UC4\n  usecase \"Cancel Appointment\" as UC5\n  usecase \"View Schedule\"\
+    \ as UC6\n  usecase \"Manage Treatment Catalog\" as UC7\n  usecase \"Record Client\
+    \ Preferences\" as UC8\n  usecase \"Check In Client\" as UC9\n  usecase \"Generate\
+    \ Revenue Report\" as UC10\n  usecase \"Leave Review\" as UC11\n  usecase \"Apply\
+    \ Discount Code\" as UC12\n  usecase \"Manage Staff Availability\" as UC13\n \
+    \ usecase \"Request Membership\" as UC14\n}\n\nCustomer -- UC1\nCustomer -- UC2\n\
+    Customer -- UC4\nCustomer -- UC5\nCustomer -- UC11\nCustomer -- UC14\nUC12 ..>\
+    \ UC2 : <<extend>>\nTherapist -- UC6\nTherapist -- UC8\nReceptionist -- UC9\n\
+    Receptionist -- UC4\nManager -- UC7\nManager -- UC10\nManager -- UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

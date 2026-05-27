@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 127
+  domain: company_registration_system
+  domain_display: Company Registration System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Company (UC1)
+      - Verify Company Name (UC2)
+      explanation: '''Verify Company Name'' (UC2) is included by ''Register Company''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Company'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Company'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:54:51.750499'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Applicant\" as A1\nactor \"Registrar\" as A2\n\
+    \nrectangle \"Company Registration System\" {\n  usecase \"Register Company\"\
+    \ as UC1\n  usecase \"Verify Company Name\" as UC2\n  usecase \"Review Application\"\
+    \ as UC3\n  usecase \"Issue Certificate\" as UC4\n  usecase \"Search Company Records\"\
+    \ as UC5\n  usecase \"Pay Registration Fee\" as UC6\n}\n\nA1 -- UC1\nA1 -- UC5\n\
+    A1 -- UC6\nA2 -- UC3\nA2 -- UC4\n\nUC1 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Company (UC1)\"\
+    ,\n            \"Verify Company Name (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Verify Company Name' (UC2) is included by 'Register Company' (UC1), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Register Company' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Register\
+    \ Company' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

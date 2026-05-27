@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Therapist" as Therapist
+
+rectangle "Mental Health Appointment System" {
+  usecase "Book Appointment" as UC1
+  usecase "Validate Insurance" as UC2
+  usecase "View Schedule" as UC3
+  usecase "Cancel Appointment" as UC4
+  usecase "Record Session Notes" as UC5
+}
+
+Patient -- UC1
+Patient -- UC4
+Therapist -- UC3
+Therapist -- UC5
+UC1 ..> UC2 : <<include>>
+@enduml

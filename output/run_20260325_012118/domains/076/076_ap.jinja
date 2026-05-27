@@ -1,0 +1,80 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Chef" as Chef
+actor "Delivery Driver" as Driver
+actor "Event Coordinator" as Coordinator
+
+rectangle "Catering Service System" {
+  usecase "Place Catering Order" as UC1
+  usecase "Browse Menu" as UC2
+  usecase "Customize Menu Selection" as UC3
+  usecase "Cancel Order" as UC4
+  usecase "Track Order Status" as UC5
+  usecase "Manage Menu" as UC6
+  usecase "Prepare Order" as UC7
+  usecase "Confirm Delivery" as UC8
+  usecase "Schedule Event Catering" as UC9
+  usecase "Manage Client Accounts" as UC10
+  usecase "Generate Invoice" as UC11
+  usecase "Validate Payment Details" as UC12
+  usecase "Request Special Dietary Options" as UC13
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC3
+Customer -- UC4
+Customer -- UC5
+Customer -- UC13
+Chef -- UC6
+Chef -- UC7
+Driver -- UC8
+Driver -- UC5
+Coordinator -- UC9
+Coordinator -- UC10
+
+UC1 ..> UC12 : <<include>>
+UC1 ..> UC11 : <<include>>
+
+UC13 ..> UC3 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Place Catering Order (UC1)",
+            "Validate Payment Details (UC12)"
+          ],
+          "explanation": "'Validate Payment Details' (UC12) is included by 'Place Catering Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Catering Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Catering Order' via the include relationship."
+        },
+        {
+          "elements": [
+            "Place Catering Order (UC1)",
+            "Generate Invoice (UC11)"
+          ],
+          "explanation": "'Generate Invoice' (UC11) is included by 'Place Catering Order' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Place Catering Order' rather than a standalone service observable to any actor, making it a functional decomposition of 'Place Catering Order' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

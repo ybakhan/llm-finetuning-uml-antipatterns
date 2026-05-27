@@ -1,0 +1,104 @@
+metadata:
+  domain_id: 31
+  domain: credit_card_management_system
+  domain_display: Credit Card Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Apply for Credit Card (UC1)
+      - Validate Identity (UC2)
+      explanation: '''Validate Identity'' (UC2) is included by ''Apply for Credit
+        Card'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Apply for
+        Credit Card'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Apply for Credit Card'' via the include
+        relationship.'
+    - elements:
+      - Apply for Credit Card (UC1)
+      - Check Credit Score (UC3)
+      explanation: '''Check Credit Score'' (UC3) is included by ''Apply for Credit
+        Card'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Apply for
+        Credit Card'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Apply for Credit Card'' via the include
+        relationship.'
+    - elements:
+      - Make Payment (UC5)
+      - Calculate Interest (UC6)
+      explanation: '''Calculate Interest'' (UC6) is included by ''Make Payment'' (UC5),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Make Payment'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Make Payment'' via the include relationship.'
+    - elements:
+      - Investigate Fraud (UC9)
+      - Gather Transaction Logs (UC10)
+      explanation: '''Gather Transaction Logs'' (UC10) is included by ''Investigate
+        Fraud'' (UC9), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Investigate
+        Fraud'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Investigate Fraud'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:33:06.576668'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Cardholder\" as CH\nactor \"Customer Service\
+    \ Agent\" as CSA\nactor \"Fraud Analyst\" as FA\nactor \"System Administrator\"\
+    \ as SA\n\nrectangle \"Credit Card Management System\" {\n  usecase \"Apply for\
+    \ Credit Card\" as UC1\n  usecase \"Validate Identity\" as UC2\n  usecase \"Check\
+    \ Credit Score\" as UC3\n  usecase \"View Account Statement\" as UC4\n  usecase\
+    \ \"Make Payment\" as UC5\n  usecase \"Calculate Interest\" as UC6\n  usecase\
+    \ \"Report Lost Card\" as UC7\n  usecase \"Block Card\" as UC8\n  usecase \"Investigate\
+    \ Fraud\" as UC9\n  usecase \"Gather Transaction Logs\" as UC10\n  usecase \"\
+    Manage Card Limits\" as UC11\n  usecase \"Dispute Transaction\" as UC12\n  usecase\
+    \ \"Request Credit Limit Increase\" as UC13\n  usecase \"Redeem Rewards\" as UC14\n\
+    \  usecase \"Manage User Accounts\" as UC15\n}\n\nCH -- UC1\nCH -- UC4\nCH --\
+    \ UC5\nCH -- UC7\nCH -- UC12\nCH -- UC13\nCH -- UC14\n\nCSA -- UC7\nCSA -- UC8\n\
+    CSA -- UC11\n\nFA -- UC9\n\nSA -- UC15\n\nUC1 ..> UC2 : <<include>>\nUC1 ..> UC3\
+    \ : <<include>>\nUC5 ..> UC6 : <<include>>\nUC9 ..> UC10 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Apply for Credit Card\
+    \ (UC1)\",\n            \"Validate Identity (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Identity' (UC2) is included by 'Apply for Credit Card'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Apply for Credit Card' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Apply for Credit Card' via the include relationship.\"\n        },\n   \
+    \     {\n          \"elements\": [\n            \"Apply for Credit Card (UC1)\"\
+    ,\n            \"Check Credit Score (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Check Credit Score' (UC3) is included by 'Apply for Credit Card' (UC1), has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Apply for Credit Card' rather than a\
+    \ standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Apply for Credit Card' via the include relationship.\"\n        },\n   \
+    \     {\n          \"elements\": [\n            \"Make Payment (UC5)\",\n    \
+    \        \"Calculate Interest (UC6)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Interest' (UC6) is included by 'Make Payment' (UC5), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Make Payment' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Make Payment' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Investigate Fraud (UC9)\",\n            \"Gather Transaction Logs\
+    \ (UC10)\"\n          ],\n          \"explanation\": \"'Gather Transaction Logs'\
+    \ (UC10) is included by 'Investigate Fraud' (UC9), has no direct actor association,\
+    \ does not include or extend any other use case, is not extended by any use case,\
+    \ and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Investigate Fraud' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Investigate Fraud' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

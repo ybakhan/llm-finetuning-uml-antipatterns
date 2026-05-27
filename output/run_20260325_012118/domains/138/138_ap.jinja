@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Streamer" as Streamer
+actor "Viewer" as Viewer
+
+rectangle "Livestreaming Platform" {
+  usecase "Start Live Stream" as UC1
+  usecase "Encode Video Feed" as UC2
+  usecase "Watch Live Stream" as UC3
+  usecase "Send Chat Message" as UC4
+  usecase "Subscribe to Channel" as UC5
+  usecase "Donate to Streamer" as UC6
+}
+
+Streamer -- UC1
+UC1 ..> UC2 : <<include>>
+Viewer -- UC3
+Viewer -- UC4
+Viewer -- UC5
+Viewer -- UC6
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Start Live Stream (UC1)",
+            "Encode Video Feed (UC2)"
+          ],
+          "explanation": "'Encode Video Feed' (UC2) is included by 'Start Live Stream' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Start Live Stream' rather than a standalone service observable to any actor, making it a functional decomposition of 'Start Live Stream' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

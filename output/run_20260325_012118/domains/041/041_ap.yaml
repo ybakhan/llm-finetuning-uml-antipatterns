@@ -1,0 +1,45 @@
+metadata:
+  domain_id: 41
+  domain: courier_delivery_system
+  domain_display: Courier Delivery System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Delivery Order (UC1)
+      - Validate Address (UC6)
+      explanation: '''Validate Address'' (UC6) is included by ''Place Delivery Order''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Delivery Order''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Place Delivery Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 11
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:36:46.840173'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Courier\" as\
+    \ Courier\n\nrectangle \"Courier Delivery System\" {\n  usecase \"Place Delivery\
+    \ Order\" as UC1\n  usecase \"Track Shipment\" as UC2\n  usecase \"Pick Up Package\"\
+    \ as UC3\n  usecase \"Deliver Package\" as UC4\n  usecase \"Update Delivery Status\"\
+    \ as UC5\n  usecase \"Validate Address\" as UC6\n}\n\nCustomer -- UC1\nCustomer\
+    \ -- UC2\nCourier -- UC3\nCourier -- UC4\nCourier -- UC5\n\nUC1 ..> UC6 : <<include>>\n\
+    @enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Delivery Order\
+    \ (UC1)\",\n            \"Validate Address (UC6)\"\n          ],\n          \"\
+    explanation\": \"'Validate Address' (UC6) is included by 'Place Delivery Order'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Place Delivery Order' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Place Delivery Order' via the include relationship.\"\n        }\n     \
+    \ ]\n    }\n  ]\n}"

@@ -1,0 +1,23 @@
+metadata:
+  domain_id: 146
+  domain: yoga_class_booking
+  domain_display: Yoga Class Booking
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:18:28.777325'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Instructor\" as\
+    \ Instructor\n\nrectangle \"Yoga Class Booking System\" {\n  usecase \"Browse\
+    \ Class Schedule\" as UC1\n  usecase \"Book Class\" as UC2\n  usecase \"Cancel\
+    \ Booking\" as UC4\n  usecase \"View Enrolled Students\" as UC5\n  usecase \"\
+    Mark Attendance\" as UC6\n}\n\nMember -- UC1\nMember -- UC2\nMember -- UC4\nInstructor\
+    \ -- UC5\nInstructor -- UC6\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

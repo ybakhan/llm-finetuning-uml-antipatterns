@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reader" as Reader
+
+rectangle "E-Book Publishing System" {
+  usecase "Upload Manuscript" as UC1
+  usecase "Browse Catalog" as UC3
+  usecase "Purchase E-Book" as UC4
+  usecase "Download E-Book" as UC5
+}
+
+Author -- UC1
+Reader -- UC3
+Reader -- UC4
+Reader -- UC5
+@enduml

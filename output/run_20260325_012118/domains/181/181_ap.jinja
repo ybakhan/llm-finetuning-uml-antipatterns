@@ -1,0 +1,86 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Farm Manager" as FM
+actor "Field Technician" as FT
+actor "Weather Service" as WS
+
+rectangle "Irrigation Control System" {
+  usecase "Configure Irrigation Schedule" as UC1
+  usecase "Monitor Soil Moisture" as UC2
+  usecase "Activate Zone Valves" as UC3
+  usecase "View Dashboard" as UC4
+  usecase "Receive Weather Forecast" as UC5
+  usecase "Generate Water Usage Report" as UC6
+  usecase "Set Alert Thresholds" as UC7
+  usecase "Perform Field Inspection" as UC8
+  usecase "Validate Sensor Readings" as UC9
+  usecase "Parse Schedule Parameters" as UC10
+  usecase "Format Report Data" as UC11
+  usecase "Manage Sensor Calibration" as UC12
+  usecase "Override Automatic Irrigation" as UC13
+  usecase "Log Valve Activity" as UC14
+}
+
+FM -- UC1
+FM -- UC2
+FM -- UC4
+FM -- UC6
+FM -- UC7
+FM -- UC13
+FT -- UC8
+FT -- UC3
+FT -- UC12
+WS -- UC5
+
+UC1 ..> UC10 : <<include>>
+UC6 ..> UC11 : <<include>>
+UC3 ..> UC14 : <<include>>
+UC8 ..> UC9 : <<include>>
+UC2 ..> UC9 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Configure Irrigation Schedule (UC1)",
+            "Parse Schedule Parameters (UC10)"
+          ],
+          "explanation": "'Parse Schedule Parameters' (UC10) is included by 'Configure Irrigation Schedule' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Configure Irrigation Schedule' rather than a standalone service observable to any actor, making it a functional decomposition of 'Configure Irrigation Schedule' via the include relationship."
+        },
+        {
+          "elements": [
+            "Generate Water Usage Report (UC6)",
+            "Format Report Data (UC11)"
+          ],
+          "explanation": "'Format Report Data' (UC11) is included by 'Generate Water Usage Report' (UC6), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Generate Water Usage Report' rather than a standalone service observable to any actor, making it a functional decomposition of 'Generate Water Usage Report' via the include relationship."
+        },
+        {
+          "elements": [
+            "Activate Zone Valves (UC3)",
+            "Log Valve Activity (UC14)"
+          ],
+          "explanation": "'Log Valve Activity' (UC14) is included by 'Activate Zone Valves' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Activate Zone Valves' rather than a standalone service observable to any actor, making it a functional decomposition of 'Activate Zone Valves' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

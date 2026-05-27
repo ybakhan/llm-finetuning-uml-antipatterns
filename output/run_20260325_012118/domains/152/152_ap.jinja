@@ -1,0 +1,77 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "System Administrator" as Admin
+actor "End User" as User
+actor "Scheduler" as Scheduler
+
+rectangle "Data Backup and Recovery System" {
+  usecase "Configure Backup Policy" as UC1
+  usecase "Run Full Backup" as UC2
+  usecase "Run Incremental Backup" as UC3
+  usecase "Restore Files" as UC4
+  usecase "View Backup Logs" as UC5
+  usecase "Schedule Automated Backup" as UC6
+  usecase "Monitor Storage Capacity" as UC7
+  usecase "Request File Recovery" as UC8
+  usecase "Verify Backup Integrity" as UC9
+  usecase "Compress Backup Data" as UC10
+  usecase "Notify Admin on Failure" as UC11
+  usecase "Generate Recovery Report" as UC12
+  usecase "Locate Backup Snapshot" as UC13
+}
+
+Admin -- UC1
+Admin -- UC2
+Admin -- UC3
+Admin -- UC5
+Admin -- UC7
+Admin -- UC9
+Scheduler -- UC6
+User -- UC8
+User -- UC4
+
+UC2 ..> UC10 : <<include>>
+UC4 ..> UC13 : <<include>>
+UC6 ..> UC3 : <<include>>
+UC11 ..> UC2 : <<extend>>
+UC12 ..> UC8 : <<extend>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Run Full Backup (UC2)",
+            "Compress Backup Data (UC10)"
+          ],
+          "explanation": "'Compress Backup Data' (UC10) is included by 'Run Full Backup' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Run Full Backup' rather than a standalone service observable to any actor, making it a functional decomposition of 'Run Full Backup' via the include relationship."
+        },
+        {
+          "elements": [
+            "Restore Files (UC4)",
+            "Locate Backup Snapshot (UC13)"
+          ],
+          "explanation": "'Locate Backup Snapshot' (UC13) is included by 'Restore Files' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Restore Files' rather than a standalone service observable to any actor, making it a functional decomposition of 'Restore Files' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,63 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Editor" as Editor
+actor "Reader" as Reader
+
+rectangle "News Publishing System" {
+  usecase "Write Article" as UC1
+  usecase "Review Article" as UC2
+  usecase "Publish Article" as UC3
+  usecase "Browse News" as UC4
+  usecase "Search Articles" as UC5
+  usecase "Validate Content" as UC6
+  usecase "Format Article" as UC7
+}
+
+Editor -- UC1
+Editor -- UC2
+Editor -- UC3
+Reader -- UC4
+Reader -- UC5
+
+UC3 ..> UC6 : <<include>>
+UC3 ..> UC7 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Publish Article (UC3)",
+            "Validate Content (UC6)"
+          ],
+          "explanation": "'Validate Content' is included by 'Publish Article', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Publish Article' rather than a standalone service observable to any actor, making it a functional decomposition of 'Publish Article' via the include relationship."
+        },
+        {
+          "elements": [
+            "Publish Article (UC3)",
+            "Format Article (UC7)"
+          ],
+          "explanation": "'Format Article' is included by 'Publish Article', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Publish Article' rather than a standalone service observable to any actor, making it a functional decomposition of 'Publish Article' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

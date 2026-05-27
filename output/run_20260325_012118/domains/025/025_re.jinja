@@ -1,0 +1,59 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Insurance Agent" as Agent
+actor "Claims Adjuster" as Adjuster
+actor "Underwriter" as Underwriter
+
+rectangle "Insurance Management System" {
+  usecase "Submit Claim" as UC1
+  usecase "Review Claim" as UC3
+  usecase "Approve/Deny Claim" as UC4
+  usecase "Purchase Policy" as UC5
+  usecase "Request Quote" as UC7
+  usecase "Assess Risk" as UC8
+  usecase "Renew Policy" as UC10
+  usecase "Cancel Policy" as UC11
+  usecase "View Policy Details" as UC12
+  usecase "File Appeal" as UC13
+  usecase "Update Customer Profile" as UC14
+  usecase "Process Payout" as UC15
+}
+
+Customer -- UC1
+Customer -- UC5
+Customer -- UC7
+Customer -- UC10
+Customer -- UC11
+Customer -- UC12
+Customer -- UC13
+Customer -- UC14
+
+Agent -- UC5
+Agent -- UC7
+Agent -- UC12
+
+Adjuster -- UC3
+Adjuster -- UC4
+Adjuster -- UC15
+
+Underwriter -- UC8
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

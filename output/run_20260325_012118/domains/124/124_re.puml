@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Trader" as Trader
+actor "Admin" as Admin
+actor "Payment Gateway" as PG
+
+rectangle "Cryptocurrency Exchange" {
+  usecase "Register Account" as UC1
+  usecase "Login" as UC3
+  usecase "Place Buy Order" as UC4
+  usecase "Place Sell Order" as UC5
+  usecase "View Portfolio" as UC6
+  usecase "Deposit Funds" as UC7
+  usecase "Withdraw Funds" as UC8
+  usecase "View Transaction History" as UC9
+  usecase "Manage Listings" as UC10
+  usecase "Monitor Suspicious Activity" as UC11
+  usecase "Set Price Alert" as UC12
+}
+
+Trader -- UC1
+Trader -- UC3
+Trader -- UC4
+Trader -- UC5
+Trader -- UC6
+Trader -- UC7
+Trader -- UC8
+Trader -- UC9
+Trader -- UC12
+
+Admin -- UC10
+Admin -- UC11
+
+PG -- UC7
+PG -- UC8
+@enduml

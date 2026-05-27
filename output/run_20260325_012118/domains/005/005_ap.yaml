@@ -1,0 +1,59 @@
+metadata:
+  domain_id: 5
+  domain: social_media_platform
+  domain_display: Social Media Platform
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Create Post (UC1)
+      - Validate Post Content (UC4)
+      explanation: '''Validate Post Content'' (UC4) is included by ''Create Post''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Create Post'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Create Post'' via the include relationship.'
+    - elements:
+      - Create Post (UC1)
+      - Save Post to Database (UC5)
+      explanation: '''Save Post to Database'' (UC5) is included by ''Create Post''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Create Post'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Create Post'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:23:07.154746'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"User\" as U1\n\nrectangle \"Social Media Platform\"\
+    \ {\n  usecase \"Create Post\" as UC1\n  usecase \"View Feed\" as UC2\n  usecase\
+    \ \"Send Message\" as UC3\n  usecase \"Validate Post Content\" as UC4\n  usecase\
+    \ \"Save Post to Database\" as UC5\n}\n\nU1 -- UC1\nU1 -- UC2\nU1 -- UC3\n\nUC1\
+    \ ..> UC4 : <<include>>\nUC1 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Create Post (UC1)\",\n\
+    \            \"Validate Post Content (UC4)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Post Content' (UC4) is included by 'Create Post' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Create Post' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Create Post' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Create Post (UC1)\",\n            \"Save Post to Database (UC5)\"\
+    \n          ],\n          \"explanation\": \"'Save Post to Database' (UC5) is\
+    \ included by 'Create Post' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Create\
+    \ Post' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Create Post' via the include relationship.\"\n\
+    \        }\n      ]\n    }\n  ]\n}"

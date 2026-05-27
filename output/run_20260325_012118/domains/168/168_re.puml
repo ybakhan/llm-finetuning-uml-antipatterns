@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+
+actor "Client" as Client
+actor "Notary" as Notary
+
+rectangle "Notary Service Booking System" {
+  usecase "Book Appointment" as UC1
+  usecase "Manage Schedule" as UC3
+  usecase "Cancel Appointment" as UC4
+}
+
+Client -- UC1
+Client -- UC4
+Notary -- UC3
+@enduml

@@ -1,0 +1,27 @@
+metadata:
+  domain_id: 151
+  domain: software_license_management
+  domain_display: Software License Management System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:55:12.503595'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"License Administrator\" as Admin\nactor \"\
+    End User\" as EndUser\nactor \"Compliance Auditor\" as Auditor\n\nrectangle \"\
+    Software License Management System\" {\n  usecase \"Register New License\" as\
+    \ UC1\n  usecase \"Assign License to User\" as UC2\n  usecase \"Revoke License\"\
+    \ as UC3\n  usecase \"View License Dashboard\" as UC4\n  usecase \"Request License\"\
+    \ as UC5\n  usecase \"Generate Compliance Report\" as UC6\n  usecase \"Conduct\
+    \ License Audit\" as UC7\n  usecase \"Renew License\" as UC8\n  usecase \"Manage\
+    \ Vendor Contracts\" as UC9\n  usecase \"Track Software Usage\" as UC10\n}\n\n\
+    Admin -- UC1\nAdmin -- UC2\nAdmin -- UC3\nAdmin -- UC4\nAdmin -- UC8\nAdmin --\
+    \ UC9\nEndUser -- UC5\nEndUser -- UC10\nAuditor -- UC6\nAuditor -- UC7\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

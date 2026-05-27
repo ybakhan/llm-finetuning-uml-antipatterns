@@ -1,0 +1,61 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Viewer" as Viewer
+actor "Content Creator" as Creator
+
+rectangle "Video Streaming Platform" {
+  usecase "Watch Video" as UC1
+  usecase "Search Content" as UC2
+  usecase "Upload Video" as UC3
+  usecase "Manage Subscription" as UC4
+  usecase "Load Video Player" as UC5
+  usecase "Buffer Stream Data" as UC6
+}
+
+Viewer -- UC1
+Viewer -- UC2
+Viewer -- UC4
+Creator -- UC3
+
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Watch Video (UC1)",
+            "Load Video Player (UC5)"
+          ],
+          "explanation": "'Load Video Player' is included by 'Watch Video', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Watch Video' rather than a standalone service observable to any actor, making it a functional decomposition of 'Watch Video' via the include relationship."
+        },
+        {
+          "elements": [
+            "Watch Video (UC1)",
+            "Buffer Stream Data (UC6)"
+          ],
+          "explanation": "'Buffer Stream Data' is included by 'Watch Video', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Watch Video' rather than a standalone service observable to any actor, making it a functional decomposition of 'Watch Video' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

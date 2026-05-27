@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Restaurant" as Restaurant
+actor "Delivery Driver" as Driver
+actor "Admin" as Admin
+
+rectangle "Food Delivery Platform" {
+  usecase "Browse Restaurants" as UC1
+  usecase "Place Order" as UC2
+  usecase "Validate Payment Details" as UC3
+  usecase "Track Delivery" as UC4
+  usecase "Rate Order" as UC5
+  usecase "Manage Menu" as UC6
+  usecase "Accept Order" as UC7
+  usecase "Update Delivery Status" as UC8
+  usecase "Calculate Delivery Fee" as UC9
+  usecase "Manage Promotions" as UC10
+  usecase "View Order History" as UC11
+  usecase "Register Account" as UC12
+  usecase "Generate Order Confirmation" as UC13
+  usecase "Handle Customer Complaints" as UC14
+  usecase "View Earnings" as UC15
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Customer -- UC5
+Customer -- UC11
+Customer -- UC12
+Restaurant -- UC6
+Restaurant -- UC7
+Driver -- UC8
+Driver -- UC15
+Admin -- UC10
+Admin -- UC14
+
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC9 : <<include>>
+UC2 ..> UC13 : <<include>>
+@enduml

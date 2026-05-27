@@ -1,0 +1,100 @@
+metadata:
+  domain_id: 75
+  domain: cafe_order_management
+  domain_display: Cafe Order Management
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Order (UC1)
+      - Select Menu Items (UC2)
+      explanation: '''Select Menu Items'' (UC2) is included by ''Place Order'' (UC1),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+    - elements:
+      - Place Order (UC1)
+      - Calculate Order Total (UC3)
+      explanation: '''Calculate Order Total'' (UC3) is included by ''Place Order''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+    - elements:
+      - Process Payment (UC4)
+      - Validate Payment Details (UC5)
+      explanation: '''Validate Payment Details'' (UC5) is included by ''Process Payment''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Payment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Payment'' via the include relationship.'
+    - elements:
+      - Process Payment (UC4)
+      - Generate Receipt (UC7)
+      explanation: '''Generate Receipt'' (UC7) is included by ''Process Payment''
+        (UC4), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Process Payment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Process Payment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 28
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:56:48.291926'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Barista\" as\
+    \ Barista\nactor \"Manager\" as Manager\n\nrectangle \"Cafe Order Management System\"\
+    \ {\n  usecase \"Place Order\" as UC1\n  usecase \"Select Menu Items\" as UC2\n\
+    \  usecase \"Calculate Order Total\" as UC3\n  usecase \"Process Payment\" as\
+    \ UC4\n  usecase \"Validate Payment Details\" as UC5\n  usecase \"Prepare Order\"\
+    \ as UC6\n  usecase \"Generate Receipt\" as UC7\n  usecase \"View Menu\" as UC8\n\
+    \  usecase \"Update Menu\" as UC9\n  usecase \"View Sales Report\" as UC10\n \
+    \ usecase \"Cancel Order\" as UC11\n  usecase \"Apply Discount\" as UC12\n  usecase\
+    \ \"Provide Feedback\" as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC8\nCustomer\
+    \ -- UC4\nCustomer -- UC11\nCustomer -- UC13\nBarista -- UC6\nBarista -- UC1\n\
+    Manager -- UC9\nManager -- UC10\nManager -- UC12\n\nUC1 ..> UC2 : <<include>>\n\
+    UC1 ..> UC3 : <<include>>\nUC4 ..> UC5 : <<include>>\nUC12 ..> UC4 : <<extend>>\n\
+    UC4 ..> UC7 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 4,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 4,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Order (UC1)\",\n\
+    \            \"Select Menu Items (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Select Menu Items' (UC2) is included by 'Place Order' (UC1), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Place Order' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Place Order' via the\
+    \ include relationship.\"\n        },\n        {\n          \"elements\": [\n\
+    \            \"Place Order (UC1)\",\n            \"Calculate Order Total (UC3)\"\
+    \n          ],\n          \"explanation\": \"'Calculate Order Total' (UC3) is\
+    \ included by 'Place Order' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Place\
+    \ Order' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Place Order' via the include relationship.\"\n\
+    \        },\n        {\n          \"elements\": [\n            \"Process Payment\
+    \ (UC4)\",\n            \"Validate Payment Details (UC5)\"\n          ],\n   \
+    \       \"explanation\": \"'Validate Payment Details' (UC5) is included by 'Process\
+    \ Payment' (UC4), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Process Payment'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Process Payment' via the include relationship.\"\n       \
+    \ },\n        {\n          \"elements\": [\n            \"Process Payment (UC4)\"\
+    ,\n            \"Generate Receipt (UC7)\"\n          ],\n          \"explanation\"\
+    : \"'Generate Receipt' (UC7) is included by 'Process Payment' (UC4), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Process Payment' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Process Payment' via\
+    \ the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

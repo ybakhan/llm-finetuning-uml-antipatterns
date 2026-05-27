@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Driver" as Driver
+actor "Parking Attendant" as Attendant
+actor "System Administrator" as Admin
+actor "Payment Gateway" as PGateway
+
+rectangle "Parking Lot Management System" {
+  usecase "Enter Parking Lot" as UC1
+  usecase "Scan Entry Ticket" as UC1a
+  usecase "Open Entry Gate" as UC1b
+  usecase "Exit Parking Lot" as UC2
+  usecase "Calculate Parking Fee" as UC2a
+  usecase "Raise Exit Barrier" as UC2b
+  usecase "Process Payment" as UC3
+  usecase "Validate Payment Details" as UC3a
+  usecase "Reserve Parking Spot" as UC4
+  usecase "View Occupancy Status" as UC5
+  usecase "Manage Parking Zones" as UC6
+  usecase "Generate Revenue Report" as UC7
+  usecase "Register Monthly Pass" as UC8
+  usecase "Monitor Security Cameras" as UC9
+}
+
+Driver -- UC1
+Driver -- UC2
+Driver -- UC3
+Driver -- UC4
+Attendant -- UC5
+Attendant -- UC9
+Admin -- UC6
+Admin -- UC7
+Admin -- UC8
+PGateway -- UC3
+
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+UC2 ..> UC2a : <<include>>
+UC2 ..> UC2b : <<include>>
+UC3 ..> UC3a : <<include>>
+@enduml

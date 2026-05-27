@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Librarian" as Librarian
+actor "Member" as Member
+actor "Administrator" as Admin
+
+rectangle "Library Management System" {
+  usecase "Borrow Book" as UC1
+  usecase "Return Book" as UC2
+  usecase "Search Catalog" as UC3
+  usecase "Register Member" as UC4
+  usecase "Manage Book Inventory" as UC5
+  usecase "Reserve Book" as UC6
+  usecase "Pay Fine" as UC7
+  usecase "Generate Reports" as UC8
+  usecase "Manage Staff Accounts" as UC9
+  usecase "Renew Membership" as UC10
+  usecase "View Borrowing History" as UC13
+  usecase "Send Overdue Notification" as UC14
+  usecase "Cancel Reservation" as UC15
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Member -- UC6
+Member -- UC7
+Member -- UC13
+Member -- UC15
+
+Librarian -- UC1
+Librarian -- UC4
+Librarian -- UC5
+Librarian -- UC14
+
+Admin -- UC8
+Admin -- UC9
+Admin -- UC10
+
+UC6 ..> UC3 : <<extend>>
+@enduml

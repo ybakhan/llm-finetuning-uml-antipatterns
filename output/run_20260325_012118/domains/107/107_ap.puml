@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Candidate" as Candidate
+actor "Examiner" as Examiner
+
+rectangle "Certification Examination System" {
+  usecase "Register for Exam" as UC1
+  usecase "Take Exam" as UC2
+  usecase "Review Results" as UC3
+  usecase "Grade Exam" as UC4
+  usecase "Issue Certificate" as UC5
+  usecase "Validate Answers" as UC6
+}
+
+Candidate -- UC1
+Candidate -- UC2
+Candidate -- UC3
+Examiner -- UC4
+Examiner -- UC5
+UC4 ..> UC6 : <<include>>
+@enduml

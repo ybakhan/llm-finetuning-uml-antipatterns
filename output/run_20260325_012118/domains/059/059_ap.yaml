@@ -1,0 +1,73 @@
+metadata:
+  domain_id: 59
+  domain: scholarship_application_system
+  domain_display: Scholarship Application System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Submit Application (UC1)
+      - Validate Documents (UC3)
+      explanation: '''Validate Documents'' (UC3) is included by ''Submit Application'' (UC1), has no direct
+        actor association, does not include or extend any other use case, is not extended by any use case,
+        and is not part of any generalisation hierarchy. It represents an internal sub-step of ''Submit
+        Application'' rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Application'' via the include relationship.'
+    - elements:
+      - Submit Application (UC1)
+      - Check Eligibility (UC4)
+      explanation: '''Check Eligibility'' (UC4) is included by ''Submit Application'' (UC1), has no direct
+        actor association, does not include or extend any other use case, is not extended by any use case,
+        and is not part of any generalisation hierarchy. It represents an internal sub-step of ''Submit
+        Application'' rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Submit Application'' via the include relationship.'
+    - elements:
+      - Score Application (UC7)
+      - Calculate GPA Score (UC6)
+      explanation: '''Calculate GPA Score'' (UC6) is included by ''Score Application'' (UC7), has no direct
+        actor association, does not include or extend any other use case, is not extended by any use case,
+        and is not part of any generalisation hierarchy. It represents an internal sub-step of ''Score
+        Application'' rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Score Application'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-05-25T05:17:34.171764'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains any antipatterns. Base\
+    \ your analysis solely on the model provided. Do not use any outside knowledge. Respond with a JSON\
+    \ object.\n\nPlantUML Model:\n@startuml\nleft to right direction\n\nactor \"Applicant\" as A1\nactor\
+    \ \"Reviewer\" as A2\nactor \"Administrator\" as A3\nactor \"Financial Aid Officer\" as A4\n\nrectangle\
+    \ \"Scholarship Application System\" {\n  usecase \"Submit Application\" as UC1\n  usecase \"Upload\
+    \ Documents\" as UC2\n  usecase \"Validate Documents\" as UC3\n  usecase \"Check Eligibility\" as\
+    \ UC4\n  usecase \"Review Application\" as UC5\n  usecase \"Calculate GPA Score\" as UC6\n  usecase\
+    \ \"Score Application\" as UC7\n  usecase \"Manage Scholarships\" as UC8\n  usecase \"Generate Award\
+    \ Letter\" as UC9\n  usecase \"Approve Award\" as UC10\n  usecase \"Track Application Status\" as\
+    \ UC11\n  usecase \"View Reports\" as UC12\n  usecase \"Notify Applicant\" as UC13\n  usecase \"Manage\
+    \ Deadlines\" as UC14\n}\n\nA1 -- UC1\nA1 -- UC2\nA1 -- UC11\nUC1 ..> UC3 : <<include>>\nUC1 ..> UC4\
+    \ : <<include>>\nA2 -- UC5\nA2 -- UC7\nUC7 ..> UC6 : <<include>>\nA3 -- UC8\nA3 -- UC14\nA3 -- UC12\n\
+    A4 -- UC10\nUC10 ..> UC9 : <<include>>\nUC10 ..> UC13 : <<include>>\nUC5 ..> UC13 : <<extend>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\": 3,\n  \"\
+    antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition: Using the include\
+    \ relationship\",\n      \"instance_count\": 3,\n      \"instances\": [\n        {\n          \"elements\"\
+    : [\n            \"Submit Application (UC1)\",\n            \"Validate Documents (UC3)\"\n       \
+    \   ],\n          \"explanation\": \"'Validate Documents' (UC3) is included by 'Submit Application'\
+    \ (UC1), has no direct actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Submit Application' rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Submit Application' via the include relationship.\"\n        },\n        {\n \
+    \         \"elements\": [\n            \"Submit Application (UC1)\",\n            \"Check Eligibility\
+    \ (UC4)\"\n          ],\n          \"explanation\": \"'Check Eligibility' (UC4) is included by 'Submit\
+    \ Application' (UC1), has no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Submit Application' rather than a standalone service observable to any\
+    \ actor, making it a functional decomposition of 'Submit Application' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Score Application (UC7)\",\n   \
+    \         \"Calculate GPA Score (UC6)\"\n          ],\n          \"explanation\": \"'Calculate GPA\
+    \ Score' (UC6) is included by 'Score Application' (UC7), has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Score Application' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Score Application' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

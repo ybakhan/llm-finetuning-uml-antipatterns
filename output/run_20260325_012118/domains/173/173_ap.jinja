@@ -1,0 +1,58 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Technician" as Technician
+
+rectangle "Vending Machine Management System" {
+  usecase "Purchase Product" as UC1
+  usecase "Validate Payment" as UC2
+  usecase "Dispense Item" as UC3
+  usecase "Restock Machine" as UC4
+  usecase "View Inventory" as UC5
+}
+
+Customer -- UC1
+Technician -- UC4
+Technician -- UC5
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "Purchase Product (UC1)",
+            "Validate Payment (UC2)"
+          ],
+          "explanation": "'Validate Payment' is included by 'Purchase Product', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Product' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Product' via the include relationship."
+        },
+        {
+          "elements": [
+            "Purchase Product (UC1)",
+            "Dispense Item (UC3)"
+          ],
+          "explanation": "'Dispense Item' is included by 'Purchase Product', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Purchase Product' rather than a standalone service observable to any actor, making it a functional decomposition of 'Purchase Product' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

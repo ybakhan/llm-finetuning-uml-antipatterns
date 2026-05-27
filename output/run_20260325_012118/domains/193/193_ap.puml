@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Reader" as Reader
+actor "Author" as Author
+
+rectangle "Graphic Novel Platform" {
+  usecase "Browse Catalog" as UC1
+  usecase "Read Novel" as UC2
+  usecase "Publish Novel" as UC3
+  usecase "Upload Pages" as UC4
+  usecase "Rate Novel" as UC5
+}
+
+Reader -- UC1
+Reader -- UC2
+Reader -- UC5
+Author -- UC3
+UC3 ..> UC4 : <<include>>
+@enduml

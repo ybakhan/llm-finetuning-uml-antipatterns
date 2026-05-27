@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+
+actor "Nurse" as Nurse
+actor "Doctor" as Doctor
+actor "Administrator" as Admin
+actor "Family Member" as Family
+actor "Pharmacist" as Pharmacist
+
+rectangle "Nursing Home Management System" {
+  usecase "Admit Resident" as UC1
+  usecase "Record Vital Signs" as UC2
+  usecase "Administer Medication" as UC3
+  usecase "Schedule Doctor Visit" as UC4
+  usecase "Generate Health Report" as UC5
+  usecase "View Resident Status" as UC6
+  usecase "Manage Staff Schedule" as UC7
+  usecase "Process Discharge" as UC8
+  usecase "Manage Diet Plans" as UC9
+  usecase "Handle Emergency Alert" as UC10
+  usecase "Request Visit Appointment" as UC11
+  usecase "Dispense Medication" as UC12
+}
+
+Nurse -- UC1
+Nurse -- UC2
+Nurse -- UC3
+Nurse -- UC10
+Doctor -- UC4
+Doctor -- UC5
+Doctor -- UC9
+Admin -- UC7
+Admin -- UC8
+Family -- UC6
+Family -- UC11
+Pharmacist -- UC12
+@enduml

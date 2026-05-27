@@ -1,0 +1,51 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Inspector" as Inspector
+actor "Production Manager" as PM
+
+rectangle "Quality Control System" {
+  usecase "Perform Inspection" as UC1
+  usecase "Record Measurements" as UC2
+  usecase "Generate Quality Report" as UC3
+  usecase "Review Defect Trends" as UC4
+  usecase "Log Defect" as UC5
+}
+
+Inspector -- UC1
+UC1 ..> UC2 : <<include>>
+Inspector -- UC5
+PM -- UC3
+PM -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Perform Inspection (UC1)",
+            "Record Measurements (UC2)"
+          ],
+          "explanation": "'Record Measurements' is included by 'Perform Inspection', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Perform Inspection' rather than a standalone service observable to any actor, making it a functional decomposition of 'Perform Inspection' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

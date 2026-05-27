@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+actor "End User" as EU
+actor "Support Agent" as SA
+actor "IT Manager" as MGR
+
+rectangle "IT Help Desk System" {
+  usecase "Submit Ticket" as UC1
+  usecase "Validate User Credentials" as UC2
+  usecase "Categorize Ticket" as UC3
+  usecase "View Ticket Status" as UC4
+  usecase "Resolve Ticket" as UC5
+  usecase "Log Resolution Details" as UC6
+  usecase "Escalate Ticket" as UC7
+  usecase "Reassign Ticket" as UC8
+  usecase "Generate Performance Report" as UC9
+  usecase "Calculate Average Resolution Time" as UC10
+  usecase "Manage Knowledge Base" as UC11
+  usecase "Search Knowledge Base" as UC12
+  usecase "Rate Support Experience" as UC13
+  usecase "Close Ticket" as UC14
+}
+
+EU -- UC1
+EU -- UC4
+EU -- UC12
+EU -- UC13
+
+SA -- UC5
+SA -- UC7
+SA -- UC8
+SA -- UC12
+SA -- UC14
+
+MGR -- UC9
+MGR -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC5 ..> UC6 : <<include>>
+UC9 ..> UC10 : <<include>>
+UC7 ..> UC8 : <<extend>>
+@enduml

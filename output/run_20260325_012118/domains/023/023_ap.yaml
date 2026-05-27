@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 23
+  domain: gym_membership_system
+  domain_display: Gym Membership System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Membership (UC1)
+      - Validate Payment Details (UC5)
+      explanation: '''Validate Payment Details'' (UC5) is included by ''Register Membership''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Register Membership'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Register Membership'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:29:56.931511'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Member\" as Member\nactor \"Trainer\" as Trainer\n\
+    \nrectangle \"Gym Membership System\" {\n  usecase \"Register Membership\" as\
+    \ UC1\n  usecase \"Book Class\" as UC2\n  usecase \"Manage Schedule\" as UC3\n\
+    \  usecase \"Cancel Membership\" as UC4\n  usecase \"Validate Payment Details\"\
+    \ as UC5\n}\n\nMember -- UC1\nMember -- UC2\nMember -- UC4\nTrainer -- UC3\nUC1\
+    \ ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Membership (UC1)\"\
+    ,\n            \"Validate Payment Details (UC5)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' (UC5) is included by 'Register Membership'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Register Membership' rather\
+    \ than a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Register Membership' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

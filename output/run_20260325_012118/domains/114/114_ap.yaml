@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 114
+  domain: hostel_booking_system
+  domain_display: Hostel Booking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Room (UC2)
+      - Validate Payment Details (UC5)
+      explanation: '''Validate Payment Details'' (UC5) is included by ''Book Room''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Room'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Book Room'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:12:20.844812'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Guest\" as Guest\nactor \"Receptionist\" as\
+    \ Receptionist\n\nrectangle \"Hostel Booking System\" {\n  usecase \"Search Available\
+    \ Rooms\" as UC1\n  usecase \"Book Room\" as UC2\n  usecase \"Check In Guest\"\
+    \ as UC3\n  usecase \"Cancel Booking\" as UC4\n  usecase \"Validate Payment Details\"\
+    \ as UC5\n}\n\nGuest -- UC1\nGuest -- UC2\nGuest -- UC4\nReceptionist -- UC3\n\
+    UC2 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Room (UC2)\",\n\
+    \            \"Validate Payment Details (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Payment Details' (UC5) is included by 'Book Room' (UC2), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Book Room' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Book Room'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

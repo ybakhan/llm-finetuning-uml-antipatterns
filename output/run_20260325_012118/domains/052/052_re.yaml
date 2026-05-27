@@ -1,0 +1,26 @@
+metadata:
+  domain_id: 52
+  domain: investment_portfolio_system
+  domain_display: Investment Portfolio System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:52:37.710938'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Investor\" as INV\nactor \"Financial Advisor\"\
+    \ as FA\nactor \"System Administrator\" as SA\n\nrectangle \"Investment Portfolio\
+    \ System\" {\n  usecase \"View Portfolio\" as UC1\n  usecase \"Buy Securities\"\
+    \ as UC2\n  usecase \"Sell Securities\" as UC3\n  usecase \"Rebalance Portfolio\"\
+    \ as UC5\n  usecase \"Generate Performance Report\" as UC6\n  usecase \"Manage\
+    \ Client Accounts\" as UC8\n  usecase \"Set Risk Profile\" as UC9\n  usecase \"\
+    Configure System Settings\" as UC10\n  usecase \"Monitor Market Data\" as UC11\n\
+    }\n\nINV -- UC1\nINV -- UC2\nINV -- UC3\nINV -- UC6\nINV -- UC9\nFA -- UC5\nFA\
+    \ -- UC8\nFA -- UC11\nSA -- UC10\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

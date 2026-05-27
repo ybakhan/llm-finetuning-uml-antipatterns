@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "HR Officer" as HR
+actor "Unit Commander" as CMD
+actor "Recruiting Officer" as REC
+actor "System Administrator" as ADMIN
+
+rectangle "Military Personnel Management System" {
+  usecase "Register New Recruit" as UC1
+  usecase "Assign Personnel to Unit" as UC2
+  usecase "Process Promotion" as UC3
+  usecase "Manage Leave Requests" as UC4
+  usecase "View Personnel Records" as UC5
+  usecase "Generate Readiness Report" as UC6
+  usecase "Manage User Accounts" as UC7
+  usecase "Track Disciplinary Actions" as UC8
+  usecase "Process Discharge" as UC9
+  usecase "Manage Training Certifications" as UC10
+  usecase "Validate Service Number" as UC11
+  usecase "Calculate Years of Service" as UC12
+  usecase "Determine Eligibility Criteria" as UC13
+}
+
+HR -- UC2
+HR -- UC3
+HR -- UC4
+HR -- UC5
+HR -- UC9
+
+CMD -- UC6
+CMD -- UC8
+CMD -- UC10
+
+REC -- UC1
+
+ADMIN -- UC7
+
+UC3 ..> UC11 : <<include>>
+UC3 ..> UC12 : <<include>>
+UC3 ..> UC13 : <<include>>
+@enduml

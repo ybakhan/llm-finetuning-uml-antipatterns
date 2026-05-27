@@ -1,0 +1,87 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "HR Officer" as HR
+actor "Unit Commander" as CMD
+actor "Recruiting Officer" as REC
+actor "System Administrator" as ADMIN
+
+rectangle "Military Personnel Management System" {
+  usecase "Register New Recruit" as UC1
+  usecase "Assign Personnel to Unit" as UC2
+  usecase "Process Promotion" as UC3
+  usecase "Manage Leave Requests" as UC4
+  usecase "View Personnel Records" as UC5
+  usecase "Generate Readiness Report" as UC6
+  usecase "Manage User Accounts" as UC7
+  usecase "Track Disciplinary Actions" as UC8
+  usecase "Process Discharge" as UC9
+  usecase "Manage Training Certifications" as UC10
+  usecase "Validate Service Number" as UC11
+  usecase "Calculate Years of Service" as UC12
+  usecase "Determine Eligibility Criteria" as UC13
+}
+
+HR -- UC2
+HR -- UC3
+HR -- UC4
+HR -- UC5
+HR -- UC9
+
+CMD -- UC6
+CMD -- UC8
+CMD -- UC10
+
+REC -- UC1
+
+ADMIN -- UC7
+
+UC3 ..> UC11 : <<include>>
+UC3 ..> UC12 : <<include>>
+UC3 ..> UC13 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Process Promotion (UC3)",
+            "Validate Service Number (UC11)"
+          ],
+          "explanation": "'Validate Service Number' (UC11) is included by 'Process Promotion' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Promotion' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Promotion' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Promotion (UC3)",
+            "Calculate Years of Service (UC12)"
+          ],
+          "explanation": "'Calculate Years of Service' (UC12) is included by 'Process Promotion' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Promotion' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Promotion' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Promotion (UC3)",
+            "Determine Eligibility Criteria (UC13)"
+          ],
+          "explanation": "'Determine Eligibility Criteria' (UC13) is included by 'Process Promotion' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Promotion' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Promotion' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

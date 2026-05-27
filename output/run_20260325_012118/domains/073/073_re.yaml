@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 73
+  domain: construction_project_management
+  domain_display: Construction Project Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:49:07.065474'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Project Manager\" as PM\nactor \"Site Engineer\"\
+    \ as SE\nactor \"Contractor\" as CO\nactor \"Safety Officer\" as SO\nactor \"\
+    Client\" as CL\n\nrectangle \"Construction Project Management System\" {\n  usecase\
+    \ \"Create Project Schedule\" as UC1\n  usecase \"Track Daily Progress\" as UC2\n\
+    \  usecase \"Submit Change Order\" as UC3\n  usecase \"Approve Change Order\"\
+    \ as UC4\n  usecase \"Conduct Safety Inspection\" as UC5\n  usecase \"Generate\
+    \ Safety Report\" as UC6\n  usecase \"Manage Subcontractor Bids\" as UC7\n  usecase\
+    \ \"Review Project Milestones\" as UC8\n  usecase \"Upload Site Documents\" as\
+    \ UC9\n  usecase \"Request Material Delivery\" as UC10\n  usecase \"View Project\
+    \ Dashboard\" as UC11\n}\n\nPM -- UC1\nPM -- UC2\nPM -- UC3\nPM -- UC4\nPM --\
+    \ UC8\nPM -- UC11\nSE -- UC2\nSE -- UC9\nSE -- UC10\nCO -- UC3\nCO -- UC7\nSO\
+    \ -- UC5\nSO -- UC6\nCL -- UC8\nCL -- UC11\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

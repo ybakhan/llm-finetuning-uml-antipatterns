@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 125
+  domain: microfinance_system
+  domain_display: Microfinance System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:15:25.285545'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Officer\" as LO\nactor \"Borrower\" as\
+    \ BO\nactor \"Branch Manager\" as BM\nactor \"System Administrator\" as SA\n\n\
+    rectangle \"Microfinance System\" {\n  usecase \"Register Borrower\" as UC1\n\
+    \  usecase \"Apply for Loan\" as UC2\n  usecase \"Evaluate Creditworthiness\"\
+    \ as UC3\n  usecase \"Approve Loan\" as UC4\n  usecase \"Disburse Loan\" as UC5\n\
+    \  usecase \"Record Repayment\" as UC6\n  usecase \"View Loan Status\" as UC7\n\
+    \  usecase \"Generate Portfolio Report\" as UC8\n  usecase \"Manage Savings Account\"\
+    \ as UC9\n  usecase \"Send Payment Reminder\" as UC10\n  usecase \"Handle Loan\
+    \ Default\" as UC11\n  usecase \"Configure System Parameters\" as UC12\n}\n\n\
+    LO -- UC1\nLO -- UC2\nLO -- UC3\nLO -- UC6\nLO -- UC10\nBO -- UC2\nBO -- UC7\n\
+    BO -- UC9\nBM -- UC4\nBM -- UC5\nBM -- UC8\nBM -- UC11\nSA -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

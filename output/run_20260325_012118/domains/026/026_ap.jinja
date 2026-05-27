@@ -1,0 +1,92 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "HR Manager" as HR
+actor "Payroll Officer" as PO
+actor "Employee" as EMP
+actor "Finance Director" as FD
+actor "Tax Authority" as TA
+
+rectangle "Payroll Management System" {
+  usecase "Manage Employee Records" as UC1
+  usecase "Configure Pay Grades" as UC2
+  usecase "Process Monthly Payroll" as UC3
+  usecase "Calculate Gross Pay" as UC4
+  usecase "Apply Tax Deductions" as UC5
+  usecase "Compute Net Pay" as UC6
+  usecase "Generate Payslips" as UC7
+  usecase "Submit Tax Filing" as UC8
+  usecase "View Payslip" as UC9
+  usecase "Request Leave" as UC10
+  usecase "Approve Leave" as UC11
+  usecase "Generate Payroll Report" as UC12
+  usecase "Manage Overtime" as UC13
+  usecase "Approve Payroll" as UC14
+  usecase "Process Bonus Payment" as UC15
+  usecase "View Tax Summary" as UC16
+}
+
+HR -- UC1
+HR -- UC2
+HR -- UC11
+HR -- UC13
+PO -- UC3
+PO -- UC7
+PO -- UC8
+PO -- UC15
+EMP -- UC9
+EMP -- UC10
+EMP -- UC16
+FD -- UC12
+FD -- UC14
+TA -- UC8
+
+UC3 ..> UC4 : <<include>>
+UC3 ..> UC5 : <<include>>
+UC3 ..> UC6 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Process Monthly Payroll (UC3)",
+            "Calculate Gross Pay (UC4)"
+          ],
+          "explanation": "'Calculate Gross Pay' (UC4) is included by 'Process Monthly Payroll' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Monthly Payroll' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Monthly Payroll' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Monthly Payroll (UC3)",
+            "Apply Tax Deductions (UC5)"
+          ],
+          "explanation": "'Apply Tax Deductions' (UC5) is included by 'Process Monthly Payroll' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Monthly Payroll' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Monthly Payroll' via the include relationship."
+        },
+        {
+          "elements": [
+            "Process Monthly Payroll (UC3)",
+            "Compute Net Pay (UC6)"
+          ],
+          "explanation": "'Compute Net Pay' (UC6) is included by 'Process Monthly Payroll' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Process Monthly Payroll' rather than a standalone service observable to any actor, making it a functional decomposition of 'Process Monthly Payroll' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,50 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Taxpayer" as Taxpayer
+actor "Tax Accountant" as Accountant
+
+rectangle "Tax Filing System" {
+  usecase "File Tax Return" as UC1
+  usecase "Validate Input Fields" as UC2
+  usecase "Review Filing Status" as UC3
+  usecase "Generate Tax Summary" as UC4
+}
+
+Taxpayer -- UC1
+Taxpayer -- UC3
+Accountant -- UC3
+Accountant -- UC4
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "File Tax Return (UC1)",
+            "Validate Input Fields (UC2)"
+          ],
+          "explanation": "'Validate Input Fields' (UC2) is included by 'File Tax Return' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'File Tax Return' rather than a standalone service observable to any actor, making it a functional decomposition of 'File Tax Return' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

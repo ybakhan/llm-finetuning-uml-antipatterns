@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 163
+  domain: laundry_pickup_service
+  domain_display: Laundry Pickup Service
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:25:14.282197'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Driver\" as\
+    \ Driver\n\nrectangle \"Laundry Pickup Service\" {\n  usecase \"Schedule Pickup\"\
+    \ as UC1\n  usecase \"Track Order\" as UC3\n  usecase \"Complete Delivery\" as\
+    \ UC4\n  usecase \"Rate Service\" as UC5\n}\n\nCustomer -- UC1\nCustomer -- UC3\n\
+    Customer -- UC5\nDriver -- UC4\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

@@ -1,0 +1,37 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "User" as User
+actor "Administrator" as Admin
+
+rectangle "Messaging Application" {
+  usecase "Send Message" as UC1
+  usecase "View Conversations" as UC3
+  usecase "Delete Message" as UC4
+  usecase "Manage Users" as UC5
+  usecase "Search Messages" as UC6
+}
+
+User -- UC1
+User -- UC3
+User -- UC4
+User -- UC6
+Admin -- UC5
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

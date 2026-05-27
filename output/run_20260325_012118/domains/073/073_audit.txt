@@ -1,0 +1,289 @@
+AUDIT LOG — Prompt #073
+Timestamp : 2026-03-25T01:49:07.064330
+Model     : claude-opus-4-6
+Tokens    : input=1536  output=1477
+
+────────────────────────────────────────────────────────────────────────
+SYSTEM PROMPT
+────────────────────────────────────────────────────────────────────────
+You are an expert UML use case modeling consultant specialising in antipattern detection and refactoring for software engineering research.
+
+Your task: for each request, generate exactly TWO versions of a PlantUML use case model for the specified domain and construct count.
+
+═══ ANTIPATTERNS TO EMBED ═══════════════════════════════════════════════════════
+─── Antipattern: Functional Decomposition: Using the include relationship (2 instances) ───
+Description : This antipattern represents improper usage of the include relationship. The service
+offered by a use case is divided into several inclusion use cases. Moreover, these
+inclusion use cases are not directly associated with any actor. They do not represent a
+complete service that is offered the system; hence, provide no observable result to a user.
+Functional decomposition is acceptable if an inclusion use case provides complete
+behavior to another actor and/or is included by another use case.
+
+Refactoring strategy:
+  Name        : Drop Functional Decomposition
+  Description : This refactoring merges the inclusion use cases into the base use case, which
+individually provides a complete service to the actor. A use case is involved in this
+antipattern if it:
+- is an inclusion use case which is included by one use case only
+- is not associated with any actor
+- is neither including nor extending any use case
+- is not extended by any use case
+- is neither a generalization nor a specialization of any use case
+
+═══ WHAT COUNTS AS A CONSTRUCT ══════════════════════════════════════════════════
+  • Actor          – each actor node
+  • Use Case       – each use case ellipse
+  • Include        – each <<include>> dependency arrow
+  • Extend         – each <<extend>> dependency arrow
+  • Generalize     – each generalisation (inheritance) arrow
+
+  TOTAL constructs = Actors + Use Cases + Includes + Extends + Generalisations.
+
+═══ DOMAIN RULE ═════════════════════════════════════════════════════════════════
+Use the exact domain specified in the user message. Do not substitute a different
+domain. Set DOMAIN_DISPLAY to the domain name as given.
+
+═══ MANDATORY RESPONSE FORMAT ═══════════════════════════════════════════════════
+Follow this template EXACTLY — including the marker lines.
+
+DOMAIN: <snake_case_domain>
+DOMAIN_DISPLAY: <Human Readable Domain Name>
+SIZE: <small|medium|large>
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: <integer>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        },
+        {
+          "constructs": [
+            "<construct name and type>",
+            "..."
+          ],
+          "explanation": "<why these constructs form the \"Functional Decomposition: Using the include relationship\" antipattern>"
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: <what must change and why — address every antipattern instance explicitly, naming the constructs to be restructured and the goal of the refactoring>
+
+```plantuml
+@startuml
+<model here>
+@enduml
+```
+
+═══ SYSTEM CONTEXT (BOUNDARY) RULE ══════════════════════════════════════════════
+Every PlantUML model MUST include a system boundary rectangle:
+  • Use a `rectangle "System Name" {{ }}` block to represent the system context.
+  • ALL use cases MUST be placed INSIDE the rectangle.
+  • ALL actors MUST be placed OUTSIDE the rectangle.
+  • The rectangle label should be the name of the system being modelled.
+
+Example structure:
+  actor Customer
+  rectangle "Online Store" {{
+    usecase "Browse Products" as UC1
+    usecase "Place Order" as UC2
+  }}
+  Customer -- UC1
+  Customer -- UC2
+
+═══ ASSOCIATION RULE ═════════════════════════════════════════════════════════════
+Actor-to-use-case associations MUST be undirected lines (--), NOT directed arrows (-->).
+  CORRECT:  Customer -- UC1
+  WRONG:    Customer --> UC1
+
+═══ REFACTORING SCOPE RULE ═══════════════════════════════════════════════════════
+Version 2 MUST be derived strictly from Version 1:
+  • You MAY remove constructs (use cases, actors, relationships) as required by the refactoring.
+  • You MAY add constructs ONLY if the specific antipattern's refactoring inherently requires it
+    (e.g. when fixing a3 "Functional Decomposition: Using the extend relationship", the refactoring
+    splits one extension use case into multiple — those new use cases are required by the fix).
+  • You MUST NOT invent new use cases or actors that are unrelated to the refactoring.
+    Enriching the domain model with extra functionality is strictly forbidden.
+
+═══ QUALITY RULES ════════════════════════��═══════════════════════════════════════
+1. Version 1 MUST contain clear, unambiguous instances of every assigned antipattern.
+2. Version 2 MUST be a correct, fully refactored model with no antipattern.
+3. Version 1 construct count must match CONSTRUCT_COUNT exactly. Version 2 may differ as refactoring can add or remove constructs.
+4. Both models must be realistic and domain-appropriate.
+5. Every model MUST have a system boundary rectangle with actors outside and use cases inside.
+6. These models train an LLM to detect antipatterns — name each one and list the exact constructs involved. Make them educationally clear examples.
+
+
+────────────────────────────────────────────────────────────────────────
+MESSAGE 1 — USER
+────────────────────────────────────────────────────────────────────────
+Prompt #073: Generate a MEDIUM use case model with exactly 26 constructs (valid range for medium: 24–30 constructs). Domain: Construction Project Management.
+
+────────────────────────────────────────────────────────────────────────
+ASSISTANT RESPONSE (raw)
+────────────────────────────────────────────────────────────────────────
+
+
+DOMAIN: construction_project_management
+DOMAIN_DISPLAY: Construction Project Management
+SIZE: medium
+
+=== VERSION 1: WITH ANTIPATTERNS ===
+CONSTRUCT_COUNT: 26
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Project Manager" as PM
+actor "Site Engineer" as SE
+actor "Contractor" as CO
+actor "Safety Officer" as SO
+actor "Client" as CL
+
+rectangle "Construction Project Management System" {
+  usecase "Create Project Schedule" as UC1
+  usecase "Define Task Dependencies" as UC1a
+  usecase "Assign Resources to Tasks" as UC1b
+  usecase "Track Daily Progress" as UC2
+  usecase "Log Work Completion" as UC2a
+  usecase "Submit Change Order" as UC3
+  usecase "Approve Change Order" as UC4
+  usecase "Conduct Safety Inspection" as UC5
+  usecase "Generate Safety Report" as UC6
+  usecase "Manage Subcontractor Bids" as UC7
+  usecase "Review Project Milestones" as UC8
+  usecase "Upload Site Documents" as UC9
+  usecase "Request Material Delivery" as UC10
+  usecase "View Project Dashboard" as UC11
+}
+
+PM -- UC1
+UC1 ..> UC1a : <<include>>
+UC1 ..> UC1b : <<include>>
+PM -- UC2
+UC2 ..> UC2a : <<include>>
+PM -- UC3
+PM -- UC4
+PM -- UC8
+PM -- UC11
+SE -- UC2
+SE -- UC9
+SE -- UC10
+CO -- UC3
+CO -- UC7
+SO -- UC5
+SO -- UC6
+CL -- UC8
+CL -- UC11
+}
+@enduml
+```
+
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "constructs": [
+            "Create Project Schedule (use case, UC1)",
+            "Define Task Dependencies (use case, UC1a)",
+            "Assign Resources to Tasks (use case, UC1b)",
+            "<<include>> from UC1 to UC1a (include relationship)",
+            "<<include>> from UC1 to UC1b (include relationship)"
+          ],
+          "explanation": "The use case 'Create Project Schedule' has been functionally decomposed into two inclusion use cases: 'Define Task Dependencies' and 'Assign Resources to Tasks'. Both UC1a and UC1b are each included by only one use case (UC1), are not associated with any actor, do not include or extend any other use case, are not extended by any use case, and are not part of any generalization hierarchy. They represent sub-steps of schedule creation rather than complete, independently valuable services to any actor. This is the Functional Decomposition antipattern using the include relationship."
+        },
+        {
+          "constructs": [
+            "Track Daily Progress (use case, UC2)",
+            "Log Work Completion (use case, UC2a)",
+            "<<include>> from UC2 to UC2a (include relationship)"
+          ],
+          "explanation": "The use case 'Track Daily Progress' has been functionally decomposed by extracting 'Log Work Completion' as a separate inclusion use case. UC2a is included by only one use case (UC2), is not associated with any actor, does not include or extend any other use case, is not extended by any use case, and is not part of any generalization hierarchy. Logging work completion is an integral sub-step of tracking daily progress, not a standalone service offering an observable result to any user. This constitutes the Functional Decomposition antipattern using the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
+
+=== VERSION 2: REFACTORED ===
+REFACTORING_RATIONALE: Two instances of functional decomposition must be resolved by merging the improperly extracted inclusion use cases back into their respective base use cases:
+
+1. **Instance 1**: "Define Task Dependencies" (UC1a) and "Assign Resources to Tasks" (UC1b) are merged back into "Create Project Schedule" (UC1). Both sub-steps are inherent parts of creating a project schedule. This removes UC1a, UC1b, and the two <<include>> relationships between UC1→UC1a and UC1→UC1b.
+
+2. **Instance 2**: "Log Work Completion" (UC2a) is merged back into "Track Daily Progress" (UC2). Logging work completion is an integral part of tracking daily progress. This removes UC2a and the <<include>> relationship between UC2→UC2a.
+
+The result is a net removal of 3 use cases and 3 include relationships (6 constructs removed), yielding 20 constructs.
+
+```plantuml
+@startuml
+left to right direction
+
+actor "Project Manager" as PM
+actor "Site Engineer" as SE
+actor "Contractor" as CO
+actor "Safety Officer" as SO
+actor "Client" as CL
+
+rectangle "Construction Project Management System" {
+  usecase "Create Project Schedule" as UC1
+  usecase "Track Daily Progress" as UC2
+  usecase "Submit Change Order" as UC3
+  usecase "Approve Change Order" as UC4
+  usecase "Conduct Safety Inspection" as UC5
+  usecase "Generate Safety Report" as UC6
+  usecase "Manage Subcontractor Bids" as UC7
+  usecase "Review Project Milestones" as UC8
+  usecase "Upload Site Documents" as UC9
+  usecase "Request Material Delivery" as UC10
+  usecase "View Project Dashboard" as UC11
+}
+
+PM -- UC1
+PM -- UC2
+PM -- UC3
+PM -- UC4
+PM -- UC8
+PM -- UC11
+SE -- UC2
+SE -- UC9
+SE -- UC10
+CO -- UC3
+CO -- UC7
+SO -- UC5
+SO -- UC6
+CL -- UC8
+CL -- UC11
+@enduml
+```

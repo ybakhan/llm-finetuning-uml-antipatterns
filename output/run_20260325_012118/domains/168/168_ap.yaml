@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 168
+  domain: notary_service_booking
+  domain_display: Notary Service Booking System
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Book Appointment (UC1)
+      - Validate Client Identity (UC2)
+      explanation: '''Validate Client Identity'' (UC2) is included by ''Book Appointment''
+        (UC1), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Book Appointment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Book Appointment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:26:57.331543'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Client\" as Client\nactor \"Notary\" as Notary\n\
+    \nrectangle \"Notary Service Booking System\" {\n  usecase \"Book Appointment\"\
+    \ as UC1\n  usecase \"Validate Client Identity\" as UC2\n  usecase \"Manage Schedule\"\
+    \ as UC3\n  usecase \"Cancel Appointment\" as UC4\n}\n\nClient -- UC1\nClient\
+    \ -- UC4\nNotary -- UC3\n\nUC1 ..> UC2 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Book Appointment (UC1)\"\
+    ,\n            \"Validate Client Identity (UC2)\"\n          ],\n          \"\
+    explanation\": \"'Validate Client Identity' (UC2) is included by 'Book Appointment'\
+    \ (UC1), has no direct actor association, does not include or extend any other\
+    \ use case, is not extended by any use case, and is not part of any generalisation\
+    \ hierarchy. It represents an internal sub-step of 'Book Appointment' rather than\
+    \ a standalone service observable to any actor, making it a functional decomposition\
+    \ of 'Book Appointment' via the include relationship.\"\n        }\n      ]\n\
+    \    }\n  ]\n}"

@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+
+actor "Doctor" as Doctor
+actor "Nurse" as Nurse
+actor "Receptionist" as Receptionist
+actor "Patient" as Patient
+actor "Lab Technician" as LabTech
+
+rectangle "Hospital Management System" {
+  usecase "Diagnose Patient" as UC1
+  usecase "Validate Patient Identity" as UC2
+  usecase "Retrieve Medical History" as UC3
+  usecase "Prescribe Medication" as UC4
+  usecase "Register Patient" as UC5
+  usecase "Schedule Appointment" as UC6
+  usecase "Record Vital Signs" as UC7
+  usecase "Administer Medication" as UC8
+  usecase "Process Lab Request" as UC9
+  usecase "Upload Lab Results" as UC10
+  usecase "View Appointment Schedule" as UC11
+  usecase "Generate Discharge Summary" as UC12
+  usecase "View Lab Results" as UC13
+}
+
+Doctor -- UC1
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+Doctor -- UC4
+Doctor -- UC12
+Receptionist -- UC5
+Receptionist -- UC6
+Nurse -- UC7
+Nurse -- UC8
+LabTech -- UC9
+LabTech -- UC10
+Patient -- UC11
+Patient -- UC13
+Doctor -- UC13
+}
+@enduml

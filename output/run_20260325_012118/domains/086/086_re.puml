@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Member" as Member
+actor "Store Manager" as Manager
+
+rectangle "Loyalty Rewards Program" {
+  usecase "Earn Points" as UC1
+  usecase "Redeem Rewards" as UC2
+  usecase "View Point Balance" as UC3
+  usecase "Manage Reward Catalog" as UC5
+  usecase "Generate Loyalty Report" as UC6
+}
+
+Member -- UC1
+Member -- UC2
+Member -- UC3
+Manager -- UC5
+Manager -- UC6
+@enduml

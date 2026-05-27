@@ -1,0 +1,28 @@
+metadata:
+  domain_id: 100
+  domain: emergency_dispatch_system
+  domain_display: Emergency Dispatch System
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:10:47.782380'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Dispatcher\" as Dispatcher\nactor \"Caller\"\
+    \ as Caller\nactor \"Field Unit\" as FieldUnit\nactor \"Supervisor\" as Supervisor\n\
+    \nrectangle \"Emergency Dispatch System\" {\n  usecase \"Receive Emergency Call\"\
+    \ as UC1\n  usecase \"Dispatch Field Unit\" as UC4\n  usecase \"Track Unit Location\"\
+    \ as UC5\n  usecase \"Update Incident Status\" as UC6\n  usecase \"Report On Scene\"\
+    \ as UC7\n  usecase \"Request Backup\" as UC8\n  usecase \"Review Dispatch Logs\"\
+    \ as UC9\n  usecase \"Manage Unit Roster\" as UC10\n  usecase \"Close Incident\"\
+    \ as UC11\n  usecase \"Generate Shift Report\" as UC12\n}\n\nCaller -- UC1\nDispatcher\
+    \ -- UC1\nDispatcher -- UC4\nDispatcher -- UC5\nDispatcher -- UC6\nDispatcher\
+    \ -- UC11\nFieldUnit -- UC7\nFieldUnit -- UC8\nSupervisor -- UC9\nSupervisor --\
+    \ UC10\nSupervisor -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

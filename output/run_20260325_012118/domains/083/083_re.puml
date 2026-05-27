@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+
+actor "Harbor Master" as HM
+actor "Ship Captain" as SC
+actor "Crane Operator" as CO
+actor "Customs Officer" as CUS
+actor "Billing Clerk" as BC
+
+rectangle "Port Management System" {
+  usecase "Request Berth Assignment" as UC1
+  usecase "Approve Vessel Entry" as UC4
+  usecase "Manage Cargo Loading" as UC5
+  usecase "Operate Crane" as UC7
+  usecase "Perform Customs Inspection" as UC8
+  usecase "Submit Cargo Declaration" as UC9
+  usecase "Generate Port Charges Invoice" as UC10
+  usecase "Track Vessel Departure" as UC11
+  usecase "Monitor Port Traffic" as UC12
+  usecase "Manage Dangerous Goods" as UC13
+}
+
+SC -- UC1
+HM -- UC4
+HM -- UC12
+HM -- UC11
+CO -- UC5
+CO -- UC7
+CUS -- UC8
+SC -- UC9
+BC -- UC10
+HM -- UC13
+@enduml

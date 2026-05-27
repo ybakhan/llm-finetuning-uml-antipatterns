@@ -1,0 +1,73 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "API Developer" as Dev
+actor "API Consumer" as Consumer
+actor "Portal Admin" as Admin
+
+rectangle "API Management Portal" {
+  usecase "Register API" as UC1
+  usecase "Validate API Schema" as UC2
+  usecase "Browse API Catalog" as UC3
+  usecase "Subscribe to API" as UC4
+  usecase "Generate API Key" as UC5
+  usecase "View API Analytics" as UC6
+  usecase "Monitor API Health" as UC7
+  usecase "Manage Rate Limits" as UC8
+  usecase "Configure API Gateway" as UC9
+  usecase "Manage User Accounts" as UC10
+  usecase "Review API Documentation" as UC11
+  usecase "Publish API Documentation" as UC12
+  usecase "Revoke API Key" as UC13
+  usecase "Test API Endpoint" as UC14
+}
+
+Dev -- UC1
+Dev -- UC6
+Dev -- UC12
+Dev -- UC14
+
+Consumer -- UC3
+Consumer -- UC4
+Consumer -- UC5
+Consumer -- UC11
+
+Admin -- UC7
+Admin -- UC8
+Admin -- UC9
+Admin -- UC10
+Admin -- UC13
+
+UC1 ..> UC2 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Register API (UC1)",
+            "Validate API Schema (UC2)"
+          ],
+          "explanation": "'Validate API Schema' (UC2) is included by 'Register API' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Register API' rather than a standalone service observable to any actor, making it a functional decomposition of 'Register API' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

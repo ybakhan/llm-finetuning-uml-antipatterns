@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+
+actor "Finder" as Finder
+actor "Claimant" as Claimant
+actor "Administrator" as Admin
+
+rectangle "Lost and Found System" {
+  usecase "Report Found Item" as UC1
+  usecase "Search Lost Items" as UC4
+  usecase "Submit Claim" as UC5
+  usecase "Upload Proof of Ownership" as UC7
+  usecase "Verify Claim" as UC8
+  usecase "Approve Item Release" as UC9
+  usecase "Manage Item Categories" as UC10
+  usecase "View Inventory Dashboard" as UC11
+  usecase "Dispose Unclaimed Items" as UC12
+  usecase "Generate Reports" as UC13
+  usecase "Register Account" as UC14
+}
+
+Finder -- UC1
+Finder -- UC14
+Claimant -- UC4
+Claimant -- UC5
+Claimant -- UC7
+Claimant -- UC14
+Admin -- UC8
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+Admin -- UC12
+Admin -- UC13
+@enduml

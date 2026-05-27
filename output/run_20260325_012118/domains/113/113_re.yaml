@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 113
+  domain: vacation_rental_platform
+  domain_display: Vacation Rental Platform
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:05:22.338172'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Guest\" as Guest\nactor \"Property Owner\"\
+    \ as Owner\n\nrectangle \"Vacation Rental Platform\" {\n  usecase \"Browse Listings\"\
+    \ as UC1\n  usecase \"Book Property\" as UC2\n  usecase \"List Property\" as UC4\n\
+    \  usecase \"Manage Reservations\" as UC5\n}\n\nGuest -- UC1\nGuest -- UC2\nOwner\
+    \ -- UC4\nOwner -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

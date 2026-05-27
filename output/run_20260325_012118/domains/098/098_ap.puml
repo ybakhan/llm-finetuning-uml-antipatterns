@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Dentist" as Dentist
+actor "Receptionist" as Receptionist
+actor "Insurance Provider" as InsProvider
+
+rectangle "Dental Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Check Available Slots" as UC2
+  usecase "Record Patient Details" as UC3
+
+  usecase "Perform Treatment" as UC4
+  usecase "Select Dental Instruments" as UC5
+  usecase "Update Treatment Notes" as UC6
+
+  usecase "Process Payment" as UC7
+  usecase "Calculate Total Charges" as UC8
+
+  usecase "View Treatment History" as UC9
+  usecase "Cancel Appointment" as UC10
+  usecase "Submit Insurance Claim" as UC11
+  usecase "Manage Patient Records" as UC12
+  usecase "Generate Prescription" as UC13
+  usecase "Send Appointment Reminder" as UC14
+  usecase "View Schedule" as UC15
+}
+
+Patient -- UC1
+Patient -- UC7
+Patient -- UC9
+Patient -- UC10
+
+Dentist -- UC4
+Dentist -- UC13
+Dentist -- UC15
+Dentist -- UC9
+
+Receptionist -- UC1
+Receptionist -- UC12
+Receptionist -- UC14
+Receptionist -- UC7
+
+InsProvider -- UC11
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+UC4 ..> UC5 : <<include>>
+UC4 ..> UC6 : <<include>>
+UC7 ..> UC8 : <<include>>
+UC11 ..> UC9 : <<include>>
+@enduml

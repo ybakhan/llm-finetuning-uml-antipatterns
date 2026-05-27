@@ -1,0 +1,50 @@
+metadata:
+  domain_id: 2
+  domain: restaurant_management_system
+  domain_display: Restaurant Management System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Order (UC2)
+      - Validate Order Items (UC3)
+      explanation: '''Validate Order Items'' (UC3) is included by ''Place Order''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Place Order'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Place Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 27
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:45:40.922189'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Customer\" as Customer\nactor \"Waiter\" as\
+    \ Waiter\nactor \"Chef\" as Chef\nactor \"Manager\" as Manager\nactor \"Cashier\"\
+    \ as Cashier\n\nrectangle \"Restaurant Management System\" {\n  usecase \"Browse\
+    \ Menu\" as UC1\n  usecase \"Place Order\" as UC2\n  usecase \"Validate Order\
+    \ Items\" as UC3\n  usecase \"Prepare Meal\" as UC4\n  usecase \"Serve Order\"\
+    \ as UC5\n  usecase \"Process Payment\" as UC6\n  usecase \"Manage Menu\" as UC7\n\
+    \  usecase \"View Sales Reports\" as UC8\n  usecase \"Make Reservation\" as UC9\n\
+    \  usecase \"Manage Staff Schedule\" as UC10\n  usecase \"Handle Customer Complaint\"\
+    \ as UC11\n  usecase \"Update Inventory\" as UC12\n  usecase \"Apply Discount\"\
+    \ as UC13\n}\n\nCustomer -- UC1\nCustomer -- UC2\nCustomer -- UC9\nWaiter -- UC2\n\
+    Waiter -- UC5\nWaiter -- UC11\nChef -- UC4\nChef -- UC12\nCashier -- UC6\nCashier\
+    \ -- UC13\nManager -- UC7\nManager -- UC8\nManager -- UC10\n\nUC2 ..> UC3 : <<include>>\n\
+    UC6 ..> UC13 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Order (UC2)\",\n\
+    \            \"Validate Order Items (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Order Items' (UC3) is included by 'Place Order' (UC2), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Place Order' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Place Order' via the\
+    \ include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

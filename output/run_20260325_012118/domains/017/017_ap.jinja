@@ -1,0 +1,68 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Patient" as Patient
+actor "Doctor" as Doctor
+actor "Receptionist" as Receptionist
+actor "Nurse" as Nurse
+
+rectangle "Medical Clinic System" {
+  usecase "Schedule Appointment" as UC1
+  usecase "Check Available Slots" as UC2
+  usecase "Conduct Consultation" as UC3
+  usecase "Prescribe Medication" as UC4
+  usecase "Validate Prescription" as UC5
+  usecase "Register Patient" as UC6
+  usecase "Record Vitals" as UC7
+  usecase "View Medical History" as UC8
+  usecase "Cancel Appointment" as UC9
+  usecase "Generate Invoice" as UC10
+  usecase "Request Lab Test" as UC11
+}
+
+Patient -- UC1
+Patient -- UC9
+Patient -- UC8
+Receptionist -- UC1
+Receptionist -- UC2
+Receptionist -- UC6
+Receptionist -- UC9
+Receptionist -- UC10
+Doctor -- UC3
+Doctor -- UC4
+Doctor -- UC8
+Doctor -- UC11
+Nurse -- UC7
+
+UC1 ..> UC2 : <<include>>
+UC4 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Prescribe Medication (UC4)",
+            "Validate Prescription (UC5)"
+          ],
+          "explanation": "'Validate Prescription' (UC5) is included by 'Prescribe Medication' (UC4), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Prescribe Medication' rather than a standalone service observable to any actor, making it a functional decomposition of 'Prescribe Medication' via the include relationship."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+metadata:
+  domain_id: 94
+  domain: municipal_waste_management
+  domain_display: Municipal Waste Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:57:50.966910'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Resident\" as Resident\nactor \"Waste Collector\"\
+    \ as Collector\nactor \"Recycling Officer\" as RecyclingOfficer\nactor \"Fleet\
+    \ Manager\" as FleetManager\nactor \"City Administrator\" as CityAdmin\n\nrectangle\
+    \ \"Municipal Waste Management System\" {\n  usecase \"Submit Waste Complaint\"\
+    \ as UC1\n  usecase \"Schedule Waste Pickup\" as UC3\n  usecase \"Record Collection\
+    \ Completion\" as UC5\n  usecase \"Sort Recyclable Materials\" as UC6\n  usecase\
+    \ \"Generate Recycling Report\" as UC7\n  usecase \"Manage Collection Fleet\"\
+    \ as UC8\n  usecase \"Request Special Pickup\" as UC9\n  usecase \"View Collection\
+    \ Schedule\" as UC10\n  usecase \"Register Recycling Drop-off\" as UC11\n  usecase\
+    \ \"Monitor Landfill Capacity\" as UC12\n  usecase \"Assign Collection Zones\"\
+    \ as UC13\n}\n\nResident -- UC1\nResident -- UC9\nResident -- UC10\nCollector\
+    \ -- UC5\nCollector -- UC3\nRecyclingOfficer -- UC6\nRecyclingOfficer -- UC7\n\
+    RecyclingOfficer -- UC11\nFleetManager -- UC8\nCityAdmin -- UC12\nCityAdmin --\
+    \ UC13\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

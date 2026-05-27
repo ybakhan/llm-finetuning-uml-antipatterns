@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+
+actor "Dispatcher" as Dispatcher
+actor "Caller" as Caller
+actor "Field Unit" as FieldUnit
+actor "Supervisor" as Supervisor
+
+rectangle "Emergency Dispatch System" {
+  usecase "Receive Emergency Call" as UC1
+  usecase "Validate Caller Information" as UC2
+  usecase "Classify Emergency Type" as UC3
+  usecase "Dispatch Field Unit" as UC4
+  usecase "Track Unit Location" as UC5
+  usecase "Update Incident Status" as UC6
+  usecase "Report On Scene" as UC7
+  usecase "Request Backup" as UC8
+  usecase "Review Dispatch Logs" as UC9
+  usecase "Manage Unit Roster" as UC10
+  usecase "Close Incident" as UC11
+  usecase "Generate Shift Report" as UC12
+}
+
+Caller -- UC1
+Dispatcher -- UC1
+Dispatcher -- UC4
+Dispatcher -- UC5
+Dispatcher -- UC6
+Dispatcher -- UC11
+FieldUnit -- UC7
+FieldUnit -- UC8
+Supervisor -- UC9
+Supervisor -- UC10
+Supervisor -- UC12
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml

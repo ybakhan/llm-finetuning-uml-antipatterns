@@ -1,0 +1,44 @@
+metadata:
+  domain_id: 49
+  domain: supply_chain_management
+  domain_display: Supply Chain Management
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Place Purchase Order (UC2)
+      - Validate Order Details (UC4)
+      explanation: '''Validate Order Details'' (UC4) is included by ''Place Purchase
+        Order'' (UC2), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Place Purchase
+        Order'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Place Purchase Order'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 10
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:39:25.358510'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Warehouse Manager\" as WM\nactor \"Supplier\"\
+    \ as SUP\n\nrectangle \"Supply Chain Management System\" {\n  usecase \"Track\
+    \ Inventory\" as UC1\n  usecase \"Place Purchase Order\" as UC2\n  usecase \"\
+    Confirm Shipment\" as UC3\n  usecase \"Validate Order Details\" as UC4\n  usecase\
+    \ \"Receive Goods\" as UC5\n}\n\nWM -- UC1\nWM -- UC2\nWM -- UC5\nSUP -- UC3\n\
+    \nUC2 ..> UC4 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Place Purchase Order\
+    \ (UC2)\",\n            \"Validate Order Details (UC4)\"\n          ],\n     \
+    \     \"explanation\": \"'Validate Order Details' (UC4) is included by 'Place\
+    \ Purchase Order' (UC2), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Place\
+    \ Purchase Order' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Place Purchase Order' via the include relationship.\"\
+    \n        }\n      ]\n    }\n  ]\n}"

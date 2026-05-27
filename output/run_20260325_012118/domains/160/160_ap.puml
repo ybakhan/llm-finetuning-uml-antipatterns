@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Staff" as Staff
+actor "Admin" as Admin
+
+rectangle "Escape Room Booking System" {
+  usecase "Browse Available Rooms" as UC1
+  usecase "Book Escape Room" as UC2
+  usecase "Validate Time Slot" as UC3
+  usecase "Cancel Booking" as UC4
+  usecase "Request Refund" as UC5
+  usecase "Check In Group" as UC6
+  usecase "Leave Review" as UC7
+  usecase "Apply Promo Code" as UC8
+  usecase "Manage Room Inventory" as UC9
+  usecase "View Booking Reports" as UC10
+  usecase "Manage Staff Schedule" as UC11
+  usecase "View Customer Feedback" as UC12
+  usecase "Reschedule Booking" as UC13
+}
+
+Customer -- UC1
+Customer -- UC2
+Customer -- UC4
+Customer -- UC5
+Customer -- UC7
+Customer -- UC13
+
+Staff -- UC6
+Staff -- UC5
+
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+Admin -- UC12
+
+UC2 ..> UC3 : <<include>>
+UC8 ..> UC2 : <<extend>>
+UC5 ..> UC4 : <<extend>>
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Mentor" as Mentor
+actor "Mentee" as Mentee
+actor "Platform Admin" as Admin
+
+rectangle "Mentorship Platform" {
+  usecase "Create Mentor Profile" as UC1
+  usecase "Search for Mentor" as UC4
+  usecase "Request Mentorship Session" as UC6
+  usecase "Conduct Video Session" as UC8
+  usecase "Submit Session Feedback" as UC9
+  usecase "Browse Learning Resources" as UC10
+  usecase "Track Mentee Progress" as UC11
+  usecase "Manage Platform Users" as UC12
+  usecase "Generate Analytics Report" as UC13
+  usecase "Set Availability Schedule" as UC14
+  usecase "View Mentor Recommendations" as UC15
+  usecase "Cancel Mentorship Session" as UC16
+}
+
+Mentor -- UC1
+Mentor -- UC8
+Mentor -- UC9
+Mentor -- UC14
+Mentor -- UC11
+
+Mentee -- UC4
+Mentee -- UC6
+Mentee -- UC8
+Mentee -- UC9
+Mentee -- UC10
+Mentee -- UC15
+Mentee -- UC16
+
+Admin -- UC12
+Admin -- UC13
+@enduml

@@ -1,0 +1,53 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor Photographer as P
+actor Viewer as V
+actor Administrator as A
+
+rectangle "Digital Photography Platform" {
+  usecase "Upload Photo" as UC1
+  usecase "Browse Gallery" as UC4
+  usecase "Search Photos" as UC5
+  usecase "Download Photo" as UC7
+  usecase "Rate Photo" as UC8
+  usecase "Comment on Photo" as UC9
+  usecase "Create Album" as UC10
+  usecase "Moderate Content" as UC11
+  usecase "Manage User Accounts" as UC12
+  usecase "View Photo Details" as UC13
+}
+
+P -- UC1
+P -- UC10
+P -- UC4
+P -- UC13
+V -- UC4
+V -- UC5
+V -- UC7
+V -- UC8
+V -- UC9
+V -- UC13
+A -- UC11
+A -- UC12
+
+UC4 ..> UC13 : <<include>>
+}
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

@@ -1,0 +1,43 @@
+metadata:
+  domain_id: 120
+  domain: crowdfunding_platform
+  domain_display: Crowdfunding Platform
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Back Project (UC2)
+      - Validate Payment Details (UC3)
+      explanation: '''Validate Payment Details'' is included by ''Back Project'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Back Project'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Back Project'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 9
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:08:10.382442'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Backer\" as Backer\nactor \"Project Creator\"\
+    \ as Creator\n\nrectangle \"Crowdfunding Platform\" {\n  usecase \"Browse Projects\"\
+    \ as UC1\n  usecase \"Back Project\" as UC2\n  usecase \"Validate Payment Details\"\
+    \ as UC3\n  usecase \"Create Campaign\" as UC4\n}\n\nBacker -- UC1\nBacker --\
+    \ UC2\nUC2 ..> UC3 : <<include>>\nCreator -- UC4\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Back Project (UC2)\"\
+    ,\n            \"Validate Payment Details (UC3)\"\n          ],\n          \"\
+    explanation\": \"'Validate Payment Details' is included by 'Back Project', has\
+    \ no direct actor association, does not include or extend any other use case,\
+    \ is not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Back Project' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Back\
+    \ Project' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

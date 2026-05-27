@@ -1,0 +1,62 @@
+metadata:
+  domain_id: 108
+  domain: kindergarten_management_system
+  domain_display: Kindergarten Management System
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 2
+    instances:
+    - elements:
+      - Record Attendance (UC1)
+      - Mark Child Present (UC2)
+      explanation: '''Mark Child Present'' is included by ''Record Attendance'', has
+        no direct actor association, does not include or extend any other use case,
+        is not extended by any use case, and is not part of any generalisation hierarchy.
+        It represents an internal sub-step of ''Record Attendance'' rather than a
+        standalone service observable to any actor, making it a functional decomposition
+        of ''Record Attendance'' via the include relationship.'
+    - elements:
+      - Record Attendance (UC1)
+      - Save Attendance Entry (UC3)
+      explanation: '''Save Attendance Entry'' is included by ''Record Attendance'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Record Attendance'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Record Attendance'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 12
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:03:20.383091'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Teacher\" as Teacher\nactor \"Parent\" as Parent\n\
+    \nrectangle \"Kindergarten Management System\" {\n  usecase \"Record Attendance\"\
+    \ as UC1\n  usecase \"Mark Child Present\" as UC2\n  usecase \"Save Attendance\
+    \ Entry\" as UC3\n  usecase \"View Child Progress\" as UC4\n  usecase \"Send Notification\
+    \ to Parent\" as UC5\n  usecase \"Register Child\" as UC6\n}\n\nTeacher -- UC1\n\
+    Teacher -- UC5\nParent -- UC4\nParent -- UC6\n\nUC1 ..> UC2 : <<include>>\nUC1\
+    \ ..> UC3 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Record Attendance (UC1)\"\
+    ,\n            \"Mark Child Present (UC2)\"\n          ],\n          \"explanation\"\
+    : \"'Mark Child Present' is included by 'Record Attendance', has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Record Attendance' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Record Attendance'\
+    \ via the include relationship.\"\n        },\n        {\n          \"elements\"\
+    : [\n            \"Record Attendance (UC1)\",\n            \"Save Attendance Entry\
+    \ (UC3)\"\n          ],\n          \"explanation\": \"'Save Attendance Entry'\
+    \ is included by 'Record Attendance', has no direct actor association, does not\
+    \ include or extend any other use case, is not extended by any use case, and is\
+    \ not part of any generalisation hierarchy. It represents an internal sub-step\
+    \ of 'Record Attendance' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Record Attendance' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

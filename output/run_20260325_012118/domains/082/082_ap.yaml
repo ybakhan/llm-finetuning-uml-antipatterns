@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 82
+  domain: electric_vehicle_charging_network
+  domain_display: Electric Vehicle Charging Network
+  size: small
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Start Charging Session (UC1)
+      - Validate Payment Method (UC2)
+      explanation: '''Validate Payment Method'' (UC2) is included by ''Start Charging
+        Session'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Start Charging
+        Session'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Start Charging Session'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:07:19.393944'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"EV Driver\" as Driver\nactor \"Network Operator\"\
+    \ as Operator\n\nrectangle \"Electric Vehicle Charging Network\" {\n  usecase\
+    \ \"Start Charging Session\" as UC1\n  usecase \"Validate Payment Method\" as\
+    \ UC2\n  usecase \"View Charging History\" as UC3\n  usecase \"Monitor Station\
+    \ Status\" as UC4\n  usecase \"Set Pricing Plan\" as UC5\n  usecase \"Report Station\
+    \ Fault\" as UC6\n}\n\nDriver -- UC1\nUC1 ..> UC2 : <<include>>\nDriver -- UC3\n\
+    Driver -- UC6\nOperator -- UC4\nOperator -- UC5\nOperator -- UC6\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Start Charging Session\
+    \ (UC1)\",\n            \"Validate Payment Method (UC2)\"\n          ],\n    \
+    \      \"explanation\": \"'Validate Payment Method' (UC2) is included by 'Start\
+    \ Charging Session' (UC1), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Start\
+    \ Charging Session' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Start Charging Session' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

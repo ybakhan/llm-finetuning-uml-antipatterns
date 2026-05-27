@@ -1,0 +1,29 @@
+metadata:
+  domain_id: 78
+  domain: sports_league_management
+  domain_display: Sports League Management
+  size: medium
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T01:51:01.452439'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"League Administrator\" as Admin\nactor \"Team\
+    \ Manager\" as Manager\nactor \"Referee\" as Referee\nactor \"Fan\" as Fan\n\n\
+    rectangle \"Sports League Management System\" {\n  usecase \"Register Team\" as\
+    \ UC1\n  usecase \"Schedule Match\" as UC2\n  usecase \"Record Match Result\"\
+    \ as UC3\n  usecase \"Update League Standings\" as UC4\n  usecase \"Assign Referee\
+    \ to Match\" as UC5\n  usecase \"Submit Lineup\" as UC6\n  usecase \"View League\
+    \ Standings\" as UC7\n  usecase \"View Match Schedule\" as UC8\n  usecase \"Manage\
+    \ Player Transfers\" as UC9\n  usecase \"Report Disciplinary Action\" as UC10\n\
+    \  usecase \"Generate Season Report\" as UC11\n  usecase \"Purchase Season Tickets\"\
+    \ as UC12\n}\n\nAdmin -- UC1\nAdmin -- UC2\nAdmin -- UC4\nAdmin -- UC5\nAdmin\
+    \ -- UC11\n\nReferee -- UC3\nReferee -- UC10\n\nManager -- UC6\nManager -- UC9\n\
+    \nFan -- UC7\nFan -- UC8\nFan -- UC12\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

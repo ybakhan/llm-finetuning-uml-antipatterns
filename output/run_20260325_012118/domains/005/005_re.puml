@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+
+actor "User" as U1
+
+rectangle "Social Media Platform" {
+  usecase "Create Post" as UC1
+  usecase "View Feed" as UC2
+  usecase "Send Message" as UC3
+}
+
+U1 -- UC1
+U1 -- UC2
+U1 -- UC3
+@enduml

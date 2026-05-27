@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+
+actor "Teacher" as Teacher
+actor "Parent" as Parent
+
+rectangle "Kindergarten Management System" {
+  usecase "Record Attendance" as UC1
+  usecase "Mark Child Present" as UC2
+  usecase "Save Attendance Entry" as UC3
+  usecase "View Child Progress" as UC4
+  usecase "Send Notification to Parent" as UC5
+  usecase "Register Child" as UC6
+}
+
+Teacher -- UC1
+Teacher -- UC5
+Parent -- UC4
+Parent -- UC6
+
+UC1 ..> UC2 : <<include>>
+UC1 ..> UC3 : <<include>>
+@enduml

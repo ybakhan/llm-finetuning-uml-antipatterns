@@ -1,0 +1,50 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Retail Trader" as RT
+actor "Institutional Trader" as IT
+actor "Compliance Officer" as CO
+actor "Market Data Provider" as MDP
+
+rectangle "Stock Trading Platform" {
+  usecase "Place Market Order" as UC1
+  usecase "Place Limit Order" as UC4
+  usecase "View Portfolio" as UC6
+  usecase "Execute Block Trade" as UC7
+  usecase "Monitor Compliance" as UC9
+  usecase "Generate Audit Report" as UC10
+  usecase "Receive Market Feed" as UC11
+  usecase "Set Price Alert" as UC12
+  usecase "Cancel Order" as UC13
+  usecase "View Trade History" as UC14
+}
+
+RT -- UC1
+RT -- UC4
+RT -- UC6
+RT -- UC12
+RT -- UC13
+RT -- UC14
+IT -- UC7
+IT -- UC6
+CO -- UC9
+CO -- UC10
+MDP -- UC11
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

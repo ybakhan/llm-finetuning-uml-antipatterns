@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+
+actor "Passenger" as Passenger
+actor "Travel Agent" as TravelAgent
+actor "Cruise Administrator" as Admin
+actor "Payment Gateway" as PaymentGW
+
+rectangle "Cruise Booking System" {
+  usecase "Search Available Cruises" as UC1
+  usecase "Book Cruise" as UC2
+  usecase "Select Cabin" as UC3
+  usecase "Process Payment" as UC4
+  usecase "Cancel Booking" as UC5
+  usecase "Apply Discount Code" as UC6
+  usecase "Manage Cruise Itineraries" as UC7
+  usecase "View Booking History" as UC8
+  usecase "Manage Passenger Manifest" as UC9
+  usecase "Request Shore Excursion" as UC10
+  usecase "Validate Passenger Details" as UC11
+  usecase "Update Passenger Profile" as UC12
+  usecase "Add Travel Insurance" as UC13
+}
+
+Passenger -- UC1
+Passenger -- UC2
+Passenger -- UC5
+Passenger -- UC8
+Passenger -- UC10
+Passenger -- UC12
+Passenger -- UC13
+
+TravelAgent -- UC1
+TravelAgent -- UC2
+TravelAgent -- UC6
+
+Admin -- UC7
+Admin -- UC9
+
+PaymentGW -- UC4
+
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC2 ..> UC11 : <<include>>
+@enduml

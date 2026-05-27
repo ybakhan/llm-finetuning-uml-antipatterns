@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+
+actor "Editor" as Editor
+actor "Reader" as Reader
+
+rectangle "News Publishing System" {
+  usecase "Write Article" as UC1
+  usecase "Review Article" as UC2
+  usecase "Publish Article" as UC3
+  usecase "Browse News" as UC4
+  usecase "Search Articles" as UC5
+}
+
+Editor -- UC1
+Editor -- UC2
+Editor -- UC3
+Reader -- UC4
+Reader -- UC5
+@enduml

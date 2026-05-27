@@ -1,0 +1,89 @@
+metadata:
+  domain_id: 183
+  domain: forest_fire_detection_system
+  domain_display: Forest Fire Detection System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Monitor Forest Zones (UC1)
+      - Validate Sensor Reading (UC12)
+      explanation: '''Validate Sensor Reading'' (UC12) is included by ''Monitor Forest
+        Zones'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Monitor
+        Forest Zones'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Monitor Forest Zones'' via the include
+        relationship.'
+    - elements:
+      - Monitor Forest Zones (UC1)
+      - Calculate Fire Risk Score (UC13)
+      explanation: '''Calculate Fire Risk Score'' (UC13) is included by ''Monitor
+        Forest Zones'' (UC1), has no direct actor association, does not include or
+        extend any other use case, is not extended by any use case, and is not part
+        of any generalisation hierarchy. It represents an internal sub-step of ''Monitor
+        Forest Zones'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Monitor Forest Zones'' via the include
+        relationship.'
+    - elements:
+      - Submit Weather Forecast (UC8)
+      - Parse Weather Data (UC14)
+      explanation: '''Parse Weather Data'' (UC14) is included by ''Submit Weather
+        Forecast'' (UC8), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Submit Weather
+        Forecast'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Submit Weather Forecast'' via the include
+        relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:52:02.305350'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Park Ranger\" as Ranger\nactor \"System Administrator\"\
+    \ as Admin\nactor \"Emergency Dispatcher\" as Dispatcher\nactor \"Meteorologist\"\
+    \ as Meteo\n\nrectangle \"Forest Fire Detection System\" {\n  usecase \"Monitor\
+    \ Forest Zones\" as UC1\n  usecase \"Generate Fire Alert\" as UC2\n  usecase \"\
+    Dispatch Emergency Team\" as UC3\n  usecase \"View Fire Risk Map\" as UC4\n  usecase\
+    \ \"Configure Alert Thresholds\" as UC5\n  usecase \"Manage Sensor Network\" as\
+    \ UC6\n  usecase \"Review Historical Data\" as UC7\n  usecase \"Submit Weather\
+    \ Forecast\" as UC8\n  usecase \"Acknowledge Alert\" as UC9\n  usecase \"Generate\
+    \ Incident Report\" as UC10\n  usecase \"Validate Sensor Reading\" as UC12\n \
+    \ usecase \"Calculate Fire Risk Score\" as UC13\n  usecase \"Parse Weather Data\"\
+    \ as UC14\n}\n\nRanger -- UC1\nRanger -- UC4\nRanger -- UC9\nRanger -- UC10\n\
+    Dispatcher -- UC2\nDispatcher -- UC3\nAdmin -- UC5\nAdmin -- UC6\nMeteo -- UC8\n\
+    Meteo -- UC7\n\nUC1 ..> UC12 : <<include>>\nUC1 ..> UC13 : <<include>>\nUC8 ..>\
+    \ UC14 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Monitor Forest Zones\
+    \ (UC1)\",\n            \"Validate Sensor Reading (UC12)\"\n          ],\n   \
+    \       \"explanation\": \"'Validate Sensor Reading' (UC12) is included by 'Monitor\
+    \ Forest Zones' (UC1), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Monitor Forest\
+    \ Zones' rather than a standalone service observable to any actor, making it a\
+    \ functional decomposition of 'Monitor Forest Zones' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Monitor Forest\
+    \ Zones (UC1)\",\n            \"Calculate Fire Risk Score (UC13)\"\n         \
+    \ ],\n          \"explanation\": \"'Calculate Fire Risk Score' (UC13) is included\
+    \ by 'Monitor Forest Zones' (UC1), has no direct actor association, does not include\
+    \ or extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Monitor\
+    \ Forest Zones' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Monitor Forest Zones' via the include relationship.\"\
+    \n        },\n        {\n          \"elements\": [\n            \"Submit Weather\
+    \ Forecast (UC8)\",\n            \"Parse Weather Data (UC14)\"\n          ],\n\
+    \          \"explanation\": \"'Parse Weather Data' (UC14) is included by 'Submit\
+    \ Weather Forecast' (UC8), has no direct actor association, does not include or\
+    \ extend any other use case, is not extended by any use case, and is not part\
+    \ of any generalisation hierarchy. It represents an internal sub-step of 'Submit\
+    \ Weather Forecast' rather than a standalone service observable to any actor,\
+    \ making it a functional decomposition of 'Submit Weather Forecast' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

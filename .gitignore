@@ -1,0 +1,27 @@
+# Environment
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE / OS
+.vscode/
+.claude/
+.DS_Store
+
+# Internal run artifacts
+output/run_*/samples_generate_state.json
+output/run_*/samples_generate.log
+output/run_*/samples_review.json
+output/run_*/results_analyze.md
+output/run_*/finetune_eval_*.jsonl
+output/run_*/results_review_*.json
+output/run_*/samples_stats.csv
+output/run_*/samples.yaml
+
+# Docs
+docs/
+
+# Trained model weights (too large)
+trained_adapter/

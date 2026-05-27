@@ -1,0 +1,46 @@
+metadata:
+  domain_id: 38
+  domain: telemedicine_system
+  domain_display: Telemedicine System
+  size: small
+  antipatterns_detected:
+  - antipattern_name: 'Functional Decomposition: Using the include relationship'
+    instance_count: 1
+    instances:
+    - elements:
+      - Conduct Video Consultation (UC2)
+      - Validate Patient Identity (UC5)
+      explanation: '''Validate Patient Identity'' is included by ''Conduct Video Consultation'',
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Conduct Video Consultation''
+        rather than a standalone service observable to any actor, making it a functional
+        decomposition of ''Conduct Video Consultation'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 13
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:51:08.313558'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Patient\" as Patient\nactor \"Doctor\" as Doctor\n\
+    \nrectangle \"Telemedicine System\" {\n  usecase \"Schedule Appointment\" as UC1\n\
+    \  usecase \"Conduct Video Consultation\" as UC2\n  usecase \"View Medical Records\"\
+    \ as UC3\n  usecase \"Write Prescription\" as UC4\n  usecase \"Validate Patient\
+    \ Identity\" as UC5\n  usecase \"Request Prescription Refill\" as UC6\n}\n\nPatient\
+    \ -- UC1\nPatient -- UC2\nPatient -- UC3\nPatient -- UC6\nDoctor -- UC2\nDoctor\
+    \ -- UC3\nDoctor -- UC4\n\nUC2 ..> UC5 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 1,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 1,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Conduct Video Consultation\
+    \ (UC2)\",\n            \"Validate Patient Identity (UC5)\"\n          ],\n  \
+    \        \"explanation\": \"'Validate Patient Identity' is included by 'Conduct\
+    \ Video Consultation', has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Conduct Video\
+    \ Consultation' rather than a standalone service observable to any actor, making\
+    \ it a functional decomposition of 'Conduct Video Consultation' via the include\
+    \ relationship.\"\n        }\n      ]\n    }\n  ]\n}"

@@ -1,0 +1,54 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "EV Driver" as Driver
+actor "Network Operator" as Operator
+
+rectangle "Electric Vehicle Charging Network" {
+  usecase "Start Charging Session" as UC1
+  usecase "Validate Payment Method" as UC2
+  usecase "View Charging History" as UC3
+  usecase "Monitor Station Status" as UC4
+  usecase "Set Pricing Plan" as UC5
+  usecase "Report Station Fault" as UC6
+}
+
+Driver -- UC1
+UC1 ..> UC2 : <<include>>
+Driver -- UC3
+Driver -- UC6
+Operator -- UC4
+Operator -- UC5
+Operator -- UC6
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Start Charging Session (UC1)",
+            "Validate Payment Method (UC2)"
+          ],
+          "explanation": "'Validate Payment Method' (UC2) is included by 'Start Charging Session' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Start Charging Session' rather than a standalone service observable to any actor, making it a functional decomposition of 'Start Charging Session' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

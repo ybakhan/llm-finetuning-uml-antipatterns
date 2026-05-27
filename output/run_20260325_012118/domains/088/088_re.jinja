@@ -1,0 +1,36 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Shopper" as Shopper
+actor "Sale Admin" as Admin
+
+rectangle "Flash Sale Platform" {
+  usecase "Browse Active Sales" as UC1
+  usecase "Purchase Deal" as UC2
+  usecase "Create Flash Sale" as UC4
+  usecase "View Sales Analytics" as UC5
+}
+
+Shopper -- UC1
+Shopper -- UC2
+Admin -- UC4
+Admin -- UC5
+
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

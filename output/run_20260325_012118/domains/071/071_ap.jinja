@@ -1,0 +1,82 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Property Manager" as PM
+actor "Tenant" as T
+actor "Maintenance Staff" as MS
+actor "Owner" as OW
+
+rectangle "Property Management System" {
+  usecase "List Property" as UC1
+  usecase "Validate Property Details" as UC1a
+  usecase "Sign Lease Agreement" as UC2
+  usecase "Collect Rent" as UC3
+  usecase "Generate Rent Invoice" as UC3a
+  usecase "Submit Maintenance Request" as UC4
+  usecase "Assign Maintenance Task" as UC5
+  usecase "Complete Maintenance Task" as UC6
+  usecase "View Property Portfolio" as UC7
+  usecase "Generate Financial Report" as UC8
+  usecase "Screen Tenant Application" as UC9
+  usecase "Schedule Property Inspection" as UC10
+  usecase "Send Lease Renewal Notice" as UC11
+  usecase "Track Expenses" as UC12
+}
+
+PM -- UC1
+UC1 ..> UC1a : <<include>>
+PM -- UC2
+PM -- UC3
+UC3 ..> UC3a : <<include>>
+PM -- UC5
+PM -- UC9
+PM -- UC10
+PM -- UC11
+PM -- UC12
+
+T -- UC2
+T -- UC4
+
+MS -- UC6
+
+OW -- UC7
+OW -- UC8
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 2,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 2,
+      "instances": [
+        {
+          "elements": [
+            "List Property (UC1)",
+            "Validate Property Details (UC1a)"
+          ],
+          "explanation": "'Validate Property Details' (UC1a) is included by 'List Property' (UC1), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'List Property' rather than a standalone service observable to any actor, making it a functional decomposition of 'List Property' via the include relationship."
+        },
+        {
+          "elements": [
+            "Collect Rent (UC3)",
+            "Generate Rent Invoice (UC3a)"
+          ],
+          "explanation": "'Generate Rent Invoice' (UC3a) is included by 'Collect Rent' (UC3), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Collect Rent' rather than a standalone service observable to any actor, making it a functional decomposition of 'Collect Rent' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

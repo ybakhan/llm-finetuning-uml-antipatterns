@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 140
+  domain: e_book_publishing_system
+  domain_display: E-Book Publishing System
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-25T02:15:52.512085'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Author\" as Author\nactor \"Reader\" as Reader\n\
+    \nrectangle \"E-Book Publishing System\" {\n  usecase \"Upload Manuscript\" as\
+    \ UC1\n  usecase \"Browse Catalog\" as UC3\n  usecase \"Purchase E-Book\" as UC4\n\
+    \  usecase \"Download E-Book\" as UC5\n}\n\nAuthor -- UC1\nReader -- UC3\nReader\
+    \ -- UC4\nReader -- UC5\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

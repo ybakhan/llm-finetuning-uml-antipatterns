@@ -1,0 +1,68 @@
+metadata:
+  domain_id: 14
+  domain: e_learning_platform
+  domain_display: E-Learning Platform
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Take Quiz (UC4)
+      - Validate Quiz Answers (UC5)
+      explanation: '''Validate Quiz Answers'' (UC5) is included by ''Take Quiz'' (UC4),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Take Quiz'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Take Quiz'' via the include relationship.'
+    - elements:
+      - Take Quiz (UC4)
+      - Calculate Quiz Score (UC6)
+      explanation: '''Calculate Quiz Score'' (UC6) is included by ''Take Quiz'' (UC4),
+        has no direct actor association, does not include or extend any other use
+        case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Take Quiz'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Take Quiz'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 29
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T00:47:16.887829'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor Student\nactor Instructor\nactor Administrator\n\
+    \nrectangle \"E-Learning Platform\" {\n  usecase \"Browse Course Catalog\" as\
+    \ UC1\n  usecase \"Enroll in Course\" as UC2\n  usecase \"Watch Lecture\" as UC3\n\
+    \  usecase \"Take Quiz\" as UC4\n  usecase \"Validate Quiz Answers\" as UC5\n\
+    \  usecase \"Calculate Quiz Score\" as UC6\n  usecase \"Submit Assignment\" as\
+    \ UC7\n  usecase \"View Grades\" as UC8\n  usecase \"Create Course\" as UC9\n\
+    \  usecase \"Upload Lecture Content\" as UC10\n  usecase \"Grade Assignment\"\
+    \ as UC11\n  usecase \"Manage User Accounts\" as UC12\n  usecase \"Generate Platform\
+    \ Report\" as UC13\n  usecase \"Post Discussion Message\" as UC14\n  usecase \"\
+    Track Learning Progress\" as UC15\n}\n\nStudent -- UC1\nStudent -- UC2\nStudent\
+    \ -- UC3\nStudent -- UC4\nStudent -- UC7\nStudent -- UC8\nStudent -- UC14\nStudent\
+    \ -- UC15\n\nInstructor -- UC9\nInstructor -- UC10\nInstructor -- UC11\nInstructor\
+    \ -- UC14\n\nAdministrator -- UC12\nAdministrator -- UC13\n\nUC4 ..> UC5 : <<include>>\n\
+    UC4 ..> UC6 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Take Quiz (UC4)\",\n\
+    \            \"Validate Quiz Answers (UC5)\"\n          ],\n          \"explanation\"\
+    : \"'Validate Quiz Answers' (UC5) is included by 'Take Quiz' (UC4), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Take Quiz' rather than a standalone service observable\
+    \ to any actor, making it a functional decomposition of 'Take Quiz' via the include\
+    \ relationship.\"\n        },\n        {\n          \"elements\": [\n        \
+    \    \"Take Quiz (UC4)\",\n            \"Calculate Quiz Score (UC6)\"\n      \
+    \    ],\n          \"explanation\": \"'Calculate Quiz Score' (UC6) is included\
+    \ by 'Take Quiz' (UC4), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Take Quiz'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Take Quiz' via the include relationship.\"\n        }\n  \
+    \    ]\n    }\n  ]\n}"

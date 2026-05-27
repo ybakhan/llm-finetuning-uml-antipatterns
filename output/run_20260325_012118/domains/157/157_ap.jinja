@@ -1,0 +1,72 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Customer" as Customer
+actor "Therapist" as Therapist
+actor "Receptionist" as Receptionist
+actor "Manager" as Manager
+
+rectangle "Spa and Wellness Booking System" {
+  usecase "Browse Treatments" as UC1
+  usecase "Book Appointment" as UC2
+  usecase "Validate Time Slot" as UC3
+  usecase "Process Payment" as UC4
+  usecase "Cancel Appointment" as UC5
+  usecase "View Schedule" as UC6
+  usecase "Manage Treatment Catalog" as UC7
+  usecase "Record Client Preferences" as UC8
+  usecase "Check In Client" as UC9
+  usecase "Generate Revenue Report" as UC10
+  usecase "Leave Review" as UC11
+  usecase "Apply Discount Code" as UC12
+  usecase "Manage Staff Availability" as UC13
+  usecase "Request Membership" as UC14
+}
+
+Customer -- UC1
+Customer -- UC2
+UC2 ..> UC3 : <<include>>
+Customer -- UC4
+Customer -- UC5
+Customer -- UC11
+Customer -- UC14
+UC12 ..> UC2 : <<extend>>
+Therapist -- UC6
+Therapist -- UC8
+Receptionist -- UC9
+Receptionist -- UC4
+Manager -- UC7
+Manager -- UC10
+Manager -- UC13
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Book Appointment (UC2)",
+            "Validate Time Slot (UC3)"
+          ],
+          "explanation": "'Validate Time Slot' (UC3) is included by 'Book Appointment' (UC2), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Book Appointment' rather than a standalone service observable to any actor, making it a functional decomposition of 'Book Appointment' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

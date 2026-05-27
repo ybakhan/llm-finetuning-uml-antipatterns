@@ -1,0 +1,85 @@
+metadata:
+  domain_id: 125
+  domain: microfinance_system
+  domain_display: Microfinance System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Register Borrower (UC1)
+      - Validate Borrower Identity (UC13)
+      explanation: '''Validate Borrower Identity'' (UC13) is included by ''Register
+        Borrower'' (UC1), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Register
+        Borrower'' rather than a standalone service observable to any actor, making
+        it a functional decomposition of ''Register Borrower'' via the include relationship.'
+    - elements:
+      - Record Repayment (UC6)
+      - Calculate Interest (UC14)
+      explanation: '''Calculate Interest'' (UC14) is included by ''Record Repayment''
+        (UC6), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Record Repayment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Record Repayment'' via the include relationship.'
+    - elements:
+      - Record Repayment (UC6)
+      - Check Repayment Schedule (UC15)
+      explanation: '''Check Repayment Schedule'' (UC15) is included by ''Record Repayment''
+        (UC6), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Record Repayment'' rather
+        than a standalone service observable to any actor, making it a functional
+        decomposition of ''Record Repayment'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:15:25.285545'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Loan Officer\" as LO\nactor \"Borrower\" as\
+    \ BO\nactor \"Branch Manager\" as BM\nactor \"System Administrator\" as SA\n\n\
+    rectangle \"Microfinance System\" {\n  usecase \"Register Borrower\" as UC1\n\
+    \  usecase \"Apply for Loan\" as UC2\n  usecase \"Evaluate Creditworthiness\"\
+    \ as UC3\n  usecase \"Approve Loan\" as UC4\n  usecase \"Disburse Loan\" as UC5\n\
+    \  usecase \"Record Repayment\" as UC6\n  usecase \"View Loan Status\" as UC7\n\
+    \  usecase \"Generate Portfolio Report\" as UC8\n  usecase \"Manage Savings Account\"\
+    \ as UC9\n  usecase \"Send Payment Reminder\" as UC10\n  usecase \"Handle Loan\
+    \ Default\" as UC11\n  usecase \"Configure System Parameters\" as UC12\n  usecase\
+    \ \"Validate Borrower Identity\" as UC13\n  usecase \"Calculate Interest\" as\
+    \ UC14\n  usecase \"Check Repayment Schedule\" as UC15\n}\n\nLO -- UC1\nLO --\
+    \ UC2\nLO -- UC3\nLO -- UC6\nLO -- UC10\nBO -- UC2\nBO -- UC7\nBO -- UC9\nBM --\
+    \ UC4\nBM -- UC5\nBM -- UC8\nBM -- UC11\nSA -- UC12\n\nUC1 ..> UC13 : <<include>>\n\
+    UC6 ..> UC14 : <<include>>\nUC6 ..> UC15 : <<include>>\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 3,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 3,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Register Borrower (UC1)\"\
+    ,\n            \"Validate Borrower Identity (UC13)\"\n          ],\n         \
+    \ \"explanation\": \"'Validate Borrower Identity' (UC13) is included by 'Register\
+    \ Borrower' (UC1), has no direct actor association, does not include or extend\
+    \ any other use case, is not extended by any use case, and is not part of any\
+    \ generalisation hierarchy. It represents an internal sub-step of 'Register Borrower'\
+    \ rather than a standalone service observable to any actor, making it a functional\
+    \ decomposition of 'Register Borrower' via the include relationship.\"\n     \
+    \   },\n        {\n          \"elements\": [\n            \"Record Repayment (UC6)\"\
+    ,\n            \"Calculate Interest (UC14)\"\n          ],\n          \"explanation\"\
+    : \"'Calculate Interest' (UC14) is included by 'Record Repayment' (UC6), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Record Repayment' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Record\
+    \ Repayment' via the include relationship.\"\n        },\n        {\n        \
+    \  \"elements\": [\n            \"Record Repayment (UC6)\",\n            \"Check\
+    \ Repayment Schedule (UC15)\"\n          ],\n          \"explanation\": \"'Check\
+    \ Repayment Schedule' (UC15) is included by 'Record Repayment' (UC6), has no direct\
+    \ actor association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Record Repayment' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Record Repayment'\
+    \ via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

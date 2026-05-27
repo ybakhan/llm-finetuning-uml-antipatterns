@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+
+actor "Instructor" as Instructor
+actor "Student" as Student
+
+rectangle "Exam Management System" {
+  usecase "Create Exam" as UC1
+  usecase "Take Exam" as UC2
+  usecase "Grade Exam" as UC3
+  usecase "View Results" as UC4
+  usecase "Validate Answers" as UC5
+}
+
+Instructor -- UC1
+Instructor -- UC3
+Student -- UC2
+Student -- UC4
+
+UC3 ..> UC5 : <<include>>
+@enduml

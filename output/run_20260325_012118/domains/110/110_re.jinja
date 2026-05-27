@@ -1,0 +1,48 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Student" as Student
+actor "Instructor" as Instructor
+actor "Administrator" as Admin
+
+rectangle "Plagiarism Detection System" {
+  usecase "Submit Document" as UC1
+  usecase "View Submission History" as UC3
+  usecase "Run Plagiarism Check" as UC4
+  usecase "Review Similarity Report" as UC7
+  usecase "Flag Submission" as UC8
+  usecase "Manage Source Database" as UC9
+  usecase "Configure Detection Thresholds" as UC10
+  usecase "Generate System Analytics" as UC11
+  usecase "Appeal Flagged Submission" as UC12
+  usecase "Manage User Accounts" as UC13
+}
+
+Student -- UC1
+Student -- UC3
+Instructor -- UC4
+Instructor -- UC7
+Instructor -- UC8
+Admin -- UC9
+Admin -- UC10
+Admin -- UC11
+Student -- UC12
+Admin -- UC13
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": false,
+  "total_antipattern_types": 0,
+  "total_instances": 0,
+  "antipatterns": []
+}
+```

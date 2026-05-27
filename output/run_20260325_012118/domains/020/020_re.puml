@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+
+actor "Student" as Student
+actor "Registrar" as Registrar
+
+rectangle "University Enrollment System" {
+  usecase "Browse Course Catalog" as UC1
+  usecase "Enroll in Course" as UC2
+  usecase "Drop Course" as UC4
+  usecase "Manage Course Offerings" as UC5
+}
+
+Student -- UC1
+Student -- UC2
+Student -- UC4
+Registrar -- UC5
+@enduml

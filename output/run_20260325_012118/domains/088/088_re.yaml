@@ -1,0 +1,22 @@
+metadata:
+  domain_id: 88
+  domain: flash_sale_platform
+  domain_display: Flash Sale Platform
+  size: small
+  antipatterns_detected: []
+  sample_type: refactored
+  task_mode: detect
+  construct_count: null
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:08:54.925517'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Shopper\" as Shopper\nactor \"Sale Admin\"\
+    \ as Admin\n\nrectangle \"Flash Sale Platform\" {\n  usecase \"Browse Active Sales\"\
+    \ as UC1\n  usecase \"Purchase Deal\" as UC2\n  usecase \"Create Flash Sale\"\
+    \ as UC4\n  usecase \"View Sales Analytics\" as UC5\n}\n\nShopper -- UC1\nShopper\
+    \ -- UC2\nAdmin -- UC4\nAdmin -- UC5\n\n@enduml"
+  output: "{\n  \"detected\": false,\n  \"total_antipattern_types\": 0,\n  \"total_instances\"\
+    : 0,\n  \"antipatterns\": []\n}"

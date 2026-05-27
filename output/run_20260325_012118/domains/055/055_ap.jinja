@@ -1,0 +1,55 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Pet Owner" as PO
+actor "Veterinarian" as VET
+actor "Receptionist" as REC
+
+rectangle "Veterinary Clinic System" {
+  usecase "Book Appointment" as UC1
+  usecase "Examine Pet" as UC2
+  usecase "Prescribe Medication" as UC3
+  usecase "Process Payment" as UC4
+  usecase "Validate Pet Records" as UC5
+}
+
+PO -- UC1
+PO -- UC4
+VET -- UC2
+VET -- UC3
+REC -- UC1
+REC -- UC4
+
+UC2 ..> UC5 : <<include>>
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Examine Pet (UC2)",
+            "Validate Pet Records (UC5)"
+          ],
+          "explanation": "'Validate Pet Records' is included by 'Examine Pet', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Examine Pet' rather than a standalone service observable to any actor, making it a functional decomposition of 'Examine Pet' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```

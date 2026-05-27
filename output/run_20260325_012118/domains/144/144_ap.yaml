@@ -1,0 +1,68 @@
+metadata:
+  domain_id: 144
+  domain: athlete_training_system
+  domain_display: Athlete Training System
+  size: medium
+  antipatterns_detected:
+  - name: 'Functional Decomposition: Using the include relationship'
+    instances:
+    - elements:
+      - Log Workout (UC2)
+      - Record Exercise Details (UC3)
+      explanation: '''Record Exercise Details'' (UC3) is included by ''Log Workout''
+        (UC2), has no direct actor association, does not include or extend any other
+        use case, is not extended by any use case, and is not part of any generalisation
+        hierarchy. It represents an internal sub-step of ''Log Workout'' rather than
+        a standalone service observable to any actor, making it a functional decomposition
+        of ''Log Workout'' via the include relationship.'
+    - elements:
+      - Create Training Plan (UC5)
+      - Schedule Rest Days (UC6)
+      explanation: '''Schedule Rest Days'' (UC6) is included by ''Create Training
+        Plan'' (UC5), has no direct actor association, does not include or extend
+        any other use case, is not extended by any use case, and is not part of any
+        generalisation hierarchy. It represents an internal sub-step of ''Create Training
+        Plan'' rather than a standalone service observable to any actor, making it
+        a functional decomposition of ''Create Training Plan'' via the include relationship.'
+  sample_type: antipattern
+  task_mode: detect
+  construct_count: 25
+  refactoring_rationale: ''
+  generated_at: '2026-03-26T01:18:16.682852'
+training_sample:
+  input: "Analyze the following PlantUML use case model and detect if it contains\
+    \ any antipatterns. Base your analysis solely on the model provided. Do not use\
+    \ any outside knowledge. Respond with a JSON object.\n\nPlantUML Model:\n@startuml\n\
+    left to right direction\n\nactor \"Athlete\" as Athlete\nactor \"Coach\" as Coach\n\
+    actor \"Nutritionist\" as Nutritionist\nactor \"Team Doctor\" as TeamDoctor\n\n\
+    rectangle \"Athlete Training System\" {\n  usecase \"View Training Schedule\"\
+    \ as UC1\n  usecase \"Log Workout\" as UC2\n  usecase \"Record Exercise Details\"\
+    \ as UC3\n  usecase \"Track Performance Metrics\" as UC4\n  usecase \"Create Training\
+    \ Plan\" as UC5\n  usecase \"Schedule Rest Days\" as UC6\n  usecase \"Assign Drills\
+    \ to Athlete\" as UC7\n  usecase \"Review Athlete Progress\" as UC8\n  usecase\
+    \ \"Create Nutrition Plan\" as UC9\n  usecase \"Log Dietary Intake\" as UC10\n\
+    \  usecase \"Record Injury\" as UC11\n  usecase \"Manage Recovery Program\" as\
+    \ UC12\n  usecase \"Generate Performance Report\" as UC13\n  usecase \"Set Training\
+    \ Goals\" as UC14\n}\n\nAthlete -- UC1\nAthlete -- UC2\nUC2 ..> UC3 : <<include>>\n\
+    Athlete -- UC4\nCoach -- UC5\nUC5 ..> UC6 : <<include>>\nCoach -- UC7\nCoach --\
+    \ UC8\nCoach -- UC13\nNutritionist -- UC9\nAthlete -- UC10\nTeamDoctor -- UC11\n\
+    TeamDoctor -- UC12\nAthlete -- UC14\n@enduml"
+  output: "{\n  \"detected\": true,\n  \"total_antipattern_types\": 1,\n  \"total_instances\"\
+    : 2,\n  \"antipatterns\": [\n    {\n      \"antipattern_name\": \"Functional Decomposition:\
+    \ Using the include relationship\",\n      \"instance_count\": 2,\n      \"instances\"\
+    : [\n        {\n          \"elements\": [\n            \"Log Workout (UC2)\",\n\
+    \            \"Record Exercise Details (UC3)\"\n          ],\n          \"explanation\"\
+    : \"'Record Exercise Details' (UC3) is included by 'Log Workout' (UC2), has no\
+    \ direct actor association, does not include or extend any other use case, is\
+    \ not extended by any use case, and is not part of any generalisation hierarchy.\
+    \ It represents an internal sub-step of 'Log Workout' rather than a standalone\
+    \ service observable to any actor, making it a functional decomposition of 'Log\
+    \ Workout' via the include relationship.\"\n        },\n        {\n          \"\
+    elements\": [\n            \"Create Training Plan (UC5)\",\n            \"Schedule\
+    \ Rest Days (UC6)\"\n          ],\n          \"explanation\": \"'Schedule Rest\
+    \ Days' (UC6) is included by 'Create Training Plan' (UC5), has no direct actor\
+    \ association, does not include or extend any other use case, is not extended\
+    \ by any use case, and is not part of any generalisation hierarchy. It represents\
+    \ an internal sub-step of 'Create Training Plan' rather than a standalone service\
+    \ observable to any actor, making it a functional decomposition of 'Create Training\
+    \ Plan' via the include relationship.\"\n        }\n      ]\n    }\n  ]\n}"

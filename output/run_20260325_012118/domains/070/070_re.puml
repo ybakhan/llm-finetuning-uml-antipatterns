@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+actor "Visitor" as V
+actor "Museum Staff" as MS
+actor "Group Coordinator" as GC
+actor "System Administrator" as SA
+
+rectangle "Museum Ticketing System" {
+  usecase "Purchase Ticket" as UC1
+  usecase "Browse Exhibitions" as UC3
+  usecase "Book Group Visit" as UC4
+  usecase "Cancel Reservation" as UC5
+  usecase "Validate Ticket" as UC6
+  usecase "Issue Refund" as UC7
+  usecase "Manage Exhibition Schedule" as UC8
+  usecase "Generate Sales Report" as UC9
+  usecase "Purchase Membership" as UC10
+  usecase "Reserve Audio Guide" as UC11
+  usecase "Manage Pricing" as UC12
+  usecase "Apply Discount" as UC13
+}
+
+V -- UC1
+V -- UC3
+V -- UC5
+V -- UC10
+V -- UC11
+GC -- UC4
+GC -- UC5
+MS -- UC6
+MS -- UC7
+SA -- UC8
+SA -- UC9
+SA -- UC12
+
+UC13 ..> UC1 : <<extend>>
+UC13 ..> UC4 : <<extend>>
+GC -- UC13
+@enduml

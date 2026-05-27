@@ -1,0 +1,49 @@
+Analyze the following PlantUML use case model and detect if it contains any antipatterns.
+Base your analysis solely on the model provided. Do not use any outside knowledge.
+Respond with a JSON object.
+
+
+PlantUML Model:
+@startuml
+left to right direction
+
+actor "Author" as Author
+actor "Reader" as Reader
+
+rectangle "Fan Fiction Community" {
+  usecase "Publish Story" as UC1
+  usecase "Validate Content" as UC2
+  usecase "Read Story" as UC3
+  usecase "Leave Review" as UC4
+}
+
+Author -- UC1
+UC1 ..> UC2 : <<include>>
+Reader -- UC3
+Reader -- UC4
+@enduml
+
+
+Answer:
+```json
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 1,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 1,
+      "instances": [
+        {
+          "elements": [
+            "Publish Story (UC1)",
+            "Validate Content (UC2)"
+          ],
+          "explanation": "'Validate Content' is included by 'Publish Story', has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Publish Story' rather than a standalone service observable to any actor, making it a functional decomposition of 'Publish Story' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
+```
