@@ -489,7 +489,11 @@ class TestReviewApp(tk.Tk):
                  font=("Helvetica", 11)).pack(side="right", padx=2)
         tk.Button(hdr, text="Next ▶", command=self._next, **_btn
                   ).pack(side="right", padx=3)
-        tk.Button(hdr, text="Next Unverified ▶▶", command=self._next_unverified, **_btn
+        tk.Button(hdr, text="Unverif ▶", command=self._next_unverified, **_btn
+                  ).pack(side="right", padx=3)
+        tk.Button(hdr, text="FP/FN ▶", command=self._next_fp_fn,
+                  bg=SURFACE, fg=RED, relief="flat", padx=6, pady=2,
+                  font=("Helvetica", 11, "bold"), cursor="hand2"
                   ).pack(side="right", padx=3)
         tk.Button(hdr, text="Go", command=self._jump, **_btn
                   ).pack(side="right", padx=3)
@@ -621,7 +625,7 @@ class TestReviewApp(tk.Tk):
         self._refresh_outcome_badge(self._effective_contribs(key), key)
 
         # Metadata
-        self._lbl_meta.config(text=f"sample_id: {key}")
+        self._lbl_meta.config(text=key)
 
         # PNG — stored so diagram popup can load it
         self._current_png = find_png(self._run_dir, rec["domain_id"], key) if self._run_dir else None
@@ -1186,6 +1190,26 @@ class TestReviewApp(tk.Tk):
                 self._show_current()
                 return
         messagebox.showinfo("All verified", "All samples are verified.")
+
+    def _next_fp_fn(self):
+        if not self.records:
+            return
+        self._persist()
+        for offset in range(1, len(self.records)):
+            idx = (self.current_idx + offset) % len(self.records)
+            rec = self.records[idx]
+            sid = rec["sample_id"]
+            contribs = self._effective_contribs(sid)
+            if not contribs:
+                checks   = self.notes.get(sid, {}).get("checks", {})
+                contribs = compute_contributions(
+                    rec.get("expected", ""), rec.get("predicted", ""), checks
+                )
+            if any(c in ("FP", "FN") for c in contribs):
+                self.current_idx = idx
+                self._show_current()
+                return
+        messagebox.showinfo("No FP/FN", "No samples with FP or FN found after this one.")
 
     def _jump(self):
         if not self.records:

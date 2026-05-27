@@ -7,7 +7,9 @@
       "FN"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FN - missed instance (Process Payment, Generate Receipt), which is involved in a chain of FD-includes (Complete Ride, Process Payment), (Process Payment, Generate Receipt).\n\nOther 3 instances are correct.",
+    "updated_at": "2026-05-27T16:57:28.635344"
   },
   "_metrics": {
     "n_verified": 78,
@@ -23,7 +25,7 @@
     "f1": 0.8395061728395062,
     "accuracy": 0.7936507936507936,
     "mcc": 0.5547001962252291,
-    "saved_at": "2026-05-27T05:16:22.955296"
+    "saved_at": "2026-05-27T16:03:05.835633"
   },
   "010_re_20260325_012118": {
     "contributions": [
@@ -60,14 +62,18 @@
       "FP",
       "TP"
     ],
-    "verified": true
+    "verified": true,
+    "text": "1 FP -  incorrectly predicted instance (Schedule Appointment, Check Available Slots) because \"Check Available Slots\" is a legitimate inclusion use case, which is directly accessed by actor \"Receptionist\". \n\nOther 1 predicted instance is correct.",
+    "updated_at": "2026-05-27T15:52:41.325541"
   },
   "017_re_20260325_012118": {
     "contributions": [
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - Same as the origninal version, for this refactored sample, the model incorrectly predicted 1 instance (Schedule Appointment, Check Available Slots) because \"Check Available Slots\" is a legitimate inclusion use case, which is directly accessed by actor \"Receptionist\". ",
+    "updated_at": "2026-05-27T15:52:58.066664"
   },
   "019_ap_20260325_012118": {
     "contributions": [
@@ -116,7 +122,9 @@
       "FP",
       "FN"
     ],
-    "verified": true
+    "verified": true,
+    "text": "1FP - wrongly predicted instance (\"Request Quote\", \"Assess Risk\"), where the elements have no relationship.\n\n1FN - missed instance (Assess Risk, Generate Risk Score), which is a standard FD-include case.\n\nOther 2 instances are correct.",
+    "updated_at": "2026-05-27T15:54:06.901783"
   },
   "025_re_20260325_012118": {
     "contributions": [
@@ -183,14 +191,18 @@
       "FP",
       "FN"
     ],
-    "verified": true
+    "verified": true,
+    "text": "1 FP - wrongly predicted instance (\"View Bug Dashboard\", \"Search Bugs\"), where the elements are not related.\n\n1 FN - missed instance (\"Generate Bug Report\", \"Export Report to PDF\"), which is a standard FD-include\n\nOther 2 instances are correct.",
+    "updated_at": "2026-05-27T15:55:02.890506"
   },
   "067_re_20260325_012118": {
     "contributions": [
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "HORRIBLE CASE\n1 FP - In this refactored sample, use case \"Report Bug\" is extended by \"Reopen Bug\", and it was predicted as base case of an FD-include instance.\n What is more bizzarre is that three use cases \"Update Bug Status\" \"Add Comment to Bug\" \"Resolve Bug\" which are not related to \"Report Bug\" were reported as the inclusion use cases of the FD-include instance. \n\n",
+    "updated_at": "2026-05-27T15:55:53.680134"
   },
   "068_ap_20260325_012118": {
     "contributions": [
@@ -228,14 +240,18 @@
       "TP",
       "TP"
     ],
-    "verified": true
+    "verified": true,
+    "text": "1 FP - wrongly predicted instance (Register for Conference, Process Payment) as FD-include despite \"Process Payment\" being accessed directly by actor \"Payment Gateway\".\n\nOther 3 instances are correct.",
+    "updated_at": "2026-05-27T15:56:15.590423"
   },
   "069_re_20260325_012118": {
     "contributions": [
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - this refactored sample, same as the original sample, wrongly predicted instance (Register for Conference, Process Payment) as FD-include despite \"Process Payment\" being accessed directly by actor \"Payment Gateway\"",
+    "updated_at": "2026-05-27T15:56:20.621535"
   },
   "070_ap_20260325_012118": {
     "contributions": [
@@ -243,7 +259,9 @@
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - wrongly predicted instance (Apply Discount, Book Group Visit) because \"Apply Discount\" extends \"Book Group Visit\".\n\nOther 1 instance is correct.",
+    "updated_at": "2026-05-27T15:57:06.011295"
   },
   "070_re_20260325_012118": {
     "contributions": [
@@ -254,7 +272,9 @@
       "FP",
       "FP"
     ],
-    "verified": true
+    "verified": true,
+    "text": "2 FP were reported.\nIn the first, this refactored sample, same as the original, wrongly predicted instance (Apply Discount, Book Group Visit) because \"Apply Discount\" extends \"Book Group Visit\"\n\nIn the second, wrong prediction, instance (Purchase Ticket, Validate Ticket) where \"Purchse Ticket\" is not related to  \"Validate Ticket\", and \"Purchse Ticket\" is extended by \"Apply Discount\"",
+    "updated_at": "2026-05-27T15:58:13.934492"
   },
   "074_ap_20260325_012118": {
     "contributions": [
@@ -292,7 +312,9 @@
       "FN"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FN - instance (Manage Cargo Loading, Verify Cargo Weight), which is a standard FD-include instance. \nOther 2 instances are correct.",
+    "updated_at": "2026-05-27T15:58:29.404558"
   },
   "083_re_20260325_012118": {
     "contributions": [
@@ -420,14 +442,18 @@
       "FP",
       "TP"
     ],
-    "verified": true
+    "verified": true,
+    "text": "1 FP - incorrectly predicted instance (Book Cruise, Process Payment) because \"Process Payment\" is accessed directly by actor \"Payment Gateway\".\n\n\nOther 2 instances are correct.",
+    "updated_at": "2026-05-27T15:59:27.949506"
   },
   "118_re_20260325_012118": {
     "contributions": [
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - this refactored sample, same as original sample, incorrectly predicted instance (Book Cruise, Process Payment) because \"Process Payment\" is accessed directly by actor \"Payment Gateway\".",
+    "updated_at": "2026-05-27T15:59:41.704332"
   },
   "119_ap_20260325_012118": {
     "contributions": [
@@ -437,7 +463,9 @@
       "FN"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FN - missed instance (Perform Underwriting, Evaluate Risk Score), which is a standard FD-include instance.",
+    "updated_at": "2026-05-27T15:59:52.354702"
   },
   "119_re_20260325_012118": {
     "contributions": [
@@ -507,7 +535,9 @@
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - in this refactored sample, wrongly predicted instance (Browse Gallery, View Photo Details) because \"View Photo Details\" is directly accessed by two actors \"Photographer\" and \"Viewer\"",
+    "updated_at": "2026-05-27T16:00:16.452833"
   },
   "145_ap_20260325_012118": {
     "contributions": [
@@ -539,7 +569,9 @@
     "checks": {
       "ap.Functional Decomposition: Using the include relationship.inst.2.explanation": "manual_ok"
     },
-    "verified": true
+    "verified": true,
+    "text": "1 FN - missed instance (Transfer Files, Encrypt File Data), which is standard FD-include instance.\n\n\n3 instance correctly predicted, of which two belong to a chain of FD-includes (Initiate Remote Session, Authenticate User), (Authenticate User, Verify Credentials).",
+    "updated_at": "2026-05-27T16:00:35.728283"
   },
   "154_re_20260325_012118": {
     "contributions": [
@@ -581,7 +613,9 @@
       "FN",
       "FN"
     ],
-    "verified": true
+    "verified": true,
+    "text": "This is the most bizzare case.\n\n2 FP were reported.\n\nThis first FP is instance (Enter Parking Lot, Raise Exit Barrier) because the elements are not related, and \"Raise Exit Barrier\" is included by \"Exit Parking Lot\" \n\nThe second FP is instance (Exit Parking Lot, Validate Payment Details) because the elements are not related, and \"Validate Payment Details\" is included by \"Process Payment\".\n\n4 FN were reported.\n\nThe first FN is missed instance (Enter Parking Lot, Open Entry Gate), which is part of instance group {(Enter Parking Lot, Scan Entry Ticket), (Enter Parking Lot, Open Entry Gate)}\n\nThe second FN is missed instance (Exit Parking Lot, Calculate Parking Fee), which is part of instance group {(Exit Parking Lot, Calculate Parking Fee), (Exit Parking Lot, Raise Exit Barrier)}\n\nThe third FN is missed instance (Exit Parking Lot, Raise Exit Barrier), which is part of instance group {(Exit Parking Lot, Calculate Parking Fee), (Exit Parking Lot, Raise Exit Barrier)}\n\nThe fourth FN is missed instance (Process Payment, Validate Payment Details) which is a standard FD-include. Note that \"Process Payment\" is associated with two actors \"Driver\" and \"Payment Gateway\". Perhaps this instance was missed because the base use case was associated with multiple actors.\n\n1 instance correctly predicted (Enter Parking Lot, Scan Entry Ticket)  ",
+    "updated_at": "2026-05-27T16:04:07.058668"
   },
   "159_re_20260325_012118": {
     "contributions": [
@@ -690,6 +724,8 @@
       "FP"
     ],
     "png_path": "domains/000/000_re.png",
-    "verified": true
+    "verified": true,
+    "text": "1 FP - this refactored sample reported instance (Scan Travel Document, Perform Identity Check), where the elements are not related by FD-include. However, they both are associated with actor \"Border Officer\".",
+    "updated_at": "2026-05-27T16:04:45.979593"
   }
 }
