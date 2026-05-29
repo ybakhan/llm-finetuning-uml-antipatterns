@@ -34,28 +34,21 @@ rectangle MAPSTEDI {
     usecase "Install Software Updates" as UC_Install
   }
 
-  together {
+  usecase "RunQC Tests"              as UC_RunQC
+  usecase "Query Remote Database" as UC_QueryRemote
 
-    together {
-      usecase "RunQC Tests"              as UC_RunQC
-      usecase "Query Remote Database" as UC_QueryRemote
-    }
+  usecase "Upload DBG and UCOM Data" as UC_Upload
 
-    usecase "Upload DBG and UCOM Data" as UC_Upload
-
-    usecase "Integrate Query Results"  as UC_Integrate
+  usecase "Integrate Query Results"  as UC_Integrate
     
-    usecase "Query Local Database"  as UC_QueryLocal
+  usecase "Query Local Database"  as UC_QueryLocal
     
-    ' ----- Database Edits -----
-    usecase "Edit Collections Data"    as UC_Edit        
-    usecase "Update Collections Data"  as UC_Update
+  ' ----- Database Edits -----
+  usecase "Edit Collections Data"    as UC_Edit        
+  usecase "Update Collections Data"  as UC_Update
 
-    together {
-      usecase "Geocode Specimen" as UC_Geocode
-      usecase "Find Locality"    as UC_FindLocality
-    }
-  }
+  usecase "Geocode Specimen" as UC_Geocode
+  usecase "Find Locality"    as UC_FindLocality
 }
 
 ' ---------- Actor associations ----------
@@ -84,7 +77,7 @@ Geocoder     -u- UC_Geocode
 DataEditor   -u- UC_Edit
 
 ' ---------- Include / Extend ----------
-UC_Download    .r.> UC_Search       : <<include>>
+UC_Download    ..r..> UC_Search       : <<include>>
 
 UC_Integrate   .u.> UC_QueryLocal   : <<include>>
 UC_Integrate   .u.> UC_QueryRemote  : <<include>>
@@ -100,4 +93,5 @@ UC_Geocode     .l.> UC_FindLocality : <<include>>
 UC_Search -[hidden]d-> UC_QueryLocal
 UC_Restore -[hidden]-> UC_FindLocality
 UC_Integrate -[hidden]l-> UC_Upload
+
 @enduml
