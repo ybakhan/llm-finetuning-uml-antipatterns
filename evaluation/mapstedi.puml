@@ -35,17 +35,17 @@ rectangle MAPSTEDI {
   }
 
   usecase "RunQC Tests"              as UC_RunQC
-  usecase "Query Remote Database" as UC_QueryRemote
+  usecase "Query Remote\nDatabase" as UC_QueryRemote
 
   usecase "Upload DBG and\nUCOM Data" as UC_Upload
 
   usecase "Integrate\nQuery Results"  as UC_Integrate
     
-  usecase "Query Local Database"  as UC_QueryLocal
+  usecase "Query Local\nDatabase"  as UC_QueryLocal
     
   ' ----- Database Edits -----
-  usecase "Edit Collections Data"    as UC_Edit        
-  usecase "Update Collections Data"  as UC_Update
+  usecase "Edit\nCollections Data"    as UC_Edit        
+  usecase "Update\nCollections Data"  as UC_Update
 
   usecase "Geocode Specimen" as UC_Geocode
   usecase "Find Locality"    as UC_FindLocality
