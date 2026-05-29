@@ -1,0 +1,48 @@
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 5,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 5,
+      "instances": [
+        {
+          "elements": [
+            "Download Collections Data (UC_Download)",
+            "Search Collections Data (UC_Search)"
+          ],
+          "explanation": "'Search Collections Data' (UC_Search) is included by 'Download Collections Data' (UC_Download), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Download Collections Data' rather than a standalone service observable to any actor, making it a functional decomposition of 'Download Collections Data' via the include relationship."
+        },
+        {
+          "elements": [
+            "Integrate Query Results (UC_Integrate)",
+            "Query Local Database (UC_QueryLocal)"
+          ],
+          "explanation": "'Query Local Database' (UC_QueryLocal) is included by 'Integrate Query Results' (UC_Integrate), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Integrate Query Results' rather than a standalone service observable to any actor, making it a functional decomposition of 'Integrate Query Results' via the include relationship."
+        },
+        {
+          "elements": [
+            "Integrate Query Results (UC_Integrate)",
+            "Query Remote Database (UC_QueryRemote)"
+          ],
+          "explanation": "'Query Remote Database' (UC_QueryRemote) is included by 'Integrate Query Results' (UC_Integrate), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Integrate Query Results' rather than a standalone service observable to any actor, making it a functional decomposition of 'Integrate Query Results' via the include relationship."
+        },
+        {
+          "elements": [
+            "Update Collections Data (UC_Update)",
+            "Edit Collections Data (UC_Edit)"
+          ],
+          "explanation": "'Edit Collections Data' (UC_Edit) is included by 'Update Collections Data' (UC_Update), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Update Collections Data' rather than a standalone service observable to any actor, making it a functional decomposition of 'Update Collections Data' via the include relationship."
+        },
+        {
+          "elements": [
+            "Update Collections Data (UC_Update)",
+            "RunQC Tests (UC_RunQC)"
+          ],
+          "explanation": "'RunQC Tests' (UC_RunQC) is included by 'Update Collections Data' (UC_Update), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Update Collections Data' rather than a standalone service observable to any actor, making it a functional decomposition of 'Update Collections Data' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
