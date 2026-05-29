@@ -1,0 +1,34 @@
+{
+  "detected": true,
+  "total_antipattern_types": 1,
+  "total_instances": 3,
+  "antipatterns": [
+    {
+      "antipattern_name": "Functional Decomposition: Using the include relationship",
+      "instance_count": 3,
+      "instances": [
+        {
+          "elements": [
+            "Integrate Query Results (UC_Integrate)",
+            "Query Local Database (UC_QueryLocal)"
+          ],
+          "explanation": "'Query Local Database' (UC_QueryLocal) is included by 'Integrate Query Results' (UC_Integrate), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Integrate Query Results' rather than a standalone service observable to any actor, making it a functional decomposition of 'Integrate Query Results' via the include relationship."
+        },
+        {
+          "elements": [
+            "RunQC Tests (UC_RunQC)",
+            "Upload DBG and UCOM Data (UC_Upload)"
+          ],
+          "explanation": "'Upload DBG and UCOM Data' (UC_Upload) is included by 'RunQC Tests' (UC_RunQC), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'RunQC Tests' rather than a standalone service observable to any actor, making it a functional decomposition of 'RunQC Tests' via the include relationship."
+        },
+        {
+          "elements": [
+            "Geocode Specimen (UC_Geocode)",
+            "Find Locality (UC_FindLocality)"
+          ],
+          "explanation": "'Find Locality' (UC_FindLocality) is included by 'Geocode Specimen' (UC_Geocode), has no direct actor association, does not include or extend any other use case, is not extended by any use case, and is not part of any generalisation hierarchy. It represents an internal sub-step of 'Geocode Specimen' rather than a standalone service observable to any actor, making it a functional decomposition of 'Geocode Specimen' via the include relationship."
+        }
+      ]
+    }
+  ]
+}
