@@ -20,26 +20,26 @@ rectangle MAPSTEDI {
   ' ----- Database Access -----
   together {
     together {
-      usecase "Download Collections Data"       as UC_Download
-      usecase "Search Collections Data"         as UC_Search
+      usecase "Download\nCollections Data"       as UC_Download
+      usecase "Search\nCollections Data"         as UC_Search
     }
-    usecase "Visualize Biodiversity Analysis" as UC_Visualize
-    usecase "Access Sensitive Data"           as UC_AccessSensitive
+    usecase "Visualize\nBiodiversity Analysis" as UC_Visualize
+    usecase "Access\nSensitive Data"           as UC_AccessSensitive
   }
 
   together {
     ' ----- Administrative Process -----
     usecase "Backup Process"           as UC_Backup
     usecase "Restore Process"          as UC_Restore
-    usecase "Install Software Updates" as UC_Install
+    usecase "Install\nSoftware Updates" as UC_Install
   }
 
   usecase "RunQC Tests"              as UC_RunQC
   usecase "Query Remote Database" as UC_QueryRemote
 
-  usecase "Upload DBG and UCOM Data" as UC_Upload
+  usecase "Upload DBG and\nUCOM Data" as UC_Upload
 
-  usecase "Integrate Query Results"  as UC_Integrate
+  usecase "Integrate\nQuery Results"  as UC_Integrate
     
   usecase "Query Local Database"  as UC_QueryLocal
     
