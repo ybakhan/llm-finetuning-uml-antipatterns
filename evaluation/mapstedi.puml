@@ -1,0 +1,81 @@
+@startuml MAPSTEDI_UseCaseModel
+
+left to right direction
+
+' ---------- Actors ----------
+actor "Public User"            as PublicUser
+actor "Research User"          as ResearchUser
+actor "Database Integrator"    as DBIntegrator
+actor "Geocoder"               as Geocoder
+actor "Data Editor"            as DataEditor
+actor "ArcIMC Administrator"   as ArcIMCAdmin
+actor "Database Administrator" as DBAdmin
+
+rectangle MAPSTEDI {
+
+  ' ----- Database Access -----
+  usecase "Download Collections Data"       as UC_Download
+  usecase "Search Collections Data"         as UC_Search
+  usecase "Visualize Biodiversity Analysis" as UC_Visualize
+  usecase "Access Sensitive Data"           as UC_AccessSensitive
+
+  ' ----- Shared query use cases (referenced by Integrator) -----
+  usecase "Query Remote Database" as UC_QueryRemote
+  usecase "Query Local Database"  as UC_QueryLocal
+
+  ' ----- Database Integrator -----
+  usecase "Integrate Query Results"  as UC_Integrate
+  usecase "Update Collections Data"  as UC_Update
+  usecase "Edit Collections Data"    as UC_Edit
+  usecase "RunQC Tests"              as UC_RunQC
+  usecase "Upload DBG and UCOM Data" as UC_Upload
+
+  ' ----- Database Edits -----
+  usecase "Geocode Specimen" as UC_Geocode
+  usecase "Find Locality"    as UC_FindLocality
+
+  ' ----- Administrative Process -----
+  usecase "Backup Process"           as UC_Backup
+  usecase "Restore Process"          as UC_Restore
+  usecase "Install Software Updates" as UC_Install
+}
+
+' ---------- Actor associations ----------
+PublicUser   -- UC_Download
+PublicUser   -- UC_Search
+PublicUser   -- UC_Visualize
+
+ResearchUser -- UC_Download
+ResearchUser -- UC_Search
+ResearchUser -- UC_Visualize
+ResearchUser -- UC_AccessSensitive
+
+DBIntegrator -- UC_Integrate
+DBIntegrator -- UC_Update
+DBIntegrator -- UC_Edit
+
+Geocoder     -- UC_Geocode
+DataEditor   -- UC_Edit
+
+ArcIMCAdmin  -- UC_Backup
+ArcIMCAdmin  -- UC_Restore
+ArcIMCAdmin  -- UC_Install
+
+DBAdmin      -- UC_Backup
+DBAdmin      -- UC_Restore
+DBAdmin      -- UC_Install
+
+' ---------- Include / Extend ----------
+UC_Download    ..> UC_Search       : <<include>>
+
+UC_Integrate   ..> UC_QueryLocal   : <<include>>
+UC_Integrate   ..> UC_QueryRemote  : <<include>>
+UC_Update      ..> UC_Edit         : <<include>>
+UC_Update      ..> UC_RunQC        : <<include>>
+UC_RunQC       ..> UC_QueryRemote  : <<include>>
+UC_RunQC       ..> UC_Upload       : <<include>>
+
+UC_Edit        ..> UC_Geocode      : <<extend>>
+UC_Geocode     ..> UC_FindLocality : <<include>>
+
+@enduml
