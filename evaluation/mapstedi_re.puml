@@ -1,50 +1,37 @@
-@startuml MAPSTEDI_UseCaseModel
+@startuml MAPSTEDI_UseCaseModel_refactored
 
 left to right direction
 
-' ---------- Actors ----------
 actor "Public User"            as PublicUser
 actor "Research User"          as ResearchUser
 
 actor "ArcIMC Administrator"   as ArcIMCAdmin
 actor "Database Administrator" as DBAdmin
 
-together {
-  actor "Geocoder"               as Geocoder
-  actor "Database Integrator"    as DBIntegrator
-  actor "Data Editor"            as DataEditor
-}
+actor "Geocoder"               as Geocoder
+actor "Database Integrator"    as DBIntegrator
+actor "Data Editor"            as DataEditor
 
 rectangle MAPSTEDI {
 
-  ' ----- Database Access -----
   together {
-    together {
-      usecase "Download\nCollections Data"       as UC_Download
-      usecase "Search\nCollections Data"         as UC_Search
-    }
-    usecase "Visualize\nBiodiversity Analysis" as UC_Visualize
-    usecase "Access\nSensitive Data"           as UC_AccessSensitive
+    usecase "Download\nCollections Data"       as UC_Download
+    usecase "Search\nCollections Data"         as UC_Search
   }
-
-  ' ----- Administrative Process -----
+  usecase "Visualize\nBiodiversity Analysis" as UC_Visualize
+  usecase "Access\nSensitive Data"           as UC_AccessSensitive
+  
   usecase "Backup Process"           as UC_Backup
   usecase "Restore Process"          as UC_Restore
   usecase "Install\nSoftware Updates" as UC_Install
-
   usecase "RunQC Tests"              as UC_RunQC
   usecase "Query Remote\nDatabase" as UC_QueryRemote
-
   usecase "Integrate\nQuery Results"  as UC_Integrate
-    
-  ' ----- Database Edits -----
   usecase "Edit\nCollections Data"    as UC_Edit        
   usecase "Update\nCollections Data"  as UC_Update
-
   usecase "Geocode Specimen" as UC_Geocode
 }
 
-' ---------- Actor associations ----------
 PublicUser   -- UC_Download
 PublicUser   -- UC_Search
 PublicUser   -- UC_Visualize
@@ -69,17 +56,14 @@ DBIntegrator -u- UC_Edit
 Geocoder     -u- UC_Geocode
 DataEditor   -u- UC_Edit
 
-' ---------- Include / Extend ----------
 UC_Download    .r.> UC_Search       : <<include>>
-
-UC_Integrate   .u.> UC_QueryRemote  : <<include>>
+UC_Integrate   .r.> UC_QueryRemote  : <<include>>
 UC_Update      .r.> UC_Edit         : <<include>>
 UC_Update      .r.> UC_RunQC        : <<include>>
-
 UC_RunQC       .r.> UC_QueryRemote  : <<include>>
-
 UC_Edit        .l.> UC_Geocode      : <<extend>>
 
 UC_Search -[hidden]d-> UC_QueryRemote
-
+UC_Download -[hidden]d-> UC_Integrate
+UC_Restore -[hidden]d-> UC_Edit
 @enduml
