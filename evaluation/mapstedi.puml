@@ -36,17 +36,20 @@ rectangle MAPSTEDI {
 
   together {
 
-    usecase "RunQC Tests"              as UC_RunQC
+    together {
+      usecase "RunQC Tests"              as UC_RunQC
+      usecase "Query Remote Database" as UC_QueryRemote
+    }
+
     usecase "Upload DBG and UCOM Data" as UC_Upload
 
     usecase "Integrate Query Results"  as UC_Integrate
-    usecase "Query Remote Database" as UC_QueryRemote
+    
     usecase "Query Local Database"  as UC_QueryLocal
     
     ' ----- Database Edits -----
     usecase "Edit Collections Data"    as UC_Edit        
     usecase "Update Collections Data"  as UC_Update
-    
 
     together {
       usecase "Geocode Specimen" as UC_Geocode
@@ -87,10 +90,14 @@ UC_Integrate   .u.> UC_QueryLocal   : <<include>>
 UC_Integrate   .u.> UC_QueryRemote  : <<include>>
 UC_Update      .r.> UC_Edit         : <<include>>
 UC_Update      .r.> UC_RunQC        : <<include>>
+
 UC_RunQC       .r.> UC_QueryRemote  : <<include>>
 UC_RunQC       .d.> UC_Upload       : <<include>>
 
-UC_Edit        .u.> UC_Geocode      : <<extend>>
+UC_Edit        .l.> UC_Geocode      : <<extend>>
 UC_Geocode     .l.> UC_FindLocality : <<include>>
 
+UC_Search -[hidden]d-> UC_QueryLocal
+UC_Restore -[hidden]-> UC_FindLocality
+UC_Integrate -[hidden]l-> UC_Upload
 @enduml
