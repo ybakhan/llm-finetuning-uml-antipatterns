@@ -1,11 +1,17 @@
 # LLM Fine-Tuning for UML Antipattern Detection
 
-> Fine-tuning a compact language model to detect structural antipatterns in UML use case diagrams — from synthetic data generation to evaluation.
+> Fine-tuning a compact language model to detect structural antipatterns in UML use case diagrams, from synthetic data generation to evaluation.
 
 ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green)
+![Jupyter](https://img.shields.io/badge/Jupyter-notebook-F37626?logo=jupyter&logoColor=white)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-transformers-FFD21E?logo=huggingface&logoColor=black)
+![Unsloth](https://img.shields.io/badge/Unsloth-fine--tuning-8A2BE2)
+![LoRA](https://img.shields.io/badge/LoRA-PEFT%20r%3D8-6366f1)
+![Claude](https://img.shields.io/badge/Claude-Opus-CC785C?logo=anthropic&logoColor=white)
+![PlantUML](https://img.shields.io/badge/PlantUML-diagram%20rendering-lightgrey)
 ![Model](https://img.shields.io/badge/Model-Qwen2.5--Coder--3B-orange)
 ![Accuracy](https://img.shields.io/badge/Detection%20Accuracy-91.0%25-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
