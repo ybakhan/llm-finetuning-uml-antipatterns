@@ -76,12 +76,12 @@ Model vs ground truth: TP 1, FP 4, FN 2 (precision 0.20, recall 0.33).
 
 ## 4. Which failures appear in both test set and MAPSTEDI
 
-| Failure | Held-out test set | MAPSTEDI |
-|---|---|---|
-| Actor-associated inclusion FP | yes (017, 069, 118, 139, 192) | yes (Search, Edit) |
-| Incomplete-scanning FN | yes (025, 067, 083, 119, 154) | yes (Upload, Find Locality) |
-| Shared inclusion FP | no (0/39 test domains) | yes (Query Remote) |
-| Inclusion-that-includes-another FP | no (not flagged in test) | yes (RunQC) |
+| Failure | Training set | Held-out test set | MAPSTEDI |
+|---|---|---|---|
+| Actor-associated inclusion FP | 10/155 domains | yes (017, 069, 118, 139, 192) | yes (Search, Edit) |
+| Incomplete-scanning FN | n/a (positives abundant; not a coverage gap) | yes (025, 067, 083, 119, 154) | yes (Upload, Find Locality) |
+| Shared inclusion FP | 2/155 domains | no (0/39 test domains) | yes (Query Remote) |
+| Inclusion-that-includes-another FP | 5/155 domains | no (not flagged in test) | yes (RunQC) |
 
 Two failure modes are shared (actor-association FP, incomplete-scanning FN), and
 MAPSTEDI additionally exposes two structural FPs (shared inclusion,
